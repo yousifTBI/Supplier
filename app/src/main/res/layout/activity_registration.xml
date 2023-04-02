@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".framework.presentation.ui.account.RegisterationActivity">
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".MainActivity">
+
+
+                <com.github.ybq.android.spinkit.SpinKitView
+                    android:id="@+id/spin_kit"
+                    style="@style/SpinKitView.Large.Circle"
+                    android:layout_width="121dp"
+                    android:layout_height="135dp"
+                    android:layout_gravity="center"
+                    app:SpinKit_Color="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    />
+
+                <ImageView
+                    android:id="@+id/imageView4"
+                    android:layout_width="296dp"
+                    android:layout_height="155dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo_tbi" />
+
+                <!--            <com.github.ybq.android.spinkit.SpinKitView-->
+                <!--                android:id="@+id/spin_kit"-->
+                <!--                style="@style/SpinKitView.Large.Circle"-->
+                <!--                android:layout_width="94dp"-->
+                <!--                android:layout_height="87dp"-->
+                <!--                android:layout_gravity="center"-->
+                <!--                app:SpinKit_Color="@color/purple_200"-->
+                <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                app:layout_constraintStart_toStartOf="parent"-->
+                <!--                app:layout_constraintTop_toTopOf="parent"-->
+                <!--                tools:ignore="MissingConstraints" />-->
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/Company"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="210dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:cursorVisible="false"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/com"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:hint=" Enter userName " />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardView6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="42dp"
+                    android:elevation="30dp"
+                    app:layout_constraintBottom_toTopOf="@id/serialId"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Company">
+
+
+                </androidx.cardview.widget.CardView>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/serialId"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_margin="42dp"
+                    android:cursorVisible="false"
+                    app:layout_constraintBottom_toTopOf="@+id/SendRequestId"
+                    app:layout_constraintTop_toBottomOf="@id/progressBar"
+                    tools:ignore="NotSibling">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/POStxt"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:hint="Distributer_Group_ID" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+
+                    android:id="@+id/SendRequestId"
+                    android:layout_width="330dp"
+                    android:layout_height="74dp"
+                    android:layout_margin="42dp"
+                    android:layout_marginTop="84dp"
+                    android:backgroundTint="@color/black"
+                    android:text="ارسال طلب "
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/serialId"
+                    />
+
+                <TextView
+                    android:id="@+id/textView12"
+                    android:layout_width="176dp"
+                    android:layout_height="54dp"
+                    android:layout_marginTop="159dp"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textStyle="bold"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/SendRequestId"
+                    app:layout_constraintVertical_bias="0.0" />
+
+
+<!--                <Button-->
+<!--                    android:id="@+id/submit"-->
+<!--                    android:layout_width="96dp"-->
+<!--                    android:layout_height="64dp"-->
+<!--                    android:layout_margin="20dp"-->
+<!--                    android:text="submit"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@+id/Company"-->
+<!--                    app:layout_constraintStart_toEndOf="@+id/Company"-->
+<!--                    app:layout_constraintTop_toTopOf="@+id/Company" />-->
+
+                <TextView
+                    android:id="@+id/comID"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="411dp"
+                    android:text="3"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/androidId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    app:layout_constraintEnd_toStartOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

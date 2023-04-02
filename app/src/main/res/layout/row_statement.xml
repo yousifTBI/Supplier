@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.tbi.supplierplus.business.pojo.reports.Invoices" />
+    </data>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:background="@drawable/blue_rounded_filled100"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:textSize="24dp"
+
+                    android:text='@{" التاريخ :" + String.valueOf(data.add_date)}'
+                    android:textColor="@color/white"
+                    tools:text="التاريخ" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="center"
+                    android:textSize="24dp"
+                    android:paddingVertical="5dp"
+                    tools:text="الفاتورة"
+                    android:text='@{" رقم الفاتوره :"+String.valueOf(data.billNo) }'
+                    android:textColor="@color/white" />
+
+
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+
+
+
+</layout>

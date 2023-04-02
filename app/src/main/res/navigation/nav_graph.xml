@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+
+        android:id="@+id/splashFragment"
+        android:name="com.tbi.supplierplus.framework.ui.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/navigation5"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.tbi.supplierplus.framework.ui.register.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_registerFragment_to_mainFragment"
+            app:destination="@id/navigation5" />
+    </fragment>
+    <fragment
+        android:id="@+id/customersFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.customers.CustomersFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_customers">
+        <argument
+            android:name="user"
+            app:argType="com.tbi.supplierplus.business.models.User" />
+        <action
+            android:id="@+id/action_customersFragment_to_customerProfileFragment"
+            app:destination="@id/customerProfileFragment" />
+        <action
+            android:id="@+id/action_customersFragment_to_CustomerQRCodeScannerFragment"
+            app:destination="@id/QRCodeScannerFragment" />
+        <action
+            android:id="@+id/action_customersFragment_to_addCustomerFragment"
+            app:destination="@id/navigation2" />
+        <action
+            android:id="@+id/action_customersFragment_to_productSelectionFragment"
+            app:destination="@id/productSelectionFragment" />
+        <action
+            android:id="@+id/action_customersFragment_to_billItemsFragment"
+            app:destination="@id/billItemsFragment" />
+        <action
+            android:id="@+id/action_customersFragment_to_billItems2Fragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@+id/nav_graph.xml"
+            app:destination="@id/billItems2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerProfileFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.customer_profile.CustomerProfileFragment"
+        android:label="CustomerProfileFragment"
+        tools:layout="@layout/fragment_customer_profile">
+        <action
+            android:id="@+id/action_customerProfileFragment_to_CustomerQRCodeScannerFragment"
+            app:destination="@id/QRCodeScannerFragment" />
+        <action
+            android:id="@+id/action_customerProfileFragment_to_executeCustomerFragment"
+            app:destination="@id/executeCustomerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/purchaseFragment"
+        android:name="com.tbi.supplierplus.framework.ui.purchase.PurchaseFragment"
+        android:label="fragment_purchase"
+        tools:layout="@layout/fragment_purchase">
+        <argument
+            android:name="user"
+            app:argType="com.tbi.supplierplus.business.models.User" />
+
+        <action
+            android:id="@+id/action_purchaseFragment_to_QRCodeScannerFragment"
+            app:destination="@id/QRCodeScannerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.tbi.supplierplus.framework.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_productSelectionFragment"
+            app:destination="@id/productSelectionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/QRCodeScannerFragment"
+        android:name="com.tbi.supplierplus.framework.ui.qr.QRCodeScannerFragment"
+        android:label="QRCodeScannerFragment"
+        tools:layout="@layout/fragment_q_r_code_scanner">
+
+        <argument
+            android:name="choice"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/expensesFragment"
+        android:name="com.tbi.supplierplus.framework.ui.expenses.ExpensesFragment"
+        android:label="ExpensesFragment"
+        tools:layout="@layout/fragment_expenses">
+        <argument
+            android:name="user"
+            app:argType="com.tbi.supplierplus.business.models.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyClosingFragment"
+        android:name="com.tbi.supplierplus.framework.ui.daily_closing.DailyClosingFragment"
+        android:label="DailyClosingFragment"
+        tools:layout="@layout/fragment_daily_closing">
+        <argument
+            android:name="user"
+            app:argType="com.tbi.supplierplus.business.models.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/returnItemsFragment"
+        android:name="com.tbi.supplierplus.framework.ui.return_items.ReturnItemsFragment"
+        android:label="ReturnItemsFragment"
+        tools:layout="@layout/fragment_return_items">
+        <argument
+            android:name="user"
+            app:argType="com.tbi.supplierplus.business.models.User" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/executeCustomerFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.execute_customer.ExecuteCustomerFragment"
+        android:label="ExecuteCustomerFragment"
+        tools:layout="@layout/fragment_execute_customer" />
+    <fragment
+        android:id="@+id/customerStatementDetailsFragment"
+        android:name="com.tbi.supplierplus.framework.ui.reports.CustomerStatementDetailsFragment"
+        android:label="CustomerStatementDetailsFragment"
+        tools:layout="@layout/fragment_customer_statement_details" />
+    <fragment
+        android:id="@+id/collectDebitFragment"
+        android:name="com.tbi.supplierplus.framework.ui.collect_debit.CollectDebitFragment"
+        android:label="CollectDebitFragment"
+        tools:layout="@layout/row_customer_debit">
+        <argument
+            android:name="user"
+            app:argType="com.tbi.supplierplus.business.models.User" />
+        <action
+            android:id="@+id/action_collectDebitFragment_to_debitExecutionFragment"
+            app:destination="@id/debitExecutionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/debitExecutionFragment"
+        android:name="com.tbi.supplierplus.framework.ui.collect_debit.debit_execution.DebitExecutionFragment"
+        android:label="DebitExecutionFragment"
+        tools:layout="@layout/fragment_debit_execution" />
+    <fragment
+        android:id="@+id/openingBalancesFragment"
+        android:name="com.tbi.supplierplus.framework.ui.opening_balance.OpeningBalancesFragment"
+        android:label="OpeningBalancesFragment"
+        tools:layout="@layout/fragment_opening_balances" >
+        <action
+            android:id="@+id/action_openingBalancesFragment_to_addOpeningBalanceFragment"
+            app:destination="@id/addOpeningBalanceFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.tbi.supplierplus.business.models.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/addOpeningBalanceFragment"
+        tools:layout="@layout/fragment_add_opening_balance"
+        android:name="com.tbi.supplierplus.framework.ui.opening_balance.add_balance.AddOpeningBalanceFragment"
+        android:label="AddOpeningBalanceFragment" />
+    <fragment
+        android:id="@+id/addItemsReturnFragment"
+        android:name="com.tbi.supplierplus.framework.ui.add_items_return.AddItemsReturnFragment"
+        android:label="AddItemsReturnFragment" >
+        <action
+            android:id="@+id/action_addItemsReturnFragment_to_executeReturnItemsFragment"
+            app:destination="@id/executeReturnItemsFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.tbi.supplierplus.business.models.User" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/executeReturnItemsFragment"
+        android:name="com.tbi.supplierplus.framework.ui.add_items_return.ExecuteReturnItemsFragment"
+        android:label="ExecuteReturnItemsFragment" />
+
+
+    <fragment
+        android:id="@+id/customerReturnItemsFragment"
+        android:name="com.tbi.supplierplus.framework.ui.add_items_return.CustomerReturnItemsFragment"
+        android:label="fragment_customer_return_items"
+        tools:layout="@layout/fragment_customer_return_items" >
+        <action
+            android:id="@+id/action_customerReturnItemsFragment_to_addItemsReturnFragment"
+            app:destination="@id/addItemsReturnFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.tbi.supplierplus.business.models.User" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemsSettlementFragment"
+        android:name="com.tbi.supplierplus.framework.ui.itemsSettlement.ItemsSettlementFragment"
+        android:label="fragment_items_settlement"
+        tools:layout="@layout/fragment_items_settlement" >
+        <argument
+            android:name="user"
+            app:argType="com.tbi.supplierplus.business.models.User" />
+    </fragment>
+    <navigation android:id="@+id/navigation2"
+        app:startDestination="@id/navigation">
+        <navigation
+            android:id="@+id/navigation"
+            app:startDestination="@id/addCustomerFragment">
+            <fragment
+                android:id="@+id/addCustomerFragment"
+                android:name="com.tbi.supplierplus.framework.ui.sales.add_customer.AddCustomerFragment"
+                android:label="AddCustomerFragment" />
+        </navigation>
+    </navigation>
+    <fragment
+        android:id="@+id/productSelectionFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.customers.product_selection.ProductSelectionFragment"
+        android:label="ProductSelectionFragment" />
+    <fragment
+        android:id="@+id/billItemsFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.customer_profile.BillItemsFragment"
+        android:label="fragment_bill_items"
+        tools:layout="@layout/fragment_bill_items" />
+    <fragment
+        android:id="@+id/billItems2Fragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.customer_profile.BillItems2Fragment"
+        android:label="BillItems2Fragment" >
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_billItems2Fragment_to_executeCustomerFragment"
+            app:destination="@id/executeCustomerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/puarchaseFragment"
+        android:name="com.tbi.supplierplus.framework.ui.purchase.newPurchase.PuarchaseFragment"
+        android:label="PuarchaseFragment" />
+    <navigation android:id="@+id/navigation4"
+        app:startDestination="@id/navigation3">
+        <navigation
+            android:id="@+id/navigation3"
+            app:startDestination="@id/reportFragment">
+            <fragment
+                android:id="@+id/reportFragment"
+                android:name="com.tbi.supplierplus.framework.ui.reports.ReportFragment"
+                android:label="fragment_report"
+                tools:layout="@layout/fragment_report">
+                <argument
+                    android:name="user"
+                    app:argType="com.tbi.supplierplus.business.models.User" />
+
+                <action
+                    android:id="@+id/action_reportFragment_to_QRCodeScannerFragment"
+                    app:destination="@id/QRCodeScannerFragment" />
+            </fragment>
+        </navigation>
+    </navigation>
+    <fragment
+        android:id="@+id/customerStatementFragment"
+        android:name="com.tbi.supplierplus.framework.ui.reports.CustomerStatementFragment"
+        android:label="CustomerStatementFragment" >
+        <action
+            android:id="@+id/action_customerStatementFragment_to_customerStatementDetailsFragment"
+            app:destination="@id/customerStatementDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportFragment2"
+        android:name="com.tbi.supplierplus.framework.ui.reports.ReportFragment"
+        android:label="ReportFragment" />
+    <navigation android:id="@+id/navigation5"
+        app:startDestination="@id/mainFragment">
+        <fragment
+            android:id="@+id/mainFragment"
+            android:name="com.tbi.supplierplus.framework.ui.MainFragment"
+            android:label="MainFragment"
+            tools:layout="@layout/fragment_main">
+            <action
+                android:id="@+id/action_mainFragment_to_customersFragment"
+                app:destination="@id/customersFragment" />
+            <argument
+                android:name="user"
+                app:argType="com.tbi.supplierplus.business.models.User" />
+            <action
+                android:id="@+id/action_mainFragment_to_purchaseFragment"
+                app:destination="@id/purchaseFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_reportFragment"
+                app:destination="@id/navigation4" />
+            <action
+                android:id="@+id/action_mainFragment_to_expensesFragment"
+                app:destination="@id/expensesFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_dailyClosingFragment"
+                app:destination="@id/dailyClosingFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_returnItemsFragment"
+                app:destination="@id/returnItemsFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_returnItemsFragment2"
+                app:destination="@id/returnItemsFragment" />
+            <action
+                android:id="@+id/action_mainFragment_self"
+                app:destination="@id/mainFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_collectDebitFragment"
+                app:destination="@id/collectDebitFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_openingBalancesFragment"
+                app:destination="@id/openingBalancesFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_customerReturnItemsFragment"
+                app:destination="@id/customerReturnItemsFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_itemsSettlementFragment"
+                app:destination="@id/itemsSettlementFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_puarchaseFragment"
+                app:destination="@id/puarchaseFragment" />
+
+        </fragment>
+        <action
+            android:id="@+id/action_global_reportsFragment"
+            app:destination="@id/reportsFragment" />
+        <action
+            android:id="@+id/action_global_addCustomerFragment2"
+            app:destination="@id/addCustomerFragment2" />
+        <action
+            android:id="@+id/action_global_productSelectionFragment"
+            app:destination="@id/productSelectionFragment" />
+        <action
+            android:id="@+id/action_global_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_global_customerSettingFragment"
+            app:destination="@id/customerSettingFragment" />
+        <action
+            android:id="@+id/action_global_customerSettingPriceFragment"
+            app:destination="@id/customerSettingPriceFragment" />
+        <action
+            android:id="@+id/action_global_salesSettingFragment"
+            app:destination="@id/salesSettingFragment" />
+    </navigation>
+    <fragment
+        android:id="@+id/reportsFragment"
+        android:name="com.tbi.supplierplus.framework.ui.reports.ReportsFragment"
+        android:label="fragment_reports"
+        tools:layout="@layout/fragment_reports" >
+        <action
+            android:id="@+id/action_reportsFragment_to_customerStatementFragment"
+            app:destination="@id/customerStatementFragment" />
+        <action
+            android:id="@+id/action_reportsFragment_to_customerStatementFragment2"
+            app:destination="@id/customerStatementFragment" />
+        <action
+            android:id="@+id/action_reportsFragment_to_salesReportFragment"
+            app:destination="@id/salesReportFragment" />
+        <action
+            android:id="@+id/action_reportsFragment_to_itemsReportFragment"
+            app:destination="@id/itemsReportFragment" />
+        <action
+            android:id="@+id/action_reportsFragment_to_selectCustomerFragment"
+            app:destination="@id/selectCustomerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/salesReportFragment"
+        android:name="com.tbi.supplierplus.framework.ui.reports.SalesReportFragment"
+        android:label="SalesReportFragment" />
+    <fragment
+        android:id="@+id/itemsReportFragment"
+        android:name="com.tbi.supplierplus.framework.ui.reports.ItemsReportFragment"
+        android:label="ItemsReportFragment" />
+    <fragment
+        android:id="@+id/addCustomerFragment2"
+        android:name="com.tbi.supplierplus.framework.ui.sales.add_customer.AddCustomerFragment"
+        android:label="AddCustomerFragment" />
+    <fragment
+        android:id="@+id/selectCustomerFragment"
+        android:name="com.tbi.supplierplus.framework.ui.reports.reportCustomer.SelectCustomerFragment"
+        android:label="SelectCustomerFragment" >
+       </fragment>
+    <fragment
+        android:id="@+id/reportCustomerFragment"
+        android:name="com.tbi.supplierplus.framework.ui.reports.reportCustomer.reportCustomerFragment"
+        android:label="reportCustomerFragment" />
+    <fragment
+        android:id="@+id/reportsCustomersFragment"
+        android:name="com.tbi.supplierplus.framework.ui.reports.reportCustomer.ReportsCustomersFragment"
+        android:label="fragment_reports_customers"
+        tools:layout="@layout/fragment_reports_customers" />
+    <fragment
+        android:id="@+id/customerSettingFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.customerSettingPrice.CustomerSettingFragment"
+        android:label="CustomerSettingFragment" >
+        <action
+            android:id="@+id/action_customerSettingFragment_to_openingBalancesFragment"
+            app:destination="@id/openingBalancesFragment" />
+        <action
+            android:id="@+id/action_customerSettingFragment_to_collectDebitFragment"
+            app:destination="@id/collectDebitFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerSettingPriceFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.customerSettingPrice.CustomerSettingPriceFragment"
+        android:label="fragment_customer_setting_price"
+        tools:layout="@layout/fragment_customer_setting_price" />
+    <fragment
+        android:id="@+id/salesSettingFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.salesSetting.SalesSettingFragment"
+        android:label="fragment_sales_setting"
+        tools:layout="@layout/fragment_sales_setting" >
+        <action
+            android:id="@+id/action_salesSettingFragment_to_expensesFragment"
+            app:destination="@id/expensesFragment" />
+        <action
+            android:id="@+id/action_salesSettingFragment_to_purchaseFragment"
+            app:destination="@id/purchaseFragment" />
+        <action
+            android:id="@+id/action_salesSettingFragment_to_returnItemsFragment"
+            app:destination="@id/returnItemsFragment" />
+    </fragment>
+</navigation>

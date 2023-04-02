@@ -1,0 +1,31 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.SupplierPlus" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/dark_blue</item>
+        <item name="colorPrimaryDark">@color/dark_blue</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="fontFamily">@font/cairo</item>
+
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="textStyle">
+
+        <item name="android:textSize">
+            12sp
+        </item>
+
+        <item name="android:textColor">
+            #524F4F
+        </item>
+
+        <item name="android:textStyle">bold</item>
+
+    </style>
+    <style name="AppTheme.SpinnerBase" parent="Widget.AppCompat.Spinner.Underlined">
+    </style>
+    <style name="SpinnerTheme" parent="AppTheme.SpinnerBase">
+        <item name="android:elevation">0dp</item>
+    </style>
+</resources>
