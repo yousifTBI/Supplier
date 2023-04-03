@@ -31,14 +31,7 @@ class AllCustomersAdapter (val onClickListener: OnClickListenerss) :
             getItem(position)?.let { it1 -> onClickListener.onClick(it1) }
         }
     }
-   // fun filterList(filterlist: ArrayList<AllCustomers?>) {
-   //     // below line is to add our filtered
-   //     // list in our course array list.
-   //     courseModelArrayList = filterlist
-   //     // below line is to notify our adapter
-   //     // as change in recycler view data.
-   //     notifyDataSetChanged()
-   // }
+
 
     companion object DiffCallback : DiffUtil.ItemCallback<AllCustomers>() {
         override fun areItemsTheSame(oldItem: AllCustomers, newItem: AllCustomers): Boolean {

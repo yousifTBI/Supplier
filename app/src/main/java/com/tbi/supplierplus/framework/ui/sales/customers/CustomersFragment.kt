@@ -43,6 +43,7 @@ class CustomersFragment : Fragment() {
 
         viewModel.  getAllCustomerTesthandel1()
         binding.spinKit.isVisible=false
+        binding.spinKit.isVisible=false
 
 
     //    val adapter = CustomersAdapter(OnClickListener {
