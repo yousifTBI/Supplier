@@ -16,6 +16,7 @@ import com.tbi.supplierplus.business.pojo.puarchase.Puarchase
 import com.tbi.supplierplus.business.repository.PurchaseRepository
 import com.tbi.supplierplus.business.repository.SalesRepository
 import com.tbi.supplierplus.framework.datasource.requests.State
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -46,7 +47,7 @@ class PurchaseViewModel @Inject constructor(
 
     fun getitemPurchase() {
         viewModelScope.launch {
-            purchaseRepository.getPurchases("2").collect {
+            purchaseRepository.getPurchases(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
                 if (it.State==1){
                     getPuarchaseItem.value = it.Item!!
                     getPuarchase.value = it.data
@@ -77,7 +78,7 @@ class PurchaseViewModel @Inject constructor(
     }
 
     fun getPurchases() {
-        viewModelScope.launch { purchaseRepository.getItemsforPuarches("2").collect {
+        viewModelScope.launch { purchaseRepository.getItemsforPuarches(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
 
             getitemss.value = it.data
         }}

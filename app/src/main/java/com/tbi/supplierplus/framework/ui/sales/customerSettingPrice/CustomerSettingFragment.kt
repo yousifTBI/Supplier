@@ -10,6 +10,7 @@ import com.tbi.supplierplus.R
 import com.tbi.supplierplus.business.models.User
 import com.tbi.supplierplus.databinding.FragmentCustomerSettingBinding
 import com.tbi.supplierplus.databinding.FragmentCustomersBinding
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import com.tbi.supplierplus.framework.ui.MainFragmentDirections
 
 class CustomerSettingFragment : Fragment() {
@@ -35,7 +36,7 @@ class CustomerSettingFragment : Fragment() {
         binding.collectCard.setOnClickListener {
             findNavController().navigate(
                 CustomerSettingFragmentDirections.actionCustomerSettingFragmentToCollectDebitFragment(
-                    User("peter_tbi", "", "", "3", "", "2", "", "")
+                    User("peter_tbi", "", "", SharedPreferencesCom.getInstance().gerSharedDistributor_ID(), "", SharedPreferencesCom.getInstance().gerSharedUser_ID(), "", "")
                 )
                     //.actionMainFragmentToCollectDebitFragment(
                     //  MainFragmentArgs.fromBundle(

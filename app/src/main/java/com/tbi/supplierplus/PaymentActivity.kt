@@ -1,15 +1,18 @@
 package com.tbi.supplierplus
 
+import android.app.AlertDialog
 import android.app.Dialog
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothSocket
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.text.*
@@ -28,7 +31,9 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.tbi.supplierplus.business.pojo.billModels.SaleingBill
 import com.tbi.supplierplus.business.pojo.bills.NewBill
+import com.tbi.supplierplus.business.utils.LoadingDialog
 import com.tbi.supplierplus.databinding.ActivityPaymentBinding
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import com.tbi.supplierplus.framework.ui.sales.SalesViewModel
 import com.tbi.supplierplus.framework.utils.PrintPic
 import dagger.hilt.android.AndroidEntryPoint
@@ -78,6 +83,7 @@ class PaymentActivity : AppCompatActivity() {
     var Total= ""
     var TotalReturn=""
     var Unpaid_deferred=""
+    val loading = LoadingDialog(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
@@ -120,10 +126,24 @@ class PaymentActivity : AppCompatActivity() {
        // var     numberList = intent .getSerializableExtra( "list" )
                // as ArrayList<SaleingBill>
         viewModel.setNewBillTip.observe(this){
+            loading.isDismiss()
             binding.progressBar2.isGone=true
             Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 
             if (it.State==1){
+
+
+                val dialog   = Dialog(this)
+
+                dialog.setContentView(R.layout.chos_items)
+
+                dialog.getWindow()?.setLayout(700, 2000)
+
+
+                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                dialog.show()
+
                numberOfBill=it.State
                Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 //
@@ -135,6 +155,9 @@ class PaymentActivity : AppCompatActivity() {
               // registerBillAndPrint()
                Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 
+                val i=Intent(this,MainActivity::class.java)
+                startActivity(i)
+                finish()
            }else if(it.State==0){
                Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 
@@ -162,7 +185,7 @@ class PaymentActivity : AppCompatActivity() {
             //بيعمل بلوك للباك جراوند
             //  dialog?.setCancelable(false)
             dialog2?.setContentView(R.layout.dilog_bill_row_discount)
-            dialog2?.getWindow()?.setLayout(600, 800)
+            dialog2?.getWindow()?.setLayout(1000, 900)
             dialog2?.show()
 
 
@@ -237,6 +260,7 @@ class PaymentActivity : AppCompatActivity() {
                     binding.TotalafterDiscaunt.setText(total1.toString())
                     dialog2.dismiss()
                 }
+                binding.deferredEditText.setText(binding.TotalafterDiscaunt.text)
 
             }
 
@@ -247,18 +271,20 @@ class PaymentActivity : AppCompatActivity() {
 
 
         }
+        binding.deferredEditText.setText(binding.TotalafterDiscaunt.text)
 
        // if(  binding.TotalafterDiscaunt.text.toString().toString().toDouble()<0) {
             binding.cashEditText.addTextChangedListener(object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                   // binding.deferredEditText.setText(binding.TotalafterDiscaunt.text)
                 }
 
                 override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
+                 //   binding.deferredEditText.setText(binding.TotalafterDiscaunt.text)
                 }
 
                 override fun afterTextChanged(p0: Editable?) {
+
                     Toast.makeText(applicationContext, p0.toString(), Toast.LENGTH_SHORT).show()
                     if (p0?.isEmpty() == true) {
                         binding.deferredEditText.setText("0.0")
@@ -275,86 +301,15 @@ class PaymentActivity : AppCompatActivity() {
                         binding.deferredEditText.setText(deferd.toString())
                     }
 
-
+                  //  binding.deferredEditText.setText(binding.TotalafterDiscaunt.text)
                 }
 
             })
 
 binding.progressBar2.isGone=true
         binding.printbtn.setOnClickListener {
-            binding.progressBar2.isVisible=true
+            showDefaultDialog(this)
 
-      //    Log.d("haaaaaaaager",   CusID
-      //     +"  --" + binding.billDiscountEditText.text.toString()
-      //     +"  --" + "1"
-      //     +"  --" + "2"
-      //     +"  --" + binding.Totalss4.text.toString()
-      //     +"  --" + binding.TotalafterDiscaunt.text.toString()
-      //     +"  --" + binding.cashEditText.text.toString()
-      //     +"  --" + binding.deferredEditText.text.toString()
-      //     +"  --" +
-      //           "1"
-      //     +"  --" + binding.Totalss2.text.toString())
-      //    for (x in list){
-      //      //  binding.textView79.setText(  " TransactionType"+"-"+x. TransactionType+"\n"
-      //      //          +"\n" +" SR_No"+"-"+x.   SR_No
-      //      //          +"\n"  +" Items"+"-"+x.   Items
-      //      //          +"\n"  +"NumberOfUnits"+"-"+x.   NumberOfUnits
-      //      //          +"\n"  +" size"+"-"+x.   size
-      //      //          +"\n"  +"UnitPrice"+"-"+x.   UnitPrice
-      //      //          +"\n"  +" Discount"+"-"+x.   Discount
-      //      //          +"\n"  +" TotalPrice"+"-"+x.   TotalPrice
-      //      //          +"\n" +"ItemID"+"-"+x.   ItemID
-      //      //          +"\n" +"Suppier_id"+"-"+x.   Suppier_id
-      //      //          +"\n"  +" Supply_Price"+"-"+x.   Supply_Price
-      //      //          +"\n" +" itemcount"+"-"+x.   itemcount
-      //      //          +"\n"  +" sals"+"-"+x.   sals
-      //      //          +"\n"  +" returns"+"-"+x.   returns   )
-      //        Log.d("haaaaaaaager","" +
-      //                " TransactionType"+x. TransactionType+"--"
-      //          +" SR_No"+x.   SR_No
-      //          +" Items"+x.   Items
-      //          +"NumberOfUnits"+x.   NumberOfUnits
-      //          +" size"+x.   size
-      //          +"UnitPrice"+x.   UnitPrice
-      //          +" Discount"+x.   Discount
-      //          +" TotalPrice"+x.   TotalPrice
-      //          +"ItemID"+x.   ItemID
-      //          +"Suppier_id"+x.   Suppier_id
-      //          +" Supply_Price"+x.   Supply_Price
-      //          +" itemcount"+x.   itemcount
-      //          +" sals"+x.   sals
-      //          +" returns"+x.   returns          )
-
-      //    }
-
-         //  GlobalScope.launch(Dispatchers.Default) {
-         //      withContext(Dispatchers.Default){
-
-         //          registerBillAndPrint()
-         //      }}
-
-         //  GlobalScope.launch(Dispatchers.Default) {
-         //      withContext(Dispatchers.Default){
-
-         //          registerBillAndPrint()
-         //      }}
-          viewModel.setNewPill(NewBill(
-              CusID.trim(),
-              binding.billDiscountEditText.text.toString().trim(),
-              "1",
-              "2",
-              binding.Totalss4.text.toString().trim(),
-              binding.TotalafterDiscaunt.text.toString().trim(),
-              binding.cashEditText.text.toString().trim(),
-              binding.deferredEditText.text.toString().trim(),
-              Unpaid_deferred,
-              binding.Totalss2.text.toString().trim(),
-              list))
-
-            Log.e("PrintError1", "e.message.toString()")
-           //registerBillAndPrint()
-            // print()
         }
     }
     @Throws(IOException::class)
@@ -791,4 +746,59 @@ binding.progressBar2.isGone=true
         return b
     }
 
+    private fun showDefaultDialog(context: Context) {
+        val alertDialog = AlertDialog.Builder(context)
+
+        alertDialog.apply {
+            //setIcon(R.drawable.ic_hello)
+            setTitle("مرحبا")
+            setMessage("هل متاكد من دفع مبلغ " + binding.cashEditText.text+"\n"+"والمتبقي "+binding.deferredEditText.text)
+            setPositiveButton("نعم ") { _: DialogInterface?, _: Int ->
+                loading.startLoading()
+                binding.progressBar2.isVisible=true
+                 SharedPreferencesCom.getInstance().gerSharedUser_ID()
+
+                viewModel.setNewPill(NewBill(
+                    CusID.trim(),
+                    binding.billDiscountEditText.text.toString().trim(),
+                    "1",
+                    SharedPreferencesCom.getInstance().gerSharedUser_ID().toString(),
+                    binding.Totalss4.text.toString().trim(),
+                    binding.TotalafterDiscaunt.text.toString().trim(),
+                    binding.cashEditText.text.toString().trim(),
+                    binding.deferredEditText.text.toString().trim(),
+                    Unpaid_deferred,
+                    binding.Totalss2.text.toString().trim(),
+                    list))
+
+                Log.e("PrintError1", "e.message.toString()")
+                //registerBillAndPrint()
+                // print()
+            }
+            setNegativeButton("لا") { _, _ ->
+                Toast.makeText(context, "لا", Toast.LENGTH_SHORT).show()
+            }
+            setNeutralButton("Neutral") { _, _ ->
+                Toast.makeText(context, "Neutral", Toast.LENGTH_SHORT).show()
+            }
+        }.create().show()
+    }
+    private fun showDefaultDialog2(context: Context) {
+        val alertDialog = AlertDialog.Builder(context)
+
+        alertDialog.apply {
+            //setIcon(R.drawable.ic_hello)
+            setTitle("Hello")
+            setMessage("I just wanted to greet you. I hope you are doing great!")
+            setPositiveButton("Positive") { _: DialogInterface?, _: Int ->
+                Toast.makeText(context, "Hello", Toast.LENGTH_SHORT).show()
+            }
+            setNegativeButton("Negative") { _, _ ->
+                Toast.makeText(context, "Negative", Toast.LENGTH_SHORT).show()
+            }
+            setNeutralButton("Neutral") { _, _ ->
+                Toast.makeText(context, "Neutral", Toast.LENGTH_SHORT).show()
+            }
+        }.create().show()
+    }
 }

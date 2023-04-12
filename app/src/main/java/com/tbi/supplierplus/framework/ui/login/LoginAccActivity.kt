@@ -31,14 +31,18 @@ class LoginAccActivity : AppCompatActivity() {
         binding = ActivityLoginAccBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+     //   val intent = Intent(this, MainActivity::class.java)
+     //   startActivity(intent)
+     //   finish()
 
         val androidId: String = Settings.Secure.getString(
             contentResolver,
             Settings.Secure.ANDROID_ID
         )
         Log.d("aziza3s2", androidId)
-     //   SharedPreferencesCom.init(this)
+         SharedPreferencesCom.init(this)
+       // SharedPreferencesCom.getInstance().setSharedDistributor_ID("2")
+       // SharedPreferencesCom.getInstance().setSharedUser_ID("2")
         viewModel.loginInfoCombVM(androidId,this)
         viewModel.loginInfoCombVLiveData.observe(this) {
 
@@ -46,12 +50,14 @@ class LoginAccActivity : AppCompatActivity() {
 
                 is State.Loading -> Log.d("aziza", "")
                 is State.Success -> {
-                   //  SharedPreferencesCom.getInstance().setSharedphoneNumber(it.data.UserInfo.userID.toString())
-//                    Log.d("aziza32", it.data.message)
+                    Log.d("aziza3sss2", it.data.UserInfo.userID.toString())
+                     SharedPreferencesCom.getInstance().setSharedUser_ID(it.data.UserInfo.userID.toString())
+                     SharedPreferencesCom.getInstance().setSharedDistributor_ID(it.data.UserInfo.Distributor_ID.toString())
+                     Log.d("azizas32", it.data.UserInfo.Distributor_ID.toString())
 //                    Log.d("aziza32", it.data.State.toString())
                  //   Log.d("aziza3s2", it.data.UserInfo.userID.toString())
                     if (it.data!!.State == 0) {
-//                        Log.d("aziza3s2", it.data.UserInfo.userID.toString())
+                       Log.d("aziza3sss2", it.data.UserInfo.userID.toString())
 //                        //your Request is pending
 //
 //                        binding.textView5.text = it.data.message

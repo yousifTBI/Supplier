@@ -21,7 +21,7 @@ class LoginRepositoryImpl @Inject constructor(
         fetch = {
             api.LoginAPI(androidID)
         }
-    , context
+
     ).flowOn(IO)
 
 
@@ -32,7 +32,7 @@ class LoginRepositoryImpl @Inject constructor(
         fetch = {
             api.RegistrationAPI(registrationModel)
         }
-    ,context
+
     ).flowOn(IO)
 
 

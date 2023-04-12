@@ -33,20 +33,29 @@ public class SharedPreferencesCom {
         sharedPreferencesLogIn.edit().clear().commit();
     }
 
-    public void setSharedphoneNumber(String number
+    public void setSharedDistributor_ID(String number
     ) {
         edits.putString("Distributor_ID", number);
         edits.apply();
     }
+    public void setSharedUser_ID(String number
+    ) {
+        edits.putString("User_ID", number);
+        edits.apply();
+    }
 
 
-
-    public String gerSharedphoneNumber(
+    public String gerSharedDistributor_ID(
     ) {
         String phoneNumber = sharedPreferencesLogIn.getString("Distributor_ID", "");
         return phoneNumber;
 
     }
+    public String gerSharedUser_ID(
+    ) {
+        String phoneNumber = sharedPreferencesLogIn.getString("User_ID", "");
+        return phoneNumber;
 
+    }
 
 }

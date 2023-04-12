@@ -15,6 +15,7 @@ import com.tbi.supplierplus.databinding.FragmentSalesSettingBinding
 import com.tbi.supplierplus.framework.ui.MainFragmentDirections
 import com.tbi.supplierplus.framework.ui.addNewItem.AddItemActivity
 import com.tbi.supplierplus.framework.ui.purchase.PurchaseActivity
+import com.tbi.supplierplus.framework.ui.sales.add_customer.AddCustomerActivity
 
 
 class SalesSettingFragment : Fragment() {
@@ -33,7 +34,7 @@ class SalesSettingFragment : Fragment() {
         }
 
         binding.reportsCard.setOnClickListener {
-            val    intent = Intent(activity, AddItemActivity::class.java)
+            val    intent = Intent(activity, AddCustomerActivity::class.java)
             startActivity(intent)
             //indNavController().navigate(
             //   MainFragmentDirections.actionMainFragmentToReportFragment(

@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ExpensesClosingFragment : Fragment() {
     private lateinit var binding: FragmentExpensesClosingBinding
 
-    private val viewModel: DailyClosingViewModel by  activityViewModels()
+    private val viewModel: DailyClosingViewModel by  viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

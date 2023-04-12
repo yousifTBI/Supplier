@@ -1,6 +1,7 @@
 package com.tbi.supplierplus.framework.ui.sales.customers.product_selection
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -8,14 +9,18 @@ import android.util.Log
 import android.view.KeyEvent
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.tbi.supplierplus.DialogBill
 import com.tbi.supplierplus.R
 import com.tbi.supplierplus.business.pojo.Items
 import com.tbi.supplierplus.business.pojo.price.SpecialPrice
+import com.tbi.supplierplus.business.utils.LoadingDialog
 import com.tbi.supplierplus.databinding.ActivityChangeSpecialPriceBinding
 import com.tbi.supplierplus.framework.datasource.requests.State
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
+import com.tbi.supplierplus.framework.ui.login.LoginAccActivity
 import com.tbi.supplierplus.framework.ui.sales.SalesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat
@@ -39,7 +44,7 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
         supportActionBar?.hide()
         message     = intent.getStringExtra("Customer_ID").toString()
       var CompanyName     = intent.getStringExtra("CompanyName").toString()
-
+        val loading = LoadingDialog(this)
         binding.textView22.setText(CompanyName)
         viewModel.getAllItemss( message!!.toInt())
          viewModel.getProducers  .observe(this){
@@ -49,27 +54,37 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
          }
        // binding.linearLayout2
 //\
-
+        binding.spinKit.isVisible=false
         viewModel.SetSpecialItemPriceLiveData.observe(this){
-            Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 
-            if (it.State==1){
-                binding.textView8.setText("")
-                binding.textView2.setText("")
-                binding.textView3.setText("")
-                binding.counterEditTextm.setText("")
-                Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
-                val dialog   = Dialog(this)
-                dialog.setContentView(R.layout.chos_items)
-                dialog.getWindow()?.setLayout(700, 800)
-                dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.show()
-            }else{
-                Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
-                binding.textView80.setText(it.Message+""+it.State.toString())
+            when (it) {
+                is com.tbi.supplierplus.framework.ui.login.State.Loading -> {
+                    binding.spinKit.isVisible=true
+                }
+                is com.tbi.supplierplus.framework.ui.login.State.Success -> {
+                    loading.isDismiss()
+                    binding.spinKit.isVisible=false
+
+                        binding.textView8.setText("")
+                        binding.textView2.setText("")
+                        binding.textView3.setText("")
+                        binding.counterEditTextm.setText("")
+                       Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
+                        val dialog   = Dialog(this)
+                        dialog.setContentView(R.layout.chos_items)
+                        dialog.getWindow()?.setLayout(700, 800)
+                        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                        dialog.show()
+
+                }
+                is com.tbi.supplierplus.framework.ui.login.State.Error -> {
+                    binding.spinKit.isVisible=false
+
+
+                    Toast.makeText(applicationContext,"خطا", Toast.LENGTH_SHORT).show()
+                }
 
             }
-            binding.textView80.setText(it.Message+""+it.State.toString())
 
         }
         //binding.
@@ -94,53 +109,22 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
 
 
         binding.button2b.setOnClickListener {
-         //  Log.d("makeText", "it.data.Item!!.item")
-         //  binding.textView80.setText( binding.textView3.text.toString()+"  - "
-         //          +message+"  -"+binding.counterEditTextm.text.toString()+" - ")
+
             if (isvaled()==true){
-                binding.textView80.setText( binding.textView3.text.toString()+""
-                    +message+""+binding.counterEditTextm.text.toString()+"")
-                //binding.textView8.text.toString()
+                loading.startLoading()
+               // binding.textView80.setText( binding.textView3.text.toString()+""
+               //     +message+""+binding.counterEditTextm.text.toString()+"")
+
 
                 binding.textView2.text.toString()
-                viewModel.SetSpecialItemPrice(SpecialPrice("2", binding.textView3.text.toString().trim(),
+                viewModel.SetSpecialItemPrice(SpecialPrice( SharedPreferencesCom.getInstance().gerSharedUser_ID().toString(), binding.textView3.text.toString().trim(),
                     message,binding.counterEditTextm.text.toString().trim()
                 ))
             }
 
         }
 
-     //   viewModel.  SetSpeci.observe(this){
-     //       Toast.makeText(baseContext, it.toString()+"1dr", Toast.LENGTH_SHORT).show()
-//
-     //   }
-   // viewModel.   SetStat.observe(this){
 
-   //     if (it==1){
-   //         binding.textView8.setText("")
-
-   //         binding.textView2.setText("")
-   //      binding.textView3.setText("")
-
-   //         binding.counterEditTextm.setText("")
-   //         Toast.makeText(baseContext, it.toString(), Toast.LENGTH_SHORT).show()
-   //         val dialog   = Dialog(this)
-
-   //         dialog.setContentView(R.layout.chos_items)
-
-   //         dialog.getWindow()?.setLayout(700, 700)
-
-
-   //         dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-   //         dialog.show()
-
-   //     }else{
-
-   //     }
-
-   // }
-    //    val loading = LoadingDialog(this)
 
         viewModel.getItemByBarcodeLiveData.observe(this) {
             when( it){
@@ -200,7 +184,7 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
             binding.editTextTextPersonName3.setText("")
             binding.editTextTextPersonName3. clearFocus ()
            // binding.textView3.setText(barcode.toString().trim())
-            viewModel.getItemByBarcodeV1API("2",barcode.toString().trim(), message)
+            viewModel.getItemByBarcodeV1API( SharedPreferencesCom.getInstance().gerSharedUser_ID().toString(),barcode.toString().trim(), message)
 
             barcode.delete(0, barcode.length)
         }

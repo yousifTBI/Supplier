@@ -42,8 +42,8 @@ class CustomersFragment : Fragment() {
         binding.lifecycleOwner = this
 
         viewModel.  getAllCustomerTesthandel1()
-        binding.spinKit.isVisible=false
-        binding.spinKit.isVisible=false
+      //  binding.spinKit.isVisible=true
+       // binding.spinKit.isVisible=false
 
 
     //    val adapter = CustomersAdapter(OnClickListener {
@@ -55,7 +55,7 @@ class CustomersFragment : Fragment() {
 //
 //
     //    })
-       viewModel.getAllCustomerTesthandel1()
+    //   viewModel.getAllCustomerTesthandel1()
 
  //      lifecycleScope.launchWhenStarted{
  //          viewModel.addRateStateFlow.collect {
@@ -108,18 +108,18 @@ class CustomersFragment : Fragment() {
 
         })
 
-        lifecycleScope.launchWhenStarted{
-            viewModel.customes(activity!!)
-            viewModel.getAllCustomers()
-        }
-        viewModel.Regionsd2.observe(viewLifecycleOwner){
+      // lifecycleScope.launchWhenStarted{
+      //     viewModel.customes(activity!!)
+      //     viewModel.getAllCustomers()
+      // }
+      // viewModel.Regionsd2.observe(viewLifecycleOwner){
 
-        }
-        viewModel.getAllCustomersLiveData.observe(viewLifecycleOwner){
+      // }
+      // viewModel.getAllCustomersLiveData.observe(viewLifecycleOwner){
 
-          //   binding.recyclerView.adapter = adapte
-          //   adapte.submitList(it)
-        }
+      //   //   binding.recyclerView.adapter = adapte
+      //   //   adapte.submitList(it)
+      // }
 
 
         viewModel. Regionsd.observe(viewLifecycleOwner) {

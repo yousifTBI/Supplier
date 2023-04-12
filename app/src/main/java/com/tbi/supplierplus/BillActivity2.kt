@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.EditText
@@ -13,6 +14,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.tbi.supplierplus.business.pojo.Items
@@ -77,6 +81,30 @@ class BillActivity2 : AppCompatActivity() {
 
         var adapte= SaleingBillAdpter()
 
+
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                //  Toast.makeText(ItemsActivity.this, "Swipe to delete", Toast.LENGTH_SHORT).show();
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                Snackbar.make(binding.billRecycler1, "Deleted item", Snackbar.LENGTH_SHORT)
+                    .setAction(listBill[viewHolder.adapterPosition].Items,
+                        View.OnClickListener { }).show()
+                listBill.removeAt(viewHolder.adapterPosition)
+               // calculateBalance(list)
+                d()
+                mortaga3()
+                adapte.notifyDataSetChanged()
+            }
+        }).attachToRecyclerView(binding.billRecycler1)
+
+
        // binding.billRecycler1.adapter = adapte
         binding.billRecycler1.adapter = adapte
 
@@ -97,7 +125,7 @@ class BillActivity2 : AppCompatActivity() {
                     //بيعمل بلوك للباك جراوند
                     //  dialog?.setCancelable(false)
                     dialog?.setContentView(R.layout.dilog_bill_row)
-                    dialog?.getWindow()?.setLayout(550,850)
+                    dialog?.getWindow()?.setLayout(1100,1700)
                     dialog?.show()
 
 
@@ -1572,6 +1600,61 @@ class BillActivity2 : AppCompatActivity() {
 //       c.restore()
 //       return b
 //   }
+
+
+    fun d(){
+        var s=0.0
+        for (item in listBill){
+            if (item.TransactionType==1){
+                var z=       item.TotalPrice.toDouble()
+                s =s+ z
+            }
+
+
+            //  Log.d("qqqqqq", item.TotalPrice)
+
+            //s++
+        }
+        // Log.d("qqqqqq",s.toString())
+
+        binding.Totalss.setText(s.toString())
+
+
+        val totals= binding.Totalss.text.toString().toDouble()-
+                binding.Totalss2.text.toString().toDouble()+
+                binding.Totalssz4.text.toString().toDouble()
+        //  binding. billDiscountEditText.text.toString().toDouble()
+
+
+        // binding   billDiscountEditText?.text?.toString().toDouble()
+        binding.Totalss4.setText(
+            totals.toString()
+        )
+    }
+
+
+    fun mortaga3(){
+        var TotalPrices=0.0
+        for (item in listBill){
+            if (item.TransactionType==0){
+                Log.d("qqqqqq", item.TotalPrice)
+                var z=       item.TotalPrice.toDouble()
+                TotalPrices =TotalPrices+ z
+            }
+        }
+        binding.Totalss2.setText(TotalPrices.toString())
+
+        val totals= binding.Totalss.text.toString().toDouble()-
+                binding.Totalss2.text.toString().toDouble()+
+
+                // binding. billDiscountEditText.text.toString().toDouble()
+
+                binding.Totalssz4.text.toString().toDouble()
+        // binding   billDiscountEditText?.text?.toString().toDouble()
+        binding.Totalss4.setText(
+            totals.toString()
+        )
+    }
 }
 
 

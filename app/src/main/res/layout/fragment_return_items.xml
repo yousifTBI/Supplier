@@ -140,22 +140,6 @@
 
                             />
 
-                        <TextView
-                            android:id="@+id/textView64"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:layout_weight="1"
-                            android:background="@color/light_blue"
-                            android:gravity="center"
-                            android:padding="8dp"
-                            android:text="رقم المنتج"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/returns_textview"
-
-                            />
                     </LinearLayout>
 
                     <TextView

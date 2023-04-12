@@ -31,22 +31,23 @@ import com.tbi.supplierplus.business.pojo.billModels.SaleingBill
 import com.tbi.supplierplus.business.pojo.bills.NewBill
 import com.tbi.supplierplus.business.pojo.price.EditProductprice
 import com.tbi.supplierplus.business.pojo.price.SpecialPrice
+import com.tbi.supplierplus.business.pojo.reports.ReportSpecificCustomer
 import com.tbi.supplierplus.business.repository.GeocodeRepository
+import com.tbi.supplierplus.business.repository.ReportsRepository
 import com.tbi.supplierplus.business.repository.SalesRepository
 import com.tbi.supplierplus.business.repository.SalesRepositoryImpl
 import com.tbi.supplierplus.business.utils.Constants
 import com.tbi.supplierplus.business.utils.NetworkState
 import com.tbi.supplierplus.business.utils.isInternetAvailable
+import com.tbi.supplierplus.framework.datasource.network.SupplierAPI
 import com.tbi.supplierplus.framework.datasource.requests.State
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
+import com.tbi.supplierplus.framework.ui.login.wrapWithFlowApi
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
@@ -57,7 +58,7 @@ import javax.inject.Inject
 class SalesViewModel @Inject constructor(
     private val salesRepository: SalesRepository,
     private val geocodeRepository: GeocodeRepository,
-    private val salesRepository2: SalesRepositoryImpl
+    private val salesRepository2: SalesRepositoryImpl,private val api: SupplierAPI
 ) :
     ViewModel() {
 
@@ -174,20 +175,29 @@ class SalesViewModel @Inject constructor(
 
 //EditItemByBarcode
 var editProductpriceLiveData = MutableLiveData<EditProductprice?>()
-var editProductpricemass = MutableLiveData<String>()
+var editProductpricemass = MutableLiveData<com.tbi.supplierplus.framework.ui.login.State<Tasks<ReportSpecificCustomer>>>()
 var editProductpriceState = MutableLiveData<Int>()
 
     fun editItemByBarcode( editProductprice: EditProductprice) {
     viewModelScope.launch {
-        salesRepository.EditItemByBarcode(editProductprice).collect{
-            editProductpriceState.value=it.State
-            editProductpricemass.value=it.Message
+        EditItemByBarcode(editProductprice).collect{
+          //  editProductpriceState.value=it
+            editProductpricemass.value=it
 
            // Log.d("AddCustomer",it.Message + ""+it.State)
            // StatesAddNewCustomer.value=it.Message
         }
     }
 }
+
+
+    fun EditItemByBarcode(editProductprice: EditProductprice) = wrapWithFlowApi(
+
+        fetch = {
+             api.EditItemByBarcodeAPI(editProductprice)
+        }
+
+    ).flowOn(Dispatchers.IO)
 
     var getItemByBarcodeLiveData = MutableLiveData<State<Tasks<Items>>>()
     var NotFoundItemByBarcodefulsLiveData = MutableLiveData<String>()
@@ -210,20 +220,25 @@ var editProductpriceState = MutableLiveData<Int>()
              }
          }
      }
-    var SetSpecialItemPriceLiveData = MutableLiveData<Tasks<SpecialPrice>>()
+    var SetSpecialItemPriceLiveData = MutableLiveData<com.tbi.supplierplus.framework.ui.login.State<Tasks<SpecialPrice>>>()
 
 
     fun  SetSpecialItemPrice( specialPrice: SpecialPrice){
         viewModelScope.launch {
-            salesRepository. SetSpecialItemPrice(specialPrice).collect{
-               // Log.d("makeText",it.Message)
+            SetSpecialItemPriceAPI(specialPrice).collect{
 
                 SetSpecialItemPriceLiveData.value=it
-                // SetSpeci.value=it.Message
-               // SetStat.value=it.State
+
             }
         }
     }
+    fun SetSpecialItemPriceAPI(specialPrice: SpecialPrice) = wrapWithFlowApi(
+
+        fetch = {
+            api.SetSpecialItemPriceAPI(specialPrice)
+        }
+
+    ).flowOn(Dispatchers.IO)
 
 
     var Regions = MutableLiveData<List<Regions>>()
@@ -305,10 +320,10 @@ var editProductpriceState = MutableLiveData<Int>()
 
 
     fun getAllCustomerTesthandel1(){
-
+        // SharedPreferencesCom.getInstance().gerSharedphoneNumber()
         Log.d("makeText","Loading8")
         viewModelScope.launch {
-            salesRepository.getAllCustomerTesthandel("2" ).collect{
+            salesRepository.getAllCustomerTesthandel(SharedPreferencesCom.getInstance().gerSharedUser_ID().toString()).collect{
                 Log.d("makeText","Loading2")
                 Regionsd.value=it
             }
@@ -331,9 +346,9 @@ var editProductpriceState = MutableLiveData<Int>()
            // runApi(_addRateStateFlow,
            //     salesRepository.getAllCustomers("2")
            //     )
-            salesRepository.getAllCustomers("2").collect{
-                CustomersLiveData.value=it.data
-                getAllCustomersLiveData.value=it.data
+            salesRepository.getAllCustomers(SharedPreferencesCom.getInstance().gerSharedUser_ID().toString()).collect{
+               // CustomersLiveData.value=it.data
+               // getAllCustomersLiveData.value=it.data
                 //  it.ArrList
             }
 
@@ -350,7 +365,7 @@ var editProductpriceState = MutableLiveData<Int>()
 
     fun getAllItemss(Cus_id:Int){
         viewModelScope.launch {
-            salesRepository.getItemss(2,Cus_id).collect {
+            salesRepository.getItemss(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt(),Cus_id).collect {
 
              //   _allItemss.value = it
                 getProducers.value = it.data

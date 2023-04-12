@@ -19,6 +19,7 @@ import com.tbi.supplierplus.business.pojo.addItem.TypeOfcategory
 import com.tbi.supplierplus.business.utils.LoadingDialog
 import com.tbi.supplierplus.databinding.ActivityAddItemBinding
 import com.tbi.supplierplus.framework.datasource.requests.State
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.AndroidEntryPoint
 import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat
 import ir.mirrajabi.searchdialog.core.SearchResultListener
@@ -38,7 +39,7 @@ var Supplier_ID:String = ""
         binding= DataBindingUtil.setContentView(this,R.layout.activity_add_item)
         viewModel = ViewModelProvider(this).get(ItemViewModel::class.java)
 
-        viewModel. getItemGroupSpinner("2","7")
+      //  viewModel. getItemGroupSpinner("2","7")
         viewModel.getSuppliers()
         val loading = LoadingDialog(this)
 
@@ -46,13 +47,10 @@ var Supplier_ID:String = ""
             when( it){
 
                 is State.Loading ->  loading.startLoading()
-                    //binding.progressBar2.visibility
-                    //Log.d("","")
-                // Toast.makeText(baseContext, it.toLoading(), Toast.LENGTH_SHORT).show()
 
                 is State.Success ->
                     if (it.data.State==1){
-                      //  binding.progressBar2.isGone
+
                         loading.isDismiss()
 
                         Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
@@ -66,10 +64,7 @@ var Supplier_ID:String = ""
 
                     binding.barcode.setText("")
                     binding.Ids.setText("")
-                  //  Toast.makeText(this,it,Toast.LENGTH_SHORT)
-                  //  Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT)
-                  //  Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT)
-                  //  Toast.makeText(baseContext, it, Toast.LENGTH_SHORT).show()
+
 
                     val dialog   = Dialog(this)
 
@@ -82,7 +77,7 @@ var Supplier_ID:String = ""
 
                     dialog.show()
                 }else{
-                    //    binding.progressBar2.isGone
+
                         loading.isDismiss()
                     Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
                     Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
@@ -93,39 +88,10 @@ var Supplier_ID:String = ""
                     loading.isDismiss()
                     Toast.makeText(baseContext, it.messag, Toast.LENGTH_SHORT).show()
                 }
-                    //binding.progressBar2.isGone
-                    //Toast.makeText(baseContext, it.messag, Toast.LENGTH_SHORT).show()
+
 
             }
-         // if(it==1){
-         // viewModel.massgeAdd.observe(this){
-         //     binding.nameOfItem.setText("")
-         //     binding.typ.setText("")
 
-         //     binding.size.setText("")
-         //     binding.sellingprice.setText("")
-         //     binding.Buyingprice.setText("")
-
-         //     binding.barcode.setText("")
-         //     binding.Ids.setText("")
-         //     Toast.makeText(this,it,Toast.LENGTH_SHORT)
-         //     Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT)
-         //     Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT)
-         //     Toast.makeText(baseContext, it, Toast.LENGTH_SHORT).show()
-         //     Log.d("nnooono", it)
-         //     val dialog   = Dialog(this)
-
-         //     dialog.setContentView(R.layout.chos_items)
-
-         //     dialog.getWindow()?.setLayout(700, 2000)
-
-
-         //     dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-         //     dialog.show()
-
-         // }
-         // }
         }
 
         viewModel.Suppliers.observe(this){
@@ -133,24 +99,24 @@ var Supplier_ID:String = ""
         }
         viewModel.Groups.observe(this){
             TypeOfcategory= it as ArrayList<TypeOfcategory>
-            Log.d("sqsq", TypeOfcategory.get(2).ItemGroup_ID.toString())
-            Log.d("sqsq", TypeOfcategory.get(2).CategoryName.toString())
+
 
         }
 
         binding.printbtn.setOnClickListener {
-
+         //   SharedPreferencesCom.getInstance().gerSharedphoneNumber()
 
             if ( isvaled()==true){
                 viewModel.addNewItem(
                     NewItem(
                         binding.nameOfItem.text.toString(),
                         binding.typ.text.toString(),
-                        "2", Supplier_ID,
+                        SharedPreferencesCom.getInstance().gerSharedUser_ID().toString(), Supplier_ID,
                         binding.size.text.toString(),
                         binding.sellingprice.text.toString(),
                         binding.Buyingprice.text.toString(),
-                        "2",
+                        //"2"
+                        SharedPreferencesCom.getInstance().gerSharedDistributor_ID().toString(),
                         binding.barcode.text.toString()
                     ))
             }
@@ -167,7 +133,8 @@ var Supplier_ID:String = ""
                         baseSearchDialogCompat, item, pos ->
                     binding.Ids.setText(item.CompanyName)
                     Log.d("sqsq", item.Supplier_ID.toString())
-
+                 //   SharedPreferencesCom.getInstance().gerSharedphoneNumber()
+                    viewModel. getItemGroupSpinner( "2",item.Supplier_ID.toString())
                     //  binding.Supl.setText(item.Supplier_ID)
                     Supplier_ID= item.Supplier_ID.toString()
                     baseSearchDialogCompat.dismiss()

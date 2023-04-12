@@ -23,6 +23,7 @@ import com.tbi.supplierplus.business.pojo.puarchase.ItemsPRCh
 import com.tbi.supplierplus.business.utils.LoadingDialog
 import com.tbi.supplierplus.databinding.ActivityPurchaseBinding
 import com.tbi.supplierplus.framework.datasource.requests.State
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.AndroidEntryPoint
 import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat
 import ir.mirrajabi.searchdialog.core.SearchResultListener
@@ -37,6 +38,7 @@ class PurchaseActivity : AppCompatActivity() {
      var list = ArrayList<ItemsPRCh>()
     lateinit var item_id:String
     lateinit var supllyid:String
+    val loading = LoadingDialog(this)
    override fun onCreate(savedInstanceState: Bundle?) {
        super.onCreate(savedInstanceState)
      //  setContentView(R.layout.activity_purchase)
@@ -45,23 +47,16 @@ class PurchaseActivity : AppCompatActivity() {
      //  LayoutInflater.from(this).inflate(R.layout.activity_purchase,parent,false);
        viewModel = ViewModelProvider(this).get(PurchaseViewModel::class.java)
 
-       val loading = LoadingDialog(this)
+
 
 
        viewModel.getPurchases()
 
 
        supportActionBar?.hide()
-       //   viewModel. getItemByBarcodeV1API()
-     // viewModel.  NotFoundItemByBarcodefulsLiveData.observe(this){
-     //      Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT)
 
-     // }
-    //   binding.button2b.setOnClickListener {
-//
-    //   }
        binding.btnPopup.setOnClickListener {
-           Log.d("linearLayout2","sh")
+
 
            Toast.makeText(applicationContext,"isEmpty",Toast.LENGTH_SHORT)
 
@@ -72,6 +67,16 @@ class PurchaseActivity : AppCompatActivity() {
            Log.d("nnooono", it.get(0).ItemName)
        }
        viewModel.SucssaddNewPurchases.observe(this){
+           loading.isDismiss()
+           binding.textView8.setText("")
+           binding.Size1.setText("")
+
+           binding.sours1.setText("")
+           binding.textView2.setText("")
+           binding.textView3.setText("")
+           binding.ItemId.setText("")
+
+           binding.  counterEditTextm.setText("")
            Toast.makeText(this,it,Toast.LENGTH_SHORT)
            Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT)
            Toast.makeText(applicationContext,it,Toast.LENGTH_SHORT)
@@ -106,35 +111,14 @@ class PurchaseActivity : AppCompatActivity() {
 
       binding.button2b.setOnClickListener {
           if ( isvaled()==true){
+              loading.startLoading()
           //    viewModel.addNewPurchases(   AddBurchace(binding.ItemId.text.toString(),binding.counterEditTextm.toString(),"2", "7"))
-              viewModel.addNewPurchases(   AddBurchace( item_id.toString(),binding.counterEditTextm.text.toString(),"2", supllyid.toString()))
+              viewModel.addNewPurchases(   AddBurchace( item_id.toString(),binding.counterEditTextm.text.toString(),
+                  SharedPreferencesCom.getInstance().gerSharedUser_ID(), supllyid.toString()))
           }
 
-        //  viewModel.addNewPurchases(
-         //     AddBurchace(id.toString(),binding.counterEditTextm.toString(),"2", suplierID.toString()))
-
-         // viewModel.addNewPurchases(
-         //     AddBurchace("binding.oString()",
-         //         binding.counterEditTextm.toString(),
-
-         //         "2", "7"))
-        //  binding.textView80.setText(item_id.toString()+"\n"+binding.counterEditTextm.toString()+"\n"+"2"+"\n"+supllyid.toString())
-          Log.d("",binding.ItemId.text.toString()+""+binding.counterEditTextm.toString())
-
-       //   viewModel.addNewPurchases(   AddBurchace( item_id.toString(),binding.counterEditTextm.text.toString(),"2", supllyid.toString()))
-
-    //     if ( binding.textView8.text.isEmpty()&&binding.counterEditTextm.text.isEmpty()
-    //         &&binding.counterEditTextm.text.length==0&& binding.textView8.text.length==0){
-    //          Toast.makeText(baseContext,"isEmpty",Toast.LENGTH_SHORT)
-
-    //         binding.counterEditTextm.setError("lpl")
-    //     }else{
-    //         viewModel.addNewPurchases(   AddBurchace(binding.ItemId.text.toString(),binding.counterEditTextm.toString(),"2", "7"))
-
-    //     }
 
 
-          //pupup()
       }
        viewModel.NotFoundItemByBarcodefulsLiveData.observe(this){
            Log.d("applicationContext",it)
@@ -212,6 +196,8 @@ class PurchaseActivity : AppCompatActivity() {
        SimpleSearchDialogCompat(this, "ادخل اسم المنتج  " + "\n", "search", null,
            inits(), SearchResultListener { baseSearchDialogCompat, item, pos ->
 
+
+
                val str = item.ItemName
                val delim = "-"
 
@@ -224,61 +210,75 @@ class PurchaseActivity : AppCompatActivity() {
                val sur = arr.get(2).toString()
                val size = arr.get(3).toString()
 
-               //  val code1  =item.Item_ID.toString()
-               // val dialog = activity?.let { it1 -> Dialog(it1) }
-               dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-               //بيعمل بلوك للباك جراوند
-               //  dialog?.setCancelable(false)
-               dialog?.setContentView(R.layout.dilog_bill_row)
-               dialog.getWindow()?.setLayout(550, 500)
-               dialog?.show()
 
 
-               lateinit var tv_name: TextView
-               tv_name = dialog?.findViewById(R.id.textView57)!!
-               tv_name.setText(arr.get(0).toString())
+               binding.textView8.setText(name)
+               binding.Size1.setText(size)
+               binding.sours1.setText(sur)
+               // binding.textView2.setText(it.Supply_Price.toString())
+               //السعر
+               binding.textView2.setText(item.Supply_Price.toString())
+               binding.textView3.setText(item.Item_ID.toString())
 
-               lateinit var tv_group: TextView
-               tv_group = dialog?.findViewById(R.id.textView52)!!
-               tv_group.setText(arr.get(1).toString())
-
-               lateinit var code: TextView
-               code = dialog?.findViewById(R.id.textView55)!!
-               code.setText(item.Item_ID.toString())
-
-
-               lateinit var tv_sur: TextView
-               tv_sur = dialog?.findViewById(R.id.textView54)!!
-               tv_sur.setText(arr.get(2).toString())
-
-               lateinit var tv_size: TextView
-               tv_size = dialog?.findViewById(R.id.textView56)!!
-               tv_size.setText(arr.get(3).toString())
-
-               lateinit var buttonAddToSalingBill: Button
-               buttonAddToSalingBill = dialog.findViewById(R.id.button2b)
-
-               lateinit var NumberOfUnits: TextInputEditText
-               NumberOfUnits = dialog?.findViewById(R.id.counterEditTextm)
-               // NumberOfUnits.text.toString()
-
-               lateinit var discountEditTextk: EditText
-               discountEditTextk = dialog.findViewById(R.id.discountEditTextk)
-               var discount = discountEditTextk.text.toString()
-
-               lateinit var buttonAddToReturnsBill: Button
-               buttonAddToReturnsBill = dialog.findViewById(R.id.buttonm)
-               var  id=item.Item_ID
-               var suplierID= item.Supplier_ID
-
-               buttonAddToSalingBill.setOnClickListener {
-                   val Item_Count=NumberOfUnits.text.toString()
-                   viewModel.addNewPurchases(   AddBurchace(id.toString(),Item_Count,"2", suplierID.toString()))
+               item_id=item.Item_ID.toString()
+               supllyid= item.Supplier_ID.toString()
 
 
-
-                   dialog.dismiss()
-               }
+//               //  val code1  =item.Item_ID.toString()
+//               // val dialog = activity?.let { it1 -> Dialog(it1) }
+//               dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+//               //بيعمل بلوك للباك جراوند
+//               //  dialog?.setCancelable(false)
+//               dialog?.setContentView(R.layout.dilog_bill_row)
+//               dialog.getWindow()?.setLayout(550, 500)
+//               dialog?.show()
+//
+//
+//               lateinit var tv_name: TextView
+//               tv_name = dialog?.findViewById(R.id.textView57)!!
+//               tv_name.setText(arr.get(0).toString())
+//
+//               lateinit var tv_group: TextView
+//               tv_group = dialog?.findViewById(R.id.textView52)!!
+//               tv_group.setText(arr.get(1).toString())
+//
+//               lateinit var code: TextView
+//               code = dialog?.findViewById(R.id.textView55)!!
+//               code.setText(item.Item_ID.toString())
+//
+//
+//               lateinit var tv_sur: TextView
+//               tv_sur = dialog?.findViewById(R.id.textView54)!!
+//               tv_sur.setText(arr.get(2).toString())
+//
+//               lateinit var tv_size: TextView
+//               tv_size = dialog?.findViewById(R.id.textView56)!!
+//               tv_size.setText(arr.get(3).toString())
+//
+//               lateinit var buttonAddToSalingBill: Button
+//               buttonAddToSalingBill = dialog.findViewById(R.id.button2b)
+//
+//               lateinit var NumberOfUnits: TextInputEditText
+//               NumberOfUnits = dialog?.findViewById(R.id.counterEditTextm)
+//               // NumberOfUnits.text.toString()
+//
+//               lateinit var discountEditTextk: EditText
+//               discountEditTextk = dialog.findViewById(R.id.discountEditTextk)
+//               var discount = discountEditTextk.text.toString()
+//
+//               lateinit var buttonAddToReturnsBill: Button
+//               buttonAddToReturnsBill = dialog.findViewById(R.id.buttonm)
+//               var  id=item.Item_ID
+//               var suplierID= item.Supplier_ID
+//
+//               buttonAddToSalingBill.setOnClickListener {
+//                   val Item_Count=NumberOfUnits.text.toString()
+//                   viewModel.addNewPurchases(   AddBurchace(id.toString(),Item_Count,"2", suplierID.toString()))
+//
+//
+//
+//                   dialog.dismiss()
+//               }
 
 
                baseSearchDialogCompat.dismiss()

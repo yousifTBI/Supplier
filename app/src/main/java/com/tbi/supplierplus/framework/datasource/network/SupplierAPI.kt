@@ -32,6 +32,7 @@ import com.tbi.supplierplus.framework.datasource.responses.*
 import com.tbi.supplierplus.framework.ui.login.DistrputerLogin
 import com.tbi.supplierplus.framework.ui.login.LoginModel
 import com.tbi.supplierplus.framework.ui.login.Task3
+import com.tbi.supplierplus.framework.ui.sales.customers.product_selection.CustomerModel
 import kotlinx.coroutines.Deferred
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -412,7 +413,9 @@ interface SupplierAPI {
     @POST("api/Account/Registration_Request")
     fun RegistrationAPI(@Body registrationModel: RegistrationModel): Deferred<Task3<RegistrationModel>>
 
-
+    @Headers("Content-Type: application/json")
+    @POST("api/Customer/AddCustomer")
+    fun AddCustomerAPI(@Body customerModel: CustomerModel): Deferred<Task3<CustomerModel>>
 
 //    @Headers("Content-Type: application/json")
 //    @GET("api/Account/GetBranch")

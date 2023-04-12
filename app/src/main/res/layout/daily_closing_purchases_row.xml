@@ -82,7 +82,8 @@
                     android:layout_marginTop="13dp"
                     android:layout_marginEnd="68dp"
                     android:text="الاجمالى:"
-                    android:textSize="18dp"
+                    android:textSize="12dp"
+
                     android:textStyle="bold"
                     app:layout_constraintEnd_toStartOf="@+id/priceI"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
@@ -93,10 +94,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:layout_marginEnd="38dp"
+                    android:layout_marginEnd="12dp"
                     android:layout_marginBottom="18dp"
-                    android:text="السعرالشراء: "
-                    android:textSize="18dp"
+                    android:text="السعر: "
+                    android:textSize="12dp"
+
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/textView52"
@@ -110,7 +112,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:text="العدد:"
-                    android:textSize="18dp"
+                    android:textSize="12dp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />

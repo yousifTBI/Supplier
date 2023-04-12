@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class ItemsReceivedFragment : Fragment() {
     private lateinit var binding: FragmentItemsReceivedBinding
 
-    private val viewModel: DailyClosingViewModel by  activityViewModels()
+    private val viewModel: DailyClosingViewModel by   viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,11 +25,7 @@ class ItemsReceivedFragment : Fragment() {
         binding = FragmentItemsReceivedBinding.inflate(inflater)
         //  binding.viewModel = viewModel
         binding.lifecycleOwner = this
-//المنتحات المباعه
-        Log.d(
-            "getDail","sss"
-        )
-       // viewModel.    getDailyClosingPurchases()
+
         viewModel.   getDailyClosingSummaryItems()
        viewModel.itemsDailyClosingLiveData.observe(viewLifecycleOwner) {
 
@@ -38,35 +34,12 @@ class ItemsReceivedFragment : Fragment() {
               binding.ReceivdClosingrecyclerView.setHasFixedSize(true)
               adabter.submitList(it)
 
-       //   binding.sales.setText(  it.get(0).ReturnAmount.toString()+""+
-       //           "\n"+it.get(0).Item_ID.toString()+
-       //           "\n"+it.get(0).Name+
-       //           "\n"+it.get(0).ReturnAmount.toString()+
-       //           "\n"+it.get(0).Count.toString()+
-       //           "\n"+it.get(0).Amount.toString()+
-       //           "\n"+it.get(0).Total.toString())
+
        }
 
-//       viewModel. purchasesLiveData.observe(viewLifecycleOwner) {
 
-//           //  val adabter=AdapterExpensesClosing()
-//           //  binding.ExpensesClosingrecyclerView.adapter = adabter
-//           //  binding.ExpensesClosingrecyclerView.setHasFixedSize(true)
-//           //  adabter.submitList(it)
-//           Log.d(
-//               "getDail",it.get(0).Name+"sss"
-//           )
-//    //    binding.sales.setText(  it.get(0).ReturnAmount.toString()+""+
-//    //            "\n"+it.get(0).Item_ID.toString()+
-//    //            "\n"+it.get(0).Name+
-//    //            "\n"+it.get(0).ReturnAmount.toString()+
-//    //            "\n"+it.get(0).Count.toString()+
-//    //            "\n"+it.get(0).Amount.toString()+
-//    //            "\n"+it.get(0).Total.toString())
-//    //}
-     //// Inflate the layout for this fragment
      return binding.root
-      //  return inflater.inflate(R.layout.fragment_items_received, container, false)
+
     }
 
 

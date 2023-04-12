@@ -57,7 +57,7 @@
 
             android:padding="8dp"
             android:text="البضاعه المستلمه"
-            android:textColor="#292626"
+            android:textColor="#F8F5F5"
             android:textSize="18dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +68,7 @@
             android:layout_width="500dp"
             android:layout_height="111dp"
             android:layout_marginTop="8dp"
+
             app:layout_constraintEnd_toEndOf="@+id/purchases"
             app:layout_constraintTop_toBottomOf="@+id/purchases"
             tools:ignore="MissingConstraints">
@@ -77,7 +78,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                android:textSize="25dp"
+                android:textSize="20dp"
+                android:textColor="@color/black"
 
                 app:layout_constraintBottom_toBottomOf="@+id/textView59"
                 app:layout_constraintEnd_toStartOf="@+id/textView59"
@@ -88,21 +90,21 @@
                 android:id="@+id/textView51"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_marginEnd="120dp"
-                android:textSize="25dp"
+                android:textColor="@color/black"
+                android:layout_marginEnd="60dp"
+                android:textSize="20dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView58"
                 app:layout_constraintEnd_toStartOf="@+id/textView58"
                 app:layout_constraintTop_toTopOf="@+id/textView58" />
 
             <TextView
                 android:id="@+id/textView59"
-                android:layout_width="319dp"
-                android:layout_height="41dp"
-                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
                 android:layout_marginEnd="8dp"
                 android:text="اجمالى اسعار البضاعه المستله:"
-                android:textSize="20dp"
+                android:textSize="16dp"
 
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -115,7 +117,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="8dp"
                 android:text="عدد البضاعه المسلمه : "
-                android:textSize="20dp"
+                android:textSize="16dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

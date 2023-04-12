@@ -18,32 +18,30 @@ fun isInternetAvailable(): Boolean {
     }
 }
 inline fun < RequestType> wrapWithFlowApi(
-    crossinline  fetch: suspend () -> Deferred<RequestType>, mContext: Context
-  // crossinline saveFetchResult: suspend (RequestType) -> Unit,
+    crossinline  fetch: suspend () -> Deferred<RequestType>
 
     ) = flow {
     try {
                 if (isInternetAvailable()) {
-                  //  createSimpleOkDialog(mContext,"loddd","")
-                    //showHelperDialog("",mContext,)
+
                     emit(State.Loading)
                     kotlin.runCatching {
                         fetch.invoke().await()
                     }.onFailure {
                         emit(State.Error(it.toString()))
-                       // createSimpleOkDialog(mContext,"failre","")
+
                     }.onSuccess {
                          emit(State.Success(it))
-                      //  createSimpleOkDialog(mContext,"failre","")!!.dismiss()
+
 
                     }
 
                 } else {
                     emit(State.Error("لايوجد اتصال بالانترنت "))
-                   // createSimpleOkDialog(mContext,"لايوجد اتصال بالانترنت ","")!!.dismiss()
+
                 }
             } catch (e: Exception) {
-       // createSimpleOkDialog(mContext,"لايوجد اتصال بالانترنت ","")!!.dismiss()
+
         emit(State.Error("لايوجد اتصال بالانترنت "))
 
 

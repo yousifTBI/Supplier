@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SalesReportFragment : Fragment() {
     private lateinit var binding: FragmentSalesReportBinding
-    private val viewModel: ReportsViewModel by activityViewModels()
+    private val viewModel2: ReportsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,17 +23,15 @@ class SalesReportFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentSalesReportBinding.inflate(inflater)
-        binding.viewModel = viewModel
+        binding.viewModel = viewModel2
         binding.lifecycleOwner = this
 
-        viewModel.getselesRepor()
-        viewModel.selesReporLivedata.observe(viewLifecycleOwner){
+        viewModel2.getselesRepor()
+        viewModel2.selesReporLivedata.observe(viewLifecycleOwner){
 
         }
 
-      //  viewModel.salesSummary.observe(this.viewLifecycleOwner){
-      //      Log.i("pp",it.toJson())
-      //  }
+
         return binding.root
     }
 
