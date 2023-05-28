@@ -53,7 +53,7 @@ class PurchasesClosingFragment : Fragment() {
                       is State.Error -> {
                           binding.spinKit.isVisible = false
                           Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
-                          Log.d("SubmitReturnMardodatVM","20")
+                          Log.d("SubmitReturnMardodatVM","2f0")
 
                       }
                   }
