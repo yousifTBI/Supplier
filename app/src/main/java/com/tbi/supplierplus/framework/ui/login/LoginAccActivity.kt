@@ -56,28 +56,10 @@ class LoginAccActivity : AppCompatActivity() {
                 is State.Loading -> Log.d("aziza", "")
                 is State.Success -> {
 
-            //         Log.d("dfklhdfljddkg",it.data.UserInfo.userID.toString())
-                    // Log.d("aziza3sss2", it.data.UserInfo.Distributor_ID.toString())
-                   // SharedPreferencesCom.getInstance().setSharedUser_ID(it.data.UserInfo.userID.toString())
-                    // SharedPreferencesCom.getInstance().setSharedUser_ID("78")
-                    // SharedPreferencesCom.getInstance().setSharedDistributor_ID("8")
-                 //   SharedPreferencesCom.getInstance().setSharedDistributor_ID(it.data.UserInfo.Distributor_ID.toString())
-                    //   Log.d("azizas32", it.data.UserInfo.Distributor_ID.toString())
-//                    Log.d("aziza32", it.data.State.toString())
-                    //   Log.d("aziza3s2", it.data.UserInfo.userID.toString())
                     if (it.data!!.State == 0) {
                         Log.d("cfgdgdfgdfg", it.data.message)
 //                        //your Request is pending
-//
-//                        binding.textView5.text = it.data.message
 
-//                        Toast.makeText(
-//                            applicationContext,
-//                            it.data.State.toString() + it.data.message,
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//                        binding.textView5.setText(it.data.message)
-                        Log.d("aziza3", "0")
                     } else if (it.data!!.State == 1) {
                         if (it.data.UserInfo.userID.toString().isNullOrEmpty()){
                             Log.d("aziza3", "1")

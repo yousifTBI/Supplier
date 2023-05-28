@@ -117,7 +117,7 @@ class AddBranchFragment : Fragment() {
                         "",
                         "",
                         "",
-                        8,
+                        SharedPreferencesCom.getInstance().gerSharedDistributor_ID().toInt(),
                         64,
                         RegionId,
                         Idd,

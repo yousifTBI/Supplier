@@ -11,7 +11,7 @@ import com.tbi.supplierplus.business.models.User
 import com.tbi.supplierplus.framework.ui.MainFragmentDirections
 
 class StoreFragment : Fragment() {
-   private lateinit var binding: FragmentStoreBinding
+    private lateinit var binding: FragmentStoreBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,18 +30,18 @@ class StoreFragment : Fragment() {
 
 
 
-          binding.reportsEditSpecialPric.setOnClickListener {
+        binding.reportsEditSpecialPric.setOnClickListener {
             findNavController().navigate(
                 StoreFragmentDirections.actionStoreFragmentToItemsSettlementFragment(
 
-                            User("peter_tbi", "", "", "3", "", "2", "", "")
+                    User("peter_tbi", "", "", "3", "", "2", "", "")
 
                 )
             )
 
         }
 
- binding.reportsEditPric.setOnClickListener {
+        binding.reportsEditPric.setOnClickListener {
             findNavController().navigate(
                 StoreFragmentDirections.actionStoreFragmentToItemsReportFragment(
 

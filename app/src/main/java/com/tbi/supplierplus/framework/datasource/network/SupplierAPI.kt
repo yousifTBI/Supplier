@@ -488,6 +488,11 @@ interface SupplierAPI {
     @GET("api/Warehousing/SubmitChangeQuantity")
     fun getSubmitChangeQuantityAPI(@Query("value") value: Double,@Query("ID") recordID: Int): Deferred<ChangeQuantityModel>
 
+    @Headers("Content-Type: application/json")
+    @GET("/api/Items/SubmitReturnMardodat")
+    fun SubmitReturnMardodatAPI(@Query("UserID") UserID: String): Deferred<Task3<Requests>>
+
+
 //    @Headers("Content-Type: application/json")
 //    @GET("api/Account/GetBranch")
 //    fun GetBranchAPI(@Query("comID") ComID: String?): Deferred<Task2<BranchModel>>
