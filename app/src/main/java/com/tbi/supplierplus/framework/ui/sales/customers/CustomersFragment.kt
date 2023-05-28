@@ -115,6 +115,11 @@ class CustomersFragment : Fragment() {
                      //   binding.BuildingNumber.setText(it.data.Details.Telephone1.toString()+" ")
                      //  listDetails = it.data.Details as ArrayList<Details>
 
+        // lifecycleScope.launchWhenStarted{
+        //     viewModel.customes(activity!!)
+        //     viewModel.getAllCustomers()
+        // }
+        // viewModel.Regionsd2.observe(viewLifecycleOwner){
 
                     }
 

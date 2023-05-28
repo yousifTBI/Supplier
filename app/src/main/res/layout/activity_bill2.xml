@@ -321,6 +321,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/farorasa" />
 
+                    android:background="#7EF87654"
 
                 <TextView
                     android:id="@+id/Totalss"

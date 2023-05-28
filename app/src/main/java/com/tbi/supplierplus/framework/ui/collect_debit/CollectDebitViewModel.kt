@@ -43,9 +43,8 @@ class CollectDebitViewModel @Inject constructor(private val debitsRepository: De
         remaining = MutableLiveData(0.0f)
     }
     fun filterCustomers(query: String) {
-        Log.i("FilterQuery", query)
         if ( _debits.value !=null){
-            _debits .value =   _debits2 .value!!.filter { query in it.cusName }
+        //    _debits .value =   _debits2 .value!!.filter { query in it.cusName }
 
         }
     }

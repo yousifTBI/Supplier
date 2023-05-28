@@ -19,20 +19,11 @@ import javax.inject.Inject
 
 interface DebitsRepository {
     fun getCustomerDebits(distributorID: String): Flow<Tasks<OpeningBalance>>
-   // fun getCustomerDebits(distributorID: String): Flow<List<CustomerDebits>>
-    fun addBalance( add:AddOpening): Flow<Tasks<OpeningBalance>>
-
-    //  fun getOpeningBalances(distributorID: String): Flow<List<CustomerDebits>>
+    fun addBalance(add: AddOpening): Flow<Tasks<OpeningBalance>>
     fun getOpeningBalances(distributorID: String): Flow<Tasks<OpeningBalance>>
-   // fun addBalance(customerID: String, userID: String, amount: String): Flow<String>
-   //fun addCollection(
-   //    customerID: String,
-   //    userID: String,
-   //    amount: String,
-   //    remaining: String
-   //): Flow<String>
     fun addCollection(
-       addCollection:AddCollection): Flow<Tasks<AddCollection>>
+        addCollection: AddCollection
+    ): Flow<Tasks<AddCollection>>
 }
 
 class DebitsRepositoryImpl @Inject constructor(private val api: SupplierAPI) : DebitsRepository {
@@ -42,7 +33,6 @@ class DebitsRepositoryImpl @Inject constructor(private val api: SupplierAPI) : D
                 val response =
                     api.Get_AllDebtsAPI(distributorID).await()
                 emit(response)
-               // Log.i("size_repo", response.fromEnvelopeToModel().size.toString())
 
             } catch (e: Exception) {
 
@@ -52,97 +42,37 @@ class DebitsRepositoryImpl @Inject constructor(private val api: SupplierAPI) : D
     override fun getOpeningBalances(distributorID: String): Flow<Tasks<OpeningBalance>> =
         flow {
             try {
-
-                val response =api.getAllcustomersOpeningBalanceAPI(SharedPreferencesCom.getInstance().gerSharedDistributor_ID()).await()
+                val response = api.getAllcustomersOpeningBalanceAPI(
+                    SharedPreferencesCom.getInstance().gerSharedUser_ID()
+                ).await()
                 emit(response)
-
             } catch (e: Exception) {
-              // emit(emptyList())
-              // Log.e("error", e.message.toString())
-              // e.printStackTrace()
-            }
-        }.flowOn( IO )
-
-    override fun addCollection(addCollection: AddCollection): Flow<Tasks<AddCollection>> =
-        flow{
-            try {
-
-                val response =api.AddCollectionAPI(addCollection).await()
-                emit(response)
-
-            } catch (e: Exception) {
-                // emit(emptyList())
-                // Log.e("error", e.message.toString())
-                // e.printStackTrace()
-            }
-
-    }.flowOn( IO )
-
-    override fun addBalance( add: AddOpening): Flow<Tasks<OpeningBalance>> =
-        flow {
-
-            try {
-                Log.e("AddOpening", "e.message.toString()")
-
-                val response =api.addCustomerOpeningBalanceAPI(add).await()
-                emit(response)
-             //   Log.d("AddOpening",Tasks<OpeningBalance>.Message)
-
-
-
-                //   emit(
-           //       api.addOpeningBalanceAsync(
-           //           getAddBalanceRequestBody(
-           //               customerID = customerID,
-           //               amount = amount,
-           //               userID = userID
-           ///           )
-           //       ).await().fromEnvelopeToModel()
-           //   )
-            } catch (e: Exception) {
-              Log.e("AddOpenings", e.message.toString()+"Exception")
-              e.printStackTrace()
             }
         }.flowOn(IO)
 
-  // override fun addBalance(customerID: String, userID: String, amount: String): Flow<String> =
-  //     flow {
-  //         try {
-  //             emit(
-  //                 api.addOpeningBalanceAsync(
-  //                     getAddBalanceRequestBody(
-  //                         customerID = customerID,
-  //                         amount = amount,
-  //                         userID = userID
-  //                     )
-  //                 ).await().fromEnvelopeToModel()
-  //             )
-  //         } catch (e: Exception) {
-  //             Log.e("error", e.message.toString())
-  //             e.printStackTrace()
-  //         }
-  //     }.flowOn(IO)
+    override fun addCollection(addCollection: AddCollection): Flow<Tasks<AddCollection>> =
+        flow {
+            try {
+                val response = api.AddCollectionAPI(addCollection).await()
+                emit(response)
 
-  //  override fun addCollection(
-  //      customerID: String,
-  //      userID: String,
-  //      amount: String,
-  //      remaining: String
-  //  ): Flow<String> = flow {
-  //      try {
-  //          emit(
-  //              api.addCollectionAsync(
-  //                  getAddCollectionRequestBody(
-  //                      customerID = customerID,
-  //                      amount = amount,
-  //                      userID = userID,
-  //                      remainingAmount = remaining
-  //                  )
-  //              ).await().fromEnvelopeToModel()
-  //          )
-  //      } catch (e: Exception) {
-  //          Log.e("error", e.message.toString())
-  //          e.printStackTrace()
-  //      }
-  //  }.flowOn(IO)
+            } catch (e: Exception) {
+
+            }
+
+        }.flowOn(IO)
+
+    override fun addBalance(add: AddOpening): Flow<Tasks<OpeningBalance>> =
+        flow {
+
+            try {
+                val response = api.addCustomerOpeningBalanceAPI(add).await()
+                emit(response)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }.flowOn(IO)
+
+
 }

@@ -86,8 +86,11 @@ class ChangePriceActivity : AppCompatActivity() {
             }
 
 
-        }
 
+        viewModel.editProductpricemass.observe(this) {
+
+
+            }
 
 
         viewModel.editProductpricemass.observe(this) {
@@ -159,6 +162,13 @@ class ChangePriceActivity : AppCompatActivity() {
                 }
 
 
+                }
+                is com.tbi.supplierplus.framework.ui.login.State.Error -> {
+                    binding.spinKit.isVisible = false
+
+
+                    Toast.makeText(applicationContext, "خطا", Toast.LENGTH_SHORT).show()
+                }
             }
 
 

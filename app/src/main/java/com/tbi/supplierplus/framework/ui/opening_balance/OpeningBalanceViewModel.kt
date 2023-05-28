@@ -81,17 +81,10 @@ class OpeningBalanceViewModel @Inject constructor(private val debitsRepository: 
             Log.d("AddOpening",balance.value?.cus_id.toString()+"-"+collection.value!!)
 
             debitsRepository.addBalance(
-
-                //Log.d(" AddOpening",balance.value)
                 AddOpening(balance.value!!.cus_id.toString(),SharedPreferencesCom.getInstance().gerSharedUser_ID(),collection.value!!)
-           // Log.d(" AddOpening",balance.value)
 
-               // customerID = _balance.value!!.cus_id.toString(),
-               // userID = user.value!!.userID,
-               // amount = collection.value!!
             ).collect {
                 Log.e("AddOpening", "task"+it.Message+"Message")
-
                 msg.value = it.Message
              }
 

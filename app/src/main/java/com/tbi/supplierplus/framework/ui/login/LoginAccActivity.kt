@@ -95,11 +95,12 @@ class LoginAccActivity : AppCompatActivity() {
 //                        Log.d("saveInfoLogin",it.data.item.Name)
 //                        viewModel.saveItems(it.data.item.comid.toString(),it.data.item.AndroidID)
 
-//                        Toast.makeText(
-//                            applicationContext,
-//                            it.data.State.toString() + it.data.message,
-//                            Toast.LENGTH_SHORT
-//                        ).show()
+                        Toast.makeText(
+                            applicationContext,
+                            it.data.State.toString() + it.data.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                         finish()
@@ -124,6 +125,11 @@ class LoginAccActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
 
+                        Toast.makeText(
+                            applicationContext,
+                            it.data.State.toString() + it.data.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     } else if (it.data!!.State == 3) {
                         //your Machine has been Registration

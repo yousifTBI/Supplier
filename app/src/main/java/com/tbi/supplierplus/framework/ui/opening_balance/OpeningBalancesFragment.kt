@@ -32,28 +32,18 @@ class OpeningBalancesFragment : Fragment() {
             CollectDebitFragmentArgs.fromBundle(requireArguments()).user
         )
         val adapter = CustomerDebitsAdapter(onClickListener = OnDebitClickListener {
-            Log.d("CustomerDebitsAdapter",it.cus_id.toString())
             viewModel.setBalance(it)
             viewModel.navigateToExecution()
         })
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
-                //  if (query.length > 1)
-                //    adapte.filter.filter(query)
-                //   adapte.notifyDataSetChanged()
                 viewModel.filterCustomers(query)
-                //   adapte.notifyDataSetChanged()
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                //  if (newText.length > 1)
-                //       adapte.filter.filter(newText)
-
-
                 viewModel.filterCustomers(newText)
-                //  adapte.notifyDataSetChanged()
                 return false
             }
         })
@@ -64,7 +54,6 @@ class OpeningBalancesFragment : Fragment() {
             if (it == null) {
             } else {
                 adapter.submitList(it)
-//            Log.i("size", it!!.size.toString())
             }
         }
         viewModel.msg.observe(viewLifecycleOwner) {

@@ -58,6 +58,12 @@ class ItemsReportFragment : Fragment() {
 //            adapter.submitList(it!!.toList())
 //        }
 
+//        viewModel.getItemsReport()
+//        viewModel.ItemsReportLivedata.observe(viewLifecycleOwner) {
+//            binding.recyclerView.adapter = adapter
+//            adapter.submitList(it!!.toList())
+//        }
+
         //   viewModel.itemsSummary.observe(viewLifecycleOwner) {
         //       binding.recyclerView.adapter = adapter
         //       adapter.submitList(it!!.toList())
