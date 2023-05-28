@@ -287,15 +287,13 @@ var editProductpriceState = MutableLiveData<Int>()
           salesRepository. addNewPill(bill).collect{
               setNewBillTip.value=it
 
-              Log.e("haaaaaaaager", it.Message+"viewmodel")
+
 
           }
       }
   }
 
-  // var x:String=""
-  //  lateinit var
- //   @SuppressLint("NullSafeMutableLiveData")
+
     fun getProducerBycode(sales_Id: Int, Item_ID : String, Cus_id  : String?):String{
        // var x:Producer
      // val job =
@@ -340,12 +338,11 @@ var editProductpriceState = MutableLiveData<Int>()
 
 
     fun getAllCustomerTesthandel1(){
-        // SharedPreferencesCom.getInstance().gerSharedphoneNumber()
-        Log.d("makeText","Loading8")
+
         viewModelScope.launch {
-            Log.d("dddd",SharedPreferencesCom.getInstance().gerSharedUser_ID().toString())
+
             salesRepository.getAllCustomerTesthandel(SharedPreferencesCom.getInstance().gerSharedUser_ID().toString()).collect{
-                Log.d("makeText","Loading2")
+
                 Regionsd.value=it
             }
         }
@@ -388,29 +385,17 @@ var editProductpriceState = MutableLiveData<Int>()
         viewModelScope.launch {
             salesRepository.getItemss(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt(),Cus_id).collect {
 
-             //   _allItemss.value = it
+
                 getProducers.value = it.data
-               // _itemss.value = it
-               // currentItemID.value = it[0].id
+
 
             }
         }
     }
-//   fun getAllItems() {
-//       viewModelScope.launch {
-//           salesRepository.getItems(user.value!!.userID).collect {
-
-//               _allItems.value = it
-//               _items.value = it
-//               currentItemID.value = it[0].id
-//           }
-//       }
-
-//   }
 
 
      fun filterCustomers(query: String) {
-         Log.i("FilterQuery", query)
+
          if ( getAllCustomersLiveData.value !=null){
              getAllCustomersLiveData .value =    CustomersLiveData .value!!.filter { query in it.item }
 
@@ -745,7 +730,7 @@ fun <T> runApi(
                     block
                 }.onFailure {
 
-                    //  Log.e(TAG, "runApi: 3")
+
                     when (it) {
                         is java.net.UnknownHostException ->
                             _apiStateFlow.value =

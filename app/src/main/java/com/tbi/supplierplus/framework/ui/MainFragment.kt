@@ -27,25 +27,9 @@ class MainFragment : Fragment() {
         binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-       //binding.purchaseCard.setVisibility(View.INVISIBLE)
-       //binding.reportsCard.setVisibility(View.INVISIBLE)
-       //binding.expensesCard.setVisibility(View.INVISIBLE)
-       //binding.returnsCard.setVisibility(View.INVISIBLE)
-       //binding.collectCard.setVisibility(View.INVISIBLE)
-       //binding.returnsForUserCard.setVisibility(View.INVISIBLE)
-       //binding.itemsSettlementCard.setVisibility(View.INVISIBLE)
-       //binding.closingDayCard.setVisibility(View.INVISIBLE)
-       //binding.balanceCard.setVisibility(View.INVISIBLE)
-      // binding.  EditProductpriceCard.setVisibility(View.INVISIBLE)
-      // binding.  ProductSelectionCard.setVisibility(View.INVISIBLE)
 
 
         binding.stock.setOnClickListener {
-//            findNavController().navigate(
-//                MainFragmentDirections.actionGlobalAvailableItemsFragment(
-//
-//                )
-//            )
 
             findNavController().navigate(
                 MainFragmentDirections.actionGlobalStoreFragment(
@@ -61,7 +45,6 @@ class MainFragment : Fragment() {
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToCustomersFragment(
                     User("peter_tbi", "", "", "3", "", "2", "", "")
-                   // MainFragmentArgs.fromBundle(requireArguments()).user
                 )
 
             )
@@ -71,14 +54,7 @@ class MainFragment : Fragment() {
         binding.saless.setOnClickListener {
             findNavController().navigate(
                 MainFragmentDirections.actionGlobalSalesSettingFragment()
-             // MainFragmentDirections.actionMainFragmentToPurchaseFragment(
-             //  //  MainFragmentArgs.fromBundle(
-             //  //      requireArguments()
-             //  //  ).user
-             //     User("peter_tbi", "", "", "3", "", "2", "", "")
 
-             // )
-              //  MainFragmentDirections.actionMainFragmentToPuarchaseFragment()
             )
         }
 
@@ -86,42 +62,17 @@ class MainFragment : Fragment() {
         binding.car.setOnClickListener {
             findNavController().navigate(
                 MainFragmentDirections.actionGlobalSettingsFragment()
-                //  MainFragmentDirections.actionMainFragmentToPuarchaseFragment()
+
             )
         }
 
 
-      // binding.reportsCard.setOnClickListener {
-      //     val    intent = Intent(activity, AddItemActivity::class.java)
-      //     startActivity(intent)
-      //    //indNavController().navigate(
-      //    //   MainFragmentDirections.actionMainFragmentToReportFragment(
-      //    //    //   MainFragmentArgs.fromBundle(
-      //    //    //       requireArguments()
-      //    //    //   ).user
-      //    //
-      //    //   )
-      //   //  )
-      // }
-
-   //  binding.expensesCard.setOnClickListener {
-   //      findNavController().navigate(
-   //          MainFragmentDirections.actionMainFragmentToExpensesFragment(
-   //        //      MainFragmentArgs.fromBundle(
-   //        //          requireArguments()
-   //        //      ).user
-   //          User("peter_tbi", "", "", "3", "", "2", "", "")
-
-   //    }
 
         binding.sales2.setOnClickListener {
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToDailyClosingFragment(
                     User("peter_tbi", "", "", "3", "", "2", "", "")
 
-                    // MainFragmentArgs.fromBundle(
-                   //     requireArguments()
-                   // ).user
                 )
             )
         }
@@ -129,67 +80,31 @@ class MainFragment : Fragment() {
         binding.saless2.setOnClickListener {
             findNavController().navigate(
                 MainFragmentDirections.actionGlobalCustomerSettingFragment(
-                  //  MainFragmentArgs.fromBundle(
-                  //      requireArguments()
-                  //  ).user
-                 //   User("peter_tbi", "", "", "3", "", "2", "", "")
 
                 )
             )
         }
 
-   //    binding.balanceCard.setOnClickListener {
-   //        findNavController().navigate(
-   //           // MainFragmentDirections.actionMainFragmentToOpeningCustomerSettingFragment(
-   //            MainFragmentDirections.actionGlobalCustomerSettingFragment(
-   //              // MainFragmentArgs.fromBundle(
-   //              //     requireArguments()
-   //              // ).user
-   //               // User("peter_tbi", "", "", "3", "", "2", "", "")
 
-   //            )
-   //        )
-   //    }
 
       binding.car2.setOnClickListener {
           findNavController().navigate(
               MainFragmentDirections.actionMainFragmentToItemsSettlementFragment(
-                //  MainFragmentArgs.fromBundle(requireArguments()).user
+
                   User("peter_tbi", "", "", "3", "", "2", "", "")
 
               )
 
           )
       }
-      //  binding.returnsForUserCard.setOnClickListener {
-      //      val    intent = Intent(activity, PurchaseActivity::class.java)
-      //      startActivity(intent)
-      //  }
 
           binding.sales3.setOnClickListener {
               findNavController().navigate(
                   MainFragmentDirections.actionGlobalReportsFragment()
-////
+
               )
           }
-    //  binding.ProductSelectionCard.setOnClickListener {
-    //      findNavController().navigate(
-    //          MainFragmentDirections.actionGlobalProductSelectionFragment()
-////
-    //      )
-    //  }
-//EditProductprice_card
-      // binding.EditProductpriceCard.setOnClickListener {
-      //     val    intent = Intent(activity, ChangePriceActivity::class.java)
-      //     startActivity(intent)
-      //    // findNavController().navigate(
-      //    //     MainFragmentDirections.actionGlobalProductSelectionFragment()
-//////
-      //    // )
-      // }
 
-      //  invoice_card
-//Accountstatement
         return binding.root
     }
 }

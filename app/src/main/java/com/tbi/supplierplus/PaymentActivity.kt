@@ -34,6 +34,7 @@ import com.google.gson.reflect.TypeToken
 import com.tbi.supplierplus.business.pojo.billModels.SaleingBill
 import com.tbi.supplierplus.business.pojo.bills.NewBill
 import com.tbi.supplierplus.business.utils.LoadingDialog
+import com.tbi.supplierplus.business.utils.toJson
 import com.tbi.supplierplus.databinding.ActivityPaymentBinding
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import com.tbi.supplierplus.framework.ui.sales.SalesViewModel
@@ -762,6 +763,7 @@ class PaymentActivity : AppCompatActivity() {
                 binding.progressBar2.isVisible=true
                 SharedPreferencesCom.getInstance().gerSharedUser_ID()
 
+
                 viewModel.setNewPill(NewBill(
                     CusID.trim(),
                     binding.billDiscountEditText.text.toString().trim(),
@@ -775,7 +777,18 @@ class PaymentActivity : AppCompatActivity() {
                     binding.Totalss2.text.toString().trim(),
                     list))
 
-                Log.e("PrintError1", "e.message.toString()")
+//                Log.e("PrintError13", NewBill(
+//                    CusID.trim(),
+//                    binding.billDiscountEditText.text.toString().trim(),
+//                    "1",
+//                    SharedPreferencesCom.getInstance().gerSharedUser_ID().toString(),
+//                    binding.Totalss4.text.toString().trim(),
+//                    binding.TotalafterDiscaunt.text.toString().trim(),
+//                    binding.cashEditText.text.toString().trim(),
+//                    binding.deferredEditText.text.toString().trim(),
+//                    Unpaid_deferred,
+//                    binding.Totalss2.text.toString().trim(),
+//                    list).toJson().toString())
                 //registerBillAndPrint()
                 // print()
             }

@@ -19,7 +19,30 @@
             android:background="#0D090707"
             android:layout_height="match_parent">
 
+            <Button
+                android:id="@+id/button5"
+                android:layout_width="219dp"
+                android:layout_height="65dp"
+                android:layout_marginBottom="16dp"
+                android:text="تسويه البضاعه"
+                android:background="@drawable/add_expense_button_background"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Large.Circle"
+                android:layout_width="121dp"
+                android:layout_height="135dp"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
             <TextView
                 android:id="@+id/Purchases"
@@ -46,16 +69,13 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/purchaseClosingrecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="8dp"
+                android:layout_height="wrap_content"
+
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Purchases "
-                tools:listitem="@layout/daily_closing_item_row" />
+                app:layout_constraintTop_toBottomOf="@+id/Purchases"
+                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

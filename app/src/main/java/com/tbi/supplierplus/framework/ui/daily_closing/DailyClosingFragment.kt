@@ -62,6 +62,7 @@ class DailyClosingFragment : Fragment() {
             loading.isDismiss()
 
             viewModel.   getDailyClosingSummaryItems()
+
             viewModel.    getData()
             viewModel.   getDailyClosingPurchases()
             viewModel2.getselesRepor()
@@ -71,14 +72,6 @@ class DailyClosingFragment : Fragment() {
             binding.ViewPager.adapter = pagerAdabter
 
 
-//            val intent = activity!!.baseContext.packageManager.getLaunchIntentForPackage(
-//                activity!!.baseContext.packageName
-//            )
-//
-//            intent!!.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//            startActivity(intent)
-//            Process.killProcess(Process.myPid())
-//            System.exit(0)
         }
 
         binding.closingDayButton.setOnClickListener {

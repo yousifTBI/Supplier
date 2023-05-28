@@ -13,14 +13,26 @@ import com.tbi.supplierplus.business.pojo.Tasks
 import com.tbi.supplierplus.business.pojo.closing.SupplierReport
 import com.tbi.supplierplus.business.pojo.reports.InvoiceDetails
 import com.tbi.supplierplus.business.repository.DailyClosingRepository
+import com.tbi.supplierplus.framework.datasource.network.SupplierAPI
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
+import com.tbi.supplierplus.framework.ui.login.wrapWithFlowApi
+import com.tbi.supplierplus.framework.ui.sales.addBranch.AddBranchModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DailyClosingViewModel @Inject constructor(val repo: DailyClosingRepository) : ViewModel() {
+class DailyClosingViewModel @Inject constructor(val repo: DailyClosingRepository,   private val api: SupplierAPI) : ViewModel() {
+
+    fun SubmitReturnMardodatVM() = wrapWithFlowApi {
+        Log.d("SubmitReturnMardodatVM",SharedPreferencesCom.getInstance().gerSharedUser_ID())
+        api.SubmitReturnMardodatAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID())
+
+    }.flowOn(Dispatchers.IO)
+
 
     var user = MutableLiveData<User>()
 

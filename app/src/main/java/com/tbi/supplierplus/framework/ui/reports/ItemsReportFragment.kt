@@ -19,7 +19,6 @@ import kotlinx.coroutines.launch
 class ItemsReportFragment : Fragment() {
     private lateinit var binding: FragmentItemsReportBinding
 
-    //  private val viewModel: ReportsViewModel by activityViewModels()
     val viewModel: AvailableItemsViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,23 +51,7 @@ class ItemsReportFragment : Fragment() {
             }
         }
 
-//        viewModel.getItemsReport()
-//        viewModel.ItemsReportLivedata.observe(viewLifecycleOwner) {
-//            binding.recyclerView.adapter = adapter
-//            adapter.submitList(it!!.toList())
-//        }
 
-//        viewModel.getItemsReport()
-//        viewModel.ItemsReportLivedata.observe(viewLifecycleOwner) {
-//            binding.recyclerView.adapter = adapter
-//            adapter.submitList(it!!.toList())
-//        }
-
-        //   viewModel.itemsSummary.observe(viewLifecycleOwner) {
-        //       binding.recyclerView.adapter = adapter
-        //       adapter.submitList(it!!.toList())
-        //       Log.i("ItemsSummary",it.toJson())
-        //   }
         return binding.root
     }
 
