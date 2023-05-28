@@ -37,22 +37,22 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
     private val barcode = StringBuffer()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-       setContentView(R.layout.activity_change_special_price)
+        setContentView(R.layout.activity_change_special_price)
         binding= DataBindingUtil.setContentView(this,R.layout.activity_change_special_price)
-       viewModel = ViewModelProvider(this).get(SalesViewModel::class.java)
-      //  viewModel = ViewModelProvider(this).get(SalesViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(SalesViewModel::class.java)
+        //  viewModel = ViewModelProvider(this).get(SalesViewModel::class.java)
         supportActionBar?.hide()
         message     = intent.getStringExtra("Customer_ID").toString()
-      var CompanyName     = intent.getStringExtra("CompanyName").toString()
+        var CompanyName     = intent.getStringExtra("CompanyName").toString()
         val loading = LoadingDialog(this)
         binding.textView22.setText(CompanyName)
         viewModel.getAllItemss( message!!.toInt())
-         viewModel.getProducers  .observe(this){
+        viewModel.getProducers  .observe(this){
 
-             list= it as ArrayList<Items>
+            list= it as ArrayList<Items>
 
-         }
-       // binding.linearLayout2
+        }
+        // binding.linearLayout2
 //\
         binding.spinKit.isVisible=false
         viewModel.SetSpecialItemPriceLiveData.observe(this){
@@ -65,24 +65,16 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
                     loading.isDismiss()
                     binding.spinKit.isVisible=false
 
-                        binding.textView8.setText("")
-                        binding.textView2.setText("")
-                        binding.textView3.setText("")
-                        binding.counterEditTextm.setText("")
-                       Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
-                        val dialog   = Dialog(this)
-                        dialog.setContentView(R.layout.chos_items)
-                        dialog.getWindow()?.setLayout(700, 800)
-                        dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                        dialog.show()
-
-                }
-                is com.tbi.supplierplus.framework.ui.login.State.Error -> {
-                    binding.spinKit.isVisible=false
-
-
-                    Toast.makeText(applicationContext,"خطا", Toast.LENGTH_SHORT).show()
-                }
+                    binding.textView8.setText("")
+                    binding.textView2.setText("")
+                    binding.textView3.setText("")
+                    binding.counterEditTextm.setText("")
+                    Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
+                    val dialog   = Dialog(this)
+                    dialog.setContentView(R.layout.chos_items)
+                    dialog.getWindow()?.setLayout(700, 800)
+                    dialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    dialog.show()
 
                 }
                 is com.tbi.supplierplus.framework.ui.login.State.Error -> {
@@ -101,7 +93,7 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
             SimpleSearchDialogCompat(this,"ادخل اسم المنتج  "+"\n","search",null,
                 inits(), SearchResultListener{
                         baseSearchDialogCompat, item, pos ->
-              //      binding.
+                    //      binding.
                     val split= DialogBill(item.item)
                     binding.textView8.setText(split.name)
                     binding.textView3.setText(item. Item_ID.toString())
@@ -111,17 +103,17 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
                     baseSearchDialogCompat.dismiss()
                 }).show()
         }
-       // viewModel.SetSpeci.observe(this){
-       //     Log.d("skowxal",it)
-       // }
+        // viewModel.SetSpeci.observe(this){
+        //     Log.d("skowxal",it)
+        // }
 
 
         binding.button2b.setOnClickListener {
 
             if (isvaled()==true){
                 loading.startLoading()
-               // binding.textView80.setText( binding.textView3.text.toString()+""
-               //     +message+""+binding.counterEditTextm.text.toString()+"")
+                // binding.textView80.setText( binding.textView3.text.toString()+""
+                //     +message+""+binding.counterEditTextm.text.toString()+"")
 
 
                 binding.textView2.text.toString()
@@ -141,18 +133,18 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
 
                 //loading.startLoading()
                 is State.Success ->if (it.data.State==1){
-                   // loading.isDismiss()
+                    // loading.isDismiss()
                     Log.d("makeText", it.data.Item!!.item)
                     Log.d("makeText",it.data.Message)
                     binding.textView8.setText(it.data.Item.item)
-                   binding.textView3.setText(it.data.Item. Item_ID.toString())
+                    binding.textView3.setText(it.data.Item. Item_ID.toString())
                     binding.textView2.setText(it.data.Item.CustomerSellingPrice.toString())
                     //.CustomerSellingPrice.toString())
                     //   it.data.Item
                     Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
 
                 } else{
-                  //  loading.isDismiss()
+                    //  loading.isDismiss()
                     Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
 
                     Log.d("makeText",it.data.Message)
@@ -162,7 +154,7 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
                 //Log.d("makeText","Success")
                 is State.Error ->   if (it.toError().isNotEmpty()){
 
-                //    loading.isDismiss()
+                    //    loading.isDismiss()
                     Toast.makeText(baseContext, it.messag, Toast.LENGTH_SHORT).show()
                 }
             }
@@ -186,12 +178,12 @@ class ChangeSpecialPriceActivity : AppCompatActivity() {
         }
         if (event?.action == KeyEvent.ACTION_DOWN && event?.keyCode == KeyEvent.KEYCODE_ENTER) {
             Toast.makeText(baseContext, barcode.toString(), Toast.LENGTH_SHORT).show()
-             binding.textView8.setText("")
-             binding.textView3.setText("")
-             binding.textView2.setText("")
+            binding.textView8.setText("")
+            binding.textView3.setText("")
+            binding.textView2.setText("")
             binding.editTextTextPersonName3.setText("")
             binding.editTextTextPersonName3. clearFocus ()
-           // binding.textView3.setText(barcode.toString().trim())
+            // binding.textView3.setText(barcode.toString().trim())
             viewModel.getItemByBarcodeV1API( SharedPreferencesCom.getInstance().gerSharedUser_ID().toString(),barcode.toString().trim(), message)
 
             barcode.delete(0, barcode.length)

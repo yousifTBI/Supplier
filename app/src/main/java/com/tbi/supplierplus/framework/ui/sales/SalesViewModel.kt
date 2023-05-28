@@ -211,7 +211,6 @@ var editProductpriceState = MutableLiveData<Int>()
             }
         }
     }
-
     var RangesLiveData = MutableLiveData<List<Ranges>>()
 
      fun GetRange(UserId: String){
@@ -221,7 +220,6 @@ var editProductpriceState = MutableLiveData<Int>()
              }
          }
      }
-
     var SetSpecialItemPriceLiveData = MutableLiveData<com.tbi.supplierplus.framework.ui.login.State<Tasks<SpecialPrice>>>()
 
 
@@ -242,7 +240,6 @@ var editProductpriceState = MutableLiveData<Int>()
 
     ).flowOn(Dispatchers.IO)
 
-    ).flowOn(Dispatchers.IO)
 
     var RegionsLiveData = MutableLiveData<List<Regions>>()
 
@@ -258,11 +255,6 @@ var editProductpriceState = MutableLiveData<Int>()
             }
         }
     }
-    fun SetSpecialItemPriceAPI(specialPrice: SpecialPrice) = wrapWithFlowApi(
-
-        fetch = {
-            api.SetSpecialItemPriceAPI(specialPrice)
-        }
 
     fun getItemByBarcodeV1API( salas_Id:String, Barcode:String,Cus_id:String){
         viewModelScope.launch {

@@ -163,12 +163,7 @@ class ChangePriceActivity : AppCompatActivity() {
 
 
                 }
-                is com.tbi.supplierplus.framework.ui.login.State.Error -> {
-                    binding.spinKit.isVisible = false
 
-
-                    Toast.makeText(applicationContext, "خطا", Toast.LENGTH_SHORT).show()
-                }
             }
 
 
