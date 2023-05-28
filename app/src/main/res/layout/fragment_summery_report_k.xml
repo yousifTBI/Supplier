@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#0D090707"
+        android:background="@drawable/mainback"
 
         tools:context=".framework.ui.daily_closing.summaryReport.SummeryReportKFragment">
 
@@ -68,7 +68,7 @@
             android:id="@+id/sal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
 
             android:layout_marginEnd="16dp"
             android:text="اجمالى المبيعات"

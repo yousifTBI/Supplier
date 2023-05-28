@@ -335,6 +335,18 @@
                 android:id="@+id/action_mainFragment_to_puarchaseFragment"
                 app:destination="@id/puarchaseFragment" />
 
+            <action
+                android:id="@+id/action_global_availableItemsFragment"
+                app:destination="@id/availableItemsFragment" />
+
+
+
+            <action
+                android:id="@+id/action_global_storeFragment"
+                app:destination="@id/storeFragment" />
+
+
+
         </fragment>
         <action
             android:id="@+id/action_global_reportsFragment"
@@ -435,5 +447,64 @@
         <action
             android:id="@+id/action_salesSettingFragment_to_returnItemsFragment"
             app:destination="@id/returnItemsFragment" />
+
+
+        <action
+            android:id="@+id/action_salesSettingFragment_to_clientOperationFragment"
+            app:destination="@id/clientOperationFragment" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.tbi.supplierplus.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/addCompanyFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.addCompany.AddCompanyFragment"
+        android:label="fragment_add_company"
+        tools:layout="@layout/fragment_add_company"
+
+        />
+    <fragment
+        android:id="@+id/clientOperationFragment"
+        android:name="com.tbi.supplierplus.ClientOperationFragment"
+        android:label="fragment_client_operation"
+        tools:layout="@layout/fragment_client_operation" >
+        <action
+            android:id="@+id/action_clientOperationFragment_to_addCompanyFragment"
+            app:destination="@id/addCompanyFragment" />
+        <action
+            android:id="@+id/action_clientOperationFragment_to_addBranchFragment"
+            app:destination="@id/addBranchFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addBranchFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.addBranch.AddBranchFragment"
+        android:label="fragment_add_branch"
+        tools:layout="@layout/fragment_add_branch" />
+
+    <fragment
+        android:id="@+id/availableItemsFragment"
+        android:name="com.tbi.supplierplus.framework.ui2.availableitemsBB.AvailableItemsFragment"
+        android:label="AvailableItemsFragment" />
+    <fragment
+        android:id="@+id/storeFragment"
+        android:name="com.tbi.supplierplus.StoreFragment"
+        android:label="fragment_store"
+        tools:layout="@layout/fragment_store" >
+
+        <action
+            android:id="@+id/action_storeFragment_to_availableItemsFragment"
+            app:destination="@id/availableItemsFragment" />
+         <action
+            android:id="@+id/action_storeFragment_to_itemsSettlementFragment"
+            app:destination="@id/itemsSettlementFragment" />
+ <action
+            android:id="@+id/action_storeFragment_to_itemsReportFragment"
+            app:destination="@id/itemsReportFragment" />
+
+
     </fragment>
 </navigation>

@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SummeryReportKFragment : Fragment() {
     private lateinit var binding: FragmentSummeryReportKBinding
 
-    private val viewModel: DailyClosingViewModel by  activityViewModels()
+    private val viewModel: DailyClosingViewModel by   viewModels()
 
 
     override fun onCreateView(

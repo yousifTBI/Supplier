@@ -12,6 +12,7 @@ import com.tbi.supplierplus.business.pojo.expenses.AddExpenses
 import com.tbi.supplierplus.business.pojo.expenses.ExpensesSearch
 
 import com.tbi.supplierplus.databinding.FragmentExpensesBinding
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -32,14 +33,7 @@ class ExpensesFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-   //    viewModel.setUser(ExpensesFragmentArgs.fromBundle(requireArguments()).user)
 
-
-   //    viewModel.liveData.observe(viewLifecycleOwner) {
-   //        Log.i("List", it.size.toString())
-   //        val adapter = ExpensesListAdapter(context!!, it)
-   //        binding.lisOfExpenses.adapter = adapter
-   //    }
 
 
         viewModel.getExpensesSearchType()
@@ -59,26 +53,15 @@ class ExpensesFragment : Fragment() {
         binding.addExpensesButton.setOnClickListener {
        var Amount=    binding.addExpenseAmountEdittext .text.toString()
           var  Reason=  binding.addReasonEdittext.text.toString()
-            viewModel.addExpenses(AddExpenses("2",Amount,Reason,expenses_ID.toString()))
+            viewModel.addExpenses(AddExpenses(SharedPreferencesCom.getInstance().gerSharedUser_ID(),Amount,Reason,expenses_ID.toString()))
         }
-        //    binding.addExpensesButton.setOnClickListener {
 
-   //        viewModel.addExpenses()
-   //        binding.addExpenseAmountEdittext.text.clear()
-   //        binding.addReasonEdittext.text.clear()
-
-   //    }
-        Log.d("expensesSpinner","p2.toString()")
 
 
    binding.expensesSpinner.onItemSelectedListener =
        object : AdapterView.OnItemSelectedListener {
            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-            //   viewModel.selectedItem.value = viewModel.expensesTypesLiveData.value!![p2]
 
-           //    p1?.accessibilityClassName.toString()
-
-           //    ExpensesSearch
            var x: ExpensesSearch
            x= p0?.getItemAtPosition(p2) as ExpensesSearch
                expenses_ID=x.Record_ID
@@ -88,9 +71,7 @@ class ExpensesFragment : Fragment() {
                Log.d("expensesSpinner",x.ExpenseType)
                Log.d("expensesSpinner",  p0?.getItemAtPosition(p2).toString())
 
-                   // viewModel.addExpenses(AddExpenses(2,))
-             //  Log.d("expensesSpinner",p0.toString())
-              // Log.d("expensesSpinner",p3.toString())
+
            }
 
            override fun onNothingSelected(p0: AdapterView<*>?) {

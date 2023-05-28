@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import com.tbi.supplierplus.BillActivity2
 import com.tbi.supplierplus.R
 import com.tbi.supplierplus.databinding.FragmentCustomerProfileBinding
 import com.tbi.supplierplus.databinding.FragmentProductSelectionBinding
+import com.tbi.supplierplus.framework.datasource.requests.State
 import com.tbi.supplierplus.framework.ui.sales.SalesViewModel
 import com.tbi.supplierplus.testAdabters.AllCustomersAdapter
 import com.tbi.supplierplus.testAdabters.OnClickListenerss
@@ -83,15 +85,33 @@ class ProductSelectionFragment : Fragment() {
             // )
 
         })
-
-        viewModel.getAllCustomers()
-        viewModel.getAllCustomersLiveData.observe(viewLifecycleOwner){
+        viewModel.  getAllCustomerTesthandel1()
+       // viewModel.getAllCustomers()
+        viewModel.Regionsd.observe(viewLifecycleOwner){
             //   Toast.
-            binding.recyclerView.adapter = adapte
-            adapte.submitList(it)
+
+
+
+            when( it){
+
+                is State.Loading -> {
+                 //   binding.spinKit.isVisible=true
+                }
+                is State.Success ->  {
+                    binding.recyclerView.adapter = adapte
+                    adapte.submitList(it.data.data)
+
+                }
+
+                is State.Error ->   {
+
+
+                }
+
+            }
+
         }
-        // Inflate the layout for this fragment
-     //   return inflater.inflate(R.layout.fragment_product_selection, container, false)
+
         return binding.root
     }
 

@@ -11,7 +11,8 @@ data class Items(
   val  Supplier_ID    :Int ,
   val  ItemGroup_ID   :Int ,
   val Supply_Price: Double,
-  val CustomerSellingPrice:Double
+  val CustomerSellingPrice:Double,
+  val Barcode:String
 
 ): Searchable
 
@@ -72,4 +73,7 @@ data class Items(
     fun getsize():String{
         return size.toString()
     }
+//    fun getBarcode():String{
+//        return Barcode
+//    }
 }

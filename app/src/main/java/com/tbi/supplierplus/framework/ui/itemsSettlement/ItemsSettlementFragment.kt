@@ -1,114 +1,216 @@
 package com.tbi.supplierplus.framework.ui.itemsSettlement
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.tbi.supplierplus.R
+import com.tbi.supplierplus.business.models.InvoicRequest
 import com.tbi.supplierplus.business.pojo.settelment.SetItemsSettelment
 import com.tbi.supplierplus.databinding.FragmentItemsSettlementBinding
+import com.tbi.supplierplus.framework.ui.login.State
 import com.tbi.supplierplus.framework.ui.return_items.ReturnItemsAdapter
 import com.tbi.supplierplus.framework.ui.return_items.ReturnItemsFragmentArgs
+import com.tbi.supplierplus.framework.ui2.availableitemsBB.AvailableItemsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import java.util.ArrayList
 
 @AndroidEntryPoint
 class ItemsSettlementFragment : Fragment() {
 
     private lateinit var binding: FragmentItemsSettlementBinding
-    val viewModel: ItemsSettlementViewModel by viewModels()
-
+    val viewModel: AvailableItemsViewModel by viewModels()
+    lateinit var adapter: GetItemsSettlementAdapter
+     var RecordID: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentItemsSettlementBinding.inflate(inflater)
-        binding.returnViewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel.setUser(ReturnItemsFragmentArgs.fromBundle(requireArguments()).user)
-        viewModel. getItemsSettlementSuppliersFillSpinner()
-        viewModel.itemsSettlementSuppliersLiveData.observe(viewLifecycleOwner) {
-            Log.i("item", it.size.toString())
-          val adapter = ReturnItemsAdapter(context!!, it)
-          binding.itemsSettlementSpinner.adapter = adapter
-
-        }
-
-        binding.itemsSettlementSpinner.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parentView: AdapterView<*>?,
-                selectedItemView: View?,
-                position: Int,
-                id: Long
-            ) {
-                viewModel.getItemsSettlement(viewModel.itemsSettlementSuppliersLiveData.value!![position].Supplier_ID.toString())
-
-                Log.i("supplierIdIn", viewModel.itemsSettlementSuppliersLiveData.value!![position].Supplier_ID.toString())
-                viewModel.supplierId = viewModel.itemsSettlementSuppliersLiveData.value!![position].Supplier_ID.toString()
 
 
-            }
 
-            override fun onNothingSelected(parentView: AdapterView<*>?) {
-            }
-        }
+          adapter = GetItemsSettlementAdapter(OnItemSettlementClickListener {
+            //  Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+              RecordID=it.RecordID
+            // set value in array list
 
-        val adapter = GetItemsSettlementAdapter(OnItemSettlementClickListener {
+            var arrayList = ArrayList<Int>()
 
-            val itemId:String = it.Item_ID.toString()
-            val returnAmount:String = it.ReturnAmount.toString()
-            val returnCount:String = it.ReturnSize.toString()
-       //     viewModel.supplierId
-           // Log.d("returnCount",viewModel.supplierId)
+            // set value in array list
+            arrayList.add(1)
+            arrayList.add(2)
+            arrayList.add(3)
+            arrayList.add(4)
+            arrayList.add(5)
+            arrayList.add(6)
+            arrayList.add(7)
+            arrayList.add(8)
+            arrayList.add(9)
+            arrayList.add(10)
+            arrayList.add(11)
+            arrayList.add(12)
+            arrayList.add(13)
+            arrayList.add(14)
+            arrayList.add(15)
 
+            // Initialize dialog
+            val dialog = Dialog(requireContext())
 
-            val dialogView =
-                LayoutInflater.from(requireContext()).inflate(R.layout.custom_items_settlement_alert_dialoge, null)
-            val builder = androidx.appcompat.app.AlertDialog.Builder(requireContext())
-                .setView(dialogView)
-                .setCancelable(false)
-            val mAlertDialog = builder.show()
+            // set custom dialog
+            dialog.setContentView(android.R.layout.list_content)
 
-            dialogView.findViewById<Button>(R.id.cancel_button)
-                .setOnClickListener(View.OnClickListener {
-                    mAlertDialog.dismiss()
-                    Toast.makeText(requireContext(), "canceled", Toast.LENGTH_SHORT).show()
+            // set custom height and width
+            dialog.window!!.setLayout(300, 300)
 
-                })
+            // set transparent background
+            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
 
+            // show dialog
+            dialog.show()
 
-            dialogView.findViewById<Button>(R.id.save_items_settlement_button)
-                .setOnClickListener {
-                viewModel. Setitemssettelment(SetItemsSettelment(itemId,returnCount,"2",viewModel.supplierId))
-                    viewModel.setItemsSettlement(itemId, viewModel.supplierId, returnAmount)
-                    Log.i("itemIdSettlemnt", itemId)
-                    Log.i("itemIdSettlemnt", viewModel.supplierId)
-                    Log.i("itemIdSettlemnt", returnAmount)
-                    viewModel.setItemsSettlementLiveData.observe(viewLifecycleOwner) {
-                        com.tbi.supplierplus.business.utils.showSnackbar(activity!!, it.message)
-                        Log.i("bbbbbbbbb", it.toString())
+            // Initialize and assign variable
+            // EditText editText=dialog.findViewById(R.id.edit_text);
+            val listView = dialog.findViewById<ListView>(android.R.id.list)
 
+            // Initialize array adapter
+            val adapterlist: ArrayAdapter<Int> =
+                ArrayAdapter<Int>(context!!, android.R.layout.simple_list_item_1, arrayList)
+
+            // set adapter
+            listView.adapter = adapterlist
+
+            listView.onItemClickListener =
+                AdapterView.OnItemClickListener { parent, view, position, id ->
+
+                    lifecycleScope.launch {
+                        viewModel.getSubmitChangeQuantityVMI(adapterlist.getItem(position).toString().toDouble(),RecordID).collect{
+                            when (it) {
+
+                                is State.Loading -> {}
+
+                                is State.Success -> {
+
+                                    binding.spinKit.isVisible = false
+                                    viewModel.GetPendingRequestsMV().collect {
+                                        when (it) {
+
+                                            is State.Loading -> {}
+
+                                            is State.Success -> {
+                                                adapter.submitList(it.data.data)
+                                                binding.recyclerView.adapter = adapter
+                                               adapter.notifyDataSetChanged()
+
+                                            }
+                                            is State.Error -> {
+                                                binding.spinKit.isVisible = false
+                                            }
+                                        }
+
+                                    }
+                                }
+                                is State.Error -> {
+                                    binding.spinKit.isVisible = false
+
+                                }
+                            }
+                        }
                     }
-                    mAlertDialog.dismiss()
+
+
+
+                 //   Log.d("GetItemsSettlementAdapter",RecordID.toString())
+
+
+
+                   // Toast.makeText(context, adapterlist.getItem(position).toString(), Toast.LENGTH_SHORT).show()
+                    adapter.notifyDataSetChanged()
+
+                    dialog.dismiss()
+
+                }
+        })
+
+        binding.button4.setOnClickListener {
+
+
+            lifecycleScope.launch {
+                viewModel.ConfirmSalesrRequestApi().collect {
+                    when (it) {
+
+                        is State.Loading -> {}
+
+                        is State.Success -> {
+                            binding.spinKit.isVisible = false
+                           // adapter.submitList(it.data.data)
+                            lifecycleScope.launch {
+                                viewModel.GetPendingRequestsMV().collect {
+                                    when (it) {
+
+                                        is State.Loading -> {}
+
+                                        is State.Success -> {
+                                            binding.spinKit.isVisible = false
+                                            adapter.submitList(it.data.data)
+
+                                            binding.recyclerView.adapter = adapter
+                                        }
+                                        is State.Error -> {
+                                            binding.spinKit.isVisible = false
+                                        }
+                                    }
+
+                                }
+                            }
+                            binding.recyclerView.adapter = adapter
+                        }
+                        is State.Error -> {
+                            binding.spinKit.isVisible = false
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+        lifecycleScope.launch {
+            viewModel.GetPendingRequestsMV().collect {
+                when (it) {
+
+                    is State.Loading -> {}
+
+                    is State.Success -> {
+                        binding.spinKit.isVisible = false
+                        binding.messageStateId.setText(it.data.message)
+
+                        Log.d("GetPendingRequestsMV",it.data.message.toString())
+                        adapter.submitList(it.data.data)
+
+                        binding.recyclerView.adapter = adapter
+                    }
+                    is State.Error -> {
+                        binding.spinKit.isVisible = false
+                    }
                 }
 
-        })
-        viewModel.getItemsSettlementLiveData.observe(viewLifecycleOwner) {
-            Log.i("ReturnsSize", it!!.size.toString())
-            Log.i("ReturnsSize", it!!.toString())
-            binding.getItemsSettlementRecycler.adapter = adapter
-            adapter.submitList(it)
+            }
         }
-
-
         return  binding.root
     }
 

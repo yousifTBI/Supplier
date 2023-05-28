@@ -15,7 +15,9 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-16dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -34,7 +36,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    />
+                    app:layout_constraintVertical_bias="0.208" />
 
                 <ImageView
                     android:id="@+id/imageView4"
@@ -64,8 +66,8 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="210dp"
                     android:layout_marginStart="32dp"
+                    android:layout_marginTop="210dp"
                     android:layout_marginEnd="32dp"
                     android:cursorVisible="false"
                     app:layout_constraintStart_toStartOf="parent"
@@ -77,6 +79,29 @@
                         android:layout_height="wrap_content"
 
                         android:hint=" Enter userName " />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/POS"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginEnd="32dp"
+
+                    app:layout_constraintBottom_toTopOf="@id/serialId"
+                    app:layout_constraintStart_toStartOf="@id/Company"
+                    app:layout_constraintTop_toBottomOf="@id/Company">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/POSSerial"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:hint=" Enter POS Serial " />
                 </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -98,20 +123,23 @@
                     android:id="@+id/serialId"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_margin="42dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="42dp"
+                    android:layout_marginTop="1dp"
                     android:cursorVisible="false"
                     app:layout_constraintBottom_toTopOf="@+id/SendRequestId"
                     app:layout_constraintTop_toBottomOf="@id/progressBar"
-                    tools:ignore="NotSibling">
+                    tools:ignore="NotSibling"
+                    tools:layout_editor_absoluteX="42dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/POStxt"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:hint="Distributer_Group_ID" />
+                        android:hint="Distributer_Group_ID"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
+
 
                 <Button
 
@@ -126,8 +154,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/serialId"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/serialId" />
 
                 <TextView
                     android:id="@+id/textView12"
@@ -144,16 +171,16 @@
                     app:layout_constraintVertical_bias="0.0" />
 
 
-<!--                <Button-->
-<!--                    android:id="@+id/submit"-->
-<!--                    android:layout_width="96dp"-->
-<!--                    android:layout_height="64dp"-->
-<!--                    android:layout_margin="20dp"-->
-<!--                    android:text="submit"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    app:layout_constraintBottom_toBottomOf="@+id/Company"-->
-<!--                    app:layout_constraintStart_toEndOf="@+id/Company"-->
-<!--                    app:layout_constraintTop_toTopOf="@+id/Company" />-->
+                <!--                <Button-->
+                <!--                    android:id="@+id/submit"-->
+                <!--                    android:layout_width="96dp"-->
+                <!--                    android:layout_height="64dp"-->
+                <!--                    android:layout_margin="20dp"-->
+                <!--                    android:text="submit"-->
+                <!--                    android:textColor="@color/white"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@+id/Company"-->
+                <!--                    app:layout_constraintStart_toEndOf="@+id/Company"-->
+                <!--                    app:layout_constraintTop_toTopOf="@+id/Company" />-->
 
                 <TextView
                     android:id="@+id/comID"
@@ -167,11 +194,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/androidId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
+                    android:visibility="gone"
                     app:layout_constraintEnd_toStartOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

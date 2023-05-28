@@ -9,6 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.tbi.supplierplus.R
 import com.tbi.supplierplus.databinding.FragmentRegisterBinding
 import com.tbi.supplierplus.databinding.FragmentReportsBinding
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import com.tbi.supplierplus.framework.ui.MainFragmentDirections
 
 class ReportsFragment : Fragment() {
@@ -18,35 +19,34 @@ class ReportsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentReportsBinding.inflate(layoutInflater)
-
+     //   SharedPreferencesCom.getInstance().gerSharedUser_ID()
 
         binding.invoiceCard.setOnClickListener {
             findNavController().navigate(
                 ReportsFragmentDirections.actionReportsFragmentToCustomerStatementFragment()
-////
+
             )
         }
         binding.dailyReportID.setOnClickListener {
             findNavController().navigate(
                 ReportsFragmentDirections.actionReportsFragmentToSalesReportFragment()
-////
+
             )
         }
-        binding.Accountstatement.setOnClickListener {
+        binding.reportsCard.setOnClickListener {
             findNavController().navigate(
                 ReportsFragmentDirections.actionReportsFragmentToItemsReportFragment()
-////
+
             )
         }
         binding.CusReportID.setOnClickListener {
             findNavController().navigate(
                 ReportsFragmentDirections.actionReportsFragmentToSelectCustomerFragment()
-////
+
             )
         }
 
-        // Inflate the layout for this fragment
-      //  return inflater.inflate(R.layout.fragment_reports, container, false)
+
         return binding.root
     }
 

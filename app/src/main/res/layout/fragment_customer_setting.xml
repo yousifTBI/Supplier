@@ -16,109 +16,76 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/mainback">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/collect_card"
+
+            <LinearLayout
+                android:id="@+id/linearLayoutimg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="24dp"
-                android:padding="20dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:cardMaxElevation="12dp"
-                app:cardUseCompatPadding="true"
-                app:layout_constraintTop_toBottomOf="@+id/balance_card"
-                tools:layout_editor_absoluteX="16dp">
+                android:src="@drawable/background"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/imgview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="80dp"
 
-                    <ImageView
-                        android:id="@+id/collect"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="18dp"
-                        android:layout_marginTop="40dp"
-                        android:src="@drawable/ic_collectfrom"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="39dp"
-                        android:layout_marginHorizontal="40dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/blue_rounded_filled100"
-                        android:gravity="center"
-                        android:text="تحصيل من العملاء المتأخرين"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/collect" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:src="@drawable/collecion"
 
-            </com.google.android.material.card.MaterialCardView>
+                    android:textSize="20dp"
+                    android:scaleType="fitXY"/>
 
-            <com.google.android.material.card.MaterialCardView
+
+            </LinearLayout>
+
+            <ImageView
                 android:id="@+id/balance_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginTop="32dp"
-                android:padding="20dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:cardMaxElevation="12dp"
-                app:cardUseCompatPadding="true"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:layout_editor_absoluteX="8dp">
+                android:layout_margin="6dp"
+                android:src="@drawable/ba1"
+                app:layout_constraintBottom_toTopOf="@+id/textView90"
+                app:layout_constraintEnd_toStartOf="@+id/collect_card"
+                app:layout_constraintHorizontal_bias="0.402"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/collect_card"
+                 />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/collect_card"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="132dp"
+                android:layout_marginEnd="88dp"
+                android:src="@drawable/daly"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayoutimg" />
 
-                    <ImageView
-                        android:id="@+id/balance"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="18dp"
-                        android:layout_marginTop="40dp"
-                        android:src="@drawable/ic_balance"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/textView89"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="الرصيد الإفتتاحي"
+                app:layout_constraintEnd_toEndOf="@+id/balance_card"
+                app:layout_constraintStart_toStartOf="@+id/balance_card"
+                app:layout_constraintTop_toBottomOf="@+id/balance_card" />
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="39dp"
-                        android:layout_marginHorizontal="40dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/blue_rounded_filled100"
-                        android:gravity="center"
-                        android:text="الرصيد الإفتتاحي"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/balance" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/textView90"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تحصيل من العملاء المتأخرين"
+                app:layout_constraintEnd_toEndOf="@+id/collect_card"
+                app:layout_constraintStart_toStartOf="@+id/collect_card"
+                app:layout_constraintTop_toBottomOf="@+id/collect_card" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,7 +39,25 @@ class MainFragment : Fragment() {
       // binding.  EditProductpriceCard.setVisibility(View.INVISIBLE)
       // binding.  ProductSelectionCard.setVisibility(View.INVISIBLE)
 
-        binding.salesCard.setOnClickListener {
+
+        binding.stock.setOnClickListener {
+//            findNavController().navigate(
+//                MainFragmentDirections.actionGlobalAvailableItemsFragment(
+//
+//                )
+//            )
+
+            findNavController().navigate(
+                MainFragmentDirections.actionGlobalStoreFragment(
+
+                )
+            )
+
+
+
+        }
+
+        binding.sales.setOnClickListener {
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToCustomersFragment(
                     User("peter_tbi", "", "", "3", "", "2", "", "")
@@ -50,7 +68,7 @@ class MainFragment : Fragment() {
 
         }
 
-        binding.purchaseCard.setOnClickListener {
+        binding.saless.setOnClickListener {
             findNavController().navigate(
                 MainFragmentDirections.actionGlobalSalesSettingFragment()
              // MainFragmentDirections.actionMainFragmentToPurchaseFragment(
@@ -65,7 +83,7 @@ class MainFragment : Fragment() {
         }
 
 
-        binding.addCustomerCard.setOnClickListener {
+        binding.car.setOnClickListener {
             findNavController().navigate(
                 MainFragmentDirections.actionGlobalSettingsFragment()
                 //  MainFragmentDirections.actionMainFragmentToPuarchaseFragment()
@@ -96,7 +114,7 @@ class MainFragment : Fragment() {
 
    //    }
 
-        binding.closingDayCard.setOnClickListener {
+        binding.sales2.setOnClickListener {
             findNavController().navigate(
                 MainFragmentDirections.actionMainFragmentToDailyClosingFragment(
                     User("peter_tbi", "", "", "3", "", "2", "", "")
@@ -108,7 +126,7 @@ class MainFragment : Fragment() {
             )
         }
 
-        binding.collectCard.setOnClickListener {
+        binding.saless2.setOnClickListener {
             findNavController().navigate(
                 MainFragmentDirections.actionGlobalCustomerSettingFragment(
                   //  MainFragmentArgs.fromBundle(
@@ -133,7 +151,7 @@ class MainFragment : Fragment() {
    //        )
    //    }
 
-      binding.itemsSettlementCard.setOnClickListener {
+      binding.car2.setOnClickListener {
           findNavController().navigate(
               MainFragmentDirections.actionMainFragmentToItemsSettlementFragment(
                 //  MainFragmentArgs.fromBundle(requireArguments()).user
@@ -148,7 +166,7 @@ class MainFragment : Fragment() {
       //      startActivity(intent)
       //  }
 
-          binding.invoiceCard.setOnClickListener {
+          binding.sales3.setOnClickListener {
               findNavController().navigate(
                   MainFragmentDirections.actionGlobalReportsFragment()
 ////

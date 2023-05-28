@@ -9,16 +9,19 @@
             name="viewModel"
             type="com.tbi.supplierplus.framework.ui.sales.SalesViewModel" />
     </data>
-
-
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mainback">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/returnsRecycler"
             android:nestedScrollingEnabled="true"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-
+            android:layout_marginTop="40dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/returns_row" />
+</androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

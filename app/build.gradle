@@ -9,6 +9,7 @@ android {
     compileSdk 30
     buildFeatures {
         dataBinding true
+
     }
         lintOptions {
             checkReleaseBuilds false
@@ -41,9 +42,21 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    dataBinding{
+        enabled=true
+    }
+
 }
 
 dependencies {
+
+    //qr
+
+    //MVVM
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+    implementation 'com.google.zxing:core:3.4.1'
+
 
     // Kotlin
     // implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version_kotlin"
@@ -80,6 +93,7 @@ dependencies {
 
  //   implementation 'com.android.support:design:27.1.1'
     implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation files('libs\\CTOS.CtPrint_0.0.18.jar')
     kapt("com.google.dagger:hilt-android-compiler:$version_hilt")
 //    implementation 'com.google.dagger:hilt-android:2.38.1'
     annotationProcessor "com.google.dagger:hilt-android-compiler:$version_hilt"
@@ -175,6 +189,12 @@ dependencies {
         implementation 'com.github.mirrajabi:search-dialog:1.2.4'
 
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
+
+
+
+
+
 }
 
 kapt {

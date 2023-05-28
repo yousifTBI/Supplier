@@ -21,7 +21,7 @@
             android:id="@+id/linearLayout4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#3A606E"
+            android:background="#f87654"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
                 android:layout_margin="10dp"
                 android:padding="2dp"
                 android:text="اختار بيع او مرتجع "
-                android:textColor="#F49F0A"
+                android:textColor="@color/white"
                 android:textSize="18dp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -56,11 +56,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:layout_marginEnd="26dp"
             android:text="الوزن :"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/grupI"
             app:layout_constraintTop_toBottomOf="@+id/grupI" />
 
         <TextView
@@ -69,9 +68,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:layout_marginEnd="156dp"
+            android:layout_marginEnd="140dp"
             android:text="المصدر:"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/sizeI"
             app:layout_constraintTop_toBottomOf="@+id/priceI" />
@@ -82,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="65dp"
-            android:layout_marginEnd="150dp"
+            android:layout_marginEnd="140dp"
             android:text="السعر: "
             android:textSize="18dp"
             android:textStyle="bold"
@@ -95,11 +94,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="22dp"
-            android:layout_marginEnd="6dp"
             android:text="مجموعه:"
-            android:textSize="18dp"
+            android:textSize="16dp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/nameI"
             app:layout_constraintTop_toBottomOf="@+id/nameI" />
 
         <TextView
@@ -109,8 +107,8 @@
 
             android:layout_marginTop="20dp"
             android:layout_marginEnd="22dp"
-            android:text="الاسم :"
-            android:textSize="18dp"
+            android:text="الاسٍٍم    :"
+            android:textSize="16dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
@@ -120,7 +118,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
-            android:textSize="18dp"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/grupI"
             app:layout_constraintEnd_toStartOf="@+id/grupI"
             app:layout_constraintTop_toTopOf="@+id/grupI" />
@@ -131,7 +129,7 @@
             android:layout_width="0dp"
             android:layout_height="26dp"
             android:layout_marginEnd="8dp"
-            android:textSize="22dp"
+            android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/priceI"
             app:layout_constraintEnd_toStartOf="@+id/priceI"
             app:layout_constraintTop_toTopOf="@+id/priceI" />
@@ -141,7 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:textSize="18dp"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/nameI"
         app:layout_constraintEnd_toStartOf="@+id/nameI"
         app:layout_constraintTop_toTopOf="@+id/nameI" />
@@ -151,7 +149,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:textSize="18dp"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/sourseI"
         app:layout_constraintEnd_toStartOf="@+id/sourseI"
         app:layout_constraintTop_toTopOf="@+id/sourseI" />
@@ -161,7 +159,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:textSize="18dp"
+        android:textSize="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/sizeI"
         app:layout_constraintEnd_toStartOf="@+id/sizeI"
         app:layout_constraintTop_toTopOf="@+id/sizeI" />
@@ -179,8 +177,8 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
-            android:layout_width="400dp"
-            android:layout_height="294dp"
+            android:layout_width="340dp"
+            android:layout_height="280dp"
             android:layout_marginTop="16dp"
             android:elevation="300dp"
             app:cardCornerRadius="17dp"
@@ -208,13 +206,14 @@
 
 
                     android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:elevation="234dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView36">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/counterEditTextm"
-                        android:layout_width="111dp"
+                        android:layout_width="90dp"
                         android:layout_height="wrap_content"
 
 
@@ -230,19 +229,19 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/sizes"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="105dp"
+                    android:layout_height="69dp"
 
 
                     android:layout_marginTop="150dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="75dp"
                     android:elevation="234dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView36">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/sizesEditTextm"
-                        android:layout_width="160dp"
+                        android:layout_width="90dp"
                         android:layout_height="wrap_content"
 
 
@@ -268,7 +267,7 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/discountEditTextk"
-                        android:layout_width="111dp"
+                        android:layout_width="90dp"
                         android:layout_height="wrap_content"
 
                         android:elevation="234dp"
@@ -296,14 +295,14 @@
 
                 <Button
                     android:id="@+id/buttonm"
-                    android:layout_width="175dp"
-                    android:layout_height="55dp"
+                    android:layout_width="122dp"
+                    android:layout_height="63dp"
                     android:layout_centerInParent="true"
 
                     android:layout_marginEnd="32dp"
-                    android:background="@drawable/blue_border"
-                    android:text="اضافة كمرتجع"
-                    android:textColor="@color/dark_blue"
+                    android:background="#C3E32E3E"
+                    android:text="مرتجع"
+                    android:textColor="@color/white"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/sizes"
@@ -312,18 +311,18 @@
 
                 <Button
                     android:id="@+id/button2b"
-                    android:layout_width="160dp"
+                    android:layout_width="120dp"
                     android:layout_height="65dp"
                     android:layout_centerInParent="true"
 
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/blue_rounded_filled20"
+                    android:background="#C94C8F30"
                     android:paddingHorizontal="5dp"
                     android:paddingStart="20dp"
                     android:paddingEnd="40dp"
-                    android:text="اضافة كبيع"
+                    android:text=" بيع"
                     android:textColor="@color/white"
-                    android:textSize="18dp"
+                    android:textSize="16dp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textinput_discountk"
                     app:layout_constraintEnd_toStartOf="@+id/textinput_discountk"

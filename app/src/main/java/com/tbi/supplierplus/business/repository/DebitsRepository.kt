@@ -9,6 +9,7 @@ import com.tbi.supplierplus.business.pojo.opening.OpeningBalance
 import com.tbi.supplierplus.business.utils.fromEnvelopeToModel
 import com.tbi.supplierplus.framework.datasource.network.SupplierAPI
 import com.tbi.supplierplus.framework.datasource.requests.*
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -52,7 +53,7 @@ class DebitsRepositoryImpl @Inject constructor(private val api: SupplierAPI) : D
         flow {
             try {
 
-                val response =api.getAllcustomersOpeningBalanceAPI("2").await()
+                val response =api.getAllcustomersOpeningBalanceAPI(SharedPreferencesCom.getInstance().gerSharedDistributor_ID()).await()
                 emit(response)
 
             } catch (e: Exception) {

@@ -25,7 +25,7 @@
                 android:id="@+id/linearLayout3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#3A606E"
+                android:background="#f87654"
 
 
                 android:orientation="vertical"
@@ -39,10 +39,10 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_marginStart="20dp"
-                    android:background="#3A606E"
+                    android:background="#f87654"
 
                     android:text=" مصروفات اخرى  "
-                    android:textColor="#F49F0A"
+                    android:textColor="@color/white"
                     android:textSize="24dp"
                     />
             </LinearLayout>
@@ -91,7 +91,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/expenses_spinner_card"
-                tools:ignore="MissingConstraints">
+                >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"

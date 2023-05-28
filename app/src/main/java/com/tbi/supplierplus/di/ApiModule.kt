@@ -73,7 +73,7 @@ class ApiModule {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
               //.baseUrl(TBI_BASE_URL)
-                .baseUrl("http://scopos-khattab.cloud/")
+                .baseUrl("https://dawar-api.unoerp.app/")
                 .client(client)
                 .build()
                 .create(SupplierAPI::class.java)

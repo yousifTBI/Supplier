@@ -7,6 +7,7 @@ import com.tbi.supplierplus.business.pojo.opening.AddCollection
 import com.tbi.supplierplus.business.pojo.opening.AddOpening
 import com.tbi.supplierplus.business.pojo.opening.OpeningBalance
 import com.tbi.supplierplus.business.repository.DebitsRepository
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -63,14 +64,14 @@ class CollectDebitViewModel @Inject constructor(private val debitsRepository: De
 
      fun getDebits() {
         viewModelScope.launch {
-            debitsRepository.getCustomerDebits("2").collect {
+            debitsRepository.getCustomerDebits(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
                 if(it.State==1){
                     _debits.value = it.data
                     _debits2.value = it.data
-                    // Log.i("sizeVM", it.size.toString())
+
                     msg.value = "هذه القائمة تحتوي علي العملاء المتأخرين فقط"
                 }else{
-                  //  Log.e("AddOpenings", it.Message+"Exception")
+
 
                 }
 

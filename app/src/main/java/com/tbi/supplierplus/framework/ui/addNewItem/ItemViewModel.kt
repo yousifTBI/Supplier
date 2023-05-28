@@ -10,6 +10,7 @@ import com.tbi.supplierplus.business.pojo.addItem.Supplier
 import com.tbi.supplierplus.business.pojo.addItem.TypeOfcategory
 import com.tbi.supplierplus.business.repository.AddItemRepository
 import com.tbi.supplierplus.framework.datasource.requests.State
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -52,7 +53,9 @@ public class ItemViewModel @Inject constructor(
 
     fun getSuppliers(){
         viewModelScope.launch {
-            addItemRepository.GetSuppliers("2").collect {
+            Log.d("sdsasks",SharedPreferencesCom.getInstance().gerSharedUser_ID().toString())
+            // SharedPreferencesCom.getInstance().gerSharedphoneNumber()
+            addItemRepository.GetSuppliers( "2").collect {
                 if (it.State==1){
                     Suppliers.value = it.data
                 }

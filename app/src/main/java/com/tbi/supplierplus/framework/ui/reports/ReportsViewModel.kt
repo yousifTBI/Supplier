@@ -9,6 +9,7 @@ import com.tbi.supplierplus.business.pojo.reports.*
 import com.tbi.supplierplus.business.repository.ReportsRepository
 import com.tbi.supplierplus.business.repository.SalesRepository
 import com.tbi.supplierplus.business.utils.toJson
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -56,7 +57,7 @@ val reporLivedata = MutableLiveData<ReportSpecificCustomer>()
     }
     fun reportSpecificCustomer(customerId:String) {
         viewModelScope.launch {
-            reportsRepository.GetselesSummryForSpecificCustomer("2",customerId).collect {
+            reportsRepository.GetselesSummryForSpecificCustomer(SharedPreferencesCom.getInstance().gerSharedUser_ID(),customerId).collect {
                 reporLivedata.value = it.Item!!
             }
         }
@@ -64,7 +65,7 @@ val reporLivedata = MutableLiveData<ReportSpecificCustomer>()
 
     fun getselesRepor() {
         viewModelScope.launch {
-            reportsRepository.getSelesReport("2").collect {
+            reportsRepository.getSelesReport(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
                 selesReporLivedata.value = it.Item
             }
         }
@@ -72,7 +73,7 @@ val reporLivedata = MutableLiveData<ReportSpecificCustomer>()
 
      fun getItemsReport() {
         viewModelScope.launch {
-            reportsRepository.getItemsReport("2").collect {
+            reportsRepository.getItemsReport(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
                 ItemsReportLivedata.value = it.data
             }
         }
@@ -94,23 +95,10 @@ val reporLivedata = MutableLiveData<ReportSpecificCustomer>()
 
    fun setSelectedStatement(statement: Invoices) {
       selectedStatement.value = statement
-       //selectedStatement.value = statement.Returns
+
    }
 
-//  init {
-//      viewModelScope.launch {
-//          customerID.asFlow().collect { getCustomerStatement(it) }
-//      }
-//      viewModelScope.launch {
-//          selectedStatement.asFlow().collect {
-//              if (it != null)
-//                  getBillDetails(
-//                      customerID = customerID.value!!,
-//                      billNo = selectedStatement.value!!.BillNo.toString()
-//                  )
-//          }
-//      }
-//  }
+
 
     private fun getSalesSummary(userID: String) {
         viewModelScope.launch {
@@ -130,13 +118,7 @@ val reporLivedata = MutableLiveData<ReportSpecificCustomer>()
     }
 
     fun getCustomerStatement(customerID: String) {
-      //  viewModelScope.launch {
-      //      viewModelScope.launch {
-      //          salesRepository.getCustomerInfo(
-      //              userID = user.value!!.userID,
-      //              customerID = customerID
-      //          ).collect { customer.value = it }
-      //      }
+
             viewModelScope.launch {
                 reportsRepository.getCustomerStatement(customerID).collect {
                     statement.value = it.data
@@ -159,10 +141,10 @@ val reporLivedata = MutableLiveData<ReportSpecificCustomer>()
         viewModelScope.launch {
             reportsRepository.getBillDetails(customerID, billNo)
                 .collect {
-                   // billDetails.value = it
+
                     Sales.value=  it.Item?. Sales
                     Returns.value=   it.Item?.Returns
-                 //  Log.d("List<Returns>",it.Item?.Returns?.get(0)?.ItemName.toString()+"vm")
+
                  }
         }
     }

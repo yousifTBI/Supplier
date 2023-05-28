@@ -1,44 +1,68 @@
 package com.tbi.supplierplus.framework.ui.reports
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.activityViewModels
+import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.tbi.supplierplus.R
-import com.tbi.supplierplus.business.utils.toJson
+import androidx.lifecycle.lifecycleScope
 import com.tbi.supplierplus.databinding.FragmentItemsReportBinding
-import com.tbi.supplierplus.databinding.FragmentSalesReportBinding
+import com.tbi.supplierplus.framework.ui.login.State
+import com.tbi.supplierplus.framework.ui2.availableitemsBB.AvailableItemsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ItemsReportFragment : Fragment() {
     private lateinit var binding: FragmentItemsReportBinding
-    private val viewModel: ReportsViewModel by activityViewModels()
+
+    //  private val viewModel: ReportsViewModel by activityViewModels()
+    val viewModel: AvailableItemsViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
         binding = FragmentItemsReportBinding.inflate(inflater)
-        binding.viewModel = viewModel
+        //  binding.viewModel = viewModel
         binding.lifecycleOwner = this
         val adapter = ItemsReportAdapter()
+        binding.spinKit.isVisible = false
+        lifecycleScope.launch {
+            viewModel.getItemsReport().collect {
+                when (it) {
 
-        viewModel.getItemsReport()
-        viewModel.ItemsReportLivedata.observe(viewLifecycleOwner) {
-            binding.recyclerView.adapter = adapter
-            adapter.submitList(it!!.toList())
+                    is State.Loading -> binding.spinKit.isVisible = true
+
+                    is State.Success -> {
+                        binding.spinKit.isVisible = false
+
+                        binding.recyclerView.adapter = adapter
+                        adapter.submitList(it.data.data)
+
+                        binding.recyclerView.adapter = adapter
+                    }
+                    is State.Error -> {
+                        binding.spinKit.isVisible = false
+                    }
+                }
+            }
         }
 
-     //   viewModel.itemsSummary.observe(viewLifecycleOwner) {
-     //       binding.recyclerView.adapter = adapter
-     //       adapter.submitList(it!!.toList())
-     //       Log.i("ItemsSummary",it.toJson())
-     //   }
+//        viewModel.getItemsReport()
+//        viewModel.ItemsReportLivedata.observe(viewLifecycleOwner) {
+//            binding.recyclerView.adapter = adapter
+//            adapter.submitList(it!!.toList())
+//        }
+
+        //   viewModel.itemsSummary.observe(viewLifecycleOwner) {
+        //       binding.recyclerView.adapter = adapter
+        //       adapter.submitList(it!!.toList())
+        //       Log.i("ItemsSummary",it.toJson())
+        //   }
         return binding.root
     }
 

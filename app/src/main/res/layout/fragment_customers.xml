@@ -12,11 +12,10 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/customers_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="15dp"
-       >
+        android:background="@drawable/mainback"
+        tools:context=".framework.ui.sales.add_customer.AddCustomerActivity">
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/spin_kit"
             style="@style/SpinKitView.Large.Circle"
@@ -29,40 +28,290 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
-        <SearchView
-            android:id="@+id/searchView"
+
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="76dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/gray_border"
+            android:layout_height="match_parent"
 
-            android:iconifiedByDefault="false"
+            android:background="@android:color/transparent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-
-            android:padding="10dp"
-            android:queryHint="العميل"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/searchView"
-            android:layout_marginTop="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchView"
-            app:layout_constraintVertical_bias="0.0"
-            tools:listitem="@layout/customers_row" />
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/companyCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
 
+                    android:layout_marginTop="66dp"
+
+                    android:elevation="30dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/strok">
+
+                        <ImageView
+                            android:id="@+id/imageView71"
+                            android:layout_width="55dp"
+                            android:layout_height="46dp"
+                            android:layout_margin="1dp"
+                            android:layout_marginBottom="1dp"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/arrow_down" />
+
+                        <TextView
+                            android:id="@+id/textView21"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:padding="4dp"
+                            android:text=" اسم الشركة"
+                            android:textColor="#A1252525"
+                            android:textSize="18dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/imageView71" />
+
+                        <!--                        <ProgressBar-->
+                        <!--                            android:id="@+id/progressBar"-->
+                        <!--                            style="?android:attr/progressBarStyle"-->
+                        <!--                            android:layout_width="90dp"-->
+                        <!--                            android:layout_height="62dp"-->
+                        <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                        <!--                            app:layout_constraintEnd_toStartOf="@+id/imageView71"-->
+                        <!--                            app:layout_constraintStart_toEndOf="@+id/textView21"-->
+                        <!--                            app:layout_constraintTop_toTopOf="parent" />-->
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/branchCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginBottom="12dp"
+                    android:elevation="30dp"
+                    app:layout_constraintBottom_toTopOf="@id/Company"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/companyCard">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/strok">
+
+                        <ImageView
+                            android:id="@+id/imageView72"
+                            android:layout_width="55dp"
+                            android:layout_height="46dp"
+                            android:layout_margin="1dp"
+                            android:layout_marginBottom="1dp"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/arrow_down" />
+
+                        <TextView
+                            android:id="@+id/textView22"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:padding="4dp"
+                            android:text=" فروع الشركة"
+                            android:textColor="#A1252525"
+                            android:textSize="14dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/imageView72" />
+
+                        <!--                        <ProgressBar-->
+                        <!--                            android:id="@+id/progressBar"-->
+                        <!--                            style="?android:attr/progressBarStyle"-->
+                        <!--                            android:layout_width="90dp"-->
+                        <!--                            android:layout_height="62dp"-->
+                        <!--                            app:layout_constraintBottom_toBottomOf="parent"-->
+                        <!--                            app:layout_constraintEnd_toStartOf="@+id/imageView71"-->
+                        <!--                            app:layout_constraintStart_toEndOf="@+id/textView21"-->
+                        <!--                            app:layout_constraintTop_toTopOf="parent" />-->
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/Company"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:editable="false"
+                    app:layout_constraintBottom_toTopOf="@+id/numOfRecordId"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/branchCard">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/com"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:editable="false"
+                        android:hint=" اسم الفرع" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/numOfRecordId"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+                    android:editable="false"
+                    app:layout_constraintBottom_toTopOf="@+id/companyCodeId"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Company">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/numOfRecord"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint=" العنوان"
+                        android:editable="false"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/companyCodeId"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintBottom_toTopOf="@+id/branchId"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/numOfRecordId">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/comCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint=" المنطقة "
+                        android:editable="false"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/branchId"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+
+                    android:layout_marginTop="31dp"
+                    app:layout_constraintBottom_toTopOf="@+id/streatId"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/companyCodeId">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/branchcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:hint="اسم جهة الاتصال  " />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/streatId"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintBottom_toTopOf="@+id/fieldId"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/branchId">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/streat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="رقم الهاتف  "
+                        android:editable="false"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+
+                    android:id="@+id/fieldId"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="32dp"
+
+                    android:layout_marginTop="32dp"
+
+                    android:layout_marginBottom="80dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/streatId">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/BuildingNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:hint="    المديونيه السابقه" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <Button
+                    android:id="@+id/SubmittttttID"
+                    android:layout_width="234dp"
+                    android:layout_height="65dp"
+                    android:backgroundTint="@color/black"
+                    android:text="الانتقال للبيع"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/fieldId"
+                    app:layout_constraintStart_toStartOf="@+id/fieldId"
+                    app:layout_constraintTop_toBottomOf="@+id/fieldId" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            
+
+        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </layout>

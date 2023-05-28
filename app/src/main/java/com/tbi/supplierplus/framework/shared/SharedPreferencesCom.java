@@ -10,15 +10,17 @@ public class SharedPreferencesCom {
     private SharedPreferences sharedPreferencesLogIn;
     private SharedPreferences.Editor edits;
 
-    public SharedPreferencesCom() {
+    public SharedPreferencesCom()
+    {
     }
 
-    public static void init(Context context) {
+    public static void init(Context context)
+    {
         Instance = new SharedPreferencesCom(context.getApplicationContext());
-
     }
 
-    public static SharedPreferencesCom getInstance() {
+    public static SharedPreferencesCom getInstance()
+    {
         if (null == Instance)
             Instance = new SharedPreferencesCom();
         return Instance;
@@ -29,24 +31,33 @@ public class SharedPreferencesCom {
         edits = sharedPreferencesLogIn.edit();
     }
 
-    public void remove() {
+    public void remove()
+    {
         sharedPreferencesLogIn.edit().clear().commit();
     }
 
-    public void setSharedphoneNumber(String number
-    ) {
+    public void setSharedDistributor_ID(String number)
+    {
         edits.putString("Distributor_ID", number);
+        edits.apply();
+    }
+    public void setSharedUser_ID(String number)
+    {
+        edits.putString("User_ID", number);
         edits.apply();
     }
 
 
-
-    public String gerSharedphoneNumber(
-    ) {
+    public String gerSharedDistributor_ID()
+    {
         String phoneNumber = sharedPreferencesLogIn.getString("Distributor_ID", "");
+        return phoneNumber;
+    }
+    public String gerSharedUser_ID()
+    {
+        String phoneNumber = sharedPreferencesLogIn.getString("User_ID", "");
         return phoneNumber;
 
     }
-
 
 }

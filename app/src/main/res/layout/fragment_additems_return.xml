@@ -13,18 +13,20 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+
         tools:context=".framework.ui.add_items_return.AddItemsReturnFragment">
 
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nested_addItems_return"
             android:layout_width="match_parent"
+
             android:layout_height="match_parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#ffffff"
+                android:background="@drawable/mainback"
                 android:orientation="vertical">
 
                 <com.google.android.material.card.MaterialCardView

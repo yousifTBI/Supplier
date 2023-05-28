@@ -13,6 +13,7 @@ import com.tbi.supplierplus.business.pojo.Tasks
 import com.tbi.supplierplus.business.pojo.closing.SupplierReport
 import com.tbi.supplierplus.business.pojo.reports.InvoiceDetails
 import com.tbi.supplierplus.business.repository.DailyClosingRepository
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -48,7 +49,7 @@ class DailyClosingViewModel @Inject constructor(val repo: DailyClosingRepository
     fun getDailyClosingSummarySupplier(){
 
         viewModelScope.launch {
-            repo.getDailyClosingSummarySupplier("2").collect {
+            repo.getDailyClosingSummarySupplier(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
                 if (it.data !=null&&it.State==1){
                     summarySupplierLiveData.value = it.data
 
@@ -60,7 +61,7 @@ class DailyClosingViewModel @Inject constructor(val repo: DailyClosingRepository
 
     fun closeTheDay(){
         viewModelScope.launch {
-            repo.setDailyClosing("2").collect {
+            repo.setDailyClosing(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
                 setClosingDayLiveData.value = it
              //  if (it.data !=null&&it.State==1){
              //      setClosingDayLiveData.value = it
@@ -76,7 +77,7 @@ class DailyClosingViewModel @Inject constructor(val repo: DailyClosingRepository
     // get closing expenses every update
     fun getData(){
         viewModelScope.launch {
-            repo.getDailyClosingExpenses("2").collect {
+            repo.getDailyClosingExpenses(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
                 if (it.data !=null&&it.State==1){
                     closingExpensesLiveData.value = it.data
 
@@ -88,7 +89,7 @@ class DailyClosingViewModel @Inject constructor(val repo: DailyClosingRepository
     // closing the purchases
     fun getDailyClosingPurchases(){
         viewModelScope.launch {
-            repo.getDailyClosingPurchases("2").collect {
+            repo.getDailyClosingPurchases(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
                 if (it.data !=null&&it.State==1){
                     purchasesLiveData.value = it.data
 
@@ -100,7 +101,7 @@ class DailyClosingViewModel @Inject constructor(val repo: DailyClosingRepository
 //GetClosingDay_Summry_items
     fun getDailyClosingSummaryItems() {
         viewModelScope.launch {
-            repo.getDailyClosingSummaryItems("2").collect {
+            repo.getDailyClosingSummaryItems(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
                 if (it.data !=null&&it.State==1){
                     itemsDailyClosingLiveData.value = it.data
 

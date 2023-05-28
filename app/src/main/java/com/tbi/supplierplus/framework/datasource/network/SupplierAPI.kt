@@ -1,5 +1,6 @@
 package com.tbi.supplierplus.framework.datasource.network
 
+import com.tbi.supplierplus.business.models.*
 import com.tbi.supplierplus.business.pojo.*
 import com.tbi.supplierplus.business.pojo.addCustomer.NewCustomer
 import com.tbi.supplierplus.business.pojo.addCustomer.Ranges
@@ -32,6 +33,14 @@ import com.tbi.supplierplus.framework.datasource.responses.*
 import com.tbi.supplierplus.framework.ui.login.DistrputerLogin
 import com.tbi.supplierplus.framework.ui.login.LoginModel
 import com.tbi.supplierplus.framework.ui.login.Task3
+import com.tbi.supplierplus.framework.ui.sales.addBranch.AddBranchModel
+import com.tbi.supplierplus.framework.ui.sales.addBranch.BranchBackModel
+import com.tbi.supplierplus.framework.ui.sales.addCompany.BranchDetailsModel
+import com.tbi.supplierplus.framework.ui.sales.addCompany.BranchModel
+import com.tbi.supplierplus.framework.ui.sales.addCompany.CompanyTask
+import com.tbi.supplierplus.framework.ui.sales.addCompany.Data
+import com.tbi.supplierplus.framework.ui.sales.add_customer.CustomerTask
+import com.tbi.supplierplus.framework.ui.sales.customers.product_selection.CustomerModel
 import kotlinx.coroutines.Deferred
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -412,7 +421,72 @@ interface SupplierAPI {
     @POST("api/Account/Registration_Request")
     fun RegistrationAPI(@Body registrationModel: RegistrationModel): Deferred<Task3<RegistrationModel>>
 
+    @Headers("Content-Type: application/json")
+    @POST("api/Customer/AddCompany")
+    fun AddCustomerAPI(@Body customerModel: CustomerModel): Deferred<CustomerTask<CustomerModel>>
 
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Company/GetCompaniesToFillSelect")
+    fun GetAllCompaniesAPI(
+        @Query("DisGroupID") DisGroupID :Int
+    ): Deferred<CompanyTask>
+
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Company/GetCompanyBranches")
+    fun GetAllBranchesAPI(
+        @Query("ComID") ComID: Int,
+        @Query("UserId") UserId: Int
+    ): Deferred<BranchModel<Branch>>
+
+
+
+    @Headers("Content-Type: application/json")
+        @GET("api/Company/GetBranchDetails")
+    fun GetBranchDetailsAPI(
+            @Query("BranchID") BranchID: Int
+    ): Deferred<BranchDetailsModel>
+
+
+
+    @Headers("Content-Type: application/json")
+    @POST("api/Company/AddBranch")
+    fun AddBranchAPI(
+        @Body add: AddBranchModel
+    ): Deferred<BranchBackModel>
+
+
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Sale/GetItemByBarcodeV1")
+    fun GetItemByBarcodeAPI(
+        @Query("sales_Id") sales_Id: Int, @Query("Barcode") Barcode: String,
+        @Query("Cus_id") Cus_id: String
+    ): Deferred<Tasks<ItemsModel>>
+
+
+
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Company/AvailableWareHouseItems")
+    fun AvailableWareHouseItemsApi(): Deferred<Task3<AvailableItems>>
+
+    @Headers("Content-Type: application/json")
+    @POST("api/Warehousing/AddWareHouseRequest")
+    fun AddWareHouseRequestApi(@Body invoicRequest: InvoicRequest): Deferred<Task3<AvailableItems>>
+
+    @Headers("Content-Type: application/json")
+    @GET("api/WareHousing/GetPendingRequests")
+    fun GetPendingRequestsApi(@Query("sales") sales: String): Deferred<Task3<Requests>>
+
+    @Headers("Content-Type: application/json")
+    @GET("/api/WareHousing/ConfirmSalesrRequest")
+    fun ConfirmSalesrRequestApi(@Query("ID") sales: String): Deferred<Task3<Requests>>
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Warehousing/SubmitChangeQuantity")
+    fun getSubmitChangeQuantityAPI(@Query("value") value: Double,@Query("ID") recordID: Int): Deferred<ChangeQuantityModel>
 
 //    @Headers("Content-Type: application/json")
 //    @GET("api/Account/GetBranch")

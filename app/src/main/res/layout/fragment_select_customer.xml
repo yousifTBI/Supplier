@@ -11,15 +11,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/mainback"
         tools:context=".framework.ui.reports.reportCustomer.SelectCustomerFragment">
 
 
                 <SearchView
                     android:id="@+id/searchView"
-                    android:layout_width="499dp"
-                    android:layout_height="63dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="40dp"
 
                     android:background="@drawable/gray_border"
                     android:elevation="4dp"
@@ -36,9 +37,8 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"

@@ -32,7 +32,7 @@ class ReturnItemsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
 
         binding = FragmentReturnItemsBinding.inflate(inflater)
         binding.returnViewModel = viewModel
@@ -46,11 +46,11 @@ class ReturnItemsFragment : Fragment() {
 
 
         viewModel.returnItemsLiveData.observe(viewLifecycleOwner) {
-          //  Log.i("List", it.size.toString())
-            Log.d("getReturn",it.get(0).Supplier_ID.toString())
-
-            val adapter = ReturnItemsAdapter(context!!, it)
-            binding.returnItemSpinner.adapter = adapter
+            if (it == null) {
+            } else {
+                val adapter = ReturnItemsAdapter(context!!, it)
+                binding.returnItemSpinner.adapter = adapter
+            }
         }
         val adapter = GetReturnItemsSettelmentAdapter()
         viewModel.getReturnItemsSettelmentLiveData.observe(viewLifecycleOwner){
@@ -60,11 +60,8 @@ class ReturnItemsFragment : Fragment() {
             }else if (it.State==2){
                 binding.getReturnItemsSettelmentRecycler.adapter = adapter
                 adapter.submitList(x)
-                //  getReturnItemsSettelmentLiveData1.value?.get(0)?.itemname="gh"
-                //  getReturnItemsSettelmentLiveData1.value?.get(0)?.Balance=0.0
-                //  getReturnItemsSettelmentLiveData.value= getReturnItemsSettelmentLiveData1.value
+
             }
-           // Log.d("getReturnItems",it.get(0).itemname)
 
         }
         binding.returnItemSpinner.onItemSelectedListener = object : OnItemSelectedListener {
@@ -76,11 +73,6 @@ class ReturnItemsFragment : Fragment() {
 
                 viewModel.getReturnItems(  suppliers.Supplier_ID.toString())
                 adapter.notifyDataSetChanged()
-                Log.d("returnItemSpinner", suppliers.CompanyName)
-                Log.d("returnItemSpinner", suppliers.Supplier_ID.toString())
-               // viewModel.getReturnItems(viewModel.returnItemsLiveData.value!![position].Supplier_ID.toString())
-//
-               // viewModel.supplierId = viewModel.returnItemsLiveData.value!![position].Supplier_ID.toString()
 
             }
 
@@ -89,27 +81,7 @@ class ReturnItemsFragment : Fragment() {
         }
 
 
-   //    val adapter = GetReturnItemsSettelmentAdapter()
-   //    viewModel.getReturnItemsSettelmentLiveData.observe(viewLifecycleOwner) {
-   //        Log.i("ReturnsSize", it!!.size.toString())
-   //        binding.getReturnItemsSettelmentRecycler.adapter = adapter
-   //        adapter.submitList(it)
-   //    }
 
-
-
-
-   //   binding.saveButton.setOnClickListener(View.OnClickListener {
-   //       Log.i("supplierId", viewModel.supplierId)
-
-   //       viewModel.getReturnItemsSettelmentLiveData.value!!.forEach {
-   //           viewModel.setReturnItems("2", viewModel.supplierId, it.id, it.quantity)
-   //       }
-
-   //       viewModel.setReturnItemsLiveData.observe(viewLifecycleOwner) {
-   //           showSnackbar(activity!!, it.message)
-   //       }
-   //   })
 
         viewModel.setReturnItemsLiveData.observe(viewLifecycleOwner) {
             showSnackbar(activity!!, it.message)

@@ -32,6 +32,7 @@ class OpeningBalancesFragment : Fragment() {
             CollectDebitFragmentArgs.fromBundle(requireArguments()).user
         )
         val adapter = CustomerDebitsAdapter(onClickListener = OnDebitClickListener {
+            Log.d("CustomerDebitsAdapter",it.cus_id.toString())
             viewModel.setBalance(it)
             viewModel.navigateToExecution()
         })
@@ -60,10 +61,12 @@ class OpeningBalancesFragment : Fragment() {
 
         binding.recyclerView.adapter = adapter
         viewModel.balances.observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-            Log.i("size", it!!.size.toString())
+            if (it == null) {
+            } else {
+                adapter.submitList(it)
+//            Log.i("size", it!!.size.toString())
+            }
         }
-
         viewModel.msg.observe(viewLifecycleOwner) {
             if (it.isNotEmpty()) {
                 showSnackbar(activity!!, it)

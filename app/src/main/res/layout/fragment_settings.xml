@@ -5,164 +5,78 @@
 
     <data>
 
-    </data>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".framework.ui.settings.SettingsFragment">
-
-        <!-- TODO: Update blank fragment layout -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/reports_card"
-            android:layout_width="280dp"
-            android:layout_height="208dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="8dp"
-
-            android:layout_marginTop="24dp"
-            android:theme="@style/Theme.MaterialComponents.Light"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
-            app:cardMaxElevation="12dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="MissingConstraints">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/reports"
-                    android:layout_width="60dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/adddd"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="39dp"
-                    android:layout_marginHorizontal="40dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/blue_rounded_filled100"
-                    android:gravity="center"
-
-                    android:text="اضافه منتج"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/reports" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/reports_edit_pric"
-            android:layout_width="300dp"
-            android:layout_height="206dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="8dp"
-
-            android:layout_marginTop="16dp"
-            android:theme="@style/Theme.MaterialComponents.Light"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
-            app:cardMaxElevation="12dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reports_card"
-            tools:ignore="MissingConstraints">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/edit_price"
-                    android:layout_width="60dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/edit"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="39dp"
-                    android:layout_marginHorizontal="40dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/blue_rounded_filled100"
-                    android:gravity="center"
-
-                    android:text="تعديل سعر خاص"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_price" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+    </data> <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mainback">
 
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/reports_edit_Special_pric"
-            android:layout_width="308dp"
-            android:layout_height="205dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="8dp"
+    <ImageView
+        android:id="@+id/reports_card"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_margin="6dp"
+        android:layout_marginTop="96dp"
+        android:src="@drawable/ba6"
+        app:layout_constraintBottom_toBottomOf="@+id/reports_edit_Special_pric"
+        app:layout_constraintEnd_toStartOf="@+id/reports_edit_Special_pric"
+        app:layout_constraintHorizontal_bias="0.237"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/reports_edit_Special_pric"
+        app:layout_constraintVertical_bias="0.77"
+         />
 
-            android:layout_marginTop="16dp"
-            android:theme="@style/Theme.MaterialComponents.Light"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
-            app:cardMaxElevation="12dp"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reports_edit_pric"
-            tools:ignore="MissingConstraints">
+    <ImageView
+        android:id="@+id/reports_edit_Special_pric"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/sahm"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/reports_edit_pric"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_margin="18dp"
+        android:src="@drawable/ba5"
+        app:layout_constraintBottom_toBottomOf="@+id/reports_edit_Special_pric"
+        app:layout_constraintEnd_toStartOf="@+id/reports_edit_Special_pric"
+        app:layout_constraintStart_toEndOf="@+id/reports_card"
+        app:layout_constraintTop_toTopOf="@+id/reports_edit_Special_pric" />
 
-                <ImageView
-                    android:id="@+id/edit_Special_price"
-                    android:layout_width="60dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/edit"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/textView89"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="اضافه منتج"
+        app:layout_constraintEnd_toEndOf="@+id/reports_card"
+        app:layout_constraintStart_toStartOf="@+id/reports_card"
+        app:layout_constraintTop_toBottomOf="@+id/reports_card" />
 
-                <TextView
-                    android:id="@+id/edit_public_price"
+    <TextView
+        android:id="@+id/textView90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تعديل سعر عام"
+        app:layout_constraintEnd_toEndOf="@+id/reports_edit_Special_pric"
+        app:layout_constraintStart_toStartOf="@+id/reports_edit_Special_pric"
+        app:layout_constraintTop_toBottomOf="@+id/reports_edit_Special_pric" />
 
-                    android:layout_width="match_parent"
-                    android:layout_height="39dp"
-                    android:layout_marginHorizontal="40dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/blue_rounded_filled100"
-                    android:gravity="center"
+    <TextView
+        android:id="@+id/textView91"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="تعديل سعر خاص"
+        app:layout_constraintEnd_toEndOf="@+id/reports_edit_pric"
+        app:layout_constraintStart_toStartOf="@+id/reports_edit_pric"
+        app:layout_constraintTop_toBottomOf="@+id/reports_edit_pric" />
 
-                    android:text="تعديل سعر عام"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/edit_Special_price" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </com.google.android.material.card.MaterialCardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

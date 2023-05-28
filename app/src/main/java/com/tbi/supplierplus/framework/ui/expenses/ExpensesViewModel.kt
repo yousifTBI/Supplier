@@ -11,6 +11,7 @@ import com.tbi.supplierplus.business.pojo.expenses.AddExpenses
 import com.tbi.supplierplus.business.pojo.expenses.ExpensesSearch
 import com.tbi.supplierplus.business.pojo.expenses.Expensese
 import com.tbi.supplierplus.business.repository.ExpensesRepository
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -44,7 +45,7 @@ class ExpensesViewModel @Inject constructor(val repo: ExpensesRepository) : View
 
     fun getExpenses(){
         viewModelScope.launch {
-            repo. GetExpenses("2").collect{
+            repo. GetExpenses(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect{
                 returnExpensesList.value = it.data
                 TotalExpensesObj.value = it.Item
             }

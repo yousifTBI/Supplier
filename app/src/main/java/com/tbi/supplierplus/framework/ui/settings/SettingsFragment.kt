@@ -31,7 +31,7 @@ class SettingsFragment : Fragment() {
             val intent = Intent(getActivity(), AddItemActivity::class.java)
             getActivity()?.startActivity(intent)
         }
-        binding.editPublicPrice.setOnClickListener {
+        binding.reportsEditSpecialPric.setOnClickListener {
             val intent = Intent(getActivity(), ChangePriceActivity::class.java)
             getActivity()?.startActivity(intent)
         }

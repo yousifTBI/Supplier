@@ -10,6 +10,7 @@ import com.tbi.supplierplus.business.models.User
 import com.tbi.supplierplus.business.pojo.opening.AddOpening
 import com.tbi.supplierplus.business.pojo.opening.OpeningBalance
 import com.tbi.supplierplus.business.repository.DebitsRepository
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -47,13 +48,15 @@ class OpeningBalanceViewModel @Inject constructor(private val debitsRepository: 
     fun filterCustomers(query: String) {
         Log.i("FilterQuery", query)
         if ( _balances.value !=null){
-            _balances .value =   _balances2 .value!!.filter { query in it.cusName }
+//            _balances .value =   _balances2 .value!!.filter { query in it.cusName }
 
         }
     }
     private fun getBalances() {
         viewModelScope.launch {
-            debitsRepository.getOpeningBalances("2").collect {
+            debitsRepository.getOpeningBalances(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
+                Log.d("getOpeningBalances",SharedPreferencesCom.getInstance().gerSharedDistributor_ID())
+
                 _balances.value = it.data
                 _balances2.value = it.data
                 msg.value = "الرصيد الإفتتاحي لكل العملاء"
@@ -80,7 +83,7 @@ class OpeningBalanceViewModel @Inject constructor(private val debitsRepository: 
             debitsRepository.addBalance(
 
                 //Log.d(" AddOpening",balance.value)
-                AddOpening(balance.value!!.cus_id.toString(),"2",collection.value!!)
+                AddOpening(balance.value!!.cus_id.toString(),SharedPreferencesCom.getInstance().gerSharedUser_ID(),collection.value!!)
            // Log.d(" AddOpening",balance.value)
 
                // customerID = _balance.value!!.cus_id.toString(),

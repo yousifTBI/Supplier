@@ -28,40 +28,45 @@ class RegistrationActivity : AppCompatActivity() {
             Settings.Secure.ANDROID_ID
         )
 
-binding.spinKit.isVisible=false
-        binding.SendRequestId.setOnClickListener{
-          if (  CheckAllFields() ) {
-            viewModel.RegistrationInfo(RegistrationModel(
-                androidId,
-                binding.com.text.toString(),
-                binding.POStxt.text.toString().toInt()
+        binding.spinKit.isVisible = false
+        binding.SendRequestId.setOnClickListener {
+            if (CheckAllFields()) {
+                viewModel.RegistrationInfo(
+                    RegistrationModel(
+                        "123456789",
+                        "qwertys1",
+                        binding.com.text.toString(),
+                        binding.POStxt.text.toString().toInt()
 
-            )
-            ,this)
-            viewModel.registrationLiveData.observe(this){
-                when (it) {
-                    is State.Loading -> {binding.spinKit.isVisible=true}
-                    is State.Success -> {
-                        binding.spinKit.isVisible=false
+                    ), this
+                )
+                viewModel.registrationLiveData.observe(this) {
+                    when (it) {
+                        is State.Loading -> {
+                            binding.spinKit.isVisible = true
+                        }
+                        is State.Success -> {
+                            binding.spinKit.isVisible = false
 
-                        Log.d("registrationLiveData",it.data.message)
-                        Toast.makeText(applicationContext,it.data.message, Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, LoginAccActivity::class.java)
-                        startActivity(intent)
+                            Log.d("registrationLiveData", it.data.message)
+                            Toast.makeText(applicationContext, it.data.message, Toast.LENGTH_SHORT)
+                                .show()
+                            val intent = Intent(this, LoginAccActivity::class.java)
+                            startActivity(intent)
 
-                        finish()
+                            finish()
+
+                        }
+                        is State.Error -> {
+                            binding.spinKit.isVisible = false
+
+
+                            Toast.makeText(applicationContext, "خطا", Toast.LENGTH_SHORT).show()
+                        }
 
                     }
-                    is State.Error -> {
-                        binding.spinKit.isVisible=false
-
-
-                        Toast.makeText(applicationContext,"خطا", Toast.LENGTH_SHORT).show()
-                    }
-
                 }
             }
-        }
         }
     }
 
@@ -69,8 +74,7 @@ binding.spinKit.isVisible=false
         if (binding.com.length() == 0) {
             binding.com.setError("This field is required")
             return false
-        }
-        else if (binding.POStxt.length() == 0) {
+        } else if (binding.POStxt.length() == 0) {
             binding.POStxt.setError("This field is required")
             return false
         }

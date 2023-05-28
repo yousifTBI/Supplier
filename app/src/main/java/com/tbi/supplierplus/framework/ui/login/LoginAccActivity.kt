@@ -31,27 +31,42 @@ class LoginAccActivity : AppCompatActivity() {
         binding = ActivityLoginAccBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        //   val intent = Intent(this, MainActivity::class.java)
+        //   startActivity(intent)
+        //   finish()
 
         val androidId: String = Settings.Secure.getString(
             contentResolver,
             Settings.Secure.ANDROID_ID
         )
+
         Log.d("aziza3s2", androidId)
-     //   SharedPreferencesCom.init(this)
-        viewModel.loginInfoCombVM(androidId,this)
+        SharedPreferencesCom.init(this)
+        // SharedPreferencesCom.getInstance().setSharedDistributor_ID("2")
+        // SharedPreferencesCom.getInstance().setSharedUser_ID("2")
+         viewModel.loginInfoCombVM("qwertys1",this)
+
+//        val intent = Intent(this, MainActivity::class.java)
+//        startActivity(intent)
+//        finish()
         viewModel.loginInfoCombVLiveData.observe(this) {
 
             when (it) {
 
                 is State.Loading -> Log.d("aziza", "")
                 is State.Success -> {
-                   //  SharedPreferencesCom.getInstance().setSharedphoneNumber(it.data.UserInfo.userID.toString())
-//                    Log.d("aziza32", it.data.message)
+
+            //         Log.d("dfklhdfljddkg",it.data.UserInfo.userID.toString())
+                    // Log.d("aziza3sss2", it.data.UserInfo.Distributor_ID.toString())
+                   // SharedPreferencesCom.getInstance().setSharedUser_ID(it.data.UserInfo.userID.toString())
+                    // SharedPreferencesCom.getInstance().setSharedUser_ID("78")
+                    // SharedPreferencesCom.getInstance().setSharedDistributor_ID("8")
+                 //   SharedPreferencesCom.getInstance().setSharedDistributor_ID(it.data.UserInfo.Distributor_ID.toString())
+                    //   Log.d("azizas32", it.data.UserInfo.Distributor_ID.toString())
 //                    Log.d("aziza32", it.data.State.toString())
-                 //   Log.d("aziza3s2", it.data.UserInfo.userID.toString())
+                    //   Log.d("aziza3s2", it.data.UserInfo.userID.toString())
                     if (it.data!!.State == 0) {
-//                        Log.d("aziza3s2", it.data.UserInfo.userID.toString())
+                        Log.d("cfgdgdfgdfg", it.data.message)
 //                        //your Request is pending
 //
 //                        binding.textView5.text = it.data.message
@@ -62,13 +77,17 @@ class LoginAccActivity : AppCompatActivity() {
 //                            Toast.LENGTH_SHORT
 //                        ).show()
 //                        binding.textView5.setText(it.data.message)
+                        Log.d("aziza3", "0")
                     } else if (it.data!!.State == 1) {
                         if (it.data.UserInfo.userID.toString().isNullOrEmpty()){
                             Log.d("aziza3", "1")
                         }else{
                             Log.d("aziza3", "2")
                         }
-
+                        SharedPreferencesCom.getInstance().setSharedUser_ID(it.data.UserInfo.userID.toString())
+                        // SharedPreferencesCom.getInstance().setSharedUser_ID("78")
+                        // SharedPreferencesCom.getInstance().setSharedDistributor_ID("8")
+                        SharedPreferencesCom.getInstance().setSharedDistributor_ID(it.data.UserInfo.Distributor_ID.toString())
                         //Successfully Login
                         // viewModel.saveInfoRoom(androidId)
 
@@ -91,13 +110,20 @@ class LoginAccActivity : AppCompatActivity() {
 
                     } else if (it.data!!.State == 2) {
                         //your Request has been pendding
+                        Log.d("aziza3", "2")
 
+                        Toast.makeText(
+                            applicationContext,
+                            it.data.State.toString() + it.data.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
 
-//                        Toast.makeText(
-//                            applicationContext,
-//                            it.data.State.toString() + it.data.message,
-//                            Toast.LENGTH_SHORT
-//                        ).show()
+                        Toast.makeText(
+                            applicationContext,
+                            it.data.State.toString() + it.data.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+
 
                     } else if (it.data!!.State == 3) {
                         //your Machine has been Registration

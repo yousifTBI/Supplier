@@ -58,7 +58,7 @@
                         android:id="@+id/textView50"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/billshap1"
+                        android:background="#FFF87654"
                         android:padding="6dp"
                         android:text="المرتجعات  "
                         android:textSize="16dp"

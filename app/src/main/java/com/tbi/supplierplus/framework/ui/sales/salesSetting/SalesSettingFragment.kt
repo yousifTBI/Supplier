@@ -10,11 +10,12 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.tbi.supplierplus.R
 import com.tbi.supplierplus.business.models.User
-import com.tbi.supplierplus.databinding.FragmentCustomerSettingBinding
 import com.tbi.supplierplus.databinding.FragmentSalesSettingBinding
+
 import com.tbi.supplierplus.framework.ui.MainFragmentDirections
 import com.tbi.supplierplus.framework.ui.addNewItem.AddItemActivity
 import com.tbi.supplierplus.framework.ui.purchase.PurchaseActivity
+import com.tbi.supplierplus.framework.ui.sales.add_customer.AddCustomerActivity
 
 
 class SalesSettingFragment : Fragment() {
@@ -33,8 +34,11 @@ class SalesSettingFragment : Fragment() {
         }
 
         binding.reportsCard.setOnClickListener {
-            val    intent = Intent(activity, AddItemActivity::class.java)
-            startActivity(intent)
+
+            findNavController().navigate(
+                SalesSettingFragmentDirections.actionSalesSettingFragmentToClientOperationFragment()
+            )
+
             //indNavController().navigate(
             //   MainFragmentDirections.actionMainFragmentToReportFragment(
             //    //   MainFragmentArgs.fromBundle(

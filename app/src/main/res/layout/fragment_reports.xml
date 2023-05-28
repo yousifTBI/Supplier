@@ -13,227 +13,100 @@
         android:layout_height="match_parent"
         tools:context=".framework.ui.reports.ReportsFragment">
 
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:background="@drawable/mainback">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/invoice_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+
+            <ImageView
+                android:id="@+id/invoiceCard"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginStart="40dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="40dp"
+                android:layout_margin="6dp"
+                android:layout_marginTop="96dp"
+                android:src="@drawable/b1"
+                app:layout_constraintBottom_toBottomOf="@+id/reports_card"
+                app:layout_constraintEnd_toStartOf="@+id/reports_card"
+                app:layout_constraintHorizontal_bias="0.132"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/reports_card"
+                app:layout_constraintVertical_bias="0.916"
+                 />
 
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:cardMaxElevation="12dp"
-                app:cardUseCompatPadding="true">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/items_invoice_card_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="18dp"
-                        android:layout_marginTop="40dp"
-                        app:tint="@color/dark_blue"
-                        android:src="@drawable/ic_reports"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="39dp"
-                        android:layout_marginHorizontal="40dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/blue_rounded_filled100"
-                        android:gravity="center"
-                        android:text="الفواتير"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/items_invoice_card_image" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/Accountstatement"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/reports_card"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginStart="40dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="40dp"
+                android:layout_marginTop="152dp"
+                android:layout_marginEnd="32dp"
+                android:src="@drawable/daly"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:cardMaxElevation="12dp"
-                app:cardUseCompatPadding="true">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/itemsAccountstatementimage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="18dp"
-                        android:layout_marginTop="40dp"
-                        app:tint="@color/dark_blue"
-                        android:src="@drawable/ic_reports"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="39dp"
-                        android:layout_marginHorizontal="40dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/blue_rounded_filled100"
-                        android:gravity="center"
-                        android:text="تقارير  المنتجات "
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/itemsAccountstatementimage" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
+            <ImageView
                 android:id="@+id/dailyReportID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginStart="40dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="40dp"
+                android:layout_margin="18dp"
+                android:src="@drawable/ba5"
+                app:layout_constraintBottom_toBottomOf="@+id/reports_card"
+                app:layout_constraintEnd_toStartOf="@+id/reports_card"
+                app:layout_constraintStart_toEndOf="@+id/invoiceCard"
+                app:layout_constraintTop_toTopOf="@+id/reports_card" />
 
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:cardMaxElevation="12dp"
-                app:cardUseCompatPadding="true">
+            <TextView
+                android:id="@+id/textView89"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="الفواتير"
+                app:layout_constraintEnd_toEndOf="@+id/invoiceCard"
+                app:layout_constraintStart_toStartOf="@+id/invoiceCard"
+                app:layout_constraintTop_toBottomOf="@+id/invoiceCard" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/textView90"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="اليوميه"
+                app:layout_constraintEnd_toEndOf="@+id/reports_card"
+                app:layout_constraintStart_toStartOf="@+id/reports_card"
+                app:layout_constraintTop_toBottomOf="@+id/reports_card" />
 
-                    <ImageView
-                        android:id="@+id/itemsdailyReportimage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="18dp"
-                        android:layout_marginTop="40dp"
-                        app:tint="@color/dark_blue"
-                        android:src="@drawable/ic_reports"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="39dp"
-                        android:layout_marginHorizontal="40dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/blue_rounded_filled100"
-                        android:gravity="center"
-                        android:text="اليوميه"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/itemsdailyReportimage" />
+            <TextView
+                android:id="@+id/textView91"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تقارير  المنتجات "
+                app:layout_constraintEnd_toEndOf="@+id/dailyReportID"
+                app:layout_constraintStart_toStartOf="@+id/dailyReportID"
+                app:layout_constraintTop_toBottomOf="@+id/dailyReportID" />
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-            <com.google.android.material.card.MaterialCardView
+            <ImageView
                 android:id="@+id/CusReportID"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginStart="40dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="40dp"
+                android:layout_margin="18dp"
+                android:src="@drawable/report3"
+                app:layout_constraintEnd_toEndOf="@+id/invoiceCard"
+                app:layout_constraintStart_toStartOf="@+id/invoiceCard"
+                app:layout_constraintTop_toBottomOf="@+id/textView89" />
 
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:cardMaxElevation="12dp"
-                app:cardUseCompatPadding="true">
+            <TextView
+                android:id="@+id/textView94"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تقرارير العملاء"
+                app:layout_constraintEnd_toEndOf="@+id/CusReportID"
+                app:layout_constraintStart_toStartOf="@+id/CusReportID"
+                app:layout_constraintTop_toBottomOf="@+id/CusReportID" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:id="@+id/CusReportIDimage"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_margin="18dp"
-                        android:layout_marginTop="40dp"
-                        app:tint="@color/dark_blue"
-                        android:src="@drawable/ic_reports"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="39dp"
-                        android:layout_marginHorizontal="40dp"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/blue_rounded_filled100"
-                        android:gravity="center"
-                        android:text="تقرارير العملاء"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/CusReportIDimage" />
-
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
+
 </layout>

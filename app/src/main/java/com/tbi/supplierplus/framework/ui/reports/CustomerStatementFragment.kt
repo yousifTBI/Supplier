@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.tbi.supplierplus.business.pojo.AllCustomers
 import com.tbi.supplierplus.business.pojo.expenses.ExpensesSearch
 import com.tbi.supplierplus.databinding.FragmentCustomerStatementBinding
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -32,11 +33,16 @@ class CustomerStatementFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        viewModel. getCustomers("2")
+        viewModel. getCustomers(SharedPreferencesCom.getInstance().gerSharedUser_ID())
 
         viewModel.customers.observe(viewLifecycleOwner) {
-            val adapter = CustomerSelectionAdapter(context!!, it)
-            binding.spinner.adapter = adapter
+            if (it ==null){
+
+            }
+            else {
+                val adapter = CustomerSelectionAdapter(context!!, it)
+                binding.spinner.adapter = adapter
+            }
         }
 
 
@@ -57,17 +63,9 @@ class CustomerStatementFragment : Fragment() {
             override fun onNothingSelected(parentView: AdapterView<*>?) {
             }
         }
-       // viewModel.Returns.observe(viewLifecycleOwner){
-//
-       // }
-       // viewModel.getBillDetails(x.Customer_ID.toString(),"5672")
-
-      //  viewModel.Sales.observe(viewLifecycleOwner){}
-//
-      //  viewModel.Returns.observe(viewLifecycleOwner){}
 
         val adapter1 = StatementAdapter(OnBillClickListener { statement ->
-          //  Log.d("List<Returns>",x.Customer_ID.toString()+"+"+statement.BillNo.toString())
+
 
             GlobalScope.launch(Dispatchers.Default){
 
@@ -79,8 +77,7 @@ class CustomerStatementFragment : Fragment() {
                 }
             }
             viewModel.setSelectedStatement(statement)
-            //customerStatementDetailsFragment
-            //CustomerStatementFragment
+
             findNavController().navigate(CustomerStatementFragmentDirections.actionCustomerStatementFragmentToCustomerStatementDetailsFragment())
         })
         viewModel.statement.observe(viewLifecycleOwner) {

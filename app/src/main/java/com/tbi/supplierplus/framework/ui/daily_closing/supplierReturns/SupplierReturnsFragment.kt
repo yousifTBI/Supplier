@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SupplierReturnsFragment : Fragment() {
     private lateinit var binding: FragmentSupplierReturnsBinding
 
-    private val viewModel: DailyClosingViewModel by  activityViewModels()
+    private val viewModel: DailyClosingViewModel by   viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
