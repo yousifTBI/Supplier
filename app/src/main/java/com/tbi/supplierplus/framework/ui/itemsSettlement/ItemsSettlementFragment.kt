@@ -199,9 +199,6 @@ class ItemsSettlementFragment : Fragment() {
                         binding.spinKit.isVisible = false
                         binding.messageStateId.setText(it.data.message)
 
-
-                        Log.d("GetPendingRequestsMV",it.data.message.toString())
-                        Log.d("GetPendingRequestsMV", it.data.State.toString())
                         adapter.submitList(it.data.data)
 
                         binding.recyclerView.adapter = adapter
