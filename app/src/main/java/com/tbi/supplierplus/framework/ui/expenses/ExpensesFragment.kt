@@ -21,14 +21,13 @@ class ExpensesFragment : Fragment() {
 
     private lateinit var binding: FragmentExpensesBinding
     val viewModel: ExpensesViewModel by viewModels()
-    var expenses_ID:Int?=null
+    var expenses_ID: Int? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        //val user = requireArguments().getString("user")!!.fromJson(User::class.java)
-        // Inflate the layout for this fragment
+
         binding = FragmentExpensesBinding.inflate(inflater)
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -37,48 +36,54 @@ class ExpensesFragment : Fragment() {
 
 
         viewModel.getExpensesSearchType()
-        viewModel. ExpensesItemsSearchList.observe(viewLifecycleOwner) {
-            Log.i("List", it.size.toString())
+        viewModel.ExpensesItemsSearchList.observe(viewLifecycleOwner) {
             val adapter = ExpensesTypeAdapter(context!!, it)
             binding.expensesSpinner.adapter = adapter
         }
 
-        viewModel.  getExpenses()
-        viewModel.  returnExpensesList.observe(viewLifecycleOwner){
+        viewModel.getExpenses()
+        viewModel.returnExpensesList.observe(viewLifecycleOwner) {
             val adapter = ExpensesListAdapter(context!!, it)
             binding.lisOfExpenses.adapter = adapter
 
         }
 
         binding.addExpensesButton.setOnClickListener {
-       var Amount=    binding.addExpenseAmountEdittext .text.toString()
-          var  Reason=  binding.addReasonEdittext.text.toString()
-            viewModel.addExpenses(AddExpenses(SharedPreferencesCom.getInstance().gerSharedUser_ID(),Amount,Reason,expenses_ID.toString()))
+            var Amount = binding.addExpenseAmountEdittext.text.toString()
+            var Reason = binding.addReasonEdittext.text.toString()
+            viewModel.addExpenses(
+                AddExpenses(
+                    SharedPreferencesCom.getInstance().gerSharedUser_ID(),
+                    Amount,
+                    Reason,
+                    expenses_ID.toString()
+                )
+            )
         }
 
 
 
-   binding.expensesSpinner.onItemSelectedListener =
-       object : AdapterView.OnItemSelectedListener {
-           override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+        binding.expensesSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
 
-           var x: ExpensesSearch
-           x= p0?.getItemAtPosition(p2) as ExpensesSearch
-               expenses_ID=x.Record_ID
-               binding.addReasonEdittext2.setText(x.ExpenseType)
-               Log.d("expensesSpinner",p2.toString())
-               Log.d("expensesSpinner",p0.toString())
-               Log.d("expensesSpinner",x.ExpenseType)
-               Log.d("expensesSpinner",  p0?.getItemAtPosition(p2).toString())
+                    var x: ExpensesSearch
+                    x = p0?.getItemAtPosition(p2) as ExpensesSearch
+                    expenses_ID = x.Record_ID
+                    binding.addReasonEdittext2.setText(x.ExpenseType)
+                    Log.d("expensesSpinner", p2.toString())
+                    Log.d("expensesSpinner", p0.toString())
+                    Log.d("expensesSpinner", x.ExpenseType)
+                    Log.d("expensesSpinner", p0?.getItemAtPosition(p2).toString())
 
 
-           }
+                }
 
-           override fun onNothingSelected(p0: AdapterView<*>?) {
-               TODO("Not yet implemented")
-           }
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    TODO("Not yet implemented")
+                }
 
-       }
+            }
 
 
         return binding.root

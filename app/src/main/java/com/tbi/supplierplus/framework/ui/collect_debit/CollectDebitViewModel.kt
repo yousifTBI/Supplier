@@ -42,12 +42,14 @@ class CollectDebitViewModel @Inject constructor(private val debitsRepository: De
         collection = MutableLiveData("")
         remaining = MutableLiveData(0.0f)
     }
+
     fun filterCustomers(query: String) {
-        if ( _debits.value !=null){
-        //    _debits .value =   _debits2 .value!!.filter { query in it.cusName }
+        if (_debits.value != null) {
+            //    _debits .value =   _debits2 .value!!.filter { query in it.cusName }
 
         }
     }
+
     fun setDebit(newDebits: OpeningBalance) {
         this._debit.value = newDebits
 
@@ -61,14 +63,16 @@ class CollectDebitViewModel @Inject constructor(private val debitsRepository: De
         navToExecution.value = false
     }
 
-     fun getDebits() {
+    fun getDebits() {
         viewModelScope.launch {
-            debitsRepository.getCustomerDebits(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {
-                if(it.State==1){
+            debitsRepository.getCustomerDebits(
+                SharedPreferencesCom.getInstance().gerSharedUser_ID()
+            ).collect {
+                if (it.State == 1) {
                     _debits.value = it.data
                     _debits2.value = it.data
                     msg.value = "هذه القائمة تحتوي علي العملاء المتأخرين فقط"
-                }else{
+                } else {
 
 
                 }
@@ -81,24 +85,25 @@ class CollectDebitViewModel @Inject constructor(private val debitsRepository: De
         msg.value = ""
     }
 
-    fun   onCollect(addCollection: AddCollection) {
+    fun onCollect(addCollection: AddCollection) {
         viewModelScope.launch {
 
-            debitsRepository.addCollection(addCollection
-             ).collect {
-                if (it.State==1){
+            debitsRepository.addCollection(
+                addCollection
+            ).collect {
+                if (it.State == 1) {
                     msg.value = it.Message
-                }else{
+                } else {
 
 
                 }
 
-               }
+            }
         }
     }
 
     fun calculateRemaining(collection: Float) {
-      remaining.value = _debit.value!!.Debts.toFloat().minus(collection)
+        remaining.value = _debit.value!!.Debts.toFloat().minus(collection)
 
     }
 }
