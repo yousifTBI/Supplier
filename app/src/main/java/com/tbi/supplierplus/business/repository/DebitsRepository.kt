@@ -57,12 +57,8 @@ class DebitsRepositoryImpl @Inject constructor(private val api: SupplierAPI) : D
         flow {
             try {
                 val response = api.AddCollectionAPI(addCollection).await()
-//                Log.d("addColleCollection",addCollection.toJson().toString())
-//                Log.d("addColleCollection",response.toJson().toString())
                 emit(response)
-
             } catch (e: Exception) {
-//                Log.d("addColleCollection",e.message.toString())
             }
 
         }.flowOn(IO)
