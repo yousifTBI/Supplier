@@ -7,6 +7,7 @@ import com.tbi.supplierplus.business.pojo.opening.AddCollection
 import com.tbi.supplierplus.business.pojo.opening.AddOpening
 import com.tbi.supplierplus.business.pojo.opening.OpeningBalance
 import com.tbi.supplierplus.business.utils.fromEnvelopeToModel
+import com.tbi.supplierplus.business.utils.toJson
 import com.tbi.supplierplus.framework.datasource.network.SupplierAPI
 import com.tbi.supplierplus.framework.datasource.requests.*
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
@@ -32,6 +33,8 @@ class DebitsRepositoryImpl @Inject constructor(private val api: SupplierAPI) : D
             try {
                 val response =
                     api.Get_AllDebtsAPI(distributorID).await()
+
+
                 emit(response)
 
             } catch (e: Exception) {
@@ -54,10 +57,12 @@ class DebitsRepositoryImpl @Inject constructor(private val api: SupplierAPI) : D
         flow {
             try {
                 val response = api.AddCollectionAPI(addCollection).await()
+//                Log.d("addColleCollection",addCollection.toJson().toString())
+//                Log.d("addColleCollection",response.toJson().toString())
                 emit(response)
 
             } catch (e: Exception) {
-
+//                Log.d("addColleCollection",e.message.toString())
             }
 
         }.flowOn(IO)

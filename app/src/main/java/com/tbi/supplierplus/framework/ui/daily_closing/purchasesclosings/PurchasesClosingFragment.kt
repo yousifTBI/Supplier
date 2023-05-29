@@ -45,7 +45,7 @@ class PurchasesClosingFragment : Fragment() {
                       is State.Loading -> binding.spinKit.isVisible = true
                       is State.Success -> {
                           binding.spinKit.isVisible = false
-                          Log.d("SubmitReturnMardodatVM","1")
+
                           DailyClosingviewModel.   SubmitReturnMardodatVM().collect {
 
                           }
@@ -53,7 +53,7 @@ class PurchasesClosingFragment : Fragment() {
                       is State.Error -> {
                           binding.spinKit.isVisible = false
                           Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
-                          Log.d("SubmitReturnMardodatVM","2f0")
+
 
                       }
                   }

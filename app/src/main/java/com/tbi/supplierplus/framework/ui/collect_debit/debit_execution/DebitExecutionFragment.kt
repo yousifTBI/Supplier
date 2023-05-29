@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import com.tbi.supplierplus.R
 import com.tbi.supplierplus.business.pojo.opening.AddCollection
 import com.tbi.supplierplus.databinding.FragmentDebitExecutionBinding
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import com.tbi.supplierplus.framework.ui.collect_debit.CollectDebitViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,17 +32,7 @@ class DebitExecutionFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-       // viewModel.debit.observe(viewLifecycleOwner){
-       //
-       // }
 
-    //  viewModel.onCollect(AddCollection("2",
-    //      "10"
-    //      ,"1"
-    //      ,"60"))
-      //  viewModel.debit.observe(viewLifecycleOwner){
-      //
-      //  }
 
         binding.cashEditText.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
@@ -64,34 +55,27 @@ class DebitExecutionFragment : Fragment() {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("رسالة تأكيد")
             builder.setMessage(" هل انت متأكد من اضافة مبلغ ${viewModel.collection.value}")
-//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
+
 
             builder.setPositiveButton("ايوة") { dialog, which ->
-                Log.e("AddOpenings", it.toString()+"btnn")
 
 
-            //   viewModel.onCollect(AddCollection(it?.cus_id.toString(),
-            //       "2"
-            //       ,binding.cashEditText.text.toString()
-            //       ,binding.deferredEditText.toString()))
-
-                viewModel.debit.observe(viewLifecycleOwner){
-                    Log.e("AddOpenings", it?.cusName+"btnn")
-
-                     viewModel.onCollect(AddCollection("2"
-
-                         ,binding.cashEditText.text.toString()
-                         ,  it?.cus_id.toString()
-                         ,binding.deferredEditText.text.toString()))
+                viewModel.debit.observe(viewLifecycleOwner) {
 
 
+                    viewModel.onCollect(
+                        AddCollection(
+                            SharedPreferencesCom.getInstance().gerSharedUser_ID(),
+                            binding.cashEditText.text.toString(),
+                            it?.cus_id.toString(),
+                            binding.deferredEditText.text.toString()
+                        )
+                    )
 
 
                 }
 
-          //     viewModel.onCollect(AddCollection("2"
-          //         ,binding.cashEditText.text.toString()
-          //         ,""))
+
             }
 
             builder.setNegativeButton("لا") { dialog, which ->

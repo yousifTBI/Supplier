@@ -67,7 +67,6 @@ class CollectDebitViewModel @Inject constructor(private val debitsRepository: De
                 if(it.State==1){
                     _debits.value = it.data
                     _debits2.value = it.data
-
                     msg.value = "هذه القائمة تحتوي علي العملاء المتأخرين فقط"
                 }else{
 
@@ -90,7 +89,7 @@ class CollectDebitViewModel @Inject constructor(private val debitsRepository: De
                 if (it.State==1){
                     msg.value = it.Message
                 }else{
-                    Log.e("AddOpenings", it.Message+"Exception")
+
 
                 }
 
@@ -100,6 +99,6 @@ class CollectDebitViewModel @Inject constructor(private val debitsRepository: De
 
     fun calculateRemaining(collection: Float) {
       remaining.value = _debit.value!!.Debts.toFloat().minus(collection)
-          //.amount.toFloat().minus(collection)
+
     }
 }
