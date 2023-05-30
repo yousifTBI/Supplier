@@ -492,6 +492,17 @@ interface SupplierAPI {
     @GET("/api/Items/SubmitReturnMardodat")
     fun SubmitReturnMardodatAPI(@Query("UserID") UserID: String): Deferred<Task3<Requests>>
 
+   @Headers("Content-Type: application/json")
+    @GET("api/Warehousing/getPendingMortaga3at")
+    fun GetPendingMortaga3atAPI(@Query("sales") sales: Int): Deferred<Task3<PenddingModel>>
+
+
+   @Headers("Content-Type: application/json")
+    @GET("api/Warehousing/ConfirmSalesrRequest")
+    fun GetConfirmSalesrRequestAPI(@Query("ID") ID: Int,
+                                   @Query("mortaga3") mortaga3: Int
+                                   ): Deferred<ConfirmRequestModel>
+
 
 //    @Headers("Content-Type: application/json")
 //    @GET("api/Account/GetBranch")
