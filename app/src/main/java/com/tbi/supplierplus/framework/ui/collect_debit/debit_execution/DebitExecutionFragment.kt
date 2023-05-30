@@ -10,10 +10,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.tbi.supplierplus.R
+import com.tbi.supplierplus.business.models.User
 import com.tbi.supplierplus.business.pojo.opening.AddCollection
 import com.tbi.supplierplus.databinding.FragmentDebitExecutionBinding
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
+import com.tbi.supplierplus.framework.ui.collect_debit.CollectDebitFragmentDirections
 import com.tbi.supplierplus.framework.ui.collect_debit.CollectDebitViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,6 +54,7 @@ class DebitExecutionFragment : Fragment() {
             }
 
         })
+
         binding.printbtn.setOnClickListener {
             val builder = AlertDialog.Builder(context)
             builder.setTitle("رسالة تأكيد")
@@ -70,10 +74,16 @@ class DebitExecutionFragment : Fragment() {
                             it?.cus_id.toString(),
                             binding.deferredEditText.text.toString()
                         )
+
                     )
 
+//                    findNavController().navigate(DebitExecutionFragmentDirections.actionDebitExecutionFragmentToCollectDebitFragment(
+//                        User("peter_tbi", "", "", "3", "", "2", "", "")
+//                    ))
+                    activity!!.onBackPressed()
 
                 }
+
 
 
             }

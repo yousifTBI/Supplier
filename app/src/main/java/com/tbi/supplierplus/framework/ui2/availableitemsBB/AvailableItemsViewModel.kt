@@ -52,6 +52,15 @@ class AvailableItemsViewModel @Inject constructor(
         api.getSubmitChangeQuantityAPI(value,recordID)
     }.flowOn(Dispatchers.IO)
 
+ fun getPendingMortaga3at(  ) = wrapWithFlowApi {
+        api.GetPendingMortaga3atAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt())
+    }.flowOn(Dispatchers.IO)
+
+
+ fun getConfirmSalesrRequest(  ) = wrapWithFlowApi {
+        api.GetConfirmSalesrRequestAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt(),1)
+    }.flowOn(Dispatchers.IO)
+
 
 
 }

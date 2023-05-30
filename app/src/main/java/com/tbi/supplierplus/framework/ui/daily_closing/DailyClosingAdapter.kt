@@ -8,12 +8,13 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tbi.supplierplus.R
 import com.tbi.supplierplus.business.models.Expenses
+import com.tbi.supplierplus.business.models.PenddingModel
 import com.tbi.supplierplus.business.pojo.closing.SupplierReport
 import com.tbi.supplierplus.databinding.DailyClosingItemRowBinding
 import com.tbi.supplierplus.databinding.ExpensesRowBinding
 
 
-class DailyClosingAdapter : ListAdapter<SupplierReport, DailyClosingViewHolder>(DiffCallback) {
+class DailyClosingAdapter : ListAdapter<PenddingModel, DailyClosingViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyClosingViewHolder {
         val binding = DataBindingUtil.inflate<DailyClosingItemRowBinding>(
@@ -30,13 +31,13 @@ class DailyClosingAdapter : ListAdapter<SupplierReport, DailyClosingViewHolder>(
 
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<SupplierReport>() {
-        override fun areItemsTheSame(oldItem: SupplierReport, newItem: SupplierReport): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<PenddingModel>() {
+        override fun areItemsTheSame(oldItem: PenddingModel, newItem: PenddingModel): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: SupplierReport, newItem: SupplierReport): Boolean {
-            return oldItem.Amount == newItem.Amount
+        override fun areContentsTheSame(oldItem: PenddingModel, newItem: PenddingModel): Boolean {
+            return oldItem.total_amount == newItem.total_amount
         }
     }
 
@@ -46,7 +47,7 @@ class DailyClosingAdapter : ListAdapter<SupplierReport, DailyClosingViewHolder>(
 }
 class DailyClosingViewHolder(private var binding: DailyClosingItemRowBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(Item: SupplierReport) {
+    fun bind(Item: PenddingModel) {
         binding.data = Item
         binding.executePendingBindings()
     }

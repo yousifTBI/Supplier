@@ -161,7 +161,11 @@
         android:id="@+id/debitExecutionFragment"
         android:name="com.tbi.supplierplus.framework.ui.collect_debit.debit_execution.DebitExecutionFragment"
         android:label="DebitExecutionFragment"
-        tools:layout="@layout/fragment_debit_execution" />
+        tools:layout="@layout/fragment_debit_execution" >
+        <action
+            android:id="@+id/action_debitExecutionFragment_to_collectDebitFragment"
+            app:destination="@id/collectDebitFragment" />
+    </fragment>
     <fragment
         android:id="@+id/openingBalancesFragment"
         android:name="com.tbi.supplierplus.framework.ui.opening_balance.OpeningBalancesFragment"

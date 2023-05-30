@@ -75,7 +75,7 @@ class ItemsSettlementFragment : Fragment() {
             dialog.setContentView(android.R.layout.list_content)
 
             // set custom height and width
-            dialog.window!!.setLayout(300, 300)
+            dialog.window!!.setLayout(350, 500)
 
             // set transparent background
             dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
@@ -117,6 +117,7 @@ class ItemsSettlementFragment : Fragment() {
                                                adapter.notifyDataSetChanged()
 
                                             }
+
                                             is State.Error -> {
                                                 binding.spinKit.isVisible = false
                                             }
@@ -188,10 +189,10 @@ class ItemsSettlementFragment : Fragment() {
             }
 
         }
-
         lifecycleScope.launch {
             viewModel.GetPendingRequestsMV().collect {
                 when (it) {
+
 
                     is State.Loading -> {}
 
@@ -199,6 +200,7 @@ class ItemsSettlementFragment : Fragment() {
                         binding.spinKit.isVisible = false
                         binding.messageStateId.setText(it.data.message)
 
+                      //  Log.d("GetPendingRequestsMV",it.data.message.toString())
                         adapter.submitList(it.data.data)
 
                         binding.recyclerView.adapter = adapter
