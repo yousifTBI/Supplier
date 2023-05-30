@@ -120,8 +120,11 @@ class SalesRepositoryImpl @Inject constructor(private val api: SupplierAPI) : Sa
     ): Flow<Tasks<Items>> = flow {
         try {
             val responses = api.getitem(userID, Cus_id).await()
+
+            Log.d("getItemss",responses.toJson().toString())
             emit(responses)
         } catch (ex: Exception) {
+            Log.d("getItemss",ex.message.toString())
 
         }
 
