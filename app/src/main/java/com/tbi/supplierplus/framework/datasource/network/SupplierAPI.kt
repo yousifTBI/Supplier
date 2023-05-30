@@ -498,10 +498,34 @@ interface SupplierAPI {
 
 
    @Headers("Content-Type: application/json")
+    @GET("api/Warehousing/SubmitChangeMortaga3Quantity")
+    fun SubmitChangeMortaga3API(@Query("ID")     ID: Int,
+                                @Query("value")  value: Int,
+                                @Query("amount")  amount: Int
+                                 ): Deferred<ConfirmRequestModel>
+
+
+
+
+   @Headers("Content-Type: application/json")
     @GET("api/Warehousing/ConfirmSalesrRequest")
     fun GetConfirmSalesrRequestAPI(@Query("ID") ID: Int,
                                    @Query("mortaga3") mortaga3: Int
                                    ): Deferred<ConfirmRequestModel>
+
+
+
+   @Headers("Content-Type: application/json")
+    @GET("api/ClosingDay/GetCloseSalesDayDatafForUser")
+    fun GetCloseSalesDayDatafForUserAPI(@Query("sales") sales: Int
+                                   ): Deferred<Task3<SalesAmountModel>>
+
+
+   @Headers("Content-Type: application/json")
+    @GET("api/ClosingDay/ConfirmCompleteAccount")
+    fun GetConfirmCompleteAccountAPI(@Query("sales") sales: Int,
+                                     @Query("type") type: Int
+                                   ): Deferred<Task3<SalesAmountModel>>
 
 
 //    @Headers("Content-Type: application/json")

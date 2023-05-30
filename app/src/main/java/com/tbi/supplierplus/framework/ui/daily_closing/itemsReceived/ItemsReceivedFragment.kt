@@ -46,6 +46,11 @@ class ItemsReceivedFragment : Fragment() {
 //
 //       }
 
+
+
+
+
+
         lifecycleScope.launch {
             availableItemsViewModel.getPendingMortaga3at().collect {
                 when (it) {

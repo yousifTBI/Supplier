@@ -8,15 +8,24 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tbi.supplierplus.R
 import com.tbi.supplierplus.business.models.PenddingModel
-import com.tbi.supplierplus.business.pojo.closing.SupplierReport
 import com.tbi.supplierplus.databinding.DailyClosingItemRowBinding
 
 class AdapterItemsReceived : ListAdapter<PenddingModel, DailyClosingViewHolder>(DiffCallback) {
+
+//    interface OnItemClickListener {
+//        fun onItemClick(position: Int)
+//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DailyClosingViewHolder {
         val binding = DataBindingUtil.inflate<DailyClosingItemRowBinding>(
             LayoutInflater.from(parent.context), R.layout.daily_closing_item_row, parent, false
         )
+
+
+//        binding.textView72.setOnClickListener {
+//
+//                var position =
+//        }
         return DailyClosingViewHolder(binding)
     }
 
