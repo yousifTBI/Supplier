@@ -151,6 +151,9 @@ class BillItems2Fragment : Fragment() {
                       ,1.0
                       ,"منتج بيع"
                       ,""
+                      ,
+                      "",
+                      "",0.0
                   ))
 
                      binding.billRecycler1.adapter = adapte
