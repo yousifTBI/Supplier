@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.tbi.supplierplus.databinding.FragmentSalesReportBinding
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import com.tbi.supplierplus.framework.ui.login.State
 import com.tbi.supplierplus.framework.ui2.availableitemsBB.AvailableItemsViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,11 +31,18 @@ class SalesReportFragment : Fragment() {
         binding = FragmentSalesReportBinding.inflate(inflater)
         binding.viewModel = viewModel2
         binding.lifecycleOwner = this
+        binding.spinKit.isVisible = false
+
+        binding.actualAmounttxt.isVisible =true
+        binding.requerAmounttxt.isVisible =true
+        binding.requarAmounttitle.isVisible =true
+        binding.actualAmounttitle.isVisible =true
 
         viewModel2.getselesRepor()
         viewModel2.selesReporLivedata.observe(viewLifecycleOwner) {
 
         }
+      //  Log.d("gggggg", SharedPreferencesCom.getInstance().gerSharedUser_ID())
 
 
         lifecycleScope.launch {
@@ -43,16 +52,23 @@ class SalesReportFragment : Fragment() {
                     is State.Loading -> {}
 
                     is State.Success -> {
-                        if (it.data.data == null) {
-                        } else {
 
 
-                            binding.actualAmounttxt.setText(it.data.item.actual_amount.toString())
-                            binding.requerAmounttxt.setText(it.data.item.required_amount.toString())
+
+                        if (it.data.item ==null){
+                            binding.actualAmounttxt.isVisible =false
+                            binding.requerAmounttxt.isVisible =false
+                            binding.requarAmounttitle.isVisible =false
+                            binding.actualAmounttitle.isVisible =false
+                        }
+                        else {
+                                binding.actualAmounttxt.setText(it.data.item.actual_amount.toString())
+                                binding.requerAmounttxt.setText(it.data.item.required_amount.toString())
+
                         }
                     }
                     is State.Error -> {
-                        Log.d("jlklkl", it.messag)
+                        Log.d("actualAmounttxt","actualAmounttxtError")
                     }
                 }
             }
@@ -64,19 +80,22 @@ class SalesReportFragment : Fragment() {
                 availableItemsViewModel.getConfirmCompleteAccount().collect {
                     when (it) {
 
-                        is State.Loading -> {}
+                        is State.Loading -> { binding.spinKit.isVisible = true}
 
                         is State.Success -> {
                             if (it == null) {
                             } else {
-                                binding.msgTxt.setText(it.data.Message)
+                                binding.spinKit.isVisible = false
+                             //   binding.msgTxt.setText(it.data.Message)
                                 Toast.makeText(context, it.data.Message, Toast.LENGTH_SHORT)
                                 Toast.makeText(context, it.data.Message, Toast.LENGTH_SHORT)
 
                             }
                         }
                         is State.Error -> {
-                            Log.d("jlklkssl", it.messag)
+                            binding.spinKit.isVisible = false
+                            Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
+
                         }
                     }
                 }

@@ -16,6 +16,20 @@
         android:background="@drawable/mainback"
         tools:context=".framework.ui.daily_closing.DailyClosingFragment">
 
+        <com.github.ybq.android.spinkit.SpinKitView
+            android:id="@+id/spin_kit"
+            style="@style/SpinKitView.Large.Circle"
+            android:layout_width="121dp"
+            android:layout_height="135dp"
+            android:layout_gravity="center"
+            app:SpinKit_Color="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+        </com.github.ybq.android.spinkit.SpinKitView>
 
 
         <!--            <androidx.cardview.widget.CardView-->
@@ -110,8 +124,6 @@
             android:id="@+id/ViewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="16dp"
             app:layout_constraintBottom_toTopOf="@+id/closing_day_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,14 +131,15 @@
             tools:ignore="MissingConstraints">
 
         </androidx.viewpager2.widget.ViewPager2>
+
         <Button
             android:id="@+id/closing_day_button"
-            android:layout_width="1dp"
-            android:layout_height="1dp"
-            android:layout_marginBottom="16dp"
+            android:layout_width="250dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/add_expense_button_background"
 
-            android:text="  اليوميه اغلاق"
+            android:text="  تسويه البضاعه"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

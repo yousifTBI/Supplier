@@ -431,6 +431,9 @@
         <action
             android:id="@+id/action_customerSettingFragment_to_collectDebitFragment"
             app:destination="@id/collectDebitFragment" />
+        <action
+            android:id="@+id/action_customerSettingFragment_to_clientOperationFragment"
+            app:destination="@id/clientOperationFragment" />
     </fragment>
     <fragment
         android:id="@+id/customerSettingPriceFragment"

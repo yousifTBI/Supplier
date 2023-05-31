@@ -75,6 +75,11 @@ class AvailableItemsViewModel @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
+    fun getCurrentMortg3atofTheUser( ) = wrapWithFlowApi {
+        api.GetCurrentMortg3atofTheUserAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt())
+    }.flowOn(Dispatchers.IO)
+
+
 
 }
 

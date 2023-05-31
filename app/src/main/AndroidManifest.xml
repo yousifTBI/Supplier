@@ -27,6 +27,20 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".framework.ui.daily_closing.ItemsBIllActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".framework.ui.closingLast.ClosingActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".framework.ui2.availableitemsBB.StockRequestActivity"
             android:exported="false">
             <meta-data

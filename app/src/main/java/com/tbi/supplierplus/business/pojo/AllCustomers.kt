@@ -12,6 +12,8 @@ data class AllCustomers(
   val Range: String,
   val Region_ID: Int,
   val Range_ID: Int,
+  val Branch_ID: Int,
+
 
 
 ): Searchable {

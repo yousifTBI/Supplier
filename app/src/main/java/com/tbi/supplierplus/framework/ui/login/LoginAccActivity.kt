@@ -44,7 +44,9 @@ class LoginAccActivity : AppCompatActivity() {
         SharedPreferencesCom.init(this)
         // SharedPreferencesCom.getInstance().setSharedDistributor_ID("2")
         // SharedPreferencesCom.getInstance().setSharedUser_ID("2")
-         viewModel.loginInfoCombVM("qwertys1",this)
+        //
+        // viewModel.loginInfoCombVM("qwertys1",this)
+         viewModel.loginInfoCombVM("qwertys122",this)
 
 //        val intent = Intent(this, MainActivity::class.java)
 //        startActivity(intent)

@@ -61,6 +61,7 @@ class SalesSettingFragment : Fragment() {
                 )
             )
         }
+
         binding.returnsCard.setOnClickListener {
             findNavController().navigate(
                 SalesSettingFragmentDirections.actionSalesSettingFragmentToReturnItemsFragment(

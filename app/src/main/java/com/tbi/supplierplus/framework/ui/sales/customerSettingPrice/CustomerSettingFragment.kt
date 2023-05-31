@@ -12,6 +12,7 @@ import com.tbi.supplierplus.databinding.FragmentCustomerSettingBinding
 import com.tbi.supplierplus.databinding.FragmentCustomersBinding
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import com.tbi.supplierplus.framework.ui.MainFragmentDirections
+import com.tbi.supplierplus.framework.ui.sales.salesSetting.SalesSettingFragmentDirections
 
 class CustomerSettingFragment : Fragment() {
 
@@ -46,6 +47,23 @@ class CustomerSettingFragment : Fragment() {
 
              //   )
             )
+        }
+
+
+        binding.reportsCard.setOnClickListener {
+
+            findNavController().navigate(
+                CustomerSettingFragmentDirections.actionCustomerSettingFragmentToClientOperationFragment()
+            )
+
+            //indNavController().navigate(
+            //   MainFragmentDirections.actionMainFragmentToReportFragment(
+            //    //   MainFragmentArgs.fromBundle(
+            //    //       requireArguments()
+            //    //   ).user
+            //
+            //   )
+            //  )
         }
         // Inflate the layout for this fragment
         return binding.root

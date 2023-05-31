@@ -33,24 +33,6 @@
             <!--                app:layout_constraintTop_toTopOf="parent" />-->
 
 
-           <TextView
-               android:id="@+id/msgTxt"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:layout_gravity="center"
-               android:layout_marginStart="16dp"
-               android:layout_marginEnd="16dp"
-               android:elevation="3456dp"
-               android:gravity="center"
-               android:padding="8dp"
-               android:textColor="@color/black"
-               android:textSize="18dp"
-               app:layout_constraintEnd_toEndOf="parent"
-               app:layout_constraintStart_toStartOf="parent"
-               app:layout_constraintTop_toTopOf="parent"
-               app:layout_constraintBottom_toTopOf="@+id/sales"
-               android:layout_marginTop="12dp"
-               />
             <TextView
                 android:id="@+id/sales"
                 style="@style/textStyle"
@@ -71,7 +53,7 @@
                 android:textSize="18dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/msgTxt" />
+               />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/ReceivdClosingrecyclerView"
@@ -87,6 +69,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/sales"
                 tools:listitem="@layout/daily_closing_item_row" />
 
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/spin_kit"
+                style="@style/SpinKitView.Large.Circle"
+                android:layout_width="121dp"
+                android:layout_height="135dp"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
             <Button
                 android:id="@+id/SubmitBtn"
                 android:layout_width="219dp"

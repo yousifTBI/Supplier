@@ -528,6 +528,12 @@ interface SupplierAPI {
                                    ): Deferred<Task3<SalesAmountModel>>
 
 
+   @Headers("Content-Type: application/json")
+    @GET("api/Warehousing/getCurrentMortg3atofTheUser")
+    fun GetCurrentMortg3atofTheUserAPI(@Query("UserId") UserId: Int
+                                   ): Deferred<Task3<CurrentMortg3Model>>
+
+
 //    @Headers("Content-Type: application/json")
 //    @GET("api/Account/GetBranch")
 //    fun GetBranchAPI(@Query("comID") ComID: String?): Deferred<Task2<BranchModel>>

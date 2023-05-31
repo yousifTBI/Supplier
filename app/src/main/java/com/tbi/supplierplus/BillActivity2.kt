@@ -85,7 +85,349 @@ class BillActivity2 : AppCompatActivity() {
                 is com.tbi.supplierplus.framework.ui.login.State.Loading -> {}
                 is com.tbi.supplierplus.framework.ui.login.State.Success -> {
                     Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
 
+
+
+                    if (it.data.State==1){
+                        val split = DialogBill(it.data.Item!!.item)
+                        val dialog = this?.let { it1 -> Dialog(it1) }
+                        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                        //بيعمل بلوك للباك جراوند
+                        //  dialog?.setCancelable(false)
+                        dialog?.setContentView(R.layout.dilog_bill_row)
+                        dialog?.getWindow()?.setLayout(750, 1150)
+                        dialog?.show()
+
+                        var size=  it.data.Item.size
+                        var CustomerSellingPrice=  it.data.Item.CustomerSellingPrice
+
+                        lateinit var tv_name: TextView
+                        tv_name = dialog?.findViewById(R.id.textView57)!!
+                        tv_name.setText(split.name)
+
+                        var itemName = it.data.Item?.item
+
+                        lateinit var tv_group: TextView
+                        tv_group = dialog?.findViewById(R.id.textView52)!!
+                        tv_group.setText(it.data.Item!!.Item_ID.toString())
+
+                        lateinit var tv_sur: TextView
+                        tv_sur = dialog?.findViewById(R.id.textView54)!!
+                        tv_sur.setText("")
+
+                        lateinit var tv_size: TextView
+                        tv_size = dialog?.findViewById(R.id.textView56)!!
+                        tv_size.setText(it.data.Item.size.toString())
+
+                        var itemSiza = it.data.Item.size.toString()
+
+
+                        Log.d("findViewByIdfindViewById",it.data.Item.size.toString()+""+it.data.Item.CustomerSellingPrice.toString())
+                        lateinit var tv_price: TextView
+                        tv_price = dialog?.findViewById(R.id.textView53)!!
+                        tv_price.setText(it.data.Item.CustomerSellingPrice.toString())
+                        var sellingPriceItem = it.data.Item.CustomerSellingPrice.toString()
+
+                        lateinit var code: TextView
+                        code = dialog?.findViewById(R.id.textView55)!!
+                        code.setText(it.data.Item.Item_ID.toString())
+
+
+                        var supplierId = it.data.Item.Supplier_ID
+                        var supplierPrice = it.data.Item.Supply_Price
+                        var itemID = it.data.Item.Item_ID
+
+                        lateinit var NumberOfUnits: TextInputEditText
+                        NumberOfUnits = dialog?.findViewById(R.id.counterEditTextm)
+
+                        lateinit var sizesEditText: TextInputEditText
+                        sizesEditText = dialog?.findViewById(R.id.sizesEditTextm)
+                        sizesEditText.setText(it.data.Item.size.toString())
+
+
+                        lateinit var discountEditTextk: EditText
+                        discountEditTextk = dialog.findViewById(R.id.discountEditTextk)
+                        var discount = discountEditTextk.text.toString()
+
+
+                        lateinit var buttonAddToReturnsBill: Button
+                        buttonAddToReturnsBill = dialog.findViewById(R.id.buttonm)
+
+                        lateinit var buttonAddToSalingBill: Button
+                        buttonAddToSalingBill = dialog.findViewById(R.id.button2b)
+
+                        /////
+                        lateinit var textView98: TextView
+                        textView98 = dialog.findViewById(R.id.textView98)
+
+                        lateinit var textView99: TextView
+                        textView99 = dialog.findViewById(R.id.textView99)
+
+                        lateinit var textView100: TextView
+                        textView100 = dialog.findViewById(R.id.textView100)
+
+                        /////
+                        lateinit var reason: Button
+                        reason = dialog.findViewById(R.id.reason)
+                        reason.setOnClickListener {
+                            val dialog2 = this?.let { it1 -> Dialog(it1) }
+                            dialog2?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+                            //بيعمل بلوك للباك جراوند
+                            //  dialog?.setCancelable(false)
+                            dialog2?.setContentView(R.layout.dilog_bill_row_discount)
+                            dialog2?.getWindow()?.setLayout(720, 1100)
+                            dialog2?.show()
+
+
+
+                            lateinit var cancel: Button
+                            cancel = dialog2.findViewById(R.id.cancel)
+                            cancel.setOnClickListener { dialog2.dismiss() }
+
+                            lateinit var ok: Button
+                            ok = dialog2.findViewById(R.id.printbtn1)
+
+                            var collection = 0.0f
+
+                            lateinit var discount: TextInputEditText
+                            discount = dialog2?.findViewById(R.id.billDiscountEditText1)
+
+                            lateinit var discount2: TextInputLayout
+                            discount2 = dialog2?.findViewById(R.id.textinput_billDiscount)
+                            //  discount2.visibility==0
+                            discount2.setVisibility(View.GONE);
+                            lateinit var billDiscountEditText9: TextInputEditText
+                            billDiscountEditText9 = dialog2?.findViewById(R.id.billDiscountEditText9)
+
+                            discount.addTextChangedListener(object : TextWatcher {
+                                override fun afterTextChanged(s: Editable?) {
+                                }
+
+                                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                                }
+
+                                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+
+                                    if (s!!.isNotEmpty())
+
+                                        try {
+                                            if (s.toString().toFloat()>size){
+                                                Toast.makeText(
+                                                    this@BillActivity2,
+                                                    "الوزن كبير"   , Toast.LENGTH_SHORT
+                                                ).show()
+
+                                                Toast.makeText(
+                                                    this@BillActivity2,
+                                                    "الوزن كبير"   , Toast.LENGTH_SHORT
+                                                ).show()
+                                            }else{
+                                                collection = (s.toString().toFloat()* CustomerSellingPrice/size).toFloat()
+                                                billDiscountEditText9.setText(collection.toString())
+
+                                            }
+
+                                        }catch (e:java.lang.Exception){
+                                            billDiscountEditText9.setText("0")
+                                        }
+                                }
+
+                            })
+                            lateinit var discribtionText: TextInputEditText
+                            discribtionText = dialog2?.findViewById(R.id.discribtionText)
+
+                            lateinit var spinner: Spinner
+                            spinner = dialog2?.findViewById(R.id.spinner)
+
+                            val languages = resources.getStringArray(R.array.Languages)
+                            if (spinner != null) {
+                                val adapter = ArrayAdapter(
+                                    this,
+                                    android.R.layout.simple_spinner_item, languages
+                                )
+                                spinner.adapter = adapter
+
+                                spinner.onItemSelectedListener = object :
+                                    AdapterView.OnItemSelectedListener {
+                                    override fun onItemSelected(
+                                        parent: AdapterView<*>,
+                                        view: View, position: Int, id: Long
+                                    ) {
+                                        textView100.setText(languages[position])
+                                        if (languages[position].equals("فرق وزن")){
+                                            discount2.setVisibility(View.VISIBLE);
+
+                                        }else{
+                                            discount2.setVisibility(View.GONE);
+
+                                        }
+                                        // discount.setText(languages[position].toString())
+                                        //  discount.hint ="ادخل القيمة"
+                                        Toast.makeText(
+                                            this@BillActivity2,
+                                            languages[position], Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+
+                                    override fun onNothingSelected(p0: AdapterView<*>?) {
+                                        Log.d("sdkshf",p0.toString())
+                                    }
+
+                                }
+                            }
+                            ok.setOnClickListener {
+                                discountEditTextk.setText(billDiscountEditText9.text.toString())
+                                textView98.setText(discribtionText.text.toString())
+                                textView99.setText(discount.text.toString())
+                                dialog2.dismiss()
+                            }
+
+                        }
+                        buttonAddToSalingBill.setOnClickListener {
+
+
+                            var x: Int = Integer.parseInt(NumberOfUnits.text.toString())
+
+                            var z = x.toDouble()
+
+
+                            var TotalPrice: Double
+                            TotalPrice =
+                                sellingPriceItem.toDouble() * z - discountEditTextk.text.toString()
+                                    .toDouble()
+
+
+                            listBill.add(
+                                SaleingBill(
+                                    1,
+                                    "1",
+                                    itemName.toString(),
+                                    NumberOfUnits.text.toString(),
+                                    itemSiza,
+                                    sellingPriceItem,
+                                    discountEditTextk.text.toString(),
+                                    TotalPrice.toString(),
+                                    itemID.toString(),
+                                    supplierId.toString(),
+                                    supplierPrice.toString(),
+                                    1.0,
+                                    "  بيع :",
+                                    ""
+                                    ,
+                                    textView98.text.toString(),
+                                    textView100.text.toString(),
+                                    textView99.text.toString().toDouble()
+                                )
+                            )
+                            var s = 0.0
+                            for (item in listBill) {
+                                if (item.TransactionType == 1) {
+                                    var z = item.TotalPrice.toDouble()
+                                    s = s + z
+                                }
+
+
+                            }
+
+
+                            binding.Totalss.setText(s.toString())
+
+
+                            val totals = binding.Totalss.text.toString().toDouble() -
+                                    binding.Totalss2.text.toString().toDouble() +
+                                    binding.Totalssz4.text.toString().toDouble()
+
+                            binding.Totalss4.setText(
+                                totals.toString()
+                            )
+
+
+
+                            adapte.submitList(listBill)
+                            adapte.notifyItemInserted(listBill.size - 1)
+                            dialog.dismiss()
+
+                        }
+
+                        buttonAddToReturnsBill.setOnClickListener {
+                            Log.d("jhswjllq", "ReturnsBill")
+
+
+                            var price = sellingPriceItem.toString()
+                            Log.d("price", price)
+
+                            var x: Int = Integer.parseInt(NumberOfUnits.text.toString())
+                            Log.d("price", x.toString())
+
+                            var z = x.toDouble()
+                            Log.d("price", z.toString())
+
+
+                            var TotalPrice: Double
+                            TotalPrice = price.toDouble() * z
+
+
+                            var PriceAfterEditSize: Double
+                            PriceAfterEditSize =
+                                sizesEditText.text.toString().toDouble() * TotalPrice.toString()
+                                    .toDouble()
+
+
+                            var TotalPriceAfterEditSize: Double
+                            TotalPriceAfterEditSize =
+                                PriceAfterEditSize / itemSiza.toString().toDouble()
+                            listBill.add(
+                                SaleingBill(
+                                    0,
+                                    "1",
+                                    itemName,
+                                    NumberOfUnits.text.toString(),
+                                    sizesEditText.text.toString(),
+                                    sellingPriceItem.toString(),
+                                    discountEditTextk.text.toString(),
+                                    TotalPriceAfterEditSize.toString(),
+                                    itemID.toString(),
+                                    supplierId.toString(),
+                                    sellingPriceItem.toString(),
+                                    1.0,
+                                    "",
+                                    "  مرتجع :   "
+                                    ,
+                                    "",
+                                    "",0.0
+                                )
+                            )
+                            var TotalPrices = 0.0
+                            for (item in listBill) {
+                                if (item.TransactionType == 0) {
+
+                                    var z = item.TotalPrice.toDouble()
+                                    TotalPrices = TotalPrices + z
+                                }
+                            }
+                            binding.Totalss2.setText(TotalPrices.toString())
+
+                            val totals = binding.Totalss.text.toString().toDouble()
+                            -binding.Totalss2.text.toString().toDouble()
+                            +binding.Totalssz4.text.toString().toDouble()
+
+                            binding.Totalss4.setText(
+                                totals.toString()
+                            )
+
+                            adapte.submitList(listBill)
+
+                            adapte.notifyDataSetChanged()
+
+                            adapte.notifyItemInserted(listBill.size - 1)
+
+
+                            dialog.dismiss()
+
+                        }
+                    }
 //                    val split = DialogBill(it.data.Item!!.item)
 //                    val dialog = this?.let { it1 -> Dialog(it1) }
 //                    dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -538,6 +880,7 @@ class BillActivity2 : AppCompatActivity() {
 
                     lateinit var textView99: TextView
                     textView99 = dialog.findViewById(R.id.textView99)
+                    textView99.setText("0.0")
 
                     lateinit var textView100: TextView
                     textView100 = dialog.findViewById(R.id.textView100)

@@ -2,16 +2,19 @@ package com.tbi.supplierplus.framework.ui.daily_closing
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Process
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
+import com.tbi.supplierplus.framework.ui.login.State
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.OnTabSelectedListener
+import com.tbi.supplierplus.framework.ui.closingLast.ClosingActivity
 import com.tbi.supplierplus.business.utils.LoadingDialog
 import com.tbi.supplierplus.databinding.FragmentDailyClosingBinding
 import com.tbi.supplierplus.framework.ui.daily_closing.expensesAdapter.ExpensesClosingFragment
@@ -20,6 +23,8 @@ import com.tbi.supplierplus.framework.ui.daily_closing.purchasesclosings.Purchas
 import com.tbi.supplierplus.framework.ui.daily_closing.supplierReturns.SupplierReturnsFragment
 import com.tbi.supplierplus.framework.ui.reports.ReportsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -35,7 +40,7 @@ class DailyClosingFragment : Fragment() {
     private val viewModel2: ReportsViewModel by activityViewModels()
     private lateinit var binding: FragmentDailyClosingBinding
     private val viewModel: DailyClosingViewModel by activityViewModels()
-
+ //   private val DailyClosingviewModel: DailyClosingViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,10 +54,10 @@ class DailyClosingFragment : Fragment() {
 
         val pagerAdabter = ViewPagerAdabter(this, fragment)
         binding.ViewPager.adapter = pagerAdabter
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("المنتجات المباعه"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("المصاريف"))
-        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("المشتريات"))
+        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("مرتجعات _ مردودات"))
         binding.tabLayout.addTab(binding.tabLayout.newTab().setText("تقارير"))
+//        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("المشتريات"))
+//        binding.tabLayout.addTab(binding.tabLayout.newTab().setText("تقارير"))
 
         val loading = LoadingDialog(this.requireActivity())
         viewModel.setUser()
@@ -73,10 +78,56 @@ class DailyClosingFragment : Fragment() {
 
 
         }
-
+     binding.spinKit.isVisible = false
         binding.closingDayButton.setOnClickListener {
-            loading.startLoading()
-            viewModel.closeTheDay()
+
+
+            lifecycleScope.launch(){
+                viewModel.   SubmitReturnMardodatVM().collect {
+                    when (it) {
+                        is State.Loading -> binding.spinKit.isVisible = true
+                        is State.Success -> {
+                            binding.spinKit.isVisible = false
+                            val intent = Intent(activity, ClosingActivity::class.java)
+
+                            startActivity(intent)
+
+//                            DailyClosingviewModel.   SubmitReturnMardodatVM().collect {
+//
+//                            }
+                        }
+                        is State.Error -> {
+                            binding.spinKit.isVisible = false
+                            Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
+
+
+                        }
+                    }
+                }
+            }
+
+
+//            loading.startLoading()
+//            viewModel.closeTheDay()
+//            lifecycleScope.launch(){
+//                viewModel.   SubmitReturnMardodatVM().collect{
+//                     when (it) {
+//                         is State.Loading -> binding.spinKit.isVisible = true
+//                         is State.Success -> {
+//                             binding.spinKit.isVisible = false
+//
+//                             binding.closingDayButton.setText("")
+//
+//                         }
+//                         is State.Error -> {
+//                             binding.spinKit.isVisible = false
+//                             Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
+//
+//
+//                         }
+//                     }
+//                }
+//            }
 
         }
 

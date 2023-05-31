@@ -33,8 +33,8 @@ class RegistrationActivity : AppCompatActivity() {
             if (CheckAllFields()) {
                 viewModel.RegistrationInfo(
                     RegistrationModel(
-                        "123456789",
-                        "qwertys1",
+                        "12345678911",
+                        "qwertys122",
                         binding.com.text.toString(),
                         binding.POStxt.text.toString().toInt()
 

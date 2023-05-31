@@ -67,7 +67,13 @@ class CustomersFragment : Fragment() {
                 is com.tbi.supplierplus.framework.ui.login.State.Success -> {
                     binding.spinKit.isVisible = false
 
-                    listCom = it.data.Data as ArrayList<Data>
+                    if (it.data.Data.isNullOrEmpty()){
+
+                    }else{
+                        listCom = it.data.Data as ArrayList<Data>
+
+
+                    }
 
                 }
                 is com.tbi.supplierplus.framework.ui.login.State.Error -> binding.spinKit.isVisible =

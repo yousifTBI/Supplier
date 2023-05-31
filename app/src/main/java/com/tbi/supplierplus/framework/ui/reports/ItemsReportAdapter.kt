@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.tbi.supplierplus.R
+import com.tbi.supplierplus.business.models.Requests
 import com.tbi.supplierplus.business.pojo.reports.ItemReport
 import com.tbi.supplierplus.databinding.RowItemsReportBinding
 
-class ItemsReportAdapter() :
+class ItemsReportAdapter(val onCilc:OnItemSettlementClickListener2)  :
     ListAdapter<ItemReport, ItemsReportViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsReportViewHolder {
@@ -22,6 +23,9 @@ class ItemsReportAdapter() :
 
     override fun onBindViewHolder(holder: ItemsReportViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
+        holder.itemView.setOnClickListener {
+            getItem(position)?.let { it1 -> onCilc.onClick(it1) }
+        }
 
     }
 
@@ -46,3 +50,6 @@ class ItemsReportViewHolder(private var binding: RowItemsReportBinding) :
     }
 }
 
+class OnItemSettlementClickListener2(val clickListener: (itemReport: ItemReport) -> Unit) {
+    fun onClick(itemsSettlement: ItemReport) = clickListener(itemsSettlement)
+}

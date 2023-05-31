@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.tbi.supplierplus.business.pojo.AllCustomers
 import com.tbi.supplierplus.business.pojo.expenses.ExpensesSearch
+import com.tbi.supplierplus.business.utils.toJson
 import com.tbi.supplierplus.databinding.FragmentCustomerStatementBinding
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,7 +24,7 @@ import kotlinx.coroutines.withContext
 class CustomerStatementFragment : Fragment() {
     private lateinit var binding: FragmentCustomerStatementBinding
     private val viewModel: ReportsViewModel by activityViewModels()
-    lateinit var x: AllCustomers
+    lateinit var allCustomers: AllCustomers
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,9 +55,10 @@ class CustomerStatementFragment : Fragment() {
                 id: Long
             ) {
 
-             //   var x: AllCustomers
-                x=  parentView?.getItemAtPosition( position) as AllCustomers
-                viewModel.getCustomerStatement(  x.Customer_ID.toString())
+                allCustomers=  parentView?.getItemAtPosition( position) as AllCustomers
+               // Log.d("onItemSelectedListener",allCustomers.toJson())
+                viewModel.getCustomerStatement(  allCustomers.Branch_ID.toString())
+
    // viewModel.setCustomerID(viewModel.customers.value!![position].Customer_ID.toString())
             }
 
@@ -73,7 +75,7 @@ class CustomerStatementFragment : Fragment() {
                 withContext(Dispatchers.Default){
 
 
-                    viewModel.  getBillDetails(x.Customer_ID.toString(),statement.BillNo.toString())
+                    viewModel.  getBillDetails(allCustomers.Branch_ID.toString(),statement.BillNo.toString())
                 }
             }
             viewModel.setSelectedStatement(statement)

@@ -16,6 +16,7 @@ import com.tbi.supplierplus.framework.ui.daily_closing.DailyClosingViewModel
 import com.tbi.supplierplus.framework.ui.daily_closing.itemsReceived.AdapterItemsReceived
 import com.tbi.supplierplus.framework.ui.login.State
 import com.tbi.supplierplus.framework.ui.reports.ItemsReportAdapter
+import com.tbi.supplierplus.framework.ui.reports.OnItemSettlementClickListener2
 import com.tbi.supplierplus.framework.ui2.availableitemsBB.AvailableItemsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -62,7 +63,10 @@ class PurchasesClosingFragment : Fragment() {
 
       }
 
-       val adapter = ItemsReportAdapter()
+       val adapter = ItemsReportAdapter(OnItemSettlementClickListener2{
+           
+
+       })
        binding.spinKit.isVisible = false
        lifecycleScope.launch {
            viewModel.getItemsReport().collect {
@@ -76,7 +80,7 @@ class PurchasesClosingFragment : Fragment() {
                        binding.purchaseClosingrecyclerView.adapter = adapter
                        adapter.submitList(it.data.data)
 
-                       binding.purchaseClosingrecyclerView.adapter = adapter
+
                    }
                    is State.Error -> {
                        binding.spinKit.isVisible = false

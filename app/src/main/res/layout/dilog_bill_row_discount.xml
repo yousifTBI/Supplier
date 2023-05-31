@@ -63,6 +63,7 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="اضف الوزن "
+            android:text="0.0"
             android:imeOptions="actionDone"
             android:inputType="numberDecimal" />
 

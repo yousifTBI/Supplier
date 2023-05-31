@@ -7,102 +7,83 @@
     <data>
         <variable
             name="data"
-            type="com.tbi.supplierplus.business.pojo.closing.SupplierReport" />
+            type="com.tbi.supplierplus.business.models.CurrentMortg3Model" />
     </data>
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:padding="4dp"
-        android:layout_margin="4dp"
         android:layout_height="wrap_content">
-
-        <androidx.cardview.widget.CardView
+        <TextView
+            android:id="@+id/daily_closing_itemName"
             android:layout_width="match_parent"
-            android:padding="4dp"
-            app:cardCornerRadius="20dp"
-            android:elevation="100dp"
-            android:layout_margin="6dp"
-            android:layout_height="wrap_content"
-            tools:ignore="MissingConstraints">
+            android:layout_height="35dp"
+            android:background="@drawable/item_list_background"
+            android:gravity="center"
+            android:text='@{""+" الاسم :"+data.itemname}'
+            android:textColor="@color/black"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#2AFFFAEC"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-
-                tools:ignore="MissingConstraints">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/linearLayout4"
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/textView72"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_weight="1"
+                    android:text='@{""+" الكمية:"+data.amount}'
 
-                    <TextView
-                        android:id="@+id/textView37"
-                        android:layout_width="340dp"
-                        android:layout_height="29dp"
-                        android:layout_marginEnd="8dp"
+                    />
 
-                        android:gravity="right"
-                        android:text="@{data.name}"
-                        android:textColor="#F49F0A"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
-                        app:layout_constraintEnd_toStartOf="@+id/textView50"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/textView78"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text='@{""+" عدد المرتجع :"+data.size}'
+                    />
 
-                    <TextView
-                        android:id="@+id/textView50"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#FFF87654"
-                        android:padding="6dp"
-                        android:text="المصروف "
-                        android:textSize="16dp"
 
-                        android:textColor="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+            </LinearLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+
 
 
                 <TextView
-                    android:id="@+id/grupI"
-                    style="@style/textStyle"
+                    android:id="@+id/textView75"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginBottom="8dp"
-                    android:text="التكلفه المصروف :"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
+                    android:layout_weight="1"
 
+                    />
+                <!--            android:text='@{""+" سعر المرتجع :"+data.returnAmount}'-->
                 <TextView
-                    android:id="@+id/textView52"
+                    android:id="@+id/textView76"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="4dp"
-                    android:text="@{String.valueOf(data.amount)}"
+                    android:layout_weight="1"/>
+                <!--                android:text='@{""+" كميه المرتجع :"+data.returnSize}'-->
 
-                    android:textSize="18dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/grupI"
-                    app:layout_constraintEnd_toStartOf="@+id/grupI"
-                    app:layout_constraintTop_toTopOf="@+id/grupI" />
+            </LinearLayout>
+        </LinearLayout>
 
 
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

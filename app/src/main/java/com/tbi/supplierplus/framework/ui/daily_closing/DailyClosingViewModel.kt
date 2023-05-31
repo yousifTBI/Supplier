@@ -28,7 +28,7 @@ import javax.inject.Inject
 class DailyClosingViewModel @Inject constructor(val repo: DailyClosingRepository,   private val api: SupplierAPI) : ViewModel() {
 
     fun SubmitReturnMardodatVM() = wrapWithFlowApi {
-        Log.d("SubmitReturnMardodatVM",SharedPreferencesCom.getInstance().gerSharedUser_ID())
+      //  Log.d("SubmitReturnMardodatVM",SharedPreferencesCom.getInstance().gerSharedUser_ID())
         api.SubmitReturnMardodatAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID())
 
     }.flowOn(Dispatchers.IO)

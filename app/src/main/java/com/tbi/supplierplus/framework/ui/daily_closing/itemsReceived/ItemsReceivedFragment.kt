@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -31,7 +32,7 @@ class ItemsReceivedFragment : Fragment() {
         binding = FragmentItemsReceivedBinding.inflate(inflater)
         //  binding.viewModel = viewModel
         binding.lifecycleOwner = this
-
+        binding.spinKit.isVisible =false
 
 
 
@@ -75,16 +76,22 @@ class ItemsReceivedFragment : Fragment() {
                 availableItemsViewModel.getConfirmSalesrRequest().collect {
                     when (it) {
 
-                        is State.Loading -> {}
+                        is State.Loading -> {
+                            binding.spinKit.isVisible =true
+                        }
 
                         is State.Success -> {
 
-                            Log.d("msgtxt","it.data.message")
-                            binding.msgTxt.setText(it.data.Message)
+                            binding.spinKit.isVisible =false
+                        //    Log.d("msgtxt","it.data.message")
+                         //   binding.msgTxt.setText(it.data.Message)
+                            Toast.makeText(context, it.data.Message, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, it.data.Message, Toast.LENGTH_SHORT).show()
 
                         }
                         is State.Error -> {
-
+                            binding.spinKit.isVisible = false
+                            Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
                         }
                     }
 

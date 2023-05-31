@@ -28,7 +28,9 @@ class ItemsReportFragment : Fragment() {
         binding = FragmentItemsReportBinding.inflate(inflater)
         //  binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        val adapter = ItemsReportAdapter()
+        val adapter = ItemsReportAdapter(OnItemSettlementClickListener2{
+
+        })
         binding.spinKit.isVisible = false
         lifecycleScope.launch {
             viewModel.getItemsReport().collect {
