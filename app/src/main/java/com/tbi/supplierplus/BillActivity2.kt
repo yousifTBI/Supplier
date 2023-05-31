@@ -247,7 +247,7 @@ class BillActivity2 : AppCompatActivity() {
 //                                override fun onItemSelected(
 //                                    parent: AdapterView<*>,
 //                                    view: View, position: Int, id: Long
-//                                ) {
+//                                ) {س
 //                                    textView100.setText(languages[position])
 //                                    if (languages[position].equals("فرق وزن")){
 //                                        discount2.setVisibility(View.VISIBLE);
