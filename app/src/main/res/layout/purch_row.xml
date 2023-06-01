@@ -8,6 +8,9 @@
 <variable
     name="data"
     type="com.tbi.supplierplus.business.pojo.puarchase.Puarchase" />
+        <variable
+            name="data2"
+            type="com.tbi.supplierplus.business.pojo.Datum" />
     </data>
 
 
@@ -45,7 +48,7 @@
                         android:layout_marginEnd="8dp"
 
                         android:gravity="right"
-                        android:text="@{data.itemName}"
+                        android:text="@{String.valueOf(data2.ItemName)}"
                         android:textColor="#F49F0A"
                         android:textSize="16dp"
                         android:maxLength="26"
@@ -59,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/blue_rounded_filled20"
                         android:padding="6dp"
-                        android:text="شراء "
+                        android:text="الاسم "
                         android:textSize="16dp"
 
                         android:textColor="@color/white"
@@ -116,7 +119,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="4dp"
-                    android:text="@{String.valueOf(data.itemCount)}"
+                    android:text="@{String.valueOf(data2.Item_Count)}"
 
                     android:textSize="18dp"
                     app:layout_constraintBottom_toBottomOf="@+id/grupI"

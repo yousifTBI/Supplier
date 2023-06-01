@@ -15,7 +15,7 @@ import com.tbi.supplierplus.business.pojo.returns.ReturnItems
 import com.tbi.supplierplus.business.pojo.returns.Suppliers
 import com.tbi.supplierplus.business.utils.showSnackbar
 import com.tbi.supplierplus.databinding.FragmentReturnItemsBinding
-import com.tbi.supplierplus.framework.ui.daily_closing.DailyClosingAdapter
+
 import com.tbi.supplierplus.framework.ui.expenses.ExpensesFragmentArgs
 import com.tbi.supplierplus.framework.ui.sales.customer_profile.ReturnsAdapter
 import dagger.hilt.android.AndroidEntryPoint
