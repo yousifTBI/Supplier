@@ -40,13 +40,13 @@ class LoginAccActivity : AppCompatActivity() {
             Settings.Secure.ANDROID_ID
         )
 
-        Log.d("aziza3s2", androidId)
+     //   Log.d("aziza3s2", androidId)
         SharedPreferencesCom.init(this)
         // SharedPreferencesCom.getInstance().setSharedDistributor_ID("2")
         // SharedPreferencesCom.getInstance().setSharedUser_ID("2")
         //
         // viewModel.loginInfoCombVM("qwertys1",this)
-         viewModel.loginInfoCombVM("qwertys122",this)
+         viewModel.loginInfoCombVM(androidId,this)
 
 //        val intent = Intent(this, MainActivity::class.java)
 //        startActivity(intent)
@@ -55,18 +55,18 @@ class LoginAccActivity : AppCompatActivity() {
 
             when (it) {
 
-                is State.Loading -> Log.d("aziza", "")
+                is State.Loading ->{}// Log.d("aziza", "")
                 is State.Success -> {
 
                     if (it.data!!.State == 0) {
-                        Log.d("cfgdgdfgdfg", it.data.message)
+ //                       Log.d("cfgdgdfgdfg", it.data.message)
 //                        //your Request is pending
 
                     } else if (it.data!!.State == 1) {
                         if (it.data.UserInfo.userID.toString().isNullOrEmpty()){
-                            Log.d("aziza3", "1")
+ //                           Log.d("aziza3", "1")
                         }else{
-                            Log.d("aziza3", "2")
+ //                           Log.d("aziza3", "2")
                         }
                         SharedPreferencesCom.getInstance().setSharedUser_ID(it.data.UserInfo.userID.toString())
                         // SharedPreferencesCom.getInstance().setSharedUser_ID("78")
@@ -79,11 +79,7 @@ class LoginAccActivity : AppCompatActivity() {
 //                        Log.d("saveInfoLogin",it.data.item.Name)
 //                        viewModel.saveItems(it.data.item.comid.toString(),it.data.item.AndroidID)
 
-                        Toast.makeText(
-                            applicationContext,
-                            it.data.State.toString() + it.data.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(applicationContext, it.data.State.toString() + it.data.message, Toast.LENGTH_SHORT).show()
 
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
@@ -95,25 +91,13 @@ class LoginAccActivity : AppCompatActivity() {
 
                     } else if (it.data!!.State == 2) {
                         //your Request has been pendding
-                        Log.d("aziza3", "2")
+//                        Log.d("aziza3", "2")
 
-                        Toast.makeText(
-                            applicationContext,
-                            it.data.State.toString() + it.data.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(applicationContext, it.data.State.toString() + it.data.message, Toast.LENGTH_SHORT).show()
 
-                        Toast.makeText(
-                            applicationContext,
-                            it.data.State.toString() + it.data.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(applicationContext, it.data.State.toString() + it.data.message, Toast.LENGTH_SHORT).show()
 
-                        Toast.makeText(
-                            applicationContext,
-                            it.data.State.toString() + it.data.message,
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(applicationContext, it.data.State.toString() + it.data.message, Toast.LENGTH_SHORT).show()
 
                     } else if (it.data!!.State == 3) {
                         //your Machine has been Registration
@@ -155,7 +139,7 @@ class LoginAccActivity : AppCompatActivity() {
                         //  finish()
                     }
                 }
-                is State.Error -> Log.d("aziza32", it.messag.toString())
+                is State.Error ->{}// Log.d("aziza32", it.messag.toString())
 
             }
         }

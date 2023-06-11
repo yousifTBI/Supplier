@@ -33,8 +33,8 @@ class RegistrationActivity : AppCompatActivity() {
             if (CheckAllFields()) {
                 viewModel.RegistrationInfo(
                     RegistrationModel(
-                        "12345678911",
-                        "qwertys122",
+                        binding.POSSerial.text.toString(),
+                        androidId,
                         binding.com.text.toString(),
                         binding.POStxt.text.toString().toInt()
 
@@ -48,7 +48,7 @@ class RegistrationActivity : AppCompatActivity() {
                         is State.Success -> {
                             binding.spinKit.isVisible = false
 
-                            Log.d("registrationLiveData", it.data.message)
+  //                          Log.d("registrationLiveData", it.data.message)
                             Toast.makeText(applicationContext, it.data.message, Toast.LENGTH_SHORT)
                                 .show()
                             val intent = Intent(this, LoginAccActivity::class.java)
@@ -76,6 +76,11 @@ class RegistrationActivity : AppCompatActivity() {
             return false
         } else if (binding.POStxt.length() == 0) {
             binding.POStxt.setError("This field is required")
+            return false
+        }
+
+     else if (binding.POSSerial.length() == 0) {
+            binding.POSSerial.setError("This field is required")
             return false
         }
 

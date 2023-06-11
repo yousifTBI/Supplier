@@ -31,14 +31,12 @@ import com.tbi.supplierplus.business.utils.Constants.HEADERS
 import com.tbi.supplierplus.business.utils.Constants.WEBSERVICE
 import com.tbi.supplierplus.framework.datasource.responses.*
 import com.tbi.supplierplus.framework.ui.login.DistrputerLogin
-import com.tbi.supplierplus.framework.ui.login.LoginModel
 import com.tbi.supplierplus.framework.ui.login.Task3
 import com.tbi.supplierplus.framework.ui.sales.addBranch.AddBranchModel
 import com.tbi.supplierplus.framework.ui.sales.addBranch.BranchBackModel
 import com.tbi.supplierplus.framework.ui.sales.addCompany.BranchDetailsModel
 import com.tbi.supplierplus.framework.ui.sales.addCompany.BranchModel
 import com.tbi.supplierplus.framework.ui.sales.addCompany.CompanyTask
-import com.tbi.supplierplus.framework.ui.sales.addCompany.Data
 import com.tbi.supplierplus.framework.ui.sales.add_customer.CustomerTask
 import com.tbi.supplierplus.framework.ui.sales.customers.product_selection.CustomerModel
 import kotlinx.coroutines.Deferred
@@ -429,7 +427,7 @@ interface SupplierAPI {
     @Headers("Content-Type: application/json")
     @GET("api/Company/GetCompaniesToFillSelect")
     fun GetAllCompaniesAPI(
-        @Query("DisGroupID") DisGroupID :Int
+        @Query("DisGroupID") DisGroupID: Int
     ): Deferred<CompanyTask>
 
 
@@ -441,13 +439,11 @@ interface SupplierAPI {
     ): Deferred<BranchModel<Branch>>
 
 
-
     @Headers("Content-Type: application/json")
-        @GET("api/Company/GetBranchDetails")
+    @GET("api/Company/GetBranchDetails")
     fun GetBranchDetailsAPI(
-            @Query("BranchID") BranchID: Int
+        @Query("BranchID") BranchID: Int
     ): Deferred<BranchDetailsModel>
-
 
 
     @Headers("Content-Type: application/json")
@@ -457,15 +453,12 @@ interface SupplierAPI {
     ): Deferred<BranchBackModel>
 
 
-
     @Headers("Content-Type: application/json")
-    @GET("api/Sale/GetItemByBarcodeV1")
+    @GET("api/Sale/GetItemByBarcode")
     fun GetItemByBarcodeAPI(
         @Query("sales_Id") sales_Id: Int, @Query("Barcode") Barcode: String,
         @Query("Cus_id") Cus_id: String
     ): Deferred<Tasks<ItemsModel>>
-
-
 
 
     @Headers("Content-Type: application/json")
@@ -486,63 +479,109 @@ interface SupplierAPI {
 
     @Headers("Content-Type: application/json")
     @GET("api/Warehousing/SubmitChangeQuantity")
-    fun getSubmitChangeQuantityAPI(@Query("value") value: Double,@Query("ID") recordID: Int): Deferred<ChangeQuantityModel>
+    fun getSubmitChangeQuantityAPI(
+        @Query("value") value: Double,
+        @Query("ID") recordID: Int
+    ): Deferred<ChangeQuantityModel>
 
     @Headers("Content-Type: application/json")
     @GET("/api/Items/SubmitReturnMardodat")
     fun SubmitReturnMardodatAPI(@Query("UserID") UserID: String): Deferred<Task3<Requests>>
 
-   @Headers("Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @GET("api/Warehousing/getPendingMortaga3at")
-    fun GetPendingMortaga3atAPI(@Query("sales") sales: Int): Deferred<Task3<PenddingModel>>
+    fun GetPendingMortaga3atAPI(@Query("sales") sales: Int): Deferred<Task3<Datum>>
 
 
-   @Headers("Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @GET("api/Warehousing/SubmitChangeMortaga3Quantity")
-    fun SubmitChangeMortaga3API(@Query("ID")     ID: Int,
-                                @Query("value")  value: Int,
-                                @Query("amount")  amount: Int
-                                 ): Deferred<ConfirmRequestModel>
+    fun SubmitChangeMortaga3API(
+        @Query("ID") ID: Int,
+        @Query("value") value: Int,
+        @Query("amount") amount: Int
+    ): Deferred<ConfirmRequestModel>
 
 
-
-
-   @Headers("Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @GET("api/Warehousing/ConfirmSalesrRequest")
-    fun GetConfirmSalesrRequestAPI(@Query("ID") ID: Int,
-                                   @Query("mortaga3") mortaga3: Int
-                                   ): Deferred<ConfirmRequestModel>
+    fun GetConfirmSalesrRequestAPI(
+        @Query("ID") ID: Int,
+        @Query("mortaga3") mortaga3: Int
+    ): Deferred<ConfirmRequestModel>
 
 
-
-   @Headers("Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @GET("api/ClosingDay/GetCloseSalesDayDatafForUser")
-    fun GetCloseSalesDayDatafForUserAPI(@Query("sales") sales: Int
-                                   ): Deferred<Task3<SalesAmountModel>>
+    fun GetCloseSalesDayDatafForUserAPI(
+        @Query("sales") sales: Int
+    ): Deferred<Task3<SalesAmountModel>>
 
 
-   @Headers("Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @GET("api/ClosingDay/ConfirmCompleteAccount")
-    fun GetConfirmCompleteAccountAPI(@Query("sales") sales: Int,
-                                     @Query("type") type: Int
-                                   ): Deferred<Task3<SalesAmountModel>>
-
-
-   @Headers("Content-Type: application/json")
-    @GET("api/Warehousing/getCurrentMortg3atofTheUser")
-    fun GetCurrentMortg3atofTheUserAPI(@Query("UserId") UserId: Int
-                                   ): Deferred<Task3<CurrentMortg3Model>>
+    fun GetConfirmCompleteAccountAPI(
+        @Query("sales") sales: Int,
+        @Query("type") type: Int
+    ): Deferred<Task3<SalesAmountModel>>
 
 
     @Headers("Content-Type: application/json")
     @GET("api/Warehousing/getCurrentMortg3atofTheUser")
-    fun getCurrentMortg3atofTheUserAPI(@Query("UserID") UserId: Int
+    fun GetCurrentMortg3atofTheUserAPI(
+        @Query("UserId") UserId: Int
+    ): Deferred<Task3<CurrentMortg3Model>>
+
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Warehousing/getCurrentMortg3atofTheUser")
+    fun getCurrentMortg3atofTheUserAPI(
+        @Query("UserID") UserId: Int
     ): Deferred<Task3<Datum>>
 
     @Headers("Content-Type: application/json")
     @GET("api/WareHousing/GetPendingRequests")
-    fun GetPendingRequestsAPI(@Query("sales") UserId: Int,@Query("mardod") mardod: Int
+    fun GetPendingRequestsAPI(
+        @Query("sales") UserId: Int, @Query("mardod") mardod: Int
     ): Deferred<Task3<Datum>>
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Items/GetItemsBills")
+    fun GetItemsBillsAPI(
+        @Query("UserId") UserId: Int,
+        @Query("ItemID") ItemID: Int
+    ): Deferred<Task3<ItemsBillsModel>>
+
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Warehousing/SubmitChangeQuantity")
+    fun GetSubmitChangeQuantityAPI(
+        @Query("value") value: Double,
+        @Query("ID") ID: Int
+    ): Deferred<Task3<EditMortg3Model>>
+
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Warehousing/SubmitChangeMortaga3Quantity")
+    fun GeSubmitChangeMortaga3QuantityAPI(
+        @Query("value") value: Double,
+        @Query("ID") ID: Int,
+        @Query("amount") amount: Double
+    ): Deferred<Task3<Mortaga3QuantityModel>>
+
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Suppliers/GetBillQRCode")
+    fun GetBillQRCodeAPI(
+        @Query("BillNo") BillNo: String
+    ): Deferred<Task3<String>>
+
+
+    @Headers("Content-Type: application/json")
+    @GET("api/Account/getUserNameByUserId")
+    fun GetUserInfo(
+        @Query("UserID") UserID: Int
+    ): Deferred<Task3<String>>
+
 
 //    @Headers("Content-Type: application/json")
 //    @GET("api/Account/GetBranch")

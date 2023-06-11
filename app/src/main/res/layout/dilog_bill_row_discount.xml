@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
 
 
+            android:text=" "
             android:elevation="234dp"
             android:ems="10"
             android:hint="سبب الخصم"
@@ -64,6 +65,7 @@
             android:ems="10"
             android:hint="اضف الوزن "
             android:text="0.0"
+            android:gravity="center"
             android:imeOptions="actionDone"
             android:inputType="numberDecimal" />
 
@@ -87,6 +89,8 @@
             android:layout_marginEnd="32dp"
             android:ems="10"
             android:hint="الخصم "
+            android:text="0.0"
+            android:gravity="center"
             android:imeOptions="actionDone"
             android:inputType="numberDecimal"
             app:layout_constraintBottom_toBottomOf="@+id/textinput_billDiscount"

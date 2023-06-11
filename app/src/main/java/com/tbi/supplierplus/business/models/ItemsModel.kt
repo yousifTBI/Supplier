@@ -8,7 +8,8 @@ data class ItemsModel(
    var item     : String,
    var Item_ID     : Int,
    var CustomerSellingPrice     : Double,
-   var Barcode     : String
+   var Barcode     : String,
+   var bal     : Double
 
 
 )

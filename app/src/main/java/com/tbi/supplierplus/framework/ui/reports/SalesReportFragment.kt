@@ -68,7 +68,7 @@ class SalesReportFragment : Fragment() {
                         }
                     }
                     is State.Error -> {
-                        Log.d("actualAmounttxt","actualAmounttxtError")
+     //                   Log.d("actualAmounttxt","actualAmounttxtError")
                     }
                 }
             }
@@ -83,6 +83,11 @@ class SalesReportFragment : Fragment() {
                         is State.Loading -> { binding.spinKit.isVisible = true}
 
                         is State.Success -> {
+
+                            binding.SubmitBtn.setText("تم التاكيد")
+                            availableItemsViewModel.getCloseSalesDayDatafForUser().collect {}
+
+                            viewModel2.getselesRepor()
                             if (it == null) {
                             } else {
                                 binding.spinKit.isVisible = false

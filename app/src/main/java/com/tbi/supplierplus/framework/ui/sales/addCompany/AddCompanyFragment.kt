@@ -235,12 +235,12 @@ class AddCompanyFragment : Fragment() {
                 is State.Success -> {
                     listCom= it.data.Data as ArrayList<Data>
                    // popUp(it.data.Data as ArrayList<Data>)
-                    Log.d("getAllCompaniesLiveData",it.data.Data[0].title)
+  //                  Log.d("getAllCompaniesLiveData",it.data.Data[0].title)
 
                 }
                 is State.Error ->
                 {
-                    Log.d("getAllCompaniesLiveData","Error")
+    //                Log.d("getAllCompaniesLiveData","Error")
                     binding.spinKit.isVisible = false
                 }
 
@@ -264,7 +264,7 @@ class AddCompanyFragment : Fragment() {
                 binding.streat.setText( " ")
 
                 Idd = item.ID()
-                Log.d("ddd",Idd.toString())
+  //              Log.d("ddd",Idd.toString())
                 ComName = item.getTitle()
                 binding.textView21.setText(ComName)
 

@@ -12,10 +12,7 @@ import android.view.View
 import android.view.Window
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -26,9 +23,7 @@ import com.google.gson.Gson
 import com.google.zxing.integration.android.IntentIntegrator
 import com.tbi.supplierplus.business.pojo.Items
 import com.tbi.supplierplus.business.pojo.billModels.SaleingBill
-import com.tbi.supplierplus.business.utils.toJson
 import com.tbi.supplierplus.databinding.ActivityBill2Binding
-import com.tbi.supplierplus.framework.datasource.network.SupplierAPI
 import com.tbi.supplierplus.framework.datasource.requests.State
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import com.tbi.supplierplus.framework.ui.collect_debit.CollectDebitViewModel
@@ -39,10 +34,6 @@ import com.tbi.supplierplus.framework.ui.scanner.capture
 import dagger.hilt.android.AndroidEntryPoint
 import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat
 import ir.mirrajabi.searchdialog.core.SearchResultListener
-import okhttp3.internal.notifyAll
-import org.w3c.dom.Text
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 @AndroidEntryPoint
@@ -56,6 +47,7 @@ class BillActivity2 : AppCompatActivity() {
     var listBill = ArrayList<SaleingBill>()
     private val barcode = StringBuffer()
     lateinit var message: String
+
     private lateinit var viewModel2: CollectDebitViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +60,7 @@ class BillActivity2 : AppCompatActivity() {
         message = intent.getStringExtra("Customer_ID").toString()
         val message2 = intent.getStringExtra("Unpaid_deferred")
         val CompanyName = intent.getStringExtra("CompanyName")
-        Log.d("messagee", message.toString())
+        //   Log.d("messagee", message.toString())
 
 
 
@@ -89,7 +81,7 @@ class BillActivity2 : AppCompatActivity() {
 
 
 
-                    if (it.data.State==1){
+                    if (it.data.State == 1) {
                         val split = DialogBill(it.data.Item!!.item)
                         val dialog = this?.let { it1 -> Dialog(it1) }
                         dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -99,8 +91,8 @@ class BillActivity2 : AppCompatActivity() {
                         dialog?.getWindow()?.setLayout(750, 1150)
                         dialog?.show()
 
-                        var size=  it.data.Item.size
-                        var CustomerSellingPrice=  it.data.Item.CustomerSellingPrice
+                        var size = it.data.Item.size
+                        var CustomerSellingPrice = it.data.Item.CustomerSellingPrice
 
                         lateinit var tv_name: TextView
                         tv_name = dialog?.findViewById(R.id.textView57)!!
@@ -123,7 +115,10 @@ class BillActivity2 : AppCompatActivity() {
                         var itemSiza = it.data.Item.size.toString()
 
 
-                        Log.d("findViewByIdfindViewById",it.data.Item.size.toString()+""+it.data.Item.CustomerSellingPrice.toString())
+//                        Log.d(
+//                            "findViewByIdfindViewById",
+//                            it.data.Item.size.toString() + "" + it.data.Item.CustomerSellingPrice.toString()
+//                        )
                         lateinit var tv_price: TextView
                         tv_price = dialog?.findViewById(R.id.textView53)!!
                         tv_price.setText(it.data.Item.CustomerSellingPrice.toString())
@@ -180,7 +175,6 @@ class BillActivity2 : AppCompatActivity() {
                             dialog2?.show()
 
 
-
                             lateinit var cancel: Button
                             cancel = dialog2.findViewById(R.id.cancel)
                             cancel.setOnClickListener { dialog2.dismiss() }
@@ -198,38 +192,50 @@ class BillActivity2 : AppCompatActivity() {
                             //  discount2.visibility==0
                             discount2.setVisibility(View.GONE);
                             lateinit var billDiscountEditText9: TextInputEditText
-                            billDiscountEditText9 = dialog2?.findViewById(R.id.billDiscountEditText9)
+                            billDiscountEditText9 =
+                                dialog2?.findViewById(R.id.billDiscountEditText9)
 
                             discount.addTextChangedListener(object : TextWatcher {
                                 override fun afterTextChanged(s: Editable?) {
                                 }
 
-                                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                                override fun beforeTextChanged(
+                                    s: CharSequence?,
+                                    start: Int,
+                                    count: Int,
+                                    after: Int
+                                ) {
                                 }
 
-                                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                                override fun onTextChanged(
+                                    s: CharSequence?,
+                                    start: Int,
+                                    before: Int,
+                                    count: Int
+                                ) {
 
 
                                     if (s!!.isNotEmpty())
 
                                         try {
-                                            if (s.toString().toFloat()>size){
+                                            if (s.toString().toFloat() > size) {
                                                 Toast.makeText(
                                                     this@BillActivity2,
-                                                    "الوزن كبير"   , Toast.LENGTH_SHORT
+                                                    "الوزن كبير", Toast.LENGTH_SHORT
                                                 ).show()
 
                                                 Toast.makeText(
                                                     this@BillActivity2,
-                                                    "الوزن كبير"   , Toast.LENGTH_SHORT
+                                                    "الوزن كبير", Toast.LENGTH_SHORT
                                                 ).show()
-                                            }else{
-                                                collection = (s.toString().toFloat()* CustomerSellingPrice/size).toFloat()
+                                            } else {
+                                                collection = (s.toString()
+                                                    .toFloat() * CustomerSellingPrice / size).toFloat()
                                                 billDiscountEditText9.setText(collection.toString())
 
                                             }
 
-                                        }catch (e:java.lang.Exception){
+                                        } catch (e: java.lang.Exception) {
                                             billDiscountEditText9.setText("0")
                                         }
                                 }
@@ -237,7 +243,7 @@ class BillActivity2 : AppCompatActivity() {
                             })
                             lateinit var discribtionText: TextInputEditText
                             discribtionText = dialog2?.findViewById(R.id.discribtionText)
-
+                            discribtionText.setText("")
                             lateinit var spinner: Spinner
                             spinner = dialog2?.findViewById(R.id.spinner)
 
@@ -256,10 +262,10 @@ class BillActivity2 : AppCompatActivity() {
                                         view: View, position: Int, id: Long
                                     ) {
                                         textView100.setText(languages[position])
-                                        if (languages[position].equals("فرق وزن")){
+                                        if (languages[position].equals("فرق وزن")) {
                                             discount2.setVisibility(View.VISIBLE);
 
-                                        }else{
+                                        } else {
                                             discount2.setVisibility(View.GONE);
 
                                         }
@@ -272,16 +278,19 @@ class BillActivity2 : AppCompatActivity() {
                                     }
 
                                     override fun onNothingSelected(p0: AdapterView<*>?) {
-                                        Log.d("sdkshf",p0.toString())
+                                        //           Log.d("sdkshf", p0.toString())
                                     }
 
                                 }
                             }
                             ok.setOnClickListener {
+
                                 discountEditTextk.setText(billDiscountEditText9.text.toString())
                                 textView98.setText(discribtionText.text.toString())
                                 textView99.setText(discount.text.toString())
                                 dialog2.dismiss()
+
+
                             }
 
                         }
@@ -314,8 +323,7 @@ class BillActivity2 : AppCompatActivity() {
                                     supplierPrice.toString(),
                                     1.0,
                                     "  بيع :",
-                                    ""
-                                    ,
+                                    "",
                                     textView98.text.toString(),
                                     textView100.text.toString(),
                                     textView99.text.toString().toDouble()
@@ -352,17 +360,17 @@ class BillActivity2 : AppCompatActivity() {
                         }
 
                         buttonAddToReturnsBill.setOnClickListener {
-                            Log.d("jhswjllq", "ReturnsBill")
+                            //               Log.d("jhswjllq", "ReturnsBill")
 
 
                             var price = sellingPriceItem.toString()
-                            Log.d("price", price)
+                            //             Log.d("price", price)
 
                             var x: Int = Integer.parseInt(NumberOfUnits.text.toString())
-                            Log.d("price", x.toString())
+                            //              Log.d("price", x.toString())
 
                             var z = x.toDouble()
-                            Log.d("price", z.toString())
+                            //            Log.d("price", z.toString())
 
 
                             var TotalPrice: Double
@@ -393,10 +401,9 @@ class BillActivity2 : AppCompatActivity() {
                                     sellingPriceItem.toString(),
                                     1.0,
                                     "",
-                                    "  مرتجع :   "
-                                    ,
+                                    "  مرتجع :   ",
                                     "",
-                                    "",0.0
+                                    "", 0.0
                                 )
                             )
                             var TotalPrices = 0.0
@@ -428,340 +435,6 @@ class BillActivity2 : AppCompatActivity() {
 
                         }
                     }
-//                    val split = DialogBill(it.data.Item!!.item)
-//                    val dialog = this?.let { it1 -> Dialog(it1) }
-//                    dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-//                    //بيعمل بلوك للباك جراوند
-//                    //  dialog?.setCancelable(false)
-//                    dialog?.setContentView(R.layout.dilog_bill_row)
-//                    dialog?.getWindow()?.setLayout(740, 1000)
-//                    dialog?.show()
-//
-//
-//                    lateinit var tv_name: TextView
-//                    tv_name = dialog?.findViewById(R.id.textView57)!!
-//                    tv_name.setText(split.name)
-//
-//                    var itemName = it.data.Item?.item
-//
-//                    lateinit var tv_group: TextView
-//                    tv_group = dialog?.findViewById(R.id.textView52)!!
-//                    tv_group.setText(it.data.Item!!.Item_ID.toString())
-//
-//                    lateinit var tv_sur: TextView
-//                    tv_sur = dialog?.findViewById(R.id.textView54)!!
-//                    tv_sur.setText("")
-//
-//                    lateinit var tv_size: TextView
-//                    tv_size = dialog?.findViewById(R.id.textView56)!!
-//                    tv_size.setText(it.data.Item.size.toString())
-//
-//                    var itemSiza = it.data.Item.size.toString()
-//
-//
-//                    lateinit var tv_price: TextView
-//                    tv_price = dialog?.findViewById(R.id.textView53)!!
-//                    tv_price.setText(it.data.Item.CustomerSellingPrice.toString())
-//                    var sellingPriceItem = it.data.Item.CustomerSellingPrice.toString()
-//
-//                    lateinit var code: TextView
-//                    code = dialog?.findViewById(R.id.textView55)!!
-//                    code.setText(it.data.Item.Item_ID.toString())
-//
-//
-//                    var supplierId = it.data.Item.Supplier_ID
-//                    var supplierPrice = it.data.Item.Supply_Price
-//                    var itemID = it.data.Item.Item_ID
-//
-//                    lateinit var NumberOfUnits: TextInputEditText
-//                    NumberOfUnits = dialog?.findViewById(R.id.counterEditTextm)
-//
-//                    lateinit var sizesEditText: TextInputEditText
-//                    sizesEditText = dialog?.findViewById(R.id.sizesEditTextm)
-//                    sizesEditText.setText(it.data.Item.size.toString())
-//
-//
-//                    lateinit var discountEditTextk: EditText
-//                    discountEditTextk = dialog.findViewById(R.id.discountEditTextk)
-//                    var discount = discountEditTextk.text.toString()
-//
-//
-//                    lateinit var buttonAddToReturnsBill: Button
-//                    buttonAddToReturnsBill = dialog.findViewById(R.id.buttonm)
-//
-//                    lateinit var buttonAddToSalingBill: Button
-//                    buttonAddToSalingBill = dialog.findViewById(R.id.button2b)
-//
-//                    /////
-//                    lateinit var textView98: TextView
-//                    textView98 = dialog.findViewById(R.id.textView98)
-//
-//                    lateinit var textView99: TextView
-//                    textView99 = dialog.findViewById(R.id.textView99)
-//
-//                    lateinit var textView100: TextView
-//                    textView100 = dialog.findViewById(R.id.textView100)
-//
-//                    /////
-//                    lateinit var reason: Button
-//                    reason = dialog.findViewById(R.id.reason)
-//                    reason.setOnClickListener {
-//                        val dialog2 = this?.let { it1 -> Dialog(it1) }
-//                        dialog2?.requestWindowFeature(Window.FEATURE_NO_TITLE)
-//                        //بيعمل بلوك للباك جراوند
-//                        //  dialog?.setCancelable(false)
-//                        dialog2?.setContentView(R.layout.dilog_bill_row_discount)
-//                        dialog2?.getWindow()?.setLayout(720, 1100)
-//                        dialog2?.show()
-//
-//
-//
-//                        lateinit var cancel: Button
-//                        cancel = dialog2.findViewById(R.id.cancel)
-//                        cancel.setOnClickListener { dialog2.dismiss() }
-//
-//                        lateinit var ok: Button
-//                        ok = dialog2.findViewById(R.id.printbtn1)
-//
-//                        var collection = 0.0f
-//
-//                        lateinit var discount: TextInputEditText
-//                        discount = dialog2?.findViewById(R.id.billDiscountEditText1)
-//
-//                        lateinit var discount2: TextInputLayout
-//                        discount2 = dialog2?.findViewById(R.id.textinput_billDiscount)
-//                        //  discount2.visibility==0
-//                        discount2.setVisibility(View.GONE);
-//                        lateinit var billDiscountEditText9: TextInputEditText
-//                        billDiscountEditText9 = dialog2?.findViewById(R.id.billDiscountEditText9)
-//
-//                        discount.addTextChangedListener(object : TextWatcher {
-//                            override fun afterTextChanged(s: Editable?) {
-//                            }
-//
-//                            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//                            }
-//
-//                            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//
-////
-////                                if (s!!.isNotEmpty())
-////
-////                                    try {
-////                                        if (s.toString().toFloat()>item.size){
-////                                            Toast.makeText(
-////                                                this@BillActivity2,
-////                                                "الوزن كبير"   , Toast.LENGTH_SHORT
-////                                            ).show()
-////
-////                                            Toast.makeText(
-////                                                this@BillActivity2,
-////                                                "الوزن كبير"   , Toast.LENGTH_SHORT
-////                                            ).show()
-////                                        }else{
-////                                            collection = (s.toString().toFloat()*item.CustomerSellingPrice/item.size).toFloat()
-////                                            billDiscountEditText9.setText(collection.toString())
-////
-////                                        }
-////
-////                                    }catch (e:java.lang.Exception){
-////                                        billDiscountEditText9.setText("0")
-////                                    }
-//                            }
-//
-//                        })
-//                        lateinit var discribtionText: TextInputEditText
-//                        discribtionText = dialog2?.findViewById(R.id.discribtionText)
-//
-//                        lateinit var spinner: Spinner
-//                        spinner = dialog2?.findViewById(R.id.spinner)
-//
-//                        val languages = resources.getStringArray(R.array.Languages)
-//                        if (spinner != null) {
-//                            val adapter = ArrayAdapter(
-//                                this,
-//                                android.R.layout.simple_spinner_item, languages
-//                            )
-//                            spinner.adapter = adapter
-//
-//                            spinner.onItemSelectedListener = object :
-//                                AdapterView.OnItemSelectedListener {
-//                                override fun onItemSelected(
-//                                    parent: AdapterView<*>,
-//                                    view: View, position: Int, id: Long
-//                                ) {
-//                                    textView100.setText(languages[position])
-//                                    if (languages[position].equals("فرق وزن")){
-//                                        discount2.setVisibility(View.VISIBLE);
-//
-//                                    }else{
-//                                        discount2.setVisibility(View.GONE);
-//
-//                                    }
-//                                    // discount.setText(languages[position].toString())
-//                                    //  discount.hint ="ادخل القيمة"
-//                                    Toast.makeText(
-//                                        this@BillActivity2,
-//                                        languages[position], Toast.LENGTH_SHORT
-//                                    ).show()
-//                                }
-//
-//                                override fun onNothingSelected(p0: AdapterView<*>?) {
-//                                    Log.d("sdkshf",p0.toString())
-//                                }
-//
-//                            }
-//                        }
-//                        ok.setOnClickListener {
-//                            discountEditTextk.setText(billDiscountEditText9.text.toString())
-//                            textView98.setText(discribtionText.text.toString())
-//                            textView99.setText(discount.text.toString())
-//                            dialog2.dismiss()
-//                        }
-//
-//                    }
-//                    buttonAddToSalingBill.setOnClickListener {
-//
-//
-//                        var x: Int = Integer.parseInt(NumberOfUnits.text.toString())
-//
-//                        var z = x.toDouble()
-//
-//
-//                        var TotalPrice: Double
-//                        TotalPrice =
-//                            sellingPriceItem.toDouble() * z - discountEditTextk.text.toString()
-//                                .toDouble()
-//
-//
-//                        listBill.add(
-//                            SaleingBill(
-//                                1,
-//                                "1",
-//                                itemName.toString(),
-//                                NumberOfUnits.text.toString(),
-//                                itemSiza,
-//                                sellingPriceItem,
-//                                discountEditTextk.text.toString(),
-//                                TotalPrice.toString(),
-//                                itemID.toString(),
-//                                supplierId.toString(),
-//                                supplierPrice.toString(),
-//                                1.0,
-//                                "  بيع :",
-//                                ""
-//                                ,
-//                                "",
-//                                "",0.0
-//                            )
-//                        )
-//                        var s = 0.0
-//                        for (item in listBill) {
-//                            if (item.TransactionType == 1) {
-//                                var z = item.TotalPrice.toDouble()
-//                                s = s + z
-//                            }
-//
-//
-//                        }
-//
-//
-//                        binding.Totalss.setText(s.toString())
-//
-//
-//                        val totals = binding.Totalss.text.toString().toDouble() -
-//                                binding.Totalss2.text.toString().toDouble() +
-//                                binding.Totalssz4.text.toString().toDouble()
-//
-//                        binding.Totalss4.setText(
-//                            totals.toString()
-//                        )
-//
-//
-//
-//                        adapte.submitList(listBill)
-//                        adapte.notifyItemInserted(listBill.size - 1)
-//                        dialog.dismiss()
-//
-//                    }
-//
-//                    buttonAddToReturnsBill.setOnClickListener {
-//                        Log.d("jhswjllq", "ReturnsBill")
-//
-//
-//                        var price = sellingPriceItem.toString()
-//                        Log.d("price", price)
-//
-//                        var x: Int = Integer.parseInt(NumberOfUnits.text.toString())
-//                        Log.d("price", x.toString())
-//
-//                        var z = x.toDouble()
-//                        Log.d("price", z.toString())
-//
-//
-//                        var TotalPrice: Double
-//                        TotalPrice = price.toDouble() * z
-//
-//
-//                        var PriceAfterEditSize: Double
-//                        PriceAfterEditSize =
-//                            sizesEditText.text.toString().toDouble() * TotalPrice.toString()
-//                                .toDouble()
-//
-//
-//                        var TotalPriceAfterEditSize: Double
-//                        TotalPriceAfterEditSize =
-//                            PriceAfterEditSize / itemSiza.toString().toDouble()
-//                        listBill.add(
-//                            SaleingBill(
-//                                0,
-//                                "1",
-//                                itemName,
-//                                NumberOfUnits.text.toString(),
-//                                sizesEditText.text.toString(),
-//                                sellingPriceItem.toString(),
-//                                discountEditTextk.text.toString(),
-//                                TotalPriceAfterEditSize.toString(),
-//                                itemID.toString(),
-//                                supplierId.toString(),
-//                                sellingPriceItem.toString(),
-//                                1.0,
-//                                "",
-//                                "  مرتجع :   "
-//                                ,
-//                                "",
-//                                "",0.0
-//                            )
-//                        )
-//                        var TotalPrices = 0.0
-//                        for (item in listBill) {
-//                            if (item.TransactionType == 0) {
-//
-//                                var z = item.TotalPrice.toDouble()
-//                                TotalPrices = TotalPrices + z
-//                            }
-//                        }
-//                        binding.Totalss2.setText(TotalPrices.toString())
-//
-//                        val totals = binding.Totalss.text.toString().toDouble()
-//                        -binding.Totalss2.text.toString().toDouble()
-//                        +binding.Totalssz4.text.toString().toDouble()
-//
-//                        binding.Totalss4.setText(
-//                            totals.toString()
-//                        )
-//
-//                        adapte.submitList(listBill)
-//
-//                        adapte.notifyDataSetChanged()
-//
-//                        adapte.notifyItemInserted(listBill.size - 1)
-//
-//
-//                        dialog.dismiss()
-//
-//                    }
-//
 
                 }
                 is com.tbi.supplierplus.framework.ui.login.State.Error -> {
@@ -814,16 +487,19 @@ class BillActivity2 : AppCompatActivity() {
 
 
         binding.imageView9.setOnClickListener {
-            // Initialize dialog
             SimpleSearchDialogCompat(this, "ادخل اسم المنتج  " + "\n", "search", null,
                 inits(), SearchResultListener { baseSearchDialogCompat, item, pos ->
 
+                    //       Log.d("buttonAddToSalingBisll", pos.toString())
+                    //   val bal =it.bal
                     val sizez = item.size
 
+                    val bal = item.bal
+                    val cunt=item.count
                     val split = DialogBill(item.item)
 
-
                     val code1 = item.Item_ID.toString()
+
                     val dialog = this?.let { it1 -> Dialog(it1) }
                     dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
                     //بيعمل بلوك للباك جراوند
@@ -862,6 +538,7 @@ class BillActivity2 : AppCompatActivity() {
                     lateinit var NumberOfUnits: TextInputEditText
                     NumberOfUnits = dialog?.findViewById(R.id.counterEditTextm)
 
+
                     lateinit var sizesEditText: TextInputEditText
                     sizesEditText = dialog?.findViewById(R.id.sizesEditTextm)
                     sizesEditText.setText(item.size.toString())
@@ -884,6 +561,8 @@ class BillActivity2 : AppCompatActivity() {
 
                     lateinit var textView100: TextView
                     textView100 = dialog.findViewById(R.id.textView100)
+
+                    var valid=NumberOfUnits.text.toString().toDouble()* item.CustomerSellingPrice
 
 
                     lateinit var reason: Button
@@ -953,7 +632,8 @@ class BillActivity2 : AppCompatActivity() {
                                         } else {
                                             collection = (s.toString()
                                                 .toFloat() * item.CustomerSellingPrice / item.size).toFloat()
-                                            billDiscountEditText9.setText(collection.toString())
+                                            val number3digits:Double = String.format("%.2f", collection).toDouble()
+                                            billDiscountEditText9.setText(number3digits.toString())
 
                                         }
 
@@ -1000,16 +680,32 @@ class BillActivity2 : AppCompatActivity() {
                                 }
 
                                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                                    Log.d("sdkshf", p0.toString())
+                                    //          Log.d("sdkshf", p0.toString())
                                 }
 
                             }
                         }
                         ok.setOnClickListener {
-                            discountEditTextk.setText(billDiscountEditText9.text.toString())
-                            textView98.setText(discribtionText.text.toString())
-                            textView99.setText(discount.text.toString())
-                            dialog2.dismiss()
+
+                            if (discribtionText.text.isNullOrEmpty() ||discribtionText.text.toString() ==" " )
+                            {
+                                discribtionText.setError("This field is required")
+                            }
+                            else{
+
+                                if (valid>billDiscountEditText9.text.toString().toDouble())
+                                {
+                                    discountEditTextk.setText(billDiscountEditText9.text.toString())
+                                    textView98.setText(discribtionText.text.toString())
+                                    textView99.setText(discount.text.toString())
+                                    dialog2.dismiss()
+                                }else{
+                                    Toast.makeText(
+                                        this@BillActivity2,
+                                        "الخصم اكبر من المسموح", Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            }
                         }
 
                     }
@@ -1018,95 +714,113 @@ class BillActivity2 : AppCompatActivity() {
                     lateinit var buttonAddToSalingBill: Button
                     buttonAddToSalingBill = dialog.findViewById(R.id.button2b)
 
+
                     buttonAddToSalingBill.setOnClickListener {
 
 
-                        var price = item.Price_ID.toString()
-                        Log.d("roiuwk", item.Price_ID.toString())
-                        Log.d("roiuwk", item.CustomerSellingPrice.toString())
-                        Log.d("roiuwk", item.getPrice_ID())
 
-                        var x: Int = Integer.parseInt(NumberOfUnits.text.toString())
+                        if (bal - cunt-NumberOfUnits.text.toString().toDouble()< 0.0) {
 
-                        var z = x.toDouble()
+                            Toast.makeText(this, "العدد المطلوب اكبر من المتاح", Toast.LENGTH_SHORT).show()
+                        } else {
+                            list[pos].count+=NumberOfUnits.text.toString().toDouble()
 
 
-                        var TotalPrice: Double
-                        TotalPrice =
-                            item.CustomerSellingPrice.toDouble() * z - discountEditTextk.text.toString()
-                                .toDouble()
+
+                            var price = item.Price_ID.toString()
+                            //          Log.d("roiuwk", item.Price_ID.toString())
+                            //          Log.d("roiuwk", item.CustomerSellingPrice.toString())
+                            //          Log.d("roiuwk", item.getPrice_ID())
+
+                            var x: Int = Integer.parseInt(NumberOfUnits.text.toString())
+
+                            var z = x.toDouble()
 
 
-                        listBill.add(
-                            SaleingBill(
-                                1,
-                                "1",
-                                split.name,
-                                NumberOfUnits.text.toString(),
-                                sizez.toString(),
-                                item.CustomerSellingPrice.toString(),
-                                discountEditTextk.text.toString(),
-                                TotalPrice.toString(),
-                                code1,
-                                item.Supplier_ID.toString(),
-                                item.Supply_Price.toString(),
-                                1.0,
-                                "  بيع :",
-                                "",
-                                textView98.text.toString(),
-                                textView100.text.toString(),
-                                textView99.text.toString().toDouble()
+                            var TotalPrice: Double
+                            TotalPrice =
+                                item.CustomerSellingPrice.toDouble() * z - discountEditTextk.text.toString()
+                                    .toDouble()
 
 
+                            listBill.add(
+                                SaleingBill(
+                                    1,
+                                    "1",
+                                    split.name,
+                                    NumberOfUnits.text.toString(),
+                                    sizez.toString(),
+                                    item.CustomerSellingPrice.toString(),
+                                    discountEditTextk.text.toString(),
+                                    TotalPrice.toString(),
+                                    code1,
+                                    item.Supplier_ID.toString(),
+                                    item.Supply_Price.toString(),
+                                    1.0,
+                                    "  بيع :",
+                                    "",
+                                    textView98.text.toString(),
+                                    textView100.text.toString(),
+                                    textView99.text.toString().toDouble()
+
+
+                                )
                             )
-                        )
-                        var s = 0.0
-                        for (item in listBill) {
-                            if (item.TransactionType == 1) {
-                                var z = item.TotalPrice.toDouble()
-                                s = s + z
+                            var s = 0.0
+                            for (item in listBill) {
+                                if (item.TransactionType == 1) {
+                                    var z = item.TotalPrice.toDouble()
+                                    s = s + z
+                                }
+
+
                             }
 
 
+                            binding.Totalss.setText(s.toString())
+
+
+                            val totals = binding.Totalss.text.toString().toDouble() -
+                                    binding.Totalss2.text.toString().toDouble() +
+                                    binding.Totalssz4.text.toString().toDouble()
+
+
+                            binding.Totalss4.setText(
+                                totals.toString()
+                            )
+
+                            adapte.submitList(listBill)
+                            adapte.notifyItemInserted(listBill.size - 1)
+
+                            dialog.dismiss()
+
+                            //    Toast.makeText(this, "العدد المطلوب اكبر من المتاح", Toast.LENGTH_SHORT).show()
                         }
 
 
-                        binding.Totalss.setText(s.toString())
-
-
-                        val totals = binding.Totalss.text.toString().toDouble() -
-                                binding.Totalss2.text.toString().toDouble() +
-                                binding.Totalssz4.text.toString().toDouble()
-
-
-                        binding.Totalss4.setText(
-                            totals.toString()
-                        )
-
-                        adapte.submitList(listBill)
-                        adapte.notifyItemInserted(listBill.size - 1)
-
-                        dialog.dismiss()
-
                     }
+                    //          Log.d("buttonAddToSalingBill", NumberOfUnits.text.toString() + "...")
+                    //          Log.d("buttonAddToSalingBill", bal.toString() + "...1")
+
+
                     buttonAddToReturnsBill.setOnClickListener {
-                        Log.d("jhswjllq", "ReturnsBill")
+                        //       Log.d("jhswjllq", "ReturnsBill")
 
 
                         var price = item.CustomerSellingPrice.toString()
-                        Log.d("price", price)
+                        //          Log.d("price", price)
 
                         var x: Int = Integer.parseInt(NumberOfUnits.text.toString())
-                        Log.d("price", x.toString())
+                        //          Log.d("price", x.toString())
 
                         var z = x.toDouble()
-                        Log.d("price", z.toString())
+                        //          Log.d("price", z.toString())
 
 
                         var TotalPrice: Double
                         TotalPrice = price.toDouble() * z
-                        Log.d("price", TotalPrice.toString())
-                        Log.d("price", item.CustomerSellingPrice.toString())
+                        //        Log.d("price", TotalPrice.toString())
+                        //        Log.d("price", item.CustomerSellingPrice.toString())
 
 
                         var PriceAfterEditSize: Double
@@ -1201,7 +915,7 @@ class BillActivity2 : AppCompatActivity() {
 
                 is State.Success -> if (it.data.State == 1) {
                     Log.d("makcvfvfeText", it.data.Item!!.item)
-                    Log.d("makeText", it.data.Message)
+                    //         Log.d("makeText", it.data.Message)
                     it.data.Item
                     var item = it.data.Item
                     val split = DialogBill(it.data.Item.item)
@@ -1324,21 +1038,21 @@ class BillActivity2 : AppCompatActivity() {
                     }
                     buttonAddToReturnsBill.setOnClickListener {
 
-                        Log.d("jhswjllq", "ReturnsBill")
+                        //      Log.d("jhswjllq", "ReturnsBill")
                         var price = item.CustomerSellingPrice.toString()
-                        Log.d("price", price)
+                        //      Log.d("price", price)
 
                         var x: Int = Integer.parseInt(NumberOfUnits.text.toString())
-                        Log.d("price", x.toString())
+                        //      Log.d("price", x.toString())
 
                         var z = x.toDouble()
-                        Log.d("price", z.toString())
+                        //       Log.d("price", z.toString())
 
 
                         var TotalPrice: Double
                         TotalPrice = price.toDouble() * z
-                        Log.d("price", TotalPrice.toString())
-                        Log.d("price", item.CustomerSellingPrice.toString())
+                        //      Log.d("price", TotalPrice.toString())
+                        //      Log.d("price", item.CustomerSellingPrice.toString())
 
 
                         var PriceAfterEditSize: Double
@@ -1375,7 +1089,7 @@ class BillActivity2 : AppCompatActivity() {
                         var TotalPrices = 0.0
                         for (item in listBill) {
                             if (item.TransactionType == 0) {
-                                Log.d("qqqqqq", item.TotalPrice)
+                                //       Log.d("qqqqqq", item.TotalPrice)
                                 var z = item.TotalPrice.toDouble()
                                 TotalPrices = TotalPrices + z
                             }
@@ -1403,7 +1117,7 @@ class BillActivity2 : AppCompatActivity() {
 
                 } else {
                     Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
-                    Log.d("makeText", it.data.Message)
+                    //    Log.d("makeText", it.data.Message)
 
                 }
 
@@ -1434,10 +1148,10 @@ class BillActivity2 : AppCompatActivity() {
 
             }
             startActivity(intent)
-            Log.e("PrintError1", "e.message.toString()")
+            // Log.e("PrintError1", "e.message.toString()")
 
 
-            Toast.makeText(baseContext, "it.item", Toast.LENGTH_SHORT).show()
+            //    Toast.makeText(baseContext, "it.item", Toast.LENGTH_SHORT).show()
 
         }
 
@@ -1564,7 +1278,7 @@ class BillActivity2 : AppCompatActivity() {
 
 
                     Log.d("selling", it.data.Item!!.Supply_Price.toString())
-                    val split = DialogBill(it.data.Item.item)
+                    val split = DialogBill(it.data.Item!!.item)
 
                     Toast.makeText(baseContext, it.data.Message, Toast.LENGTH_SHORT).show()
 
@@ -1797,6 +1511,18 @@ class BillActivity2 : AppCompatActivity() {
         }
 
     }
+
+
+
+
+//    private fun CheckAllFields(): Boolean {
+//        if (binding.discribtionText.length() == 0) {
+//            binding.discribtionText.setError("This field is required")
+//            return false
+//        }
+//        return true
+//    }
+
 }
 
 

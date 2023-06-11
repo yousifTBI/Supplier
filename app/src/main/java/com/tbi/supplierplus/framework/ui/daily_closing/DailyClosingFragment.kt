@@ -107,6 +107,9 @@ class DailyClosingFragment : Fragment() {
             }
 
 
+
+        }
+
 //            loading.startLoading()
 //            viewModel.closeTheDay()
 //            lifecycleScope.launch(){
@@ -128,9 +131,6 @@ class DailyClosingFragment : Fragment() {
 //                     }
 //                }
 //            }
-
-        }
-
         binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
                 binding.ViewPager.setCurrentItem(tab.position)

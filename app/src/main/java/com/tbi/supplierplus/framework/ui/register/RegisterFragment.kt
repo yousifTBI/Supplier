@@ -56,7 +56,7 @@ class RegisterFragment : Fragment() {
                            // it
                         )
                     )
-                    Log.i("ResultUserID", it.userID + it.userID.length)
+ //                   Log.i("ResultUserID", it.userID + it.userID.length)
                     viewModel.saveUserData(it)
                 }
             }

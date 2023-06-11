@@ -295,7 +295,9 @@
 
                         android:elevation="234dp"
                         android:ems="10"
+                        android:editable="false"
                         android:hint="الخصم"
+                        android:enabled="false"
                         android:inputType="numberDecimal"
                         android:text="0" />
 

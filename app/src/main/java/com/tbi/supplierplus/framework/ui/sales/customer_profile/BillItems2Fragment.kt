@@ -195,7 +195,7 @@ class BillItems2Fragment : Fragment() {
         viewModel.getProducers  .observe(viewLifecycleOwner){
 
                 list= it as ArrayList<Items>
-           Log.d("ddddd",list.get(0).getID())
+  //         Log.d("ddddd",list.get(0).getID())
          //   list.get(0).a
                 //  binding.recyclerView.adapter = adapte
                 //  adapte.submitList(it)
@@ -262,7 +262,7 @@ class BillItems2Fragment : Fragment() {
                         val code = intent.getStringExtra(QR_EXTRA)
                         // Timber.d("New QR code $code")
                         // now you have qr code here
-                        Log.d("zzzzzzzz",code.toString())
+      //                  Log.d("zzzzzzzz",code.toString())
                    Toast.makeText(activity, barcode.toString(), Toast.LENGTH_SHORT).show()
 
                     }

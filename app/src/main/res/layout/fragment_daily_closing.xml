@@ -134,8 +134,8 @@
 
         <Button
             android:id="@+id/closing_day_button"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/add_expense_button_background"
 

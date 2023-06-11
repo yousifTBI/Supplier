@@ -29,8 +29,9 @@ class CollectDebitFragment : Fragment() {
         viewModel.setUser(
             CollectDebitFragmentArgs.fromBundle(requireArguments()).user
         )
+
         viewModel. getDebits()
-        val adapter = CustomerDebitsAdapter(onClickListener = OnDebitClickListener {
+        var adapter = CustomerDebitsAdapter(onClickListener = OnDebitClickListener {
             viewModel.setDebit(it)
             viewModel.navigateToExecution()
         })

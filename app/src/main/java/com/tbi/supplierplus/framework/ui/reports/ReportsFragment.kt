@@ -40,10 +40,10 @@ class ReportsFragment : Fragment() {
             )
         }
         binding.CusReportID.setOnClickListener {
-            findNavController().navigate(
-                ReportsFragmentDirections.actionReportsFragmentToSelectCustomerFragment()
-
-            )
+//            findNavController().navigate(
+//                ReportsFragmentDirections.actionReportsFragmentToSelectCustomerFragment()
+//
+//            )
         }
 
 

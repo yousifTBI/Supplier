@@ -40,7 +40,7 @@ class RegisterViewModel @Inject constructor(
      fun login() = repository.login(getAndroidID(context), getSerialID())
 
     init {
-        Log.i("ResultAndroid", "${getAndroidID(context)}-${getSerialID()}")
+   //     Log.i("ResultAndroid", "${getAndroidID(context)}-${getSerialID()}")
     }
 
     suspend fun saveUserData(user: User) = dbRepository.save(user)

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -112,20 +113,23 @@ class CustomersFragment : Fragment() {
 
                     if (it.data.Details == null) {
                     } else {
-                      //  binding.branchCard.isVisible = false
+
+
+                        //  binding.branchCard.isVisible = false
                         //  Log.d("ddd",it.data.Details.BranchName)
+
                         binding.com.setText(it.data.Details.BranchName.toString() + " ")
                         binding.numOfRecord.setText(it.data.Details.Address.toString() + " ")
                         binding.comCode.setText(it.data.Details.RegionID.toString() + " ")
                         binding.branchcode.setText(it.data.Details.ContactName.toString() + " ")
-                     //   binding.BuildingNumber.setText(it.data.Details.Telephone1.toString()+" ")
-                     //  listDetails = it.data.Details as ArrayList<Details>
+                        binding.streat.setText(it.data.Details.Telephone1.toString()+" ")
+                        //  listDetails = it.data.Details as ArrayList<Details>
 
-        // lifecycleScope.launchWhenStarted{
-        //     viewModel.customes(activity!!)
-        //     viewModel.getAllCustomers()
-        // }
-        // viewModel.Regionsd2.observe(viewLifecycleOwner){
+                        // lifecycleScope.launchWhenStarted{
+                        //     viewModel.customes(activity!!)
+                        //     viewModel.getAllCustomers()
+                        // }
+                        // viewModel.Regionsd2.observe(viewLifecycleOwner){
 
                     }
 
@@ -142,28 +146,28 @@ class CustomersFragment : Fragment() {
             BranchesPopUp()
         }
 
-              viewModel.getAllBranchesLiveData.observe(viewLifecycleOwner) {
+        viewModel.getAllBranchesLiveData.observe(viewLifecycleOwner) {
 
-                  when (it) {
+            when (it) {
 
-                      is com.tbi.supplierplus.framework.ui.login.State.Loading -> binding.spinKit.isVisible =
-                          true
-                      is com.tbi.supplierplus.framework.ui.login.State.Success -> {
+                is com.tbi.supplierplus.framework.ui.login.State.Loading -> binding.spinKit.isVisible =
+                    true
+                is com.tbi.supplierplus.framework.ui.login.State.Success -> {
 
-                          binding.spinKit.isVisible = false
-                          if (it.data.Data == null) {
-                          } else {
-                              listBranches = it.data.Data
+                    binding.spinKit.isVisible = false
+                    if (it.data.Data == null) {
+                    } else {
+                        listBranches = it.data.Data
 
 
 
-                          }
-                      }
-                      is com.tbi.supplierplus.framework.ui.login.State.Error -> binding.spinKit.isVisible =
-                          false
+                    }
+                }
+                is com.tbi.supplierplus.framework.ui.login.State.Error -> binding.spinKit.isVisible =
+                    false
 
-                  }
-              }
+            }
+        }
 
 //
 //
@@ -226,15 +230,15 @@ class CustomersFragment : Fragment() {
 //            val Unpaid_deferred = it.Unpaid_deferred.toString()
 //            val CompanyName = it.item.toString()
 
-            val intent = Intent(activity, BillActivity2::class.java)
-                .apply {
-                    putExtra("Customer_ID", Customer_ID)
-                    putExtra("Unpaid_deferred", Unpaid_deferred)
-                    putExtra("CompanyName", CompanyName)
+                val intent = Intent(activity, BillActivity2::class.java)
+                    .apply {
+                        putExtra("Customer_ID", Customer_ID)
+                        putExtra("Unpaid_deferred", Unpaid_deferred)
+                        putExtra("CompanyName", CompanyName)
 
-                }
-            startActivity(intent)
-        }
+                    }
+                startActivity(intent)
+            }
         }
 //        val adapte = AllCustomersAdapter(OnClickListenerss {
 //
@@ -385,18 +389,34 @@ class CustomersFragment : Fragment() {
         SimpleSearchDialogCompat(context, "ادخل اسم الفرع  " + "\n", "search", null,
             listBranches, SearchResultListener { baseSearchDialogCompat, item, pos ->
 
-                  Customer_ID =item.ID().toString()
-                  Unpaid_deferred =item.Unpaid_deferred().toString()
-                CompanyName =item.getTitle()
 
 
-                Log.d("Unpaid_deferred",item.Unpaid_deferred().toString())
-                barnchId =item.ID()
-                item.Unpaid_deferred().toString()
-                viewModel.GetAllBranchDetailsVM(item.ID())
-                ComName = item.getTitle()
-                binding.textView22.setText(ComName)
-                binding.BuildingNumber.setText(item.Unpaid_deferred().toString() + " ")
+                if (  listBranches[pos].salesStatus =="False") {
+                    // Handle the unclickable item
+                    // Optionally, you can show a message or perform any other desired action
+                    Toast.makeText(context, "هذا الفرع ليس تابع لك", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "هذا الفرع ليس تابع لك", Toast.LENGTH_SHORT).show()
+                    return@SearchResultListener
+                }
+                else{
+                    Customer_ID =item.ID().toString()
+                    Unpaid_deferred =item.Unpaid_deferred().toString()
+                    CompanyName =item.getTitle()
+
+
+
+                    barnchId =item.ID()
+                    item.Unpaid_deferred().toString()
+                    //  Log.d("Unpaid_defxserred",item.ID().toString())
+                    viewModel.GetAllBranchDetailsVM(item.ID())
+                    ComName = item.getTitle()
+                    binding.textView22.setText(ComName)
+                    binding.BuildingNumber.setText(item.Unpaid_deferred().toString() + " ")
+                }
+
+
+
+
                 baseSearchDialogCompat.dismiss()
             }).show()
     }
@@ -410,7 +430,7 @@ class CustomersFragment : Fragment() {
     }
 
     fun branchApi(branchID: Int) {
-      //  viewModel.GetAllBranchDetailsVM(branchID)
+        //  viewModel.GetAllBranchDetailsVM(branchID)
         viewModel.GetAllBranchesVM(branchID)
         listBranches.clear()
 
@@ -429,10 +449,13 @@ class CustomersFragment : Fragment() {
     private fun CheckAllFields(): Boolean {
         if (companyId == -333) {
             binding.textView21.setError("This field is required")
+            val toast = Toast.makeText(context, "اختار الشركه  ", Toast.LENGTH_LONG)
+            toast.show()
             return false
         }
         if (barnchId == -333) {
             binding.textView22.setError("This field is required")
+            val toast = Toast.makeText(context, "اختار الفرع ", Toast.LENGTH_LONG)
             return false
         }
 

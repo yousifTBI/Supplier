@@ -236,10 +236,10 @@ class ExecuteCustomerFragment : Fragment() {
             // tell the user data were sent
         } catch (e: NullPointerException) {
             e.printStackTrace()
-            Log.e("PrintError1", e.message.toString())
+  //          Log.e("PrintError1", e.message.toString())
         } catch (e: Exception) {
             e.printStackTrace()
-            Log.e("PrintErro2r", e.message.toString())
+    //        Log.e("PrintErro2r", e.message.toString())
 
         }
         closeBT()

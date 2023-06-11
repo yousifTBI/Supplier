@@ -2,6 +2,7 @@ package com.tbi.supplierplus.framework.ui.sales.addBranch
 
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -20,11 +21,11 @@ import com.tbi.supplierplus.business.pojo.addCustomer.Ranges
 import com.tbi.supplierplus.business.pojo.addCustomer.Regions
 import com.tbi.supplierplus.databinding.FragmentAddBranchBinding
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
+import com.tbi.supplierplus.framework.getLocation.MyLocation
 import com.tbi.supplierplus.framework.ui.login.State
 import com.tbi.supplierplus.framework.ui.sales.SalesViewModel
 import com.tbi.supplierplus.framework.ui.sales.addCompany.Data
 import com.tbi.supplierplus.framework.ui.sales.add_customer.AddCustomerViewModel
-import com.tbi.supplierplus.framework.ui.sales.customers.product_selection.CustomerModel
 import dagger.hilt.android.AndroidEntryPoint
 import ir.mirrajabi.searchdialog.SimpleSearchDialogCompat
 import ir.mirrajabi.searchdialog.core.SearchResultListener
@@ -47,38 +48,96 @@ class AddBranchFragment : Fragment() {
     var RangeName = ""
     var RegionName = ""
     var RegionId = -333
-        override fun onCreateView(
+    var loc: Location? = null
+    override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-            binding = FragmentAddBranchBinding.inflate(inflater)
-            viewModel = ViewModelProvider(this).get(AddCustomerViewModel::class.java)
+        binding = FragmentAddBranchBinding.inflate(inflater)
+        viewModel = ViewModelProvider(this).get(AddCustomerViewModel::class.java)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context!!)
+        binding.spinKit.isVisible = false
 
-            binding.spinKit.isVisible = false
 
-            binding.companyCard.setOnClickListener {
-                popUp()
+
+        binding.companyCard.setOnClickListener {
+            popUp()
+        }
+
+
+        binding.RangeCard.setOnClickListener {
+            RangepopUp()
+        }
+
+
+
+        binding.RegionCard.setOnClickListener {
+            RegionpopUp()
+        }
+
+
+        val locationResult: MyLocation.LocationResult = object : MyLocation.LocationResult() {
+            override fun gotLocation(location: Location) {
+                loc = location
+                //   System.out.println("allah: " + loc!!.latitude)
+                //   System.out.println("allah: " + loc!!.longitude)
+                long = loc!!.longitude
+                lat = loc!!.latitude
+
+            }
+        }
+
+        val myLocation =
+            MyLocation()
+
+
+        myLocation.getLocation(context, locationResult)
+
+        binding.SubmittttttID.setOnClickListener {
+
+            // checkPermissions()
+
+
+            // fetchLocation()
+
+            Log.d("latitude",long.toString())
+            if (CheckAllFields()) {
+                binding.spinKit.isVisible = true
+
+
+                if (CheckAllFields()) {
+                    viewModel.AddBranchVM(
+                        AddBranchModel(
+                            1,
+                            binding.com.text.toString(),
+                            binding.numOfRecord.text.toString(),
+                            binding.comCode.text.toString(),
+                            binding.branchcode.text.toString(),
+                            binding.streat.text.toString(),
+                            binding.BuildingNumber.text.toString(),
+                            "",
+                            "",
+                            "",
+                            "",
+                            SharedPreferencesCom.getInstance().gerSharedDistributor_ID()
+                                .toInt(),
+                            64,
+                            RegionId,
+                            Idd,
+                            loc!!.latitude,
+                            loc!!.longitude,
+                            binding.BuildingNumber.text.toString(),
+                            SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt()
+                        )
+                    )
+
+
+                }
+
             }
 
-
-            binding.RangeCard.setOnClickListener {
-                RangepopUp()
-            }
-
-
-
-            binding.RegionCard.setOnClickListener {
-                RegionpopUp()
-            }
-
-
-
-
-            binding.SubmittttttID.setOnClickListener {
-
-
-                Log.d("sdsret",Idd.toString())
+            //               Log.d("sdsret",Idd.toString())
 //            val json=    AddBranchModel(
 //                    1,
 //                    binding.com.text.toString(),
@@ -100,102 +159,74 @@ class AddBranchFragment : Fragment() {
 //                    binding.BuildingNumber.text.toString(),
 //                SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt()
 //                ).toJson()
-  //              Log.d("AddBranchVM",json)
+            //              Log.d("AddBranchVM",json)
 
 
-                if (CheckAllFields()){
-                viewModel.AddBranchVM(
-                    AddBranchModel(
-                        1,
-                        binding.com.text.toString(),
-                        binding.numOfRecord.text.toString(),
-                        binding.comCode.text.toString(),
-                        binding.branchcode.text.toString(),
-                        binding.streat.text.toString(),
-                        binding.BuildingNumber.text.toString(),
-                        "",
-                        "",
-                        "",
-                        "",
-                        SharedPreferencesCom.getInstance().gerSharedDistributor_ID().toInt(),
-                        64,
-                        RegionId,
-                        Idd,
-                        1.0,
-                        1.0,
-                        binding.BuildingNumber.text.toString(),
-                        SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt()
-                                          )
-                )
+        }
+
+        viewModel.addBranchLiveData.observe(viewLifecycleOwner) {
+            when (it) {
+
+                is State.Loading -> binding.spinKit.isVisible = true
+                is State.Success -> {
+                    binding.spinKit.isVisible = false
 
 
+                    Toast.makeText(context, it.data.Message, Toast.LENGTH_SHORT).show()
+                    binding.com.setText("")
+                    binding.numOfRecord.setText("")
+                    binding.comCode.setText("")
+                    binding.branchcode.setText("")
+                    binding.streat.setText("")
+                    binding.BuildingNumber.setText("")
 
-            }
-            }
-
-            viewModel.addBranchLiveData.observe(viewLifecycleOwner) {
-                when (it) {
-
-                    is State.Loading -> binding.spinKit.isVisible = true
-                    is State.Success -> {
-                        binding.spinKit.isVisible = false
-
-
-                        Toast.makeText(context, it.data.Message, Toast.LENGTH_SHORT).show()
-                        binding.com.setText("")
-                        binding.numOfRecord.setText("")
-                        binding.comCode.setText("")
-                        binding.branchcode.setText("")
-                        binding.streat.setText("")
-                        binding.BuildingNumber.setText("")
-
-                    }
-                    is State.Error -> {
-                        binding.spinKit.isVisible = false
-                        Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
-                    }
+                }
+                is State.Error -> {
+                    binding.spinKit.isVisible = false
+                    Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
                 }
             }
+        }
 
-          //  SharedPreferencesCom.getInstance().gerSharedUser_ID()
-            salesViewModel.GetRange( SharedPreferencesCom.getInstance().gerSharedUser_ID())
-            salesViewModel.RangesLiveData.observe(viewLifecycleOwner){
+        //  SharedPreferencesCom.getInstance().gerSharedUser_ID()
+        salesViewModel.GetRange( SharedPreferencesCom.getInstance().gerSharedUser_ID())
+        salesViewModel.RangesLiveData.observe(viewLifecycleOwner){
 
-                   if (it.isNullOrEmpty()){
-                   } else{
-                        RangeList= it as ArrayList<Ranges>
+            if (it.isNullOrEmpty()){
+            } else{
+                RangeList= it as ArrayList<Ranges>
 
             }
-            }
+        }
 
 
-            salesViewModel.RegionsLiveData.observe(viewLifecycleOwner){
-                if (it.isNullOrEmpty()){}
-                else{
+        salesViewModel.RegionsLiveData.observe(viewLifecycleOwner){
+            if (it.isNullOrEmpty()){}
+            else{
                 RegionList = it as ArrayList<Regions>
             }
-            }
+        }
 
 
 
-            viewModel.GetAllCompaniesVM()
-            viewModel.  getAllCompaniesLiveData.observe(viewLifecycleOwner) {
-                when (it) {
+        viewModel.GetAllCompaniesVM()
+        viewModel.  getAllCompaniesLiveData.observe(viewLifecycleOwner) {
+            when (it) {
 
-                    is State.Loading -> binding.spinKit.isVisible = true
-                    is State.Success -> {
-                        binding.spinKit.isVisible = false
-                        listCom= it.data.Data as ArrayList<Data>
+                is State.Loading -> binding.spinKit.isVisible = true
+                is State.Success -> {
+                    binding.spinKit.isVisible = false
+                    listCom= it.data.Data as ArrayList<Data>
 
-
-                    }
-                    is State.Error ->
-                    {
-                        binding.spinKit.isVisible = false
-                    }
 
                 }
+                is State.Error ->
+                {
+                    binding.spinKit.isVisible = false
+                }
+
             }
+        }
 
 
 
@@ -281,33 +312,35 @@ class AddBranchFragment : Fragment() {
                 if (CheckAllFields()) {
                     binding.spinKit.isVisible=true
 
-                    viewModel.addCustomerVM(
-                        CustomerModel(
-                            1,
-                            binding.com.text.toString(),
-                            binding.numOfRecord.text.toString(),
-                            binding.comCode.text.toString(),
-                            binding.branchcode.text.toString(),
-                            binding.streat.text.toString(),
-                            binding.BuildingNumber.text.toString(),
-                            "",
-                            "sample string 9",
-                            "2023-05-20T11:07:07.9181084+03:00",
-                            "sample string 10",
-                            1,
-                            0,
-                            1,
-                            "sample string 11",
-                            SharedPreferencesCom.getInstance().gerSharedUser_ID(),
 
-                            //  SharedPreferencesCom.getInstance().gerSharedDistributor_ID(),
-
-//                        binding.regin.text.toString(),
-//                        binding.postalcode.text.toString(),
-                            //                        it.latitude,
-                            //                        it.longitude
+                    if (CheckAllFields()){
+                        viewModel.AddBranchVM(
+                            AddBranchModel(
+                                1,
+                                binding.com.text.toString(),
+                                binding.numOfRecord.text.toString(),
+                                binding.comCode.text.toString(),
+                                binding.branchcode.text.toString(),
+                                binding.streat.text.toString(),
+                                binding.BuildingNumber.text.toString(),
+                                "",
+                                "",
+                                "",
+                                "",
+                                SharedPreferencesCom.getInstance().gerSharedDistributor_ID().toInt(),
+                                64,
+                                RegionId,
+                                Idd,
+                                it.longitude,
+                                it.latitude,
+                                binding.BuildingNumber.text.toString(),
+                                SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt()
+                            )
                         )
-                    )
+
+
+
+                    }
 
 
                     viewModel.AddBranchVM(
@@ -343,11 +376,11 @@ class AddBranchFragment : Fragment() {
                 }
                 long = it.longitude
                 lat = it.latitude
-                Log.d("gmmIntentUdsdri", long.toString()+"two")
+                Log.d("gmmIntentUri", long.toString()+"two")
 
 //                 val gmmIntentUri =
 //                     Uri.parse("geo:$lat,$long?q=hotels")
-// //                Log.d("gmmIntentUri", long+"three")
+                //               Log.d("gmmIntentUri", long+"three")
 //                 val mapIntent = Intent(Intent.ACTION_VIEW, gmmIntentUri)
 //                 mapIntent.setPackage("com.google.android.apps.maps")
 //                 startActivity(mapIntent)
@@ -367,18 +400,21 @@ class AddBranchFragment : Fragment() {
         } else if (binding.comCode.length() == 0) {
             binding.comCode.setError("This field is required")
             return false
-        } else if (binding.branchcode.length() == 0) {
-            binding.branchcode.setError("This field is required")
-            return false
-        } else if (binding.streat.length() == 0) {
-            binding.streat.setError("This field is required")
-            return false
-        } else if (binding.BuildingNumber.length() == 0) {
+        }
+//        else if (binding.branchcode.length() == 0) {
+//            binding.branchcode.setError("This field is required")
+//            return false
+//        }
+//        else if (binding.streat.length() == 0) {
+//            binding.streat.setError("This field is required")
+//            return false
+//        }
+        else if (binding.BuildingNumber.length() == 0) {
             binding.BuildingNumber.setError("This field is required")
             return false
         }
 
-      else if (binding.textView21.length() == 0) {
+        else if (binding.textView21.length() == 0) {
             binding.textView21.setError("This field is required")
             return false
         }
@@ -387,7 +423,7 @@ class AddBranchFragment : Fragment() {
             return false
         }
 
-      else if ( RegionId == -333) {
+        else if ( RegionId == -333) {
             binding.textView23.setError("This field is required")
             return false
         }
@@ -411,7 +447,7 @@ class AddBranchFragment : Fragment() {
 //                binding.BuildingNumber.setText(" ")
 //                binding.streat.setText(" ")
 
-             //   Idd = item.ID()
+                //   Idd = item.ID()
 //                Log.d("ddd", Idd.toString())
 //                ComName = item.getTitle()
 //                binding.textView21.setText(ComName)
@@ -437,7 +473,7 @@ class AddBranchFragment : Fragment() {
                 RangeName = item.getTitle()
                 binding.textView22.setText(RangeName)
                 salesViewModel.getRegions(SharedPreferencesCom.getInstance().gerSharedUser_ID(),item.RecordIDs())
-                Log.d("RegionName", item.RecordIDs())
+                //               Log.d("RegionName", item.RecordIDs())
                 baseSearchDialogCompat.dismiss()
             }).show()
     }

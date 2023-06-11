@@ -12,7 +12,12 @@ data class Items(
     val ItemGroup_ID: Int,
     val Supply_Price: Double,
     val CustomerSellingPrice: Double,
-    val Barcode: String
+
+    val Barcode: String,
+    val bal : Double,
+    var count:Double=0.0
+
+
 
 ) : Searchable {
     private val a: String

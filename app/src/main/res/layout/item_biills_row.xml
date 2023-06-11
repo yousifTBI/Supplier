@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.tbi.supplierplus.business.models.ItemsBillsModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/blue_rounded_filled100"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text='@{" المباع "}'
+
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text='@{" المرتجع"}'
+
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                tools:text="التاريخ" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text='@{" الفرع " }'
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                tools:text="الفاتورة" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text='@{"  الفاتورة  " }'
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+            android:layout_marginHorizontal="20dp"
+            android:background="@drawable/blue_rounded_filled1002"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text='@{"" + String.valueOf(data.sales)}'
+
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                tools:text="التاريخ" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginEnd="5dp"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:text='@{"" + String.valueOf(data.Return)}'
+
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                tools:text="التاريخ" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text='@{" ا"+String.valueOf(data.branchName) }'
+                android:textColor="@color/white"
+                android:textSize="16dp"
+                tools:text="الفاتورة" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.5"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text='@{" "+String.valueOf(data.billNo) }'
+                android:textColor="@color/white"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</layout>

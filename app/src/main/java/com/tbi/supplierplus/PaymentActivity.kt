@@ -19,6 +19,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.*
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.Toast
@@ -28,6 +29,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -37,11 +39,14 @@ import com.tbi.supplierplus.business.utils.LoadingDialog
 import com.tbi.supplierplus.business.utils.toJson
 import com.tbi.supplierplus.databinding.ActivityPaymentBinding
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
+import com.tbi.supplierplus.framework.ui.login.State
 import com.tbi.supplierplus.framework.ui.sales.SalesViewModel
+import com.tbi.supplierplus.framework.ui2.availableitemsBB.AvailableItemsViewModel
 import com.tbi.supplierplus.framework.utils.PrintPic
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -72,7 +77,7 @@ class PaymentActivity : AppCompatActivity() {
     lateinit var readBuffer: ByteArray
     var readBufferPosition = 0
     var counter = 0
-
+    var billNumToCreateQR =""
 
     @Volatile
     var stopWorker = false
@@ -87,12 +92,13 @@ class PaymentActivity : AppCompatActivity() {
     var TotalReturn=""
     var Unpaid_deferred=""
     val loading = LoadingDialog(this)
+    lateinit var availableItemsViewModel: AvailableItemsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_payment)
         viewModel = ViewModelProvider(this).get(SalesViewModel::class.java)
-
+        availableItemsViewModel = ViewModelProvider(this).get(AvailableItemsViewModel::class.java)
 
         val TotalSalse = intent.getStringExtra("TotalSalse")
         Unpaid_deferred = intent.getStringExtra("Unpaid_deferred").toString()
@@ -113,7 +119,11 @@ class PaymentActivity : AppCompatActivity() {
         //     Gson().fromJson<List<YourList>>("data", object : TypeToken<List<YourList?>?>() {}.type)
 
         // ArrayList<SaleingBill>=
+
+
         list = Gson().fromJson<List<SaleingBill>>(intent.getStringExtra("list"), object : TypeToken<List<SaleingBill?>?>() {}.type) as ArrayList<SaleingBill>
+
+
 
         //   binding.scanQra.setText(list.get(0).Items.toString())
 //https://stackoverflow.com/questions/12092612/pass-list-of-objects-from-one-activity-to-other-activity-in-android
@@ -123,8 +133,8 @@ class PaymentActivity : AppCompatActivity() {
 
         // val challenge: ArrayList<SaleingBill> = intent.extras.getParcelableArrayList("Birds")!!
         // var numberLists=ArrayList<SaleingBill>()
-//
-//
+
+
         binding.TotalafterDiscaunt.setText( Total)
         // var     numberList = intent .getSerializableExtra( "list" )
         // as ArrayList<SaleingBill>
@@ -133,7 +143,13 @@ class PaymentActivity : AppCompatActivity() {
             binding.progressBar2.isGone=true
             Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 
+
+
             if (it.State==1){
+                Log.d("billNumToCreateQR",it.Message+"msg")
+
+                var msgnum =it.Message
+
 
 
                 val dialog   = Dialog(this)
@@ -148,12 +164,40 @@ class PaymentActivity : AppCompatActivity() {
                 dialog.show()
 
                 numberOfBill=it.State
+
+
                 Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 //
-                GlobalScope.launch(Dispatchers.Default) {
-                    withContext(Dispatchers.Default){
-//
-                        CastlesPrinter("123",it.Message.toString())
+                GlobalScope.launch(Dispatchers.Main) {
+                    withContext(Dispatchers.Main){
+
+                        //  Log.d("billNumToCreateQR",billNumToCreateQR)
+
+                        //   Log.d("billNumToCreateQR",billNumToCreateQR)
+
+                        lifecycleScope.launch {
+                            availableItemsViewModel.GetBillQRCode(it.Message).collect {
+                                when (it) {
+                                    is State.Loading -> {}
+                                    is State.Success -> {
+
+                                        Log.d("billNumToCreateQR", it.data.item.toString())
+                                        Log.d("billNumToCreateQR","it.data.item.toString()")
+
+                                        billNumToCreateQR = it.data.item.toString()
+                                        CastlesPrinter( it.data.item.toString(),msgnum)
+                                    }
+                                    is State.Error -> {
+                                        Log.d("billNumToCreateQR","Error")
+
+                                    }
+                                }
+
+                            }
+                        }
+
+
+
                         //   registerBillAndPrint(it.Message.toString())
                     }}
                 // registerBillAndPrint()
@@ -196,6 +240,10 @@ class PaymentActivity : AppCompatActivity() {
             lateinit var discount: TextInputEditText
             discount = dialog2?.findViewById(R.id.billDiscountEditText1)
             // NumberOfUnits.text.toString()
+            discount.setVisibility(View.GONE)
+            lateinit var billDiscountEditText9: TextInputEditText
+            billDiscountEditText9 =
+                dialog2?.findViewById(R.id.billDiscountEditText9)
 
             lateinit var ok: Button
             ok = dialog2.findViewById(R.id.printbtn1)
@@ -241,7 +289,7 @@ class PaymentActivity : AppCompatActivity() {
             ok.setOnClickListener {
 
 
-                var discount1 = discount.text.toString()
+                var discount1 = billDiscountEditText9.text.toString()
                     .toDouble() + binding.billDiscountEditText.text.toString().toDouble()
                 // binding.billDiscountEditText.setText(discount)
 
@@ -312,7 +360,13 @@ class PaymentActivity : AppCompatActivity() {
 
         binding.progressBar2.isGone=true
         binding.printbtn.setOnClickListener {
-            showDefaultDialog(this)
+            if (binding.cashEditText.text.toString().toDouble() >binding.TotalafterDiscaunt.text.toString().toDouble())
+            {
+                Toast.makeText(applicationContext, "ادخل المبلغ بطريقة صحيحة", Toast.LENGTH_SHORT).show()
+            }else{
+                showDefaultDialog(this)
+            }
+
 
         }
     }
@@ -826,7 +880,7 @@ class PaymentActivity : AppCompatActivity() {
         val Currently_high = 20
         var ret = 0
         val print = CtPrint()
-        print.initPage(700)
+        print.initPage((list.size*280)+900)
         print.drawImage(textAsBitmap2(registerBillAndPrint2(billNum), 320, 27), 4, 30)
         print.printPage()
         var bitmap: Bitmap? = null
@@ -931,7 +985,7 @@ class PaymentActivity : AppCompatActivity() {
 //            //    int startRest= s.ItemName.indexOf(" ",15);
 //            //    String restOfItemName=s.ItemName.substring(startRest);
 //            //    s.ItemName=s.ItemName.substring(0,startRest);
-////
+//
 //            //      sb.append("  "+s.ItemName+"       "+s.contaty+"           "+s.balanc+"           "+"\n" +
 //            //            " "+restOfItemName+"\n" +"\n");
 //            //  }else {
@@ -1014,14 +1068,20 @@ class PaymentActivity : AppCompatActivity() {
         this. msgToPrint =
             msgToPrint.plus("ت.ض : ").plus(" 679/427/597 ")
                 .plus("\n")
-        this.  msgToPrint = msgToPrint.plus("التاريخ :").plus("9-10-2022 ")
+
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        val currentDate = sdf.format(Date())
+
+        this.  msgToPrint = msgToPrint.plus("التاريخ :").plus(currentDate.toString())
+
+
         this.  msgToPrint = msgToPrint.plus("   ")
         this.  msgToPrint.plus("\n")
-        this.  msgToPrint =
-            msgToPrint.plus("رقم الموبيل:  ").plus("01112272015 ")
-                .plus("\n")
+//        this.  msgToPrint =
+//            msgToPrint.plus("رقم الموبيل:  ").plus("01112272015 ")
+//                .plus("\n")
 
-        //
+
         //  msgToPrint = msgToPrint.plus("\n")
         //  val split= DialogBill(name)
         //   val
@@ -1034,7 +1094,7 @@ class PaymentActivity : AppCompatActivity() {
         //         .plus(" ").plus(SimpleDateFormat("hh:mm:ss").format(Date())).plus("\n")
 
         //   if (_bill.value!!.isNotEmpty()) {
-        this.   msgToPrint = msgToPrint.plus("==========الفاتورة==========")
+        this.   msgToPrint = msgToPrint.plus("========الفاتورة========")
         this.   msgToPrint = msgToPrint.plus("\n")
         //  repeat(_bill.value!!.size) {
 
@@ -1049,7 +1109,7 @@ class PaymentActivity : AppCompatActivity() {
                 this.      msgToPrint = msgToPrint.plus("   ")
                 this.      msgToPrint.plus("\n")
                 this.     msgToPrint = msgToPrint.plus("\n")
-                this.      msgToPrint = msgToPrint.plus("النوع :   " + listX.sals +listX.returns)
+                this.      msgToPrint = msgToPrint.plus(":" + listX.sals +listX.returns)
                 this.     msgToPrint = msgToPrint.plus("\n")
 
                 this.   msgToPrint.plus("\n")

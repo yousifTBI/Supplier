@@ -34,6 +34,9 @@ class DailyClosingAdapter (val onClickListener: OnDebitClickListeners): ListAdap
         getItem(position)?.let {
             Log.d("getCurriygentMoI1",it.ItemName+" ")
             holder.bind(it) }
+        holder.itemView.setOnClickListener {
+            getItem(position)?.let { it1 -> onClickListener.onClick(it1) }
+        }
 
       //  getItem(position).
 

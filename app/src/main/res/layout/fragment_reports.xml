@@ -29,11 +29,10 @@
                 android:src="@drawable/b1"
                 app:layout_constraintBottom_toBottomOf="@+id/reports_card"
                 app:layout_constraintEnd_toStartOf="@+id/reports_card"
-                app:layout_constraintHorizontal_bias="0.132"
+                app:layout_constraintHorizontal_bias="0.437"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/reports_card"
-                app:layout_constraintVertical_bias="0.916"
-                 />
+                app:layout_constraintVertical_bias="1.0" />
 
             <ImageView
                 android:id="@+id/reports_card"
@@ -41,22 +40,24 @@
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="152dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginEnd="84dp"
                 android:src="@drawable/daly"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+
                 android:id="@+id/dailyReportID"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_margin="18dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="128dp"
                 android:src="@drawable/ba5"
-                app:layout_constraintBottom_toBottomOf="@+id/reports_card"
-                app:layout_constraintEnd_toStartOf="@+id/reports_card"
-                app:layout_constraintStart_toEndOf="@+id/invoiceCard"
-                app:layout_constraintTop_toTopOf="@+id/reports_card" />
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@+id/invoiceCard"
+                app:layout_constraintTop_toBottomOf="@+id/textView89" />
 
             <TextView
                 android:id="@+id/textView89"
@@ -77,6 +78,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/reports_card" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/textView91"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,12 +94,15 @@
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_margin="18dp"
+                android:layout_marginTop="136dp"
                 android:src="@drawable/report3"
-                app:layout_constraintEnd_toEndOf="@+id/invoiceCard"
-                app:layout_constraintStart_toStartOf="@+id/invoiceCard"
-                app:layout_constraintTop_toBottomOf="@+id/textView89" />
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView89"
+                tools:layout_editor_absoluteX="134dp" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/textView94"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

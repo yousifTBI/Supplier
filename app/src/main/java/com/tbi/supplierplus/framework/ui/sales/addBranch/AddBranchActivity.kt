@@ -37,8 +37,8 @@ class AddBranchActivity : AppCompatActivity() {
         binding= DataBindingUtil.setContentView(this,R.layout.activity_add_branch)
         viewModel = ViewModelProvider(this).get(AddCustomerViewModel::class.java)
 
-        Log.d("djsod", SharedPreferencesCom.getInstance().gerSharedUser_ID()+
-                SharedPreferencesCom.getInstance().gerSharedDistributor_ID())
+ //       Log.d("djsod", SharedPreferencesCom.getInstance().gerSharedUser_ID()+
+ //               SharedPreferencesCom.getInstance().gerSharedDistributor_ID())
         //  viewModel.addCustomerVM()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         binding.SubmittttttID.setOnClickListener {
@@ -111,7 +111,7 @@ class AddBranchActivity : AppCompatActivity() {
 
         //        Log.d("gmmIntentUri", long+"lll")
         task.addOnSuccessListener {
-            Log.d("gmmIntentUri",it.latitude.toString())
+//            Log.d("gmmIntentUri",it.latitude.toString())
 
 
             if (it != null) {
@@ -119,7 +119,7 @@ class AddBranchActivity : AppCompatActivity() {
 
                 long = it.longitude
                 lat = it.latitude
-                Log.d("gmmIntentUdsdri", long.toString()+"two")
+ //               Log.d("gmmIntentUdsdri", long.toString()+"two")
 
 //                 val gmmIntentUri =
 //                     Uri.parse("geo:$lat,$long?q=hotels")

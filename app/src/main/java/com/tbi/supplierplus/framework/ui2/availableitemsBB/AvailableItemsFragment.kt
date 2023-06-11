@@ -36,7 +36,7 @@ class AvailableItemsFragment : Fragment() {
 
 
 
-            adapter = AvailableItemsAdapter(OnAvailableItemsClickListener {
+        adapter = AvailableItemsAdapter(OnAvailableItemsClickListener {
             val ItemID = it.ItemID
             val ItemName = it.ItemName
             val Barcode = it.Barcode
@@ -61,6 +61,31 @@ class AvailableItemsFragment : Fragment() {
 
         })
 
+
+
+
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            availableItemsViewModel.GetBillQRCode("70").collect {
+//                when (it) {
+//                    is State.Loading -> {}
+//                    is State.Success -> {
+//
+//                        Log.d("billNumToCreateQR", it.data.item.toString())
+//                        Log.d("billNumToCreateQR","it.data.item.toString()")
+//
+//                    }
+//                    is State.Error -> {
+//                        Log.d("billNumToCreateQR","Error")
+//
+//                    }
+//                }
+//
+//            }
+//        }
+
+
+
+
         viewLifecycleOwner.lifecycleScope.launch {
             availableItemsViewModel.getAvailableItems().collect {
                 when (it) {
@@ -69,14 +94,14 @@ class AvailableItemsFragment : Fragment() {
                     //binding.spinKit.isVisible = true
                     is State.Success -> {
                         binding.spinKit.isVisible = false
-                        Log.d("testSot", it.data.data[0].ItemName)
+                        //                     Log.d("testSot", it.data.data[0].ItemName)
                         adapter.submitList(it.data.data)
                         binding.recyclerView.adapter = adapter
 
 
                     }
                     is State.Error -> {
-                        Log.d("testSot", "2")
+                        //                      Log.d("testSot", "2")
                         binding.spinKit.isVisible = false
                         Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
                     }
@@ -103,14 +128,14 @@ class AvailableItemsFragment : Fragment() {
                     //binding.spinKit.isVisible = true
                     is State.Success -> {
                         binding.spinKit.isVisible = false
-                        Log.d("testSot", it.data.data[0].ItemName)
+                        //                   Log.d("testSot", it.data.data[0].ItemName)
                         adapter.submitList(it.data.data)
                         binding.recyclerView.adapter = adapter
 
 
                     }
                     is State.Error -> {
-                        Log.d("testSot", "2")
+                        //                   Log.d("testSot", "2")
                         binding.spinKit.isVisible = false
                         Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
                     }
@@ -124,7 +149,33 @@ class AvailableItemsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("kkkkkk","onResume")
+        viewLifecycleOwner.lifecycleScope.launch {
+            availableItemsViewModel.getAvailableItems().collect {
+                when (it) {
+
+                    is State.Loading -> {}
+                    //binding.spinKit.isVisible = true
+                    is State.Success -> {
+                        binding.spinKit.isVisible = false
+                        //                   Log.d("testSot", it.data.data[0].ItemName)
+                        adapter.submitList(it.data.data)
+                        binding.recyclerView.adapter = adapter
+
+
+                    }
+                    is State.Error -> {
+                        //                   Log.d("testSot", "2")
+                        binding.spinKit.isVisible = false
+                        Toast.makeText(context, it.messag, Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+            }
+
+
+        }
     }
+
+
 
 }

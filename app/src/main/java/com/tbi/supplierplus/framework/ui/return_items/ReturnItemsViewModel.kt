@@ -48,7 +48,7 @@ class ReturnItemsViewModel @Inject constructor(val repo: ReturnItemsRepository) 
             "2"
             ).collect {
                 returnItemsLiveData.value = it.data
-                Log.d("getReturn",it.Message)
+   //             Log.d("getReturn",it.Message)
             }
         }
     }

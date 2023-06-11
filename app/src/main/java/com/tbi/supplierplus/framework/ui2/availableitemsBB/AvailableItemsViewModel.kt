@@ -80,6 +80,31 @@ class AvailableItemsViewModel @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
+    fun getItemsBills( ItemID: Int) = wrapWithFlowApi {
+        api.GetItemsBillsAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt(),ItemID)
+    }.flowOn(Dispatchers.IO)
+
+
+    fun getSubmitChangeQuantity( value: Double,ID: Int) = wrapWithFlowApi {
+        api.GetSubmitChangeQuantityAPI(value,ID)
+    }.flowOn(Dispatchers.IO)
+
+
+
+    fun geSubmitChangeMortaga3Quantity( value: Double,ID: Int,amount: Double) = wrapWithFlowApi {
+        api.GeSubmitChangeMortaga3QuantityAPI(value,ID,amount)
+    }.flowOn(Dispatchers.IO)
+
+    fun GetBillQRCode( BillNo: String) = wrapWithFlowApi {
+        api.GetBillQRCodeAPI(BillNo)
+    }.flowOn(Dispatchers.IO)
+
+
+
+    fun GetUserInfo() = wrapWithFlowApi {
+        api.GetUserInfo(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt())
+    }.flowOn(Dispatchers.IO)
+
 
 }
 

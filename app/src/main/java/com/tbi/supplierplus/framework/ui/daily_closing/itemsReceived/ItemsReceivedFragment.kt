@@ -62,7 +62,7 @@ class ItemsReceivedFragment : Fragment() {
                         val adabter=AdapterItemsReceived()
                         binding.ReceivdClosingrecyclerView.adapter = adabter
                         binding.ReceivdClosingrecyclerView.setHasFixedSize(true)
-                        adabter.submitList(it.data.data)
+                       // adabter.submitList(it.data.data)
                     }
                     is State.Error -> {
                     }
