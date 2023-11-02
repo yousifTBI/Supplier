@@ -28,6 +28,10 @@ class ItemsReportFragment : Fragment() {
         binding = FragmentItemsReportBinding.inflate(inflater)
         //  binding.viewModel = viewModel
         binding.lifecycleOwner = this
+
+
+
+
         val adapter = ItemsReportAdapter(OnItemSettlementClickListener2{
 
         })

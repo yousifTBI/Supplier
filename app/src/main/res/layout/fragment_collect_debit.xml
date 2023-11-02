@@ -15,15 +15,13 @@
         android:layout_height="match_parent"
         android:background="@drawable/mainback">
         <SearchView
+            android:visibility="gone"
             android:id="@+id/searchView"
             android:layout_width="500dp"
-            android:layout_height="76dp"
+            android:layout_height="66dp"
             android:layout_marginTop="45dp"
             android:background="@drawable/gray_border"
-
             android:iconifiedByDefault="false"
-
-
             android:padding="10dp"
             android:queryHint="العميل"
             app:layout_constraintEnd_toEndOf="parent"
@@ -37,6 +35,7 @@
             android:layout_height="0dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintTop_toBottomOf="@+id/searchView"
+            tools:itemCount="2"
             tools:listitem="@layout/row_customer_debit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

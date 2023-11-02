@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -18,6 +19,7 @@ import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import com.tbi.supplierplus.framework.ui.sales.addCompany.Data
 import com.tbi.supplierplus.framework.ui.sales.addCompany.Details
 import com.tbi.supplierplus.framework.ui.sales.add_customer.AddCustomerViewModel
+import com.tbi.supplierplus.framework.ui2.mortag3.SellOrMortg3Activity
 import com.tbi.supplierplus.testAdabters.AllCustomersAdapter
 import com.tbi.supplierplus.testAdabters.OnClickListenerss
 import dagger.hilt.android.AndroidEntryPoint
@@ -112,13 +114,16 @@ class CustomersFragment : Fragment() {
 
                     if (it.data.Details == null) {
                     } else {
+
+
                       //  binding.branchCard.isVisible = false
                         //  Log.d("ddd",it.data.Details.BranchName)
+
                         binding.com.setText(it.data.Details.BranchName.toString() + " ")
                         binding.numOfRecord.setText(it.data.Details.Address.toString() + " ")
                         binding.comCode.setText(it.data.Details.RegionID.toString() + " ")
                         binding.branchcode.setText(it.data.Details.ContactName.toString() + " ")
-                     //   binding.BuildingNumber.setText(it.data.Details.Telephone1.toString()+" ")
+                        binding.streat.setText(it.data.Details.Telephone1.toString()+" ")
                      //  listDetails = it.data.Details as ArrayList<Details>
 
         // lifecycleScope.launchWhenStarted{
@@ -226,7 +231,7 @@ class CustomersFragment : Fragment() {
 //            val Unpaid_deferred = it.Unpaid_deferred.toString()
 //            val CompanyName = it.item.toString()
 
-            val intent = Intent(activity, BillActivity2::class.java)
+            val intent = Intent(activity, SellOrMortg3Activity::class.java)
                 .apply {
                     putExtra("Customer_ID", Customer_ID)
                     putExtra("Unpaid_deferred", Unpaid_deferred)
@@ -385,18 +390,34 @@ class CustomersFragment : Fragment() {
         SimpleSearchDialogCompat(context, "ادخل اسم الفرع  " + "\n", "search", null,
             listBranches, SearchResultListener { baseSearchDialogCompat, item, pos ->
 
-                  Customer_ID =item.ID().toString()
-                  Unpaid_deferred =item.Unpaid_deferred().toString()
-                CompanyName =item.getTitle()
 
 
-                Log.d("Unpaid_deferred",item.Unpaid_deferred().toString())
-                barnchId =item.ID()
-                item.Unpaid_deferred().toString()
-                viewModel.GetAllBranchDetailsVM(item.ID())
-                ComName = item.getTitle()
-                binding.textView22.setText(ComName)
-                binding.BuildingNumber.setText(item.Unpaid_deferred().toString() + " ")
+                if (  listBranches[pos].salesStatus =="False") {
+                    // Handle the unclickable item
+                    // Optionally, you can show a message or perform any other desired action
+                    Toast.makeText(context, "هذا الفرع ليس تابع لك", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "هذا الفرع ليس تابع لك", Toast.LENGTH_SHORT).show()
+                    return@SearchResultListener
+                }
+                else{
+                    Customer_ID =item.ID().toString()
+                    Unpaid_deferred =item.Unpaid_deferred().toString()
+                    CompanyName =item.getTitle()
+
+
+
+                    barnchId =item.ID()
+                    item.Unpaid_deferred().toString()
+                    //  Log.d("Unpaid_defxserred",item.ID().toString())
+                    viewModel.GetAllBranchDetailsVM(item.ID())
+                    ComName = item.getTitle()
+                    binding.textView22.setText(ComName)
+                    binding.BuildingNumber.setText(item.Unpaid_deferred().toString() + " ")
+                }
+
+
+
+
                 baseSearchDialogCompat.dismiss()
             }).show()
     }
@@ -429,10 +450,13 @@ class CustomersFragment : Fragment() {
     private fun CheckAllFields(): Boolean {
         if (companyId == -333) {
             binding.textView21.setError("This field is required")
+            val toast = Toast.makeText(context, "اختار الشركه  ", Toast.LENGTH_LONG)
+            toast.show()
             return false
         }
         if (barnchId == -333) {
             binding.textView22.setError("This field is required")
+            val toast = Toast.makeText(context, "اختار الفرع ", Toast.LENGTH_LONG)
             return false
         }
 

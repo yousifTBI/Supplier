@@ -13,6 +13,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/mainback"
         tools:context=".framework.ui.sales.add_customer.AddCustomerActivity">
+
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/spin_kit"
             style="@style/SpinKitView.Large.Circle"
@@ -23,14 +24,13 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintTop_toTopOf="parent" />
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
 
-            android:background="@android:color/transparent"
-            >
+            android:background="@android:color/transparent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout1"
@@ -88,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="32dp"
-
+                    android:inputType="number"
                     android:layout_marginTop="32dp"
                     app:layout_constraintBottom_toTopOf="@+id/branchId"
                     app:layout_constraintStart_toStartOf="parent"
@@ -99,6 +99,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint=" رقم الهاتف"
+                        android:inputType="number"
 
                         />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -111,7 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="32dp"
-
+                    android:inputType="number"
                     android:layout_marginTop="31dp"
                     app:layout_constraintBottom_toTopOf="@+id/streatId"
                     app:layout_constraintStart_toStartOf="parent"
@@ -121,8 +122,8 @@
                         android:id="@+id/branchcode"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
-                        android:hint="2 رقم الهاتف" />
+                        android:hint="2 رقم الهاتف"
+                        android:inputType="number" />
                 </com.google.android.material.textfield.TextInputLayout>
 
 

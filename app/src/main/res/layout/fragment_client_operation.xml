@@ -87,6 +87,32 @@
                 app:layout_constraintStart_toStartOf="@+id/returns_card"
                 app:layout_constraintTop_toBottomOf="@+id/returns_card" />
 
+            <ImageView
+
+                android:id="@+id/editBranchId"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="6dp"
+                android:layout_marginTop="135dp"
+                android:src="@drawable/ba3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.323"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView89"
+                app:layout_constraintVertical_bias="0.089"
+                app:tint="@color/dark_blue" />
+
+            <TextView
+                android:id="@+id/textView102"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="تعديل عميل"
+                app:layout_constraintEnd_toEndOf="@+id/editBranchId"
+                app:layout_constraintStart_toStartOf="@+id/editBranchId"
+                app:layout_constraintTop_toBottomOf="@+id/editBranchId" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>

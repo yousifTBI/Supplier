@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -59,6 +60,7 @@ class CustomerStatementFragment : Fragment() {
                // Log.d("onItemSelectedListener",allCustomers.toJson())
                 viewModel.getCustomerStatement(  allCustomers.Branch_ID.toString())
 
+
    // viewModel.setCustomerID(viewModel.customers.value!![position].Customer_ID.toString())
             }
 
@@ -68,19 +70,22 @@ class CustomerStatementFragment : Fragment() {
 
         val adapter1 = StatementAdapter(OnBillClickListener { statement ->
 
+            var stringArg =""
 
             GlobalScope.launch(Dispatchers.Default){
 
 
                 withContext(Dispatchers.Default){
+                  //  Log.d("CompanyName",allCustomers.CompanyName.toString() +"")
+                    Log.d("CompanyName",allCustomers.item.toString() +"")
 
-
-                    viewModel.  getBillDetails(allCustomers.Branch_ID.toString(),statement.BillNo.toString())
+                    viewModel.getBillDetails(statement.BillNo.toString(),allCustomers.Branch_ID.toString())
                 }
             }
             viewModel.setSelectedStatement(statement)
-
-            findNavController().navigate(CustomerStatementFragmentDirections.actionCustomerStatementFragmentToCustomerStatementDetailsFragment())
+            stringArg =allCustomers.item
+           // Log.d("stringArg",stringArg.toString())
+            findNavController().navigate(CustomerStatementFragmentDirections.actionCustomerStatementFragmentToCustomerStatementDetailsFragment(stringArg))
         })
         viewModel.statement.observe(viewLifecycleOwner) {
 

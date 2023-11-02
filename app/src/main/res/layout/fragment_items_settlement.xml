@@ -49,6 +49,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
 
+
+                android:textColor="#DF0F0F"
+                android:textStyle="bold"
+                 android:textSize="20dp"
                 android:layout_marginTop="30dp"
                 app:layout_constraintBottom_toTopOf="@+id/textView9v"
                 app:layout_constraintTop_toTopOf="parent"

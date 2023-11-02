@@ -6,12 +6,14 @@ import com.tbi.supplierplus.business.utils.Constants.GOOGLE_BASE_URL
 import com.tbi.supplierplus.business.utils.Constants.TBI_BASE_URL
 import com.tbi.supplierplus.framework.datasource.network.GoogleMapsAPI
 import com.tbi.supplierplus.framework.datasource.network.SupplierAPI
+import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.logging.HttpLoggingInterceptor
 import org.simpleframework.xml.convert.AnnotationStrategy
 import org.simpleframework.xml.core.Persister
@@ -42,25 +44,35 @@ class ApiModule {
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
         var client = OkHttpClient.Builder()
+
        // try {
-
             //client.cache(cache)
-
       //  client  .addInterceptor(object  LoggingInterceptor())
         client.networkInterceptors().add(StethoInterceptor())
            // client.connectTimeout(10, TimeUnit.SECONDS)
 
      // client.addNetworkInterceptor(interceptor) // same for .addInterceptor(...)
-        client  .connectTimeout(30, TimeUnit.SECONDS) //Backend is really slow
-        client   .writeTimeout(30, TimeUnit.SECONDS)
-        client   .readTimeout(30, TimeUnit.SECONDS)
-            return client.build()
+        client.connectTimeout(30, TimeUnit.SECONDS) //Backend is really slow
+        client.writeTimeout(30, TimeUnit.SECONDS)
+        client.readTimeout(30, TimeUnit.SECONDS)
+
+
 
       //  }catch ( ex:Exception){
       //       return client.callTimeout(23,TimeUnit.DAYS)
       //  }
 
 
+        client.addInterceptor { chain ->
+            val request: Request =
+                chain.request().newBuilder().addHeader("UserId", SharedPreferencesCom.getInstance().gerSharedUser_ID()).
+                addHeader("DistributorGroupId", SharedPreferencesCom.getInstance().gerSharedDistributor_ID()).
+               // addHeader("DistributorGroupId", SharedPreferencesCom.getInstance().getSerial_ID()).
+                build()
+            chain.proceed(request)
+        }
+
+        return client.build()
     }
 
 
@@ -79,6 +91,7 @@ class ApiModule {
                 .create(SupplierAPI::class.java)
 
   }
+
 
 
 

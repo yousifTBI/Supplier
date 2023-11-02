@@ -15,9 +15,15 @@ import com.tbi.supplierplus.databinding.ItemsSettelmentItemBinding
 import kotlinx.android.synthetic.main.items_settelment_item.view.*
 
 class AvailableItemsAdapter
-     (val onClickListener: OnAvailableItemsClickListener)
+     ( var AvailableItemsItemslist : ArrayList<AvailableItems>,val onClickListener: OnAvailableItemsClickListener)
     : ListAdapter<AvailableItems, GetItemsSettelmentViewHolder>(DiffCallback) {
 
+
+
+    fun setFilteredList(mList: List<AvailableItems>) {
+        this.AvailableItemsItemslist = mList as ArrayList<AvailableItems>
+        notifyDataSetChanged()
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GetItemsSettelmentViewHolder {
         val binding = DataBindingUtil.inflate<AvailableTemsBinding>(
             LayoutInflater.from(parent.context), R.layout.available_tems, parent, false
@@ -25,6 +31,7 @@ class AvailableItemsAdapter
 
         return GetItemsSettelmentViewHolder(binding)
     }
+
 
     override fun onBindViewHolder(holder: GetItemsSettelmentViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }

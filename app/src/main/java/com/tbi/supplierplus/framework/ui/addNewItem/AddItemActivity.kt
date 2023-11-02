@@ -132,7 +132,7 @@ var Supplier_ID:String = ""
                 init(), SearchResultListener{
                         baseSearchDialogCompat, item, pos ->
                     binding.Ids.setText(item.CompanyName)
-                    Log.d("sqsq", item.Supplier_ID.toString())
+//                    Log.d("sqsq", item.Supplier_ID.toString())
                  //   SharedPreferencesCom.getInstance().gerSharedphoneNumber()
                     viewModel. getItemGroupSpinner( "2",item.Supplier_ID.toString())
                     //  binding.Supl.setText(item.Supplier_ID)
@@ -146,7 +146,7 @@ var Supplier_ID:String = ""
                 inits(), SearchResultListener{
                         baseSearchDialogCompat, item, pos ->
                     binding.typeOfItem.setText(item.CategoryName)
-                    Log.d("sqsq", item.ItemGroup_ID.toString())
+//                    Log.d("sqsq", item.ItemGroup_ID.toString())
 
                     binding.typ.setText(item.ItemGroup_ID.toString())
                     baseSearchDialogCompat.dismiss()

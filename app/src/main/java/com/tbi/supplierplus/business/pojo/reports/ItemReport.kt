@@ -7,4 +7,6 @@ data class ItemReport(
       var Balance   :Double,
       var itemname  :String,
       var Item_ID   :   Int,
+      var ITEM_ID   :   Int,
+
 )

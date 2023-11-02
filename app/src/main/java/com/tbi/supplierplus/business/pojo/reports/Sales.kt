@@ -8,6 +8,7 @@ data class Sales(
    var UnitPrice     : Double   ,
    var TotalPrice    : Double  ,
    var size          : Double  ,
-   var Discount      : Double
+   var Discount      : Double,
+   var ItemID      : Int
 
 )

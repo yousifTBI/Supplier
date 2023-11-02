@@ -137,13 +137,14 @@ val reporLivedata = MutableLiveData<ReportSpecificCustomer>()
     val Sales = MutableLiveData<List<Sales>?>()
     val Returns = MutableLiveData<List<Returns>?>()
 
-   suspend  fun   getBillDetails(customerID: String, billNo: String) {
+   suspend  fun   getBillDetails( billNo: String,customerID: String) {
         viewModelScope.launch {
-            reportsRepository.getBillDetails(customerID, billNo)
+            reportsRepository.getBillDetails(billNo, customerID)
                 .collect {
 
                     Sales.value=  it.Item?. Sales
                     Returns.value=   it.Item?.Returns
+
 
                  }
         }

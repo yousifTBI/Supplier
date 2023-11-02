@@ -19,6 +19,7 @@ import com.tbi.supplierplus.framework.ui.sales.addCompany.BranchModel
 import com.tbi.supplierplus.framework.ui.sales.addCompany.CompanyTask
 import com.tbi.supplierplus.framework.ui.sales.addCompany.Data
 import com.tbi.supplierplus.framework.ui.sales.customers.product_selection.CustomerModel
+import com.tbi.supplierplus.framework.ui.sales.editBranch.EditBranchDetailsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -38,6 +39,7 @@ class AddCustomerViewModel @Inject constructor(
     var getAllBranchesLiveData = MutableLiveData<State<BranchModel<Branch>>>()
     var getBranchesDetailsLiveData = MutableLiveData<State<BranchDetailsModel>>()
     var addBranchLiveData = MutableLiveData<State<BranchBackModel>>()
+    var EditBranchDetailsLiveData = MutableLiveData<State<Tasks<EditBranchDetailsModel>>>()
     var getProductByBarcodeLivedata = MutableLiveData<State<Tasks<ItemsModel>>>()
 
 
@@ -54,7 +56,8 @@ class AddCustomerViewModel @Inject constructor(
 
     fun GetAllCompaniesVM() {
         viewModelScope.launch {
-            GetCompaniesName(SharedPreferencesCom.getInstance().gerSharedDistributor_ID().toInt() ).collect {
+            GetCompaniesName(SharedPreferencesCom.getInstance().gerSharedDistributor_ID().toInt(),
+                SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt()).collect {
 
 
                 getAllCompaniesLiveData.value = it
@@ -104,6 +107,25 @@ class AddCustomerViewModel @Inject constructor(
     }
 
 
+
+
+    fun EditBranchDetailsVM(add: EditBranchDetailsModel) {
+        viewModelScope.launch {
+           EditBranchDetails(add).collect {
+
+
+               EditBranchDetailsLiveData.value = it
+
+
+            }
+        }
+    }
+
+
+
+
+
+
     fun GetProductByBarcodeVM(sales_Id: Int,   Barcode: String, Cus_id: String) {
         viewModelScope.launch {
           GetProductByBarcode(sales_Id,Barcode,Cus_id).collect {
@@ -124,8 +146,8 @@ class AddCustomerViewModel @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
-    fun GetCompaniesName(DisGroupID :Int) = wrapWithFlowApi {
-        api.GetAllCompaniesAPI(DisGroupID )
+    fun GetCompaniesName(DisGroupID :Int, UserId: Int) = wrapWithFlowApi {
+        api.GetAllCompaniesAPI(DisGroupID, UserId )
     }.flowOn(Dispatchers.IO)
 
 
@@ -142,6 +164,11 @@ class AddCustomerViewModel @Inject constructor(
 
     fun AddBranch(add: AddBranchModel) = wrapWithFlowApi {
         api.AddBranchAPI(add)
+    }.flowOn(Dispatchers.IO)
+
+
+    fun EditBranchDetails(add: EditBranchDetailsModel) = wrapWithFlowApi {
+        api.EditBranchDetailsAPI(add)
     }.flowOn(Dispatchers.IO)
 
 

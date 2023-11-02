@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/mainback"
+    tools:context=".framework.ui2.mortag3.SellOrMortg3Activity">
+
+
+    <ImageView
+        android:id="@+id/invoiceCard"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_margin="6dp"
+        android:layout_marginTop="96dp"
+        android:src="@drawable/b1"
+        app:layout_constraintBottom_toBottomOf="@+id/reports_card"
+        app:layout_constraintEnd_toStartOf="@+id/reports_card"
+        app:layout_constraintHorizontal_bias="0.275"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/reports_card"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageView
+        android:id="@+id/reports_card"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="148dp"
+        android:src="@drawable/daly"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView89"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="البيع"
+        app:layout_constraintEnd_toEndOf="@+id/invoiceCard"
+        app:layout_constraintStart_toStartOf="@+id/invoiceCard"
+        app:layout_constraintTop_toBottomOf="@+id/invoiceCard" />
+
+
+
+    <TextView
+        android:id="@+id/textView90"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="مرتجع"
+        app:layout_constraintEnd_toEndOf="@+id/reports_card"
+        app:layout_constraintStart_toStartOf="@+id/reports_card"
+        app:layout_constraintTop_toBottomOf="@+id/reports_card" />
+
+
+    <ImageView
+        android:id="@+id/withoutSellingID"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center"
+        android:layout_margin="6dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/ba1"
+        app:layout_constraintBottom_toBottomOf="@+id/reports_card"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reports_card"
+        app:layout_constraintTop_toTopOf="@+id/reports_card"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/textView103"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="مرور دون بيع"
+        app:layout_constraintEnd_toEndOf="@+id/withoutSellingID"
+        app:layout_constraintStart_toStartOf="@+id/withoutSellingID"
+        app:layout_constraintTop_toBottomOf="@+id/withoutSellingID" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

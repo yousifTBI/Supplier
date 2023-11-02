@@ -776,7 +776,214 @@
 
 
         </LinearLayout>
+        <LinearLayout
 
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/paperPayIdAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:text="0.0"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/paperPayAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text=" المبلغ"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/paperPayId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:text="0.0"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/paperPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="  اوراق الدفع المسلمة"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/Actual_DeferredMoneyPaper_Amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:text="0.0"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Actual_DeferredMoneyPaper_AmountId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text=" المبلغ"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Actual_DeferredMoneyPaper_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:text="0.0"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Actual_DeferredMoneyPaper_countId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="  اوراق الاجل مسلمة"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/payment_paper_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:text="0.0"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/payment_paper_amountId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text="   المبلغ "
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/payment_paper_count_required"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:text="0.0"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/payment_paper_count_requiredId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:layout_weight=".5"
+                android:gravity="center_horizontal"
+                android:text="  ورق دفع مطلوب "
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/colection_paper_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:text="0.0"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/colection_paper_amountId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text=" المبلغ"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/colection_paper_count_required"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:text="0.0"
+                android:gravity="center_horizontal"
+                android:layout_weight="2"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/colection_paper_count_requiredId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                android:padding="6dp"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:text=" ورق اجل مطلوب"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -790,7 +997,7 @@
                 android:layout_margin="32dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/add_expense_button_background"
-                android:text="   تاكيد المدفوع"
+                android:text="   تاكيد التسوية"
                 android:textColor="#F8F5F5"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

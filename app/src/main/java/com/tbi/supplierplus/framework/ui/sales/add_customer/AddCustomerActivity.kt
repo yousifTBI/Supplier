@@ -49,8 +49,8 @@ class AddCustomerActivity : AppCompatActivity() {
 
 
 
-Log.d("djsod", SharedPreferencesCom.getInstance().gerSharedUser_ID()+
-    SharedPreferencesCom.getInstance().gerSharedDistributor_ID())
+//Log.d("djsod", SharedPreferencesCom.getInstance().gerSharedUser_ID()+
+//    SharedPreferencesCom.getInstance().gerSharedDistributor_ID())
       //  viewModel.addCustomerVM()
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         binding.SubmittttttID.setOnClickListener {
@@ -200,7 +200,7 @@ Log.d("djsod", SharedPreferencesCom.getInstance().gerSharedUser_ID()+
 
  //        Log.d("gmmIntentUri", long+"lll")
          task.addOnSuccessListener {
-           Log.d("gmmIntentUri",it.latitude.toString())
+  //         Log.d("gmmIntentUri",it.latitude.toString())
 
 
              if (it != null) {
@@ -240,7 +240,7 @@ Log.d("djsod", SharedPreferencesCom.getInstance().gerSharedUser_ID()+
                  }
                  long = it.longitude
                  lat = it.latitude
-                Log.d("gmmIntentUdsdri", long.toString()+"two")
+//                Log.d("gmmIntentUdsdri", long.toString()+"two")
 
 //                 val gmmIntentUri =
 //                     Uri.parse("geo:$lat,$long?q=hotels")

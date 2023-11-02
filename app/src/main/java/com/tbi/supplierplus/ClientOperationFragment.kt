@@ -51,6 +51,18 @@ class ClientOperationFragment : Fragment() {
 
 
 
+          binding.editBranchId.setOnClickListener {
+
+              findNavController().navigate(
+
+                     ClientOperationFragmentDirections.actionClientOperationFragmentToEditBranchFragment()
+                  )
+//              val    intent = Intent(activity, AddBranchActivity::class.java)
+//              startActivity(intent)
+        }
+
+
+
         return binding.root
     }
 }

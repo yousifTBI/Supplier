@@ -110,7 +110,7 @@ class ReportsRepositoryImpl @Inject constructor(@TBIService private val api: Sup
             IO
         )
 
-    override  suspend fun getBillDetails(customerID: String, billNo: String): Flow<Tasks<InvoiceDetails>> = flow {
+    override  suspend fun getBillDetails( billNo: String,customerID: String): Flow<Tasks<InvoiceDetails>> = flow {
         try {
             val response =
                 api.getPillDetailsAPI(billNo, customerID).await()

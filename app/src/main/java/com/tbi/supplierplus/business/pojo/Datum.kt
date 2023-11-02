@@ -3,62 +3,61 @@ package com.tbi.supplierplus.business.pojo
 data class Datum(
 
 
+    var RecordID: Int,
+    var Item_ID: Int,
 
-    val RecordID: Int,
+    var total_amount: Double,
+    var Item_Name: String,
 
-
-    val Item_ID: Int,
-
-
-    val SalesName: String,
+    var SalesName: String,
 
 
     var ItemName: String,
     var Itemname: String,
 
 
-    val Item_Count: Double,
+    var Item_Count: Double,
 
 
-    val User_ID: Int,
+    var User_ID: Int,
 
 
-    val Edit_date: String,
+    var Edit_date: String,
 
 
-    val _Edit_date: String,
+    var _Edit_date: String,
 
 
-    val Supplier_ID: Int,
+    var Supplier_ID: Int,
 
-    val dailyClosing: Any? = null,
-
-
-    val Storekeeper_confirm: Int,
+    var dailyClosing: Any? = null,
 
 
-    val StorekeeperName: String,
+    var Storekeeper_confirm: Int,
 
 
-    val sales_confirm: Int,
+    var StorekeeperName: String,
 
 
-    val Storekeeper_id: Any? = null,
+    var sales_confirm: Int,
 
 
-    val sales_id: Int,
+    var Storekeeper_id: Any? = null,
 
 
-    val sales_confirm_date: Any? = null,
+    var sales_id: Int,
 
 
-    val Storekeeper_confirm_date: Any? = null,
+    var sales_confirm_date: Any? = null,
 
 
-    val Settlement: Int,
-
-    val type: Int,
+    var Storekeeper_confirm_date: Any? = null,
 
 
-    val RequstNo: Any? = null
+    var Settlement: Int,
+
+    var type: Int,
+
+
+    var RequstNo: Any? = null
 )

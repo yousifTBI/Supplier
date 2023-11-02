@@ -73,7 +73,8 @@ class CollectDebitViewModel @Inject constructor(private val debitsRepository: De
                     _debits2.value = it.data
                     msg.value = "هذه القائمة تحتوي علي العملاء المتأخرين فقط"
                 } else {
-
+                    _debits.value = it.data
+                    _debits2.value = it.data
 
                 }
 

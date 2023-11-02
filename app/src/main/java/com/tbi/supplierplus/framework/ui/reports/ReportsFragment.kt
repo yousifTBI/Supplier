@@ -40,8 +40,30 @@ class ReportsFragment : Fragment() {
             )
         }
         binding.CusReportID.setOnClickListener {
+//            findNavController().navigate(
+//                ReportsFragmentDirections.actionReportsFragmentToSelectCustomerFragment()
+//
+//            )
+        }
+
+        binding.allinvoiceCard.setOnClickListener {
             findNavController().navigate(
-                ReportsFragmentDirections.actionReportsFragmentToSelectCustomerFragment()
+                ReportsFragmentDirections.actionReportsFragmentToAllInvoicesFragment()
+
+            )
+        }
+
+  binding.monthlyReport.setOnClickListener {
+            findNavController().navigate(
+                ReportsFragmentDirections.actionReportsFragmentToMonthlyReportFragment()
+
+            )
+        }
+
+
+  binding.DayRoadLineID.setOnClickListener {
+            findNavController().navigate(
+                ReportsFragmentDirections.actionReportsFragmentToRoadLineFragment()
 
             )
         }

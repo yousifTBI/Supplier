@@ -144,7 +144,12 @@
         android:id="@+id/customerStatementDetailsFragment"
         android:name="com.tbi.supplierplus.framework.ui.reports.CustomerStatementDetailsFragment"
         android:label="CustomerStatementDetailsFragment"
-        tools:layout="@layout/fragment_customer_statement_details" />
+        tools:layout="@layout/fragment_customer_statement_details" >
+
+        <argument
+            android:name="stringArg"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/collectDebitFragment"
         android:name="com.tbi.supplierplus.framework.ui.collect_debit.CollectDebitFragment"
@@ -165,6 +170,10 @@
         <action
             android:id="@+id/action_debitExecutionFragment_to_collectDebitFragment"
             app:destination="@id/collectDebitFragment" />
+
+        <argument
+            android:name="stringArg"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/openingBalancesFragment"
@@ -284,6 +293,7 @@
         <action
             android:id="@+id/action_customerStatementFragment_to_customerStatementDetailsFragment"
             app:destination="@id/customerStatementDetailsFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/reportFragment2"
@@ -390,10 +400,21 @@
             app:destination="@id/salesReportFragment" />
         <action
             android:id="@+id/action_reportsFragment_to_itemsReportFragment"
-            app:destination="@id/itemsReportFragment" />
+            app:destination="@id/dateReportFragment" />
         <action
             android:id="@+id/action_reportsFragment_to_selectCustomerFragment"
             app:destination="@id/selectCustomerFragment" />
+        <action
+            android:id="@+id/action_reportsFragment_to_allInvoicesFragment"
+            app:destination="@id/allInvoicesFragment" />
+
+        <action
+            android:id="@+id/action_reportsFragment_to_monthlyReportFragment"
+            app:destination="@id/monthlyReportFragment" />
+         <action
+            android:id="@+id/action_reportsFragment_to_roadLineFragment"
+            app:destination="@id/roadLineFragment" />
+
     </fragment>
     <fragment
         android:id="@+id/salesReportFragment"
@@ -485,6 +506,9 @@
         <action
             android:id="@+id/action_clientOperationFragment_to_addBranchFragment"
             app:destination="@id/addBranchFragment" />
+        <action
+            android:id="@+id/action_clientOperationFragment_to_editBranchFragment"
+            app:destination="@id/editBranchFragment" />
     </fragment>
     <fragment
         android:id="@+id/addBranchFragment"
@@ -514,4 +538,31 @@
 
 
     </fragment>
+    <fragment
+        android:id="@+id/editBranchFragment"
+        android:name="com.tbi.supplierplus.framework.ui.sales.editBranch.EditBranchFragment"
+        android:label="fragment_edit_branch"
+        tools:layout="@layout/fragment_edit_branch" />
+
+    <fragment
+        android:id="@+id/allInvoicesFragment"
+        android:name="com.tbi.supplierplus.framework.ui.reports.AllInvoicesFragment"
+        android:label="fragment_all_invoices"
+        tools:layout="@layout/fragment_all_invoices" />
+    <fragment
+        android:id="@+id/dateReportFragment"
+        android:name="com.tbi.supplierplus.framework.ui.dateReport.DateReportFragment"
+        android:label="fragment_date_report"
+        tools:layout="@layout/fragment_date_report" />
+    <fragment
+        android:id="@+id/monthlyReportFragment"
+        android:name="com.tbi.supplierplus.framework.ui.reports.MonthlyReportFragment"
+        android:label="fragment_monthly_report"
+        tools:layout="@layout/fragment_monthly_report" />
+
+    <fragment
+        android:id="@+id/roadLineFragment"
+        android:name="com.tbi.supplierplus.framework.ui.roadLine.RoadLineFragment"
+        android:label="fragment_road_line"
+        tools:layout="@layout/fragment_road_line" />
 </navigation>

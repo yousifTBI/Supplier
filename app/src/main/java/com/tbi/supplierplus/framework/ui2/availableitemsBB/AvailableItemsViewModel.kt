@@ -3,6 +3,8 @@ package com.tbi.supplierplus.framework.ui2.availableitemsBB
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tbi.supplierplus.business.models.InvoicRequest
+import com.tbi.supplierplus.business.models.ReturnItemsModel
+import com.tbi.supplierplus.business.models.VisitBranchWithoutPayModel
 import com.tbi.supplierplus.framework.datasource.network.SupplierAPI
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
 import com.tbi.supplierplus.framework.ui.login.State
@@ -27,7 +29,7 @@ class AvailableItemsViewModel @Inject constructor(
 
 
     fun getAvailableItems() = wrapWithFlowApi {
-        api.AvailableWareHouseItemsApi()
+        api.AvailableWareHouseItemsApi(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt())
     }.flowOn(Dispatchers.IO)
 
 
@@ -77,6 +79,67 @@ class AvailableItemsViewModel @Inject constructor(
 
     fun getCurrentMortg3atofTheUser( ) = wrapWithFlowApi {
         api.GetCurrentMortg3atofTheUserAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt())
+    }.flowOn(Dispatchers.IO)
+
+
+    fun getItemsBills( ItemID: Int) = wrapWithFlowApi {
+        api.GetItemsBillsAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt(),ItemID)
+    }.flowOn(Dispatchers.IO)
+
+
+    fun getSubmitChangeQuantity( value: Double,ID: Int) = wrapWithFlowApi {
+        api.GetSubmitChangeQuantityAPI(value,ID)
+    }.flowOn(Dispatchers.IO)
+
+
+
+    fun geSubmitChangeMortaga3Quantity( value: Double,ID: Int,amount: Double) = wrapWithFlowApi {
+        api.GeSubmitChangeMortaga3QuantityAPI(value,ID,amount)
+    }.flowOn(Dispatchers.IO)
+
+
+    fun GetBillQRCode( BillNo: String) = wrapWithFlowApi {
+        api.GetBillQRCodeAPI(BillNo)
+    }.flowOn(Dispatchers.IO)
+
+
+
+    fun GetUserInfo() = wrapWithFlowApi {
+        api.GetUserInfo(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt())
+    }.flowOn(Dispatchers.IO)
+
+
+    fun AddLocationPointToUser( longitude: Double, latitude: Double) = wrapWithFlowApi {
+        api.AddLocationPointToUserAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt(),longitude,latitude)
+    }.flowOn(Dispatchers.IO)
+
+
+    fun ReturnItems(returnItemsModel: ReturnItemsModel) = wrapWithFlowApi {
+        api.ReturnItemsAPI(returnItemsModel)
+    }.flowOn(Dispatchers.IO)
+
+ fun VisitBranchWithoutPay( visitBranchWithoutPayModel: VisitBranchWithoutPayModel) = wrapWithFlowApi {
+        api.VisitBranchWithoutPayAPI(visitBranchWithoutPayModel)
+    }.flowOn(Dispatchers.IO)
+
+
+ fun getUserBillsByDay( ) = wrapWithFlowApi {
+        api.getUserBillsByDayAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt())
+    }.flowOn(Dispatchers.IO)
+
+ fun GetAllDayDataForDistributors(  DateFrom: String, DateTo: String ) = wrapWithFlowApi {
+        api.GetAllDayDataForDistributorsAPI(DateFrom ,DateTo,SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt() )
+    }.flowOn(Dispatchers.IO)
+
+
+
+ fun GetSalesCurrentDayRoadMap( ) = wrapWithFlowApi {
+        api.GetSalesCurrentDayRoadMapAPI( SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt() )
+    }.flowOn(Dispatchers.IO)
+
+
+ fun TestHeader( ) = wrapWithFlowApi {
+        api.TestHeader()
     }.flowOn(Dispatchers.IO)
 
 

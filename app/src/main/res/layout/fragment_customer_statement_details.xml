@@ -146,6 +146,7 @@
 
 
                     <TextView
+                        android:id="@+id/billnumTXT"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -221,6 +222,7 @@
 
 
                     <TextView
+                        android:id="@+id/currentDefferd"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -562,6 +564,20 @@
                         android:nestedScrollingEnabled="false"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/bill_row" />
+
+
+                    <Button
+                        android:id="@+id/reprintBTN"
+                        android:layout_width="255dp"
+                        android:layout_height="wrap_content"
+                        android:text="اعادة طباعه فاتورة"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:background="@drawable/blue_rounded_filled20"
+                        android:paddingHorizontal="5dp"
+                        />
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>
@@ -667,6 +683,18 @@
                             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                             tools:listitem="@layout/returns_row" />
                     </LinearLayout>
+                    <Button
+                        android:id="@+id/reprintreturnBTN"
+                        android:layout_width="255dp"
+                        android:layout_height="wrap_content"
+                        android:text="اعادة طباعه مرتجع"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:background="@drawable/blue_rounded_filled20"
+                        android:paddingHorizontal="5dp"
+                        />
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>

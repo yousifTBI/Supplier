@@ -30,7 +30,7 @@
                 android:layout_width="219dp"
                 android:layout_height="65dp"
                 android:layout_marginBottom="16dp"
-                android:text="تسويه البضاعه"
+                android:text="تاكيد تسليم المرتجع"
                 android:background="@drawable/add_expense_button_background"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"

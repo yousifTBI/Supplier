@@ -27,6 +27,53 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".framework.ui2.mortag3.Mortag3BillActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".framework.ui2.mortag3.EdirMortag3Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".framework.ui2.mortag3.SellOrMortg3Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".framework.ui2.mortag3.BillMortag3Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+        <service
+            android:name=".framework.ui.backgroundService.BackgroundService"
+            android:stopWithTask="false" />
+
+        <activity
+            android:name=".framework.ui.closingLast.Mortg3atActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".framework.ui.closingLast.Mortg3Activity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".framework.ui.daily_closing.ItemsBIllActivity"
             android:exported="false">
             <meta-data

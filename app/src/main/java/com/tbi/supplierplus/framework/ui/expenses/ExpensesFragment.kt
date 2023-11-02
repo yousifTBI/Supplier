@@ -37,8 +37,11 @@ class ExpensesFragment : Fragment() {
 
         viewModel.getExpensesSearchType()
         viewModel.ExpensesItemsSearchList.observe(viewLifecycleOwner) {
+            if (it ==null){}
+            else{
             val adapter = ExpensesTypeAdapter(context!!, it)
             binding.expensesSpinner.adapter = adapter
+        }
         }
 
         viewModel.getExpenses()
@@ -59,6 +62,8 @@ class ExpensesFragment : Fragment() {
                     expenses_ID.toString()
                 )
             )
+            binding.addExpenseAmountEdittext.setText("")
+            binding.addReasonEdittext.setText("")
         }
 
 
@@ -71,10 +76,10 @@ class ExpensesFragment : Fragment() {
                     x = p0?.getItemAtPosition(p2) as ExpensesSearch
                     expenses_ID = x.Record_ID
                     binding.addReasonEdittext2.setText(x.ExpenseType)
-                    Log.d("expensesSpinner", p2.toString())
-                    Log.d("expensesSpinner", p0.toString())
-                    Log.d("expensesSpinner", x.ExpenseType)
-                    Log.d("expensesSpinner", p0?.getItemAtPosition(p2).toString())
+     //              Log.d("expensesSpinner", p2.toString())
+     //              Log.d("expensesSpinner", p0.toString())
+     //              Log.d("expensesSpinner", x.ExpenseType)
+     //              Log.d("expensesSpinner", p0?.getItemAtPosition(p2).toString())
 
 
                 }

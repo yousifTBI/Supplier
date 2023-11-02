@@ -53,7 +53,7 @@ public class ItemViewModel @Inject constructor(
 
     fun getSuppliers(){
         viewModelScope.launch {
-            Log.d("sdsasks",SharedPreferencesCom.getInstance().gerSharedUser_ID().toString())
+   //         Log.d("sdsasks",SharedPreferencesCom.getInstance().gerSharedUser_ID().toString())
             // SharedPreferencesCom.getInstance().gerSharedphoneNumber()
             addItemRepository.GetSuppliers( "2").collect {
                 if (it.State==1){

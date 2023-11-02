@@ -158,35 +158,35 @@
             app:layout_constraintEnd_toStartOf="@+id/priceI"
             app:layout_constraintTop_toTopOf="@+id/priceI" />
 
-    <TextView
-        android:id="@+id/textView57"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/nameI"
-        app:layout_constraintEnd_toStartOf="@+id/nameI"
-        app:layout_constraintTop_toTopOf="@+id/nameI" />
+        <TextView
+            android:id="@+id/textView57"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/nameI"
+            app:layout_constraintEnd_toStartOf="@+id/nameI"
+            app:layout_constraintTop_toTopOf="@+id/nameI" />
 
-    <TextView
-        android:id="@+id/textView54"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/sourseI"
-        app:layout_constraintEnd_toStartOf="@+id/sourseI"
-        app:layout_constraintTop_toTopOf="@+id/sourseI" />
+        <TextView
+            android:id="@+id/textView54"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sourseI"
+            app:layout_constraintEnd_toStartOf="@+id/sourseI"
+            app:layout_constraintTop_toTopOf="@+id/sourseI" />
 
-    <TextView
-        android:id="@+id/textView56"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/sizeI"
-        app:layout_constraintEnd_toStartOf="@+id/sizeI"
-        app:layout_constraintTop_toTopOf="@+id/sizeI" />
+        <TextView
+            android:id="@+id/textView56"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textSize="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/sizeI"
+            app:layout_constraintEnd_toStartOf="@+id/sizeI"
+            app:layout_constraintTop_toTopOf="@+id/sizeI" />
 
         <TextView
             android:id="@+id/textView55"
@@ -251,6 +251,7 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:visibility="gone"
                     android:id="@+id/sizes"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="wrap_content"
@@ -295,7 +296,9 @@
 
                         android:elevation="234dp"
                         android:ems="10"
+                        android:editable="false"
                         android:hint="الخصم"
+                        android:enabled="false"
                         android:inputType="numberDecimal"
                         android:text="0" />
 
@@ -317,6 +320,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
+                    android:visibility="gone"
                     android:id="@+id/buttonm"
                     android:layout_width="160dp"
                     android:layout_height="63dp"
@@ -332,51 +336,51 @@
                     app:layout_constraintEnd_toStartOf="@+id/sizes"
                     app:layout_constraintTop_toTopOf="@+id/sizes" />
 
-<!--                <com.google.android.material.textfield.TextInputLayout-->
-<!--                    android:id="@+id/textinput_discribtion"-->
-<!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
+                <!--                <com.google.android.material.textfield.TextInputLayout-->
+                <!--                    android:id="@+id/textinput_discribtion"-->
+                <!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
 
-<!--                    android:layout_marginEnd="16dp"-->
-<!--                    android:elevation="234dp"-->
-<!--                    app:layout_constraintBottom_toTopOf="@+id/buttonm"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@+id/textinput_counterj">-->
+                <!--                    android:layout_marginEnd="16dp"-->
+                <!--                    android:elevation="234dp"-->
+                <!--                    app:layout_constraintBottom_toTopOf="@+id/buttonm"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@+id/textinput_counterj">-->
 
-<!--                    <com.google.android.material.textfield.TextInputEditText-->
-<!--                        android:id="@+id/discribtionText"-->
-<!--                        android:layout_width="120dp"-->
-<!--                        android:layout_height="wrap_content"-->
-
-
-<!--                        android:elevation="234dp"-->
-<!--                        android:ems="10"-->
-<!--                        android:hint="سبب الخصم"-->
-<!--                        android:inputType="numberDecimal"-->
-<!--                        android:text="سبب الخصم" />-->
+                <!--                    <com.google.android.material.textfield.TextInputEditText-->
+                <!--                        android:id="@+id/discribtionText"-->
+                <!--                        android:layout_width="120dp"-->
+                <!--                        android:layout_height="wrap_content"-->
 
 
-<!--                </com.google.android.material.textfield.TextInputLayout>-->
+                <!--                        android:elevation="234dp"-->
+                <!--                        android:ems="10"-->
+                <!--                        android:hint="سبب الخصم"-->
+                <!--                        android:inputType="numberDecimal"-->
+                <!--                        android:text="سبب الخصم" />-->
 
-<!--                <Button-->
-<!--                    android:id="@+id/Weight"-->
-<!--                    android:layout_width="85dp"-->
-<!--                    android:layout_height="65dp"-->
-<!--                    android:layout_centerInParent="true"-->
 
-<!--                    android:layout_marginEnd="8dp"-->
-<!--                    android:background="#C930818F"-->
-<!--                    android:paddingHorizontal="5dp"-->
-<!--                    android:paddingStart="20dp"-->
-<!--                    android:paddingEnd="40dp"-->
-<!--                    android:text="وزن"-->
-<!--                    android:textColor="@color/white"-->
-<!--                    android:textSize="16dp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    app:layout_constraintBottom_toBottomOf="@+id/textinput_discribtion"-->
-<!--                    app:layout_constraintEnd_toStartOf="@+id/textinput_discribtion"-->
-<!--                    app:layout_constraintTop_toTopOf="@+id/textinput_discribtion" />-->
+                <!--                </com.google.android.material.textfield.TextInputLayout>-->
+
+                <!--                <Button-->
+                <!--                    android:id="@+id/Weight"-->
+                <!--                    android:layout_width="85dp"-->
+                <!--                    android:layout_height="65dp"-->
+                <!--                    android:layout_centerInParent="true"-->
+
+                <!--                    android:layout_marginEnd="8dp"-->
+                <!--                    android:background="#C930818F"-->
+                <!--                    android:paddingHorizontal="5dp"-->
+                <!--                    android:paddingStart="20dp"-->
+                <!--                    android:paddingEnd="40dp"-->
+                <!--                    android:text="وزن"-->
+                <!--                    android:textColor="@color/white"-->
+                <!--                    android:textSize="16dp"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@+id/textinput_discribtion"-->
+                <!--                    app:layout_constraintEnd_toStartOf="@+id/textinput_discribtion"-->
+                <!--                    app:layout_constraintTop_toTopOf="@+id/textinput_discribtion" />-->
 
                 <Button
                     android:id="@+id/reason"
@@ -385,7 +389,6 @@
                     android:layout_centerInParent="true"
 
                     android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="32dp"
                     android:background="#C930818F"
                     android:paddingHorizontal="5dp"
                     android:paddingStart="20dp"
@@ -396,7 +399,7 @@
                     android:textColor="@color/white"
                     android:textSize="16dp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/buttonm"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/textinput_discountk"
                     app:layout_constraintTop_toBottomOf="@+id/button2b" />
 

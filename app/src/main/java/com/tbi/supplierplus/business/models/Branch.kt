@@ -6,6 +6,7 @@ data class Branch(
 
     var UserId: Int,
     var billNumber: Boolean,
+    var salesStatus: String,
     var SalesName: String,
     var comid: Int,
     var Unpaid_deferred: Double,
@@ -15,7 +16,7 @@ data class Branch(
     var Range: String,
     var Region_ID: String,
     var Range_ID: String,
-    var Branch_ID: Int,
+    var Branch_ID: Int
 
 ) : Searchable {
     override fun getTitle(): String {

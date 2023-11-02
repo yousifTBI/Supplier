@@ -321,7 +321,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/farorasa" />
 
-                    android:background="#7EF87654"
+<!--                    android:background="#7EF87654"-->
 
                 <TextView
                     android:id="@+id/Totalss"
@@ -365,7 +365,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/scanQra" />
 
                 <TextView
-                    android:id="@+id/Totalssz4"
+                    android:id="@+id/oldRemainningAmount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="88dp"

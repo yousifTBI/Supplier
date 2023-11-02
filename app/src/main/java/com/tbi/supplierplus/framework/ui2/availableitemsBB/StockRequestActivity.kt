@@ -42,9 +42,9 @@ class StockRequestActivity : AppCompatActivity() {
         binding.textView8.setText(ItemName)
         binding.textView3.setText(Barcode)
 
-        binding.textView2.setText(Selling_Price)
+    //    binding.textView2.setText(Selling_Price)
 
-        binding.Size1.setText(Supply_Price)
+     //   binding.Size1.setText(Supply_Price)
 
         binding.textView8.setText(ItemName)
         binding.sours1.setText(availableCount)
@@ -53,8 +53,12 @@ class StockRequestActivity : AppCompatActivity() {
         binding.spinKit.isVisible = false
 
         binding.button2b.setOnClickListener {
-            if (binding.counterEditTextm.text.toString().isNullOrEmpty()) {
+            if (binding.counterEditTextm.text.toString().toDouble() >  binding.sours1.text.toString().toDouble()) {
+                Toast.makeText(applicationContext, "العدد المطلوب اكبر من المتاح", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "العدد المطلوب اكبر من المتاح", Toast.LENGTH_SHORT).show()
+                binding.counterEditTextm.setText("")
             } else {
+
                 binding.spinKit.isVisible = true
                 val coun = binding.counterEditTextm.text.toString()
                 var count = coun.toDouble()
@@ -92,10 +96,10 @@ class StockRequestActivity : AppCompatActivity() {
 
                     }
                 }
-
+                finish()
             }
 
-            finish()
+
         }
     }
 }

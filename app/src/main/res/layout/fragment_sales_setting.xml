@@ -18,28 +18,29 @@
 
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/returns_for_user_card"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_margin="6dp"
-                android:layout_marginTop="96dp"
                 android:src="@drawable/ba3"
-                app:layout_constraintBottom_toBottomOf="@+id/reports_card"
-                app:layout_constraintEnd_toStartOf="@+id/reports_card"
-                app:layout_constraintHorizontal_bias="0.132"
+                app:layout_constraintBottom_toTopOf="@+id/textView93"
+                app:layout_constraintEnd_toStartOf="@+id/expenses_card"
+                app:layout_constraintHorizontal_bias="0.185"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/reports_card"
-                app:layout_constraintVertical_bias="0.916"
+                app:layout_constraintTop_toTopOf="@+id/expenses_card"
+                app:layout_constraintVertical_bias="1.0"
                 app:tint="@color/dark_blue" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/reports_card"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="152dp"
-                android:layout_marginEnd="32dp"
+                android:layout_marginTop="620dp"
+                android:layout_marginEnd="108dp"
                 android:src="@drawable/client"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -50,25 +51,30 @@
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_margin="18dp"
-                android:layout_marginBottom="28dp"
                 android:src="@drawable/mony1"
-                app:layout_constraintBottom_toBottomOf="@+id/textView92"
-                app:layout_constraintEnd_toEndOf="@+id/reports_card" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.854"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.16" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/returns_card"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_gravity="center"
                 android:layout_margin="18dp"
                 android:src="@drawable/ba6"
-                app:layout_constraintBottom_toBottomOf="@+id/reports_card"
 
-                app:layout_constraintEnd_toStartOf="@+id/reports_card"
+                app:layout_constraintBottom_toTopOf="@+id/textView93"
+                app:layout_constraintEnd_toStartOf="@+id/expenses_card"
                 app:layout_constraintStart_toEndOf="@+id/returns_for_user_card"
                 app:layout_constraintTop_toTopOf="@+id/returns_for_user_card" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/purchase_card"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -81,6 +87,7 @@
                 app:layout_constraintVertical_bias="0.131" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/textView89"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -90,6 +97,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/returns_for_user_card" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/textView90"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,16 +107,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/reports_card" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/textView91"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="مرتجعات"
-                app:layout_constraintBottom_toBottomOf="@+id/textView90"
-                app:layout_constraintEnd_toEndOf="@+id/returns_card"
+                 app:layout_constraintEnd_toEndOf="@+id/returns_card"
                 app:layout_constraintStart_toStartOf="@+id/returns_card"
                 app:layout_constraintTop_toBottomOf="@+id/returns_card" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/textView92"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

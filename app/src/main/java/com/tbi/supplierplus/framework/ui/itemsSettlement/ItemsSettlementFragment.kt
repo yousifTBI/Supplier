@@ -45,106 +45,106 @@ class ItemsSettlementFragment : Fragment() {
 
 
           adapter = GetItemsSettlementAdapter(OnItemSettlementClickListener {
-            //  Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
-              RecordID=it.RecordID
-            // set value in array list
-
-            var arrayList = ArrayList<Int>()
-
-            // set value in array list
-            arrayList.add(1)
-            arrayList.add(2)
-            arrayList.add(3)
-            arrayList.add(4)
-            arrayList.add(5)
-            arrayList.add(6)
-            arrayList.add(7)
-            arrayList.add(8)
-            arrayList.add(9)
-            arrayList.add(10)
-            arrayList.add(11)
-            arrayList.add(12)
-            arrayList.add(13)
-            arrayList.add(14)
-            arrayList.add(15)
-
-            // Initialize dialog
-            val dialog = Dialog(requireContext())
-
-            // set custom dialog
-            dialog.setContentView(android.R.layout.list_content)
-
-            // set custom height and width
-            dialog.window!!.setLayout(350, 500)
-
-            // set transparent background
-            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
-
-            // show dialog
-            dialog.show()
-
-            // Initialize and assign variable
-            // EditText editText=dialog.findViewById(R.id.edit_text);
-            val listView = dialog.findViewById<ListView>(android.R.id.list)
-
-            // Initialize array adapter
-            val adapterlist: ArrayAdapter<Int> =
-                ArrayAdapter<Int>(context!!, android.R.layout.simple_list_item_1, arrayList)
-
-            // set adapter
-            listView.adapter = adapterlist
-
-            listView.onItemClickListener =
-                AdapterView.OnItemClickListener { parent, view, position, id ->
-
-                    lifecycleScope.launch {
-                        viewModel.getSubmitChangeQuantityVMI(adapterlist.getItem(position).toString().toDouble(),RecordID).collect{
-                            when (it) {
-
-                                is State.Loading -> {}
-
-                                is State.Success -> {
-
-                                    binding.spinKit.isVisible = false
-                                    viewModel.GetPendingRequestsMV().collect {
-                                        when (it) {
-
-                                            is State.Loading -> {}
-
-                                            is State.Success -> {
-                                                adapter.submitList(it.data.data)
-                                                binding.recyclerView.adapter = adapter
-                                               adapter.notifyDataSetChanged()
-
-                                            }
-
-                                            is State.Error -> {
-                                                binding.spinKit.isVisible = false
-                                            }
-                                        }
-
-                                    }
-                                }
-                                is State.Error -> {
-                                    binding.spinKit.isVisible = false
-
-                                }
-                            }
-                        }
-                    }
-
-
-
-                 //   Log.d("GetItemsSettlementAdapter",RecordID.toString())
-
-
-
-                   // Toast.makeText(context, adapterlist.getItem(position).toString(), Toast.LENGTH_SHORT).show()
-                    adapter.notifyDataSetChanged()
-
-                    dialog.dismiss()
-
-                }
+//            //  Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
+//              RecordID=it.RecordID
+//            // set value in array list
+//
+//            var arrayList = ArrayList<Int>()
+//
+//            // set value in array list
+//            arrayList.add(1)
+//            arrayList.add(2)
+//            arrayList.add(3)
+//            arrayList.add(4)
+//            arrayList.add(5)
+//            arrayList.add(6)
+//            arrayList.add(7)
+//            arrayList.add(8)
+//            arrayList.add(9)
+//            arrayList.add(10)
+//            arrayList.add(11)
+//            arrayList.add(12)
+//            arrayList.add(13)
+//            arrayList.add(14)
+//            arrayList.add(15)
+//
+//            // Initialize dialog
+//            val dialog = Dialog(requireContext())
+//
+//            // set custom dialog
+//            dialog.setContentView(android.R.layout.list_content)
+//
+//            // set custom height and width
+//            dialog.window!!.setLayout(350, 500)
+//
+//            // set transparent background
+//            dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.WHITE))
+//
+//            // show dialog
+//            dialog.show()
+//
+//            // Initialize and assign variable
+//            // EditText editText=dialog.findViewById(R.id.edit_text);
+//            val listView = dialog.findViewById<ListView>(android.R.id.list)
+//
+//            // Initialize array adapter
+//            val adapterlist: ArrayAdapter<Int> =
+//                ArrayAdapter<Int>(context!!, android.R.layout.simple_list_item_1, arrayList)
+//
+//            // set adapter
+//            listView.adapter = adapterlist
+//
+//            listView.onItemClickListener =
+//                AdapterView.OnItemClickListener { parent, view, position, id ->
+//
+//                    lifecycleScope.launch {
+//                        viewModel.getSubmitChangeQuantityVMI(adapterlist.getItem(position).toString().toDouble(),RecordID).collect{
+//                            when (it) {
+//
+//                                is State.Loading -> {}
+//
+//                                is State.Success -> {
+//
+//                                    binding.spinKit.isVisible = false
+//                                    viewModel.GetPendingRequestsMV().collect {
+//                                        when (it) {
+//
+//                                            is State.Loading -> {}
+//
+//                                            is State.Success -> {
+//                                                adapter.submitList(it.data.data)
+//                                                binding.recyclerView.adapter = adapter
+//                                               adapter.notifyDataSetChanged()
+//
+//                                            }
+//
+//                                            is State.Error -> {
+//                                                binding.spinKit.isVisible = false
+//                                            }
+//                                        }
+//
+//                                    }
+//                                }
+//                                is State.Error -> {
+//                                    binding.spinKit.isVisible = false
+//
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//
+//
+//                 //   Log.d("GetItemsSettlementAdapter",RecordID.toString())
+//
+//
+//
+//                   // Toast.makeText(context, adapterlist.getItem(position).toString(), Toast.LENGTH_SHORT).show()
+//                    adapter.notifyDataSetChanged()
+//
+//                    dialog.dismiss()
+//
+//                }
         })
 
         binding.button4.setOnClickListener {
@@ -187,7 +187,6 @@ class ItemsSettlementFragment : Fragment() {
 
                 }
             }
-
         }
         lifecycleScope.launch {
             viewModel.GetPendingRequestsMV().collect {

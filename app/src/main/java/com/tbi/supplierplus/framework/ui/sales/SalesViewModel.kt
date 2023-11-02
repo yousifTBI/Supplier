@@ -206,7 +206,7 @@ var editProductpriceState = MutableLiveData<Int>()
     fun AddNewCustomer(newCustomer: NewCustomer) {
         viewModelScope.launch {
             salesRepository.AddCustomer(newCustomer).collect{
-                Log.d("AddCustomer",it.Message + ""+it.State)
+   //             Log.d("AddCustomer",it.Message + ""+it.State)
                 StatesAddNewCustomer.value=it.Message
             }
         }
@@ -245,7 +245,7 @@ var editProductpriceState = MutableLiveData<Int>()
 
 
     fun  getRegions(User_ID: String, Range_Id: String) {
-        Log.d("cardView5", "test")
+   //     Log.d("cardView5", "test")
 
                 viewModelScope.launch {
             salesRepository.Get_Region(User_ID, Range_Id).collect{

@@ -1,0 +1,27 @@
+package com.tbi.supplierplus.business.models
+
+data class DataForDistributorsModel(
+    var CashShortFall    :Double,
+    var CollectionPaperCountShortFall    :Double,
+    var CollectionPaperAmountShortFall    :Double,
+    var MoneyPaperCountShortFall    :Double,
+    var MoneyPaperAmountShortFall    :Double,
+    var SalesName    :String,
+    var SalesId    :Int,
+    var TotalPil    :Int,
+    var TotalPillBeforDiscount    :Double,
+    var TotalPilDiscount    :Double,
+    var TotalPilAfterDiscount    :Double,
+    var TotalItemsQount    :Double,
+    var TotalItemsDiscount    :Double,
+    var TotalPilCach    :Double,
+    var TotalPilAgel    :Double,
+    var Msrofat    :Double,
+    var TotalPilNet    :Double,
+    var ReturnAmount    :Double,
+    var Collection    :Double,
+    var MoneyReceiptPapers_count    :Double,
+    var MoneyReceiptPapers_Amount    :Double,
+    var DeferredMoneyPaper_count    :Double,
+    var DeferredMoneyPaper_Amount    :Double,
+)

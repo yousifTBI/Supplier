@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".framework.ui.dateReport.DateReportFragment">
+    <data>
+
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.tbi.supplierplus.framework.ui.reports.ReportsViewModel" />-->
+    </data>
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/mainback"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        >
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="35dp"
+        >
+        <androidx.cardview.widget.CardView
+            android:id="@+id/startDateCard"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+
+            android:elevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="9dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+                <TextView
+                    android:id="@+id/startDateTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="48dp"
+                    android:gravity="center"
+                    android:hint=" ادخل تاريخ البداية "
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/endDateCard"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_margin="8dp"
+
+            android:elevation="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/startDateCard"
+            >
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="9dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+                <TextView
+                    android:id="@+id/endDateTV"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginHorizontal="48dp"
+                    android:gravity="center"
+                    android:hint=" ادخل تاريخ النهاية "
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageView2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/reportbtn"
+            android:layout_width="212dp"
+            android:layout_height="61dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/items_settlement_button_background"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="انقر لجلب التقرير "
+            android:textColor="#fff"
+            android:textSize="25dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/endDateCard"
+            app:layout_constraintEnd_toEndOf="parent"           />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="200dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/reportbtn">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/actualAmounttxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/requarAmounttitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="عدد الفواتير"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="     " />
+
+                <TextView
+                    android:id="@+id/requerAmounttxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textColor="@color/zxing_viewfinder_laser"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/actualAmounttitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:padding="6dp"
+                    android:text=" العجز"
+                    android:textColor="@color/zxing_viewfinder_laser"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/paperPayIdAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/paperPayAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text=" المبلغ"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/paperPayId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/paperPay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="  عجز اوراق الاجل "
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Actual_DeferredMoneyPaper_Amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Actual_DeferredMoneyPaper_AmountId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text=" المبلغ"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Actual_DeferredMoneyPaper_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/Actual_DeferredMoneyPaper_countId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="  عجز ورق دفع "
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/payment_paper_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/payment_paper_amountId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="   المبلغ "
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/payment_paper_count_required"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/payment_paper_count_requiredId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight=".5"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text=" عدد اوراق دفع  "
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/colection_paper_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/colection_paper_amountId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text=" المبلغ"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/colection_paper_count_required"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/colection_paper_count_requiredId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text=" عدد اوراق اجل "
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+<!--                <TextView-->
+<!--                    android:id="@+id/colection_paper_amount"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="6dp"-->
+<!--                    android:layout_weight="2"-->
+<!--                    android:gravity="center_horizontal"-->
+<!--                    android:padding="6dp"-->
+<!--                    android:text="0.0"-->
+<!--                    android:textStyle="bold" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/colection_paper_amountId"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_margin="6dp"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:gravity="center_horizontal"-->
+<!--                    android:padding="6dp"-->
+<!--                    android:text=" المبلغ"-->
+<!--                    android:textStyle="bold" />-->
+
+                <TextView
+                    android:id="@+id/colection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="2"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text="0.0"
+                    android:textColor="#008000"
+                    android:textStyle="bold"
+                    tools:ignore="NewApi" />
+
+                <TextView
+                    android:id="@+id/colection_d"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="6dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal"
+                    android:padding="6dp"
+                    android:text=" التحصيل "
+                    android:textColor="#008000"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:orientation="vertical">-->
+
+        <!--        <com.github.ybq.android.spinkit.SpinKitView-->
+        <!--            android:id="@+id/spin_kit"-->
+        <!--            style="@style/SpinKitView.Large.Circle"-->
+        <!--            android:layout_width="121dp"-->
+        <!--            android:layout_height="135dp"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            app:SpinKit_Color="@color/black"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            app:layout_constraintStart_toStartOf="parent"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            />-->
+        <!--        <LinearLayout-->
+        <!--            android:background="#5CF4F4F4"-->
+        <!--            android:id="@+id/header"-->
+        <!--            android:layout_marginTop="40dp"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginHorizontal="8dp"-->
+        <!--             android:orientation="horizontal"-->
+        <!--            app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/textView45"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="8dp"-->
+        <!--                android:layout_marginBottom="11dp"-->
+        <!--                android:layout_weight="0.25"-->
+
+        <!--                android:gravity="center"-->
+
+        <!--                android:text="الرصيد"-->
+        <!--                tools:text="credit" />-->
+
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/textView44"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="8dp"-->
+        <!--                android:layout_marginBottom="11dp"-->
+
+        <!--                android:layout_weight="0.25"-->
+
+        <!--                android:gravity="center"-->
+        <!--                android:text="مبيعات"-->
+
+        <!--                tools:text="sales" />-->
+
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/textView40"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="8dp"-->
+        <!--                android:layout_marginBottom="11dp"-->
+        <!--                android:layout_weight="0.25"-->
+        <!--                android:gravity="center"-->
+        <!--                android:text="الكمية"-->
+
+        <!--                tools:text="quantity" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/textView39"-->
+        <!--                android:layout_width="0dp"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginTop="8dp"-->
+        <!--                android:layout_marginBottom="11dp"-->
+        <!--                android:layout_weight="0.25"-->
+        <!--                android:gravity="center"-->
+        <!--                android:text="المنتج"-->
+
+        <!--                tools:text="Name" />-->
+
+
+        <!--        </LinearLayout>-->
+
+
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:id="@+id/recyclerView"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginHorizontal="8dp"-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:background="@drawable/gray_rounded_filled20"-->
+        <!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+        <!--            app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--            app:layout_constraintEnd_toStartOf="@+id/header"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/header"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            tools:listitem="@layout/row_items_report" />-->
+
+        <!--        </LinearLayout>-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

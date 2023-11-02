@@ -41,7 +41,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@{data.cusName}"
+                    android:text="@{data.BranchName}"
                     tools:text="name" />
 
                 <TextView

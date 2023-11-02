@@ -9,16 +9,15 @@ import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
+import android.graphics.*
 import android.graphics.drawable.ColorDrawable
 import android.icu.text.SimpleDateFormat
+import android.location.Location
 import android.os.Bundle
 import android.os.Handler
 import android.text.*
 import android.util.Log
+import android.view.View
 import android.view.Window
 import android.widget.Button
 import android.widget.Toast
@@ -28,6 +27,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputEditText
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -36,12 +36,16 @@ import com.tbi.supplierplus.business.pojo.bills.NewBill
 import com.tbi.supplierplus.business.utils.LoadingDialog
 import com.tbi.supplierplus.business.utils.toJson
 import com.tbi.supplierplus.databinding.ActivityPaymentBinding
+import com.tbi.supplierplus.framework.getLocation.MyLocation
 import com.tbi.supplierplus.framework.shared.SharedPreferencesCom
+import com.tbi.supplierplus.framework.ui.login.State
 import com.tbi.supplierplus.framework.ui.sales.SalesViewModel
+import com.tbi.supplierplus.framework.ui2.availableitemsBB.AvailableItemsViewModel
 import com.tbi.supplierplus.framework.utils.PrintPic
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.IOException
@@ -72,7 +76,7 @@ class PaymentActivity : AppCompatActivity() {
     lateinit var readBuffer: ByteArray
     var readBufferPosition = 0
     var counter = 0
-
+     var billNumToCreateQR =""
 
     @Volatile
     var stopWorker = false
@@ -83,21 +87,40 @@ class PaymentActivity : AppCompatActivity() {
 
     var CusID:String = ""
     var name:String = ""
-    var Total= ""
+    var TotalAfterDescound= ""
     var TotalReturn=""
     var Unpaid_deferred=""
     val loading = LoadingDialog(this)
+    var loc: Location? = null
+    var long = 0.0
+    var lat = 0.0
+    lateinit var availableItemsViewModel: AvailableItemsViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_payment)
         viewModel = ViewModelProvider(this).get(SalesViewModel::class.java)
+        availableItemsViewModel = ViewModelProvider(this).get(AvailableItemsViewModel::class.java)
 
+        val locationResult: MyLocation.LocationResult = object : MyLocation.LocationResult() {
+            override fun gotLocation(location: Location) {
+                loc = location
+                //   System.out.println("allah: " + loc!!.latitude)
+                // System.out.println("allah: " + loc!!.longitude)
+                long = loc!!.longitude
+                lat = loc!!.latitude
+
+            }
+        }
+
+        val myLocation =
+            MyLocation()
+        myLocation.getLocation(this, locationResult)
 
         val TotalSalse = intent.getStringExtra("TotalSalse")
         Unpaid_deferred = intent.getStringExtra("Unpaid_deferred").toString()
         TotalReturn = intent.getStringExtra("TotalReturn").toString()
-        Total = intent.getStringExtra("Total").toString()
+        TotalAfterDescound = intent.getStringExtra("TotalAfterDescound").toString()
         name = intent.getStringExtra("name").toString()
         CusID = intent.getStringExtra("CusID").toString()
         //  var list = intent.getStringExtra("data").toString()
@@ -113,7 +136,11 @@ class PaymentActivity : AppCompatActivity() {
         //     Gson().fromJson<List<YourList>>("data", object : TypeToken<List<YourList?>?>() {}.type)
 
         // ArrayList<SaleingBill>=
+
+
         list = Gson().fromJson<List<SaleingBill>>(intent.getStringExtra("list"), object : TypeToken<List<SaleingBill?>?>() {}.type) as ArrayList<SaleingBill>
+
+
 
         //   binding.scanQra.setText(list.get(0).Items.toString())
 //https://stackoverflow.com/questions/12092612/pass-list-of-objects-from-one-activity-to-other-activity-in-android
@@ -123,9 +150,9 @@ class PaymentActivity : AppCompatActivity() {
 
         // val challenge: ArrayList<SaleingBill> = intent.extras.getParcelableArrayList("Birds")!!
         // var numberLists=ArrayList<SaleingBill>()
-//
-//
-        binding.TotalafterDiscaunt.setText( Total)
+
+
+        binding.TotalafterDiscaunt.setText(( Unpaid_deferred.toDouble()+TotalSalse.toString().toDouble()).toString())
         // var     numberList = intent .getSerializableExtra( "list" )
         // as ArrayList<SaleingBill>
         viewModel.setNewBillTip.observe(this){
@@ -133,7 +160,13 @@ class PaymentActivity : AppCompatActivity() {
             binding.progressBar2.isGone=true
             Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 
+
+
             if (it.State==1){
+                Log.d("billNumToCreateQR",it.Message+"msg")
+
+                var msgnum =it.Message
+
 
 
                 val dialog   = Dialog(this)
@@ -148,16 +181,50 @@ class PaymentActivity : AppCompatActivity() {
                 dialog.show()
 
                 numberOfBill=it.State
+
+
                 Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 //
-                GlobalScope.launch(Dispatchers.Default) {
-                    withContext(Dispatchers.Default){
-//
-                        CastlesPrinter("123",it.Message.toString())
+                GlobalScope.launch(Dispatchers.Main) {
+                    withContext(Dispatchers.Main){
+
+                      //  Log.d("billNumToCreateQR",billNumToCreateQR)
+
+                     //   Log.d("billNumToCreateQR",billNumToCreateQR)
+
+                        lifecycleScope.launch {
+                            availableItemsViewModel.GetBillQRCode(it.Message).collect {
+                                when (it) {
+                                    is State.Loading -> {}
+                                    is State.Success -> {
+
+                                        Log.d("billNumToCreateQR", it.data.item.toString())
+                                        Log.d("billNumToCreateQR","it.data.item.toString()")
+
+                                        billNumToCreateQR = it.data.item.toString()
+                                        if (binding.deferredEditText.text.toString().toDouble() ==0.0)
+                                        {
+                                        CastlesPrinter( it.data.item.toString(),msgnum)
+                                    }else{
+                                            CastlesPrinter( it.data.item.toString(),msgnum)
+                                            CastlesPrinter( it.data.item.toString(),msgnum)
+                                    }
+                                    }
+                                    is State.Error -> {
+                                        Log.d("billNumToCreateQR","Error")
+
+                                    }
+                                }
+
+                            }
+                        }
+
+
+
                         //   registerBillAndPrint(it.Message.toString())
                     }}
                 // registerBillAndPrint()
-                Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
+              //  Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 
                 val i=Intent(this,MainActivity::class.java)
                 startActivity(i)
@@ -176,7 +243,7 @@ class PaymentActivity : AppCompatActivity() {
 
         binding.Totalssz4.setText(Unpaid_deferred)
         binding.Totalss2. setText(TotalReturn)
-        binding. Totalss4.setText(Total)
+        binding. Totalss4.setText(TotalAfterDescound)
 
 
 
@@ -196,6 +263,10 @@ class PaymentActivity : AppCompatActivity() {
             lateinit var discount: TextInputEditText
             discount = dialog2?.findViewById(R.id.billDiscountEditText1)
             // NumberOfUnits.text.toString()
+            discount.setVisibility(View.GONE)
+            lateinit var billDiscountEditText9: TextInputEditText
+            billDiscountEditText9 =
+                dialog2?.findViewById(R.id.billDiscountEditText9)
 
             lateinit var ok: Button
             ok = dialog2.findViewById(R.id.printbtn1)
@@ -241,22 +312,20 @@ class PaymentActivity : AppCompatActivity() {
             ok.setOnClickListener {
 
 
-                var discount1 = discount.text.toString()
+                var discount1 = billDiscountEditText9.text.toString()
                     .toDouble() + binding.billDiscountEditText.text.toString().toDouble()
                 // binding.billDiscountEditText.setText(discount)
 
                 //  var total1=binding.Totalss4.text.toString().toDouble()-discount1.toDouble()
                 if (discount1 > binding.Totalss4.text.toString().toDouble()) {
 
-                    Toast.makeText(
-                        applicationContext,
-                        "الخصم اكبر من قيمه الفاتوره",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast.makeText(applicationContext, "الخصم اكبر من قيمه الفاتوره", Toast.LENGTH_SHORT).show()
 
                 } else {
+
                     //   var setbillDiscountEditText=discount1.toDouble()+ binding.billDiscountEditText.text.toString().toDouble()
-                    var total1 = binding.Totalss4.text.toString().toDouble() - discount1.toDouble()
+                 //   var total1 = binding.Totalss4.text.toString().toDouble() - discount1.toDouble()
+                    var total1 =( Unpaid_deferred.toDouble()+TotalSalse.toString().toDouble()) - discount1.toDouble()
 
                     //   binding.billDiscountEditText.setText(setbillDiscountEditText.toString())
                     binding.billDiscountEditText.setText(discount1.toString())
@@ -264,7 +333,7 @@ class PaymentActivity : AppCompatActivity() {
                     binding.TotalafterDiscaunt.setText(total1.toString())
                     dialog2.dismiss()
                 }
-                binding.deferredEditText.setText(binding.TotalafterDiscaunt.text)
+                binding.deferredEditText.setText((binding.TotalafterDiscaunt.text.toString()))
 
             }
 
@@ -298,11 +367,10 @@ class PaymentActivity : AppCompatActivity() {
                     var TotalafterDiscaunt1 =
                         binding.TotalafterDiscaunt.text.toString().toString().replace("-", "")
 
-
-                    var deferd =
-                        TotalafterDiscaunt1.toDouble() - binding.cashEditText.text.toString()
+                    var deferd = TotalafterDiscaunt1.toDouble() - binding.cashEditText.text.toString()
                             .toDouble()
                     binding.deferredEditText.setText(deferd.toString())
+
                 }
 
                 //  binding.deferredEditText.setText(binding.TotalafterDiscaunt.text)
@@ -312,7 +380,19 @@ class PaymentActivity : AppCompatActivity() {
 
         binding.progressBar2.isGone=true
         binding.printbtn.setOnClickListener {
-            showDefaultDialog(this)
+            if (binding.TotalafterDiscaunt.text.toString().toDouble()<0){
+                showDefaultDialog(this)
+            }else
+            {
+                if (binding.cashEditText.text.toString().toDouble() >binding.TotalafterDiscaunt.text.toString().toDouble())
+                {
+                    Toast.makeText(applicationContext, "ادخل المبلغ بطريقة صحيحة", Toast.LENGTH_SHORT).show()
+                }else{
+                    showDefaultDialog(this)
+                }
+            }
+
+
 
         }
     }
@@ -361,6 +441,7 @@ class PaymentActivity : AppCompatActivity() {
 
         if (list.isEmpty()) {
         } else {
+        //    Log.d("listBill",list.toJson())
 
             for (listX in list) {
                 //  if (listX.TransactionType==1) {
@@ -465,7 +546,7 @@ class PaymentActivity : AppCompatActivity() {
         msgToPrint.plus("\n")
         msgToPrint = msgToPrint.plus("\n")
 
-        msgToPrint = msgToPrint.plus("الاجمالى قبل الخصم:   " + Total)
+        msgToPrint = msgToPrint.plus("الاجمالى قبل الخصم:   " + TotalAfterDescound)
         msgToPrint.plus("\n")
         msgToPrint = msgToPrint.plus("\n")
 
@@ -764,6 +845,7 @@ class PaymentActivity : AppCompatActivity() {
                 SharedPreferencesCom.getInstance().gerSharedUser_ID()
 
 
+              //  Log.d("showDefaultDialog",loc!!.longitude.toString())
                 viewModel.setNewPill(NewBill(
                     CusID.trim(),
                     binding.billDiscountEditText.text.toString().trim(),
@@ -775,20 +857,28 @@ class PaymentActivity : AppCompatActivity() {
                     binding.deferredEditText.text.toString().trim(),
                     Unpaid_deferred,
                     binding.Totalss2.text.toString().trim(),
-                    list))
+                    list,
+                    loc!!.longitude,
+                    loc!!.latitude,
+                    binding.com.text.toString()
+                ))
 
-//                Log.e("PrintError13", NewBill(
-//                    CusID.trim(),
-//                    binding.billDiscountEditText.text.toString().trim(),
-//                    "1",
-//                    SharedPreferencesCom.getInstance().gerSharedUser_ID().toString(),
-//                    binding.Totalss4.text.toString().trim(),
-//                    binding.TotalafterDiscaunt.text.toString().trim(),
-//                    binding.cashEditText.text.toString().trim(),
-//                    binding.deferredEditText.text.toString().trim(),
-//                    Unpaid_deferred,
-//                    binding.Totalss2.text.toString().trim(),
-//                    list).toJson().toString())
+                Log.d("Unpaid_deferred",Unpaid_deferred.toString())
+                Log.e("PrintError13", NewBill(
+                    CusID.trim(),
+                    binding.billDiscountEditText.text.toString().trim(),
+                    "1",
+                    SharedPreferencesCom.getInstance().gerSharedUser_ID().toString(),
+                    binding.Totalss4.text.toString().trim(),
+                    binding.TotalafterDiscaunt.text.toString().trim(),
+                    binding.cashEditText.text.toString().trim(),
+                    binding.deferredEditText.text.toString().trim(),
+                    Unpaid_deferred,
+                    binding.Totalss2.text.toString().trim(),
+                    list,
+                    loc!!.longitude,
+                    loc!!.latitude,
+                binding.com.text.toString()).toJson().toString())
                 //registerBillAndPrint()
                 // print()
             }
@@ -826,11 +916,16 @@ class PaymentActivity : AppCompatActivity() {
         val Currently_high = 20
         var ret = 0
         val print = CtPrint()
-        print.initPage(700)
-        print.drawImage(textAsBitmap2(registerBillAndPrint2(billNum), 320, 27), 4, 30)
+     //   print.initPage((list.size*280)+1140)
+        print.initPage((list.size*280)+500)
+        print.drawImage(textAsBitmap2(registerBillAndPrint2(billNum), 330, 24), 4, 30)
         print.printPage()
         var bitmap: Bitmap? = null
         print.initPage(370)
+        bitmap = print.encodeToBitmap(QR, CtPrint.QR_CODE, 350, 320)
+
+
+
         bitmap = print.encodeToBitmap(QR, CtPrint.QR_CODE, 350, 320)
         print.drawImage(bitmap, 0, 0)
         print.printPage()
@@ -898,9 +993,7 @@ class PaymentActivity : AppCompatActivity() {
 
 // Draw background
         val paint = Paint(
-            (Paint.ANTI_ALIAS_FLAG
-                    or Paint.LINEAR_TEXT_FLAG)
-        )
+            (Paint.ANTI_ALIAS_FLAG or Paint.LINEAR_TEXT_FLAG))
         paint.style = Paint.Style.FILL
         paint.color = Color.WHITE
         c.drawPaint(paint)
@@ -931,7 +1024,7 @@ class PaymentActivity : AppCompatActivity() {
 //            //    int startRest= s.ItemName.indexOf(" ",15);
 //            //    String restOfItemName=s.ItemName.substring(startRest);
 //            //    s.ItemName=s.ItemName.substring(0,startRest);
-////
+//
 //            //      sb.append("  "+s.ItemName+"       "+s.contaty+"           "+s.balanc+"           "+"\n" +
 //            //            " "+restOfItemName+"\n" +"\n");
 //            //  }else {
@@ -1001,27 +1094,31 @@ class PaymentActivity : AppCompatActivity() {
         //  Log.e("PrintError1", "e.message.toString()")
 
 
-        //  val    msgToPrint=""
+         msgToPrint=""
         this.msgToPrint = msgToPrint.plus("رقم الفاتورة ").plus(numerofBill).plus("\n")
 
-        this.  msgToPrint =
-            msgToPrint.plus("بواسطة : ").plus("شركه البان الدوار  ")
-                .plus("\n")
+        this.msgToPrint =
+            msgToPrint.plus("بواسطة : ").plus("شركه البان الدوار  ").plus("\n")
 
         this. msgToPrint =
-            msgToPrint.plus("س.ت  ").plus(" 173847 ")
-                .plus("\n")
-        this. msgToPrint =
-            msgToPrint.plus("ت.ض : ").plus(" 679/427/597 ")
-                .plus("\n")
-        this.  msgToPrint = msgToPrint.plus("التاريخ :").plus("9-10-2022 ")
-        this.  msgToPrint = msgToPrint.plus("   ")
-        this.  msgToPrint.plus("\n")
-        this.  msgToPrint =
-            msgToPrint.plus("رقم الموبيل:  ").plus("01112272015 ")
-                .plus("\n")
+            msgToPrint.plus("س.ت  ").plus(" 173847 ").plus("\n")
 
-        //
+        this. msgToPrint =
+            msgToPrint.plus("ت.ض : ").plus(" 679/427/597 ").plus("\n")
+
+        val sdf = SimpleDateFormat("dd/M/yyyy hh:mm:ss")
+        val currentDate = sdf.format(Date())
+
+        this.msgToPrint = msgToPrint.plus("التاريخ :").plus(currentDate.toString())
+
+
+        this.msgToPrint = msgToPrint.plus("   ")
+        this.msgToPrint.plus("\n")
+//        this.  msgToPrint =
+//            msgToPrint.plus("رقم الموبيل:  ").plus("01112272015 ")
+//                .plus("\n")
+
+
         //  msgToPrint = msgToPrint.plus("\n")
         //  val split= DialogBill(name)
         //   val
@@ -1034,7 +1131,8 @@ class PaymentActivity : AppCompatActivity() {
         //         .plus(" ").plus(SimpleDateFormat("hh:mm:ss").format(Date())).plus("\n")
 
         //   if (_bill.value!!.isNotEmpty()) {
-        this.   msgToPrint = msgToPrint.plus("==========الفاتورة==========")
+        this.   msgToPrint = msgToPrint.plus("\n")
+        this.   msgToPrint = msgToPrint.plus("________ الفاتورة _________")
         this.   msgToPrint = msgToPrint.plus("\n")
         //  repeat(_bill.value!!.size) {
 
@@ -1045,34 +1143,45 @@ class PaymentActivity : AppCompatActivity() {
             for (listX in list) {
                 //  if (listX.TransactionType==1) {
 
-                this.     msgToPrint = msgToPrint.plus(" اسم المنتج : " + listX.Items)
+                this.     msgToPrint = msgToPrint.plus(" المنتج : " + listX.Items)
                 this.      msgToPrint = msgToPrint.plus("   ")
                 this.      msgToPrint.plus("\n")
                 this.     msgToPrint = msgToPrint.plus("\n")
-                this.      msgToPrint = msgToPrint.plus("النوع :   " + listX.sals +listX.returns)
+
+                this.msgToPrint = msgToPrint.plus("العدد               السعر           الاجمالي ").plus("\n")
+              //  this.      msgToPrint.plus("العدد                 السعر             الاجمالي ")
+                this.      msgToPrint.plus("\n")
+                this.     msgToPrint = msgToPrint.plus("\n")
+
+                this.msgToPrint = msgToPrint.plus("    "+listX.TotalPrice+"          "+ listX.UnitPrice+"                "+ listX.NumberOfUnits)
+               // this.      msgToPrint = msgToPrint.plus(":" + listX.sals +listX.returns)
                 this.     msgToPrint = msgToPrint.plus("\n")
 
                 this.   msgToPrint.plus("\n")
 
 
-                this.  msgToPrint = msgToPrint.plus("سعر الوحده :   " + listX.UnitPrice)
-                this.  msgToPrint = msgToPrint.plus("\n")
+             //   this.  msgToPrint = msgToPrint.plus("سعر الوحده :                 " + listX.UnitPrice)
+             //   this.  msgToPrint = msgToPrint.plus("\n")
+             //   this.  msgToPrint.plus("\n")
 
-                this.  msgToPrint.plus("\n")
+                if (listX.Discount.toDouble()==0.0){
 
-                this.  msgToPrint = msgToPrint.plus("الخصم على هذا المنج :   " + listX.Discount)
-                this.  msgToPrint.plus("\n")
-                this.  msgToPrint = msgToPrint.plus("\n")
-
-                this.  msgToPrint = msgToPrint.plus("عدد المباع من المنتج:   " + listX.NumberOfUnits)
-                this.  msgToPrint.plus("\n")
-                this.  msgToPrint = msgToPrint.plus("\n")
+                }else{
+                    this.  msgToPrint = msgToPrint.plus("الخصم على هذا المنج :   " + listX.Discount)
+                    this.  msgToPrint.plus("\n")
+                    this.  msgToPrint = msgToPrint.plus("\n")
+                }
 
 
-                this.  msgToPrint = msgToPrint.plus("الاجمالى :  " +listX.TotalPrice)
-                this.  msgToPrint.plus("\n")
-                this.  msgToPrint = msgToPrint.plus("\n")
-                this.  msgToPrint = msgToPrint.plus("________________________")
+            //   this.  msgToPrint = msgToPrint.plus("عدد المباع من المنتج:     " + listX.NumberOfUnits)
+            //   this.  msgToPrint.plus("\n")
+            //   this.  msgToPrint = msgToPrint.plus("\n")
+
+
+               // this.  msgToPrint = msgToPrint.plus("الاجمالى :                   " +listX.TotalPrice)
+               // this.  msgToPrint.plus("\n")
+               // this.  msgToPrint = msgToPrint.plus("\n")
+                this.  msgToPrint = msgToPrint.plus("___________________________")
                 // }else{
                 //     msgToPrint = msgToPrint.plus("\n")
                 //     //  repeat(_bill.value!!.size) {
@@ -1125,50 +1234,56 @@ class PaymentActivity : AppCompatActivity() {
         }
 
         this. msgToPrint = msgToPrint.plus("\n")
-        this. msgToPrint = msgToPrint.plus("اجمالي المبيعات :   " + binding.Totalss.text.toString())
+        this. msgToPrint = msgToPrint.plus("اجمالي المبيعات :         " + binding.Totalss.text.toString())
         this. msgToPrint = msgToPrint.plus("   ")
         this. msgToPrint.plus("\n")
         this. msgToPrint = msgToPrint.plus("\n")
 
         //    msgToPrint = msgToPrint.plus("الوزن " +" _bill.value!![it].size")
-        this. msgToPrint = msgToPrint.plus("المديونيه السابقه :   " + Unpaid_deferred)
+        this. msgToPrint = msgToPrint.plus("المديونيه السابقه :          " + Unpaid_deferred)
         this. msgToPrint = msgToPrint.plus("\n")
 
         this. msgToPrint.plus("\n")
 
-        this. msgToPrint = msgToPrint.plus("اجمالى المرتجعات :   " + TotalReturn)
-        this. msgToPrint.plus("\n")
-        this. msgToPrint = msgToPrint.plus("\n")
-        this. msgToPrint = msgToPrint.plus("\n")
+//        this. msgToPrint = msgToPrint.plus("اجمالى المرتجعات :   " + TotalReturn)
+//        this. msgToPrint.plus("\n")
+//        this. msgToPrint = msgToPrint.plus("\n")
+//        this. msgToPrint = msgToPrint.plus("\n")
 
-        this. msgToPrint = msgToPrint.plus("مديونيه سابقه :   " + Unpaid_deferred)
-        this. msgToPrint.plus("\n")
-        this. msgToPrint = msgToPrint.plus("\n")
+//        this. msgToPrint = msgToPrint.plus("مديونيه سابقه :   " + Unpaid_deferred)
+//        this. msgToPrint.plus("\n")
+//        this. msgToPrint = msgToPrint.plus("\n")
 
-        this. msgToPrint = msgToPrint.plus("الاجمالى قبل الخصم:   " + Total)
-        this. msgToPrint.plus("\n")
-        this. msgToPrint = msgToPrint.plus("\n")
+        if ( binding.billDiscountEditText.text.toString().toDouble() ==0.0)
+        {
+
+        }else{
+            this. msgToPrint = msgToPrint.plus("الاجمالى قبل الخصم:    " + TotalAfterDescound)
+            this. msgToPrint.plus("\n")
+            this. msgToPrint = msgToPrint.plus("\n")
+
+            this. msgToPrint =
+                this. msgToPrint.plus("الخصم :                        " + binding.billDiscountEditText.text.toString())
+
+
+            this. msgToPrint = msgToPrint.plus("\n")
+
+            this. msgToPrint.plus("\n")
+        }
 
         this. msgToPrint =
-            this.     msgToPrint.plus("الخصم :               " + binding.billDiscountEditText.text.toString())
-
-
+            this.     msgToPrint.plus("المطلوب دفعه :             " + binding.TotalafterDiscaunt.text.toString())
         this. msgToPrint = msgToPrint.plus("\n")
 
         this. msgToPrint.plus("\n")
         this. msgToPrint =
-            this.     msgToPrint.plus("المطلوب دفعه :       " + binding.TotalafterDiscaunt.text.toString())
-        this. msgToPrint = msgToPrint.plus("\n")
-
-        this. msgToPrint.plus("\n")
-        this. msgToPrint =
-            this.     msgToPrint.plus("المدفوع:              " + binding.cashEditText.text.toString())
+            this.     msgToPrint.plus("المدفوع:                        " + binding.cashEditText.text.toString())
         this. msgToPrint = msgToPrint.plus("  ")
         this. msgToPrint = msgToPrint.plus("\n")
 
         this. msgToPrint.plus("\n")
         this. msgToPrint =
-            this.     msgToPrint.plus("الباقى :      " + binding.deferredEditText.text.toString())
+            this.     msgToPrint.plus("الباقى :                         " + binding.deferredEditText.text.toString())
         this. msgToPrint = msgToPrint.plus("  ")
         this. msgToPrint = msgToPrint.plus("\n")
 
@@ -1176,9 +1291,9 @@ class PaymentActivity : AppCompatActivity() {
         this. msgToPrint = msgToPrint.plus("  ")
         this. msgToPrint = msgToPrint.plus("\n")
 
-        this. msgToPrint = msgToPrint.plus("\n")
-        this. msgToPrint = msgToPrint.plus("##########")
-        this. msgToPrint = msgToPrint.plus("\n")
+       // this. msgToPrint = msgToPrint.plus("\n")
+      //  this. msgToPrint = msgToPrint.plus("##########")
+      //  this. msgToPrint = msgToPrint.plus("\n")
         //      }
         //  }
 
@@ -1193,7 +1308,7 @@ class PaymentActivity : AppCompatActivity() {
         //         msgToPrint = msgToPrint.plus("   ")
 
         //    msgToPrint = msgToPrint.plus("اجمالى المبيعات${Total}")
-        this.    msgToPrint = msgToPrint.plus("\n")
+      //  this.    msgToPrint = msgToPrint.plus("\n")
         //         msgToPrint = msgToPrint.plus("##########")
         //         msgToPrint = msgToPrint.plus("\n")
         //     }
@@ -1214,13 +1329,26 @@ class PaymentActivity : AppCompatActivity() {
         //        msgToPrint = msgToPrint.plus("كاش ").plus(billCash.value).plus("\n")
         //    msgToPrint = msgToPrint.plus("المدفوع ").plus(collection.value).plus("\n")
 //
+      this.   msgToPrint = msgToPrint.plus("******************************")
+      this.   msgToPrint = msgToPrint.plus("\n")
+     // this.   msgToPrint = msgToPrint.plus("                 شش")
+     // this.   msgToPrint = msgToPrint.plus("\n ")
+     // this.   msgToPrint = msgToPrint.plus("\n ")
+     // this.   msgToPrint = msgToPrint.plus("استلمت انا المذكور اعلاه البضاعه الموضحة وصفا وقيمة وملتزم بسداد الثمن خلال مدة اقصاها او ارجاعها ")
+     // this.   msgToPrint = msgToPrint.plus("\n")
+     // this.   msgToPrint = msgToPrint.plus("\n")
+     // this.   msgToPrint = msgToPrint.plus("بحالتها التي سلمت عليها ولا تعتبر ذمتي خالية الا باستلام الفاتورة الموقعه مني ")
+     // this.   msgToPrint = msgToPrint.plus("\n")
+        this.   msgToPrint = msgToPrint.plus("       المستلم   ")
 
+        this.   msgToPrint = msgToPrint.plus("\n")
+        this.   msgToPrint = msgToPrint.plus("******************************")
         this.   msgToPrint = msgToPrint.plus("\n")
         this.   msgToPrint = msgToPrint.plus("\n")
         this.   msgToPrint = msgToPrint.plus("Powered by")
         this.   msgToPrint = msgToPrint.plus("\n")
         this.   msgToPrint = msgToPrint.plus("Technology & Business Integration")
-        this.   msgToPrint = msgToPrint.plus("\n")
+    //    this.   msgToPrint = msgToPrint.plus("\n")
         //  }
         //  }
         //  print()

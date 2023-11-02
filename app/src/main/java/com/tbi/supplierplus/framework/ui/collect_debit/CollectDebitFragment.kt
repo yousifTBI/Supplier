@@ -29,8 +29,9 @@ class CollectDebitFragment : Fragment() {
         viewModel.setUser(
             CollectDebitFragmentArgs.fromBundle(requireArguments()).user
         )
+
         viewModel. getDebits()
-        val adapter = CustomerDebitsAdapter(onClickListener = OnDebitClickListener {
+        var adapter = CustomerDebitsAdapter(onClickListener = OnDebitClickListener {
             viewModel.setDebit(it)
             viewModel.navigateToExecution()
         })
@@ -46,9 +47,11 @@ class CollectDebitFragment : Fragment() {
             }
         })
 
+        var stringArg =""
       binding.recyclerView.adapter = adapter
       viewModel.debits.observe(viewLifecycleOwner) {
           adapter.submitList(it)
+
       }
 
         viewModel.msg.observe(viewLifecycleOwner) {
@@ -60,7 +63,7 @@ class CollectDebitFragment : Fragment() {
 
         viewModel.navToExecution.observe(viewLifecycleOwner) {
             if (it) {
-                findNavController().navigate(CollectDebitFragmentDirections.actionCollectDebitFragmentToDebitExecutionFragment())
+                findNavController().navigate(CollectDebitFragmentDirections.actionCollectDebitFragmentToDebitExecutionFragment("Hello, this is the string to pass!"))
                 viewModel.onDoneNavigateToExecution()
             }
         }

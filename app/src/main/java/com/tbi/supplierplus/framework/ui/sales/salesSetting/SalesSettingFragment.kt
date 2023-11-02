@@ -28,7 +28,7 @@ class SalesSettingFragment : Fragment() {
     ): View? {
         binding = FragmentSalesSettingBinding.inflate(inflater)
         binding.returnsForUserCard.setOnClickListener {
-            Log.d("sdsdsf","sdsds")
+     //       Log.d("sdsdsf","sdsds")
             val    intent = Intent(activity, PurchaseActivity::class.java)
             startActivity(intent)
         }

@@ -41,7 +41,7 @@
             android:id="@+id/textView63"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="البيع"
+            android:text="عمليات"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/sales"
             app:layout_constraintStart_toStartOf="@+id/sales"
@@ -182,10 +182,24 @@
             android:id="@+id/textView88"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="اعدادات العملاء"
+            android:text=" العملاء"
             app:layout_constraintEnd_toEndOf="@+id/saless2"
             app:layout_constraintStart_toStartOf="@+id/saless2"
             app:layout_constraintTop_toBottomOf="@+id/saless2" />
+
+        <TextView
+            android:id="@+id/textView101"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="22dp"
+            android:padding="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView88"
+            app:layout_constraintVertical_bias="0.106" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

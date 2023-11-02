@@ -1,6 +1,8 @@
 package com.tbi.supplierplus.framework.ui.reports
 
+import android.graphics.Color
 import android.os.Bundle
+import android.provider.CalendarContract.Colors
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -64,11 +66,27 @@ class SalesReportFragment : Fragment() {
                         else {
                                 binding.actualAmounttxt.setText(it.data.item.actual_amount.toString())
                                 binding.requerAmounttxt.setText(it.data.item.required_amount.toString())
+                                binding.paperPayId.setText(it.data.item.Actual_MoneyReceiptPapers_count.toString())
+                                binding.paperPayIdAmount.setText(it.data.item.Actual_MoneyReceiptPapers_Amount.toString())
+                                binding.ActualDeferredMoneyPaperAmount.setText(it.data.item.Actual_DeferredMoneyPaper_Amount.toString())
+                                binding.ActualDeferredMoneyPaperCount.setText(it.data.item.Actual_DeferredMoneyPaper_count.toString())
+                                binding.paymentPaperCountRequired.setText(it.data.item.payment_paper_count_required.toString())
+                                binding.paymentPaperAmount.setText(it.data.item.payment_paper_amount.toString())
+                                binding.colectionPaperCountRequired.setText(it.data.item.colection_paper_count_required.toString())
+                                binding.colectionPaperAmount.setText(it.data.item.colection_paper_amount.toString())
 
                         }
+                        if (binding.actualAmounttxt.text.toString().toDouble() < binding.requerAmounttxt.text.toString().toDouble()){
+                            binding.actualAmounttxt.setTextColor(Color.RED)
+                            binding.requarAmounttitle.setTextColor(Color.RED)
+
+                        }else{
+
+                        }
+
                     }
                     is State.Error -> {
-                        Log.d("actualAmounttxt","actualAmounttxtError")
+     //                   Log.d("actualAmounttxt","actualAmounttxtError")
                     }
                 }
             }
@@ -83,6 +101,11 @@ class SalesReportFragment : Fragment() {
                         is State.Loading -> { binding.spinKit.isVisible = true}
 
                         is State.Success -> {
+
+                            binding.SubmitBtn.setText("تم التاكيد")
+                            availableItemsViewModel.getCloseSalesDayDatafForUser().collect {}
+
+                            viewModel2.getselesRepor()
                             if (it == null) {
                             } else {
                                 binding.spinKit.isVisible = false
