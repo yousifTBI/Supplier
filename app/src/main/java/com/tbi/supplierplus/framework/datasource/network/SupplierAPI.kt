@@ -205,7 +205,10 @@ interface SupplierAPI {
 
     @Headers("Content-Type: application/json")
     @GET("api/Report/Get_Customer_Statement")
-    fun getCustomerStatementAPI(@Query("CusID") UserID: String): Deferred<Tasks<Invoices>>
+    fun getCustomerStatementAPI(
+        @Query("CusID") UserID: String,
+        @Query("ItemId") ItemId: Int
+    ): Deferred<Tasks<Invoices>>
 
 
     @Headers("Content-Type: application/json")
@@ -331,7 +334,8 @@ interface SupplierAPI {
     @GET("api/Sale/GetItemByBarcodeV1")
     fun getItemByBarcodeV1API(
         @Query("sales_Id") salas_Id: String,
-        @Query("Barcode") Barcode: String, @Query("Cus_id") Cus_id: String
+        @Query("Barcode") Barcode: String,
+        @Query("Cus_id") Cus_id: String
     ): Deferred<Tasks<Items>>
 
 
@@ -442,13 +446,11 @@ interface SupplierAPI {
         @Query("UserId") UserId: Int
     ): Deferred<BranchModel<Branch>>
 
-
     @Headers("Content-Type: application/json")
     @GET("api/Company/GetBranchDetails")
     fun GetBranchDetailsAPI(
         @Query("BranchID") BranchID: Int
     ): Deferred<BranchDetailsModel>
-
 
     @Headers("Content-Type: application/json")
     @POST("api/Company/AddBranch")
@@ -635,6 +637,13 @@ interface SupplierAPI {
     @GET("TestHeader")
     fun TestHeader(
     ):  Deferred<TestHeaderModel>
+
+
+@Headers("Content-Type: application/json")
+    @GET("api/Items/GetAllItemsFromTable")
+    fun GetAllItemsFromTable(
+
+    ):  Deferred<ItemTask<ItemDetailsModel>>
 
 
 

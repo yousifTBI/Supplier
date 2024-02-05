@@ -27,6 +27,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".framework.ui.NetSpeedActivity"
+            android:exported="false" />
+        <activity
             android:name=".framework.ui2.mortag3.Mortag3BillActivity"
             android:exported="false">
             <meta-data

@@ -52,24 +52,7 @@ class ExpensesClosingFragment : Fragment() {
 
                             Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
                             Toast.makeText(context, it.data.message, Toast.LENGTH_SHORT).show()
-//                            if (it.data.data.isNullOrEmpty()) {
-//                                Log.d("SubmitReturnMardodatVMisNullOrEmpty1", it.data.message)
-//                            } else {
-//                                val intent = Intent(activity, ClosingActivity::class.java)
-//
-//                                startActivity(intent)
-//                            }
-                            val intent = Intent(activity, ClosingActivity::class.java)
 
-                            startActivity(intent)
-
-//                            val intent = Intent(activity, ClosingActivity::class.java)
-//
-//                            startActivity(intent)
-
-//                            DailyClosingviewModel.   SubmitReturnMardodatVM().collect {
-//
-//                            }
                         }
                         is State.Error -> {
                             binding.spinKit.isVisible = false
@@ -141,8 +124,10 @@ class ExpensesClosingFragment : Fragment() {
             }
         }
         //   binding. sales.setText("المخزون والمردودات ")
-
-
+        binding.reviewbtn.setOnClickListener {
+            val intent = Intent(activity, ClosingActivity::class.java)
+            startActivity(intent)
+        }
         return binding.root
     }
 

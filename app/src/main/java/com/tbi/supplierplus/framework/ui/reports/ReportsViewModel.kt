@@ -117,10 +117,10 @@ val reporLivedata = MutableLiveData<ReportSpecificCustomer>()
         }
     }
 
-    fun getCustomerStatement(customerID: String) {
+    fun getCustomerStatement(customerID: String ,ItemId :Int) {
 
             viewModelScope.launch {
-                reportsRepository.getCustomerStatement(customerID).collect {
+                reportsRepository.getCustomerStatement(customerID ,ItemId).collect {
                     statement.value = it.data
                 }
             }

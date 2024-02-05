@@ -143,6 +143,11 @@ class AvailableItemsViewModel @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
+ fun getAllItemsFromTable( ) = wrapWithFlowApi {
+        api.GetAllItemsFromTable()
+    }.flowOn(Dispatchers.IO)
+
+
 
 }
 

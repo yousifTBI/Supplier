@@ -29,6 +29,8 @@ class SellOrMortg3Activity : AppCompatActivity() {
     private val availableItemsViewModel: AvailableItemsViewModel by viewModels()
     var loc: Location? = null
     lateinit var message: String
+    var long = 0.0
+    var lat = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sell_or_mortg3)
@@ -64,6 +66,8 @@ class SellOrMortg3Activity : AppCompatActivity() {
         val locationResult: MyLocation.LocationResult = object : MyLocation.LocationResult() {
             override fun gotLocation(location: Location) {
                 loc = location
+                lat= loc!!.latitude
+                long= loc!!.longitude
                 //   System.out.println("allah: " + loc!!.latitude)
                 //   System.out.println("allah: " + loc!!.longitude)
                 //     Log.d("allahAkbr",  loc!!.latitude.toString())
@@ -84,8 +88,8 @@ class SellOrMortg3Activity : AppCompatActivity() {
                     VisitBranchWithoutPayModel(
                         SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt(),
                         message.toInt(),
-                        loc!!.longitude,
-                        loc!!.latitude
+                       long,
+                        lat
 
                     )
                   ).collect {

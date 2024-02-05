@@ -16,6 +16,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -50,46 +51,49 @@ class LoginAccActivity : AppCompatActivity() {
             contentResolver,
             Settings.Secure.ANDROID_ID
         )
-
-
-        Log.d("aziza3s2", androidId)
+      //  Log.d("aziza3s2", androidId)
 
 
 
         checkLocationPermission()
         SharedPreferencesCom.init(this)
-
-
         val locationResult: MyLocation.LocationResult = object : MyLocation.LocationResult() {
             override fun gotLocation(location: Location) {
                 loc = location
-              //  System.out.println("allah: " + loc!!.latitude)
-              //  System.out.println("allah: " + loc!!.longitude)
                // Log.d("allah",  loc!!.altitude.toString())
                // Log.d("allah",  loc!!.longitude.toString())
             }
         }
-
         val myLocation = MyLocation()
         myLocation.getLocation(this@LoginAccActivity, locationResult)
 
 
-
+        viewModel.checkInternetConnection()
+        viewModel.isInternetAvailable.observe(this) { isConnected ->
+            if (!isConnected) {
+               // Toast.makeText(applicationContext, "لا يوجد اتصال بالانترنت", Toast.LENGTH_LONG).show()
+                binding.msgtxt.setText("لا يوجد اتصال بالانترنت")
+                Log.d("aziza3s2", "لا يوجد اتصال بالانترنت")
+                // Show "no internet" message or take appropriate action
+                // For example, display a Snackbar or Toast
+            }
+        }
 
 
         // SharedPreferencesCom.getInstance().setSharedDistributor_ID("2")
         // SharedPreferencesCom.getInstance().setSharedUser_ID("2")
 
         // viewModel.loginInfoCombVM("qwertys1",this)
+        binding.logoutId.setOnClickListener {
+            //   SharedPreferencesCom.getInstance().setSerial_ID("")
+            val intent = Intent(this, RegistrationActivity::class.java)
+            startActivity(intent)
 
+        }
 
-
-
-
-         viewModel.loginInfoCombVM(androidId,this)
-//        viewModel.loginInfoCombVM(SharedPreferencesCom.getInstance().getSerial_ID(),this)
-
-
+        Log.d("loginInfoCombVLiveData",SharedPreferencesCom.getInstance().getSerial_ID())
+        viewModel.loginInfoCombVM(androidId,this)
+        viewModel.loginInfoCombVM(SharedPreferencesCom.getInstance().getSerial_ID(),this)
 //        val intent = Intent(this, MainActivity::class.java)
 //        startActivity(intent)
 //        finish()
@@ -111,8 +115,6 @@ class LoginAccActivity : AppCompatActivity() {
  //                           Log.d("aziza3", "2")
                         }
                         SharedPreferencesCom.getInstance().setSharedUser_ID(it.data.UserInfo.userID.toString())
-                        // SharedPreferencesCom.getInstance().setSharedUser_ID("78")
-                        // SharedPreferencesCom.getInstance().setSharedDistributor_ID("8")
                         SharedPreferencesCom.getInstance().setSharedDistributor_ID(it.data.UserInfo.Distributor_ID.toString())
                         //Successfully Login
                         // viewModel.saveInfoRoom(androidId)
@@ -145,12 +147,7 @@ class LoginAccActivity : AppCompatActivity() {
                         //your Machine has been Registration
 //                        Log.d("aziza32", it.data.message)
 //                        //  Toast.makeText(applicationContext, it.data.State.toString() + "your Machine has been suspended", Toast.LENGTH_SHORT).show()
-//                        Toast.makeText(
-//                            applicationContext,
-//                            it.data.State.toString() + it.data.message,
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-//
+//                        Toast.makeText( applicationContext, it.data.State.toString() + it.data.message, Toast.LENGTH_SHORT ).show()
 //                        //your Machine has been suspended
 //                        binding.textView5.text = it.data.message
 //                        //your Machine has been suspended
@@ -164,17 +161,12 @@ class LoginAccActivity : AppCompatActivity() {
                     } else if (it.data!!.State == 4) {
                         //go to registeration first
                         //   Toast.makeText(applicationContext, it.data.State.toString() + "go to registeration first", Toast.LENGTH_SHORT).show()
-//                        Toast.makeText(
-//                            applicationContext,
-//                            it.data.State.toString() + it.data.message,
-//                            Toast.LENGTH_SHORT
-//                        ).show()
+                     //   Toast.makeText( applicationContext, it.data.State.toString() + it.data.message, Toast.LENGTH_SHORT ).show()
                         //go to registeration first
 
                         /**
                         val intent = Intent(this, RegisterationActivity::class.java)
                         startActivity(intent)
-
                          */
                         // go to registration first
                         //  val intent = Intent(this, AccountActivity::class.java)
@@ -308,4 +300,6 @@ class LoginAccActivity : AppCompatActivity() {
 
         checkLocationPermission()
     }
+
+
 }

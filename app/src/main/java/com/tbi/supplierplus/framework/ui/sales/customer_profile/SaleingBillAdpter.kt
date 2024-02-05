@@ -13,9 +13,9 @@ import com.tbi.supplierplus.databinding.ReturnsRowBinding
 import com.tbi.supplierplus.databinding.SaleingrowBinding
 import kotlinx.android.synthetic.main.saleingrow.view.*
 
-class SaleingBillAdpter
-// (private val itemClickListener:  ItemClickListenerCounter)
-    :
+class SaleingBillAdpter(val onCategoryClickListener: OnCategoryClickListener) :
+// (private val itemClickListener:  ItemClickListenerCounter):
+
     ListAdapter<SaleingBill, SalingViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SalingViewHolder {
@@ -27,6 +27,9 @@ class SaleingBillAdpter
 
     override fun onBindViewHolder(holder: SalingViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
+        holder.itemView.setOnClickListener {
+            getItem(position)?.let { it1 -> onCategoryClickListener.onClick(it1, position) }
+        }
         // holder.itemView.textView52.
         // holder.itemView.buttonup.setOnClickListener {
         //    // x++
@@ -78,3 +81,6 @@ class SalingViewHolder(private var binding: SaleingrowBinding) :
 
 }
 
+class OnCategoryClickListener(val clickListener: (position: Int) -> Unit) {
+    fun onClick(Category: SaleingBill, position: Int) = clickListener(position)
+}

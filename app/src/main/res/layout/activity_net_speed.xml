@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- activity_main.xml -->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".framework.ui.NetSpeedActivity"
+     >
+
+<TextView
+    android:id="@+id/downloadSpeedTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Download Speed: "
+    android:textSize="18sp"
+    android:layout_centerVertical="true"
+    android:layout_centerHorizontal="true" />
+
+<TextView
+    android:id="@+id/uploadSpeedTextView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Upload Speed: "
+    android:textSize="18sp"
+    android:layout_below="@id/downloadSpeedTextView"
+    android:layout_marginTop="16dp"
+    android:layout_centerHorizontal="true" />
+
+<Button
+    android:id="@+id/startTestButton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Start Speed Test"
+    android:layout_below="@id/uploadSpeedTextView"
+    android:layout_marginTop="32dp"
+    android:layout_centerHorizontal="true"
+    android:onClick="startSpeedTest" />
+</RelativeLayout>

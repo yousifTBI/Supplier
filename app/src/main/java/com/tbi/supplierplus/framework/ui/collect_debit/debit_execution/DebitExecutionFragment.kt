@@ -2,6 +2,7 @@ package com.tbi.supplierplus.framework.ui.collect_debit.debit_execution
 
 import CTOS.CtPrint
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Bitmap
@@ -16,6 +17,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.*
 import androidx.core.view.get
 import androidx.fragment.app.activityViewModels
@@ -38,6 +40,8 @@ class DebitExecutionFragment : Fragment(), AdapterView.OnItemSelectedListener {
     var paymentMethods = arrayOf("كاش", "شيك", "تحويل بنكي", "محفظة الكترونيه")
     var paymentMethodPosition = 0
     var msgToPrint = ""
+    var CheckNumber = ""
+    var Bank = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -118,7 +122,9 @@ class DebitExecutionFragment : Fragment(), AdapterView.OnItemSelectedListener {
                                     binding.cashEditText.text.toString(),
                                     it?.cus_id.toString(),
                                     binding.deferredEditText.text.toString(),
-                                    paymentMethodPosition.toInt()
+                                    paymentMethodPosition.toInt(),
+                                    CheckNumber,
+                                    Bank
                                 )
                             )
 
@@ -158,6 +164,33 @@ class DebitExecutionFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         paymentMethodPosition = position + 1
         Log.d("setOnItemSelectedListener", paymentMethodPosition.toString())
+        if (paymentMethodPosition ==2){
+            val dialog = requireContext()?.let { it1 -> Dialog(it1) }
+            dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            //بيعمل بلوك للباك جراوند
+            //  dialog?.setCancelable(false)
+            dialog?.setContentView(R.layout.check_details)
+            dialog?.getWindow()?.setLayout(700, 850)
+            dialog?.show()
+            dialog?.show()
+            lateinit var tv_name: TextView
+            tv_name = dialog?.findViewById(R.id.billDiscountEditText1)!!
+
+            lateinit var checkNumID: TextView
+            checkNumID = dialog?.findViewById(R.id.checkNumID)!!
+
+            lateinit var EditweightDailog: Button
+            EditweightDailog = dialog?.findViewById(R.id.EditweightDailog)!!
+
+            EditweightDailog.setOnClickListener {
+                Log.d("checkNumID",checkNumID.text.toString())
+                Log.d("checkNumID",tv_name.text.toString())
+                Bank =tv_name.text.toString()
+                CheckNumber = checkNumID.text.toString()
+                dialog.dismiss()
+            }
+
+        }
 
     }
 

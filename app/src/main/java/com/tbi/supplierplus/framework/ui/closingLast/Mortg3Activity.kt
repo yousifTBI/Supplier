@@ -1,6 +1,7 @@
 package com.tbi.supplierplus.framework.ui.closingLast
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
@@ -43,17 +44,20 @@ class Mortg3Activity : AppCompatActivity() {
                         when (it) {
                             is State.Loading -> {binding.spinKit.isVisible =true}
                             is State.Success -> {
+                                Log.d("availableItemsViewModel",it.data.Message+ItemID.toInt())
                                 binding.spinKit.isVisible =false
                                 binding.numOfRecord.setText(it.data.item.Item_Count.toString())
 
                             }
-                            is State.Error -> {binding.spinKit.isVisible =false}
+                            is State.Error -> {
+                                Log.d("availableItemsViewModel","Error")
+                                binding.spinKit.isVisible =false
+                            }
                         }
                     }
                 }
             }
         }
-
     }
 
     private fun CheckAllFields(): Boolean {

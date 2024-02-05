@@ -58,7 +58,7 @@ class CustomerStatementFragment : Fragment() {
 
                 allCustomers=  parentView?.getItemAtPosition( position) as AllCustomers
                // Log.d("onItemSelectedListener",allCustomers.toJson())
-                viewModel.getCustomerStatement(  allCustomers.Branch_ID.toString())
+                viewModel.getCustomerStatement(  allCustomers.Branch_ID.toString(),0)
 
 
    // viewModel.setCustomerID(viewModel.customers.value!![position].Customer_ID.toString())

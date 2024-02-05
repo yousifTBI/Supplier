@@ -34,13 +34,11 @@
             android:id="@+id/discribtionText"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
-
-
             android:text=" "
             android:elevation="234dp"
             android:ems="10"
             android:hint="سبب الخصم"
-
+            android:selectAllOnFocus="true"
             />
 
 
@@ -52,7 +50,6 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-
         android:layout_marginTop="28dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,13 +61,32 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="اضف الوزن "
-            android:text="0.0"
+            android:text=""
             android:gravity="center"
             android:imeOptions="actionDone"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:selectAllOnFocus="true"
+            />
 
 
     </com.google.android.material.textfield.TextInputLayout>
+    <Button
+        android:visibility="gone"
+        android:id="@+id/confirmWieght"
+        android:layout_width="120dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/blue_rounded_filled20"
+        android:paddingHorizontal="5dp"
+        android:text="تاكيد الوزن"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textinput_discribtion"
+        app:layout_constraintEnd_toEndOf="@+id/textinput_billDiscount"
+        app:layout_constraintStart_toStartOf="@+id/textinput_billDiscount"
+        app:layout_constraintTop_toBottomOf="@+id/textinput_billDiscount" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinput_bill2"
@@ -86,17 +102,34 @@
             android:id="@+id/billDiscountEditText9"
             android:layout_width="120dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
             android:ems="10"
             android:hint="الخصم "
             android:text="0.0"
             android:gravity="center"
             android:imeOptions="actionDone"
             android:inputType="numberDecimal"
-            app:layout_constraintBottom_toBottomOf="@+id/textinput_billDiscount"
-            app:layout_constraintEnd_toStartOf="@+id/textinput_billDiscount"
-            app:layout_constraintTop_toTopOf="@+id/textinput_billDiscount" />
+            android:selectAllOnFocus="true"
+            />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/confirmPrice"
+        android:layout_width="120dp"
+        android:layout_height="53dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/blue_rounded_filled20"
+        android:paddingHorizontal="5dp"
+        android:text="تاكيد السعر"
+
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textinput_discribtion"
+        app:layout_constraintEnd_toEndOf="@+id/textinput_bill2"
+        app:layout_constraintStart_toStartOf="@+id/textinput_bill2"
+        app:layout_constraintTop_toBottomOf="@+id/textinput_bill2" />
+
+
 
     <Button
         android:id="@+id/printbtn1"

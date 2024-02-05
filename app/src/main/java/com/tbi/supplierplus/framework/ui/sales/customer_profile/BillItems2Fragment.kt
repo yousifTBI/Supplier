@@ -56,7 +56,7 @@ class BillItems2Fragment : Fragment() {
      //  val  id=arguments?.getString("id")
 
 
-         var adapte=SaleingBillAdpter()
+         var adapte=SaleingBillAdpter(OnCategoryClickListener {  })
 
 
       binding.textView23.setOnClickListener {

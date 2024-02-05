@@ -164,7 +164,7 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@+id/payment_card"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/commentTXT" />
+                    app:layout_constraintTop_toBottomOf="@+id/clientID" />
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/payment_card"
@@ -173,7 +173,7 @@
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="8dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="250dp"
+                    android:layout_marginTop="370dp"
                     android:layout_marginEnd="20dp"
                     android:padding="20dp"
                     app:cardCornerRadius="20dp"
@@ -242,6 +242,7 @@
                                 android:ems="10"
                                 android:hint="المدفوع"
                                 android:inputType="numberDecimal"
+                                android:selectAllOnFocus="true"
                                 tools:text="0.0" />
 
                         </com.google.android.material.textfield.TextInputLayout>
@@ -327,7 +328,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="32dp"
                     android:layout_marginTop="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/cancel1"
+                    app:layout_constraintBottom_toTopOf="@+id/clientID"
                     app:layout_constraintEnd_toEndOf="@+id/totalpefordiscount"
                     app:layout_constraintTop_toBottomOf="@+id/totalpefordiscount">
 
@@ -337,8 +338,34 @@
                         android:layout_height="wrap_content"
                         android:textColor="#753A606E"
                         android:textSize="20dp"
+                        android:selectAllOnFocus="true"
                         android:hint="اضف  تعليق"/>
                 </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/clientID"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toTopOf="@+id/cancel1"
+                    app:layout_constraintEnd_toEndOf="@+id/totalpefordiscount"
+                    app:layout_constraintTop_toBottomOf="@+id/commentTXT">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/clientName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="#753A606E"
+                        android:textSize="20dp"
+                        android:hint="رقم مستند العميل "
+                        android:selectAllOnFocus="true"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

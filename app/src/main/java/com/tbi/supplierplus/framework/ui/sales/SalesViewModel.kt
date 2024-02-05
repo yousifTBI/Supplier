@@ -287,8 +287,6 @@ var editProductpriceState = MutableLiveData<Int>()
           salesRepository. addNewPill(bill).collect{
               setNewBillTip.value=it
 
-
-
           }
       }
   }

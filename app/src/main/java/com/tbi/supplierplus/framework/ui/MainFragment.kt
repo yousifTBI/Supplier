@@ -27,8 +27,10 @@ import com.tbi.supplierplus.framework.ui.backgroundService.BackgroundService
 import com.tbi.supplierplus.framework.ui.closingLast.ClosingActivity
 import com.tbi.supplierplus.framework.ui.login.State
 import com.tbi.supplierplus.framework.ui.purchase.PurchaseActivity
+import com.tbi.supplierplus.framework.ui.registration.RegistrationActivity
 import com.tbi.supplierplus.framework.ui.sales.customers.product_selection.ChangePriceActivity
 import com.tbi.supplierplus.framework.ui2.availableitemsBB.AvailableItemsViewModel
+import com.tbi.supplierplus.framework.ui2.mortag3.SellOrMortg3Activity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Delay
 import kotlinx.coroutines.Dispatchers
@@ -44,6 +46,8 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
    private val availableItemsViewModel: AvailableItemsViewModel by viewModels()
     var loc: Location? = null
+    var lat = 0.0
+    var lon = 0.0
      override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,9 +66,13 @@ class MainFragment : Fragment() {
          val locationResult: MyLocation.LocationResult = object : MyLocation.LocationResult() {
              override fun gotLocation(location: Location) {
                  loc = location
+                     lat =loc!!.latitude
+                     lon =loc!!.longitude
+
              //   System.out.println("allah: " + loc!!.latitude)
              //   System.out.println("allah: " + loc!!.longitude)
-             //     Log.d("allahAkbr",  loc!!.latitude.toString())
+                  Log.d("allahAkbr",  loc!!.latitude.toString())
+                  Log.d("allahAkbr",  lat.toString())
              //  Log.d("allahAkbr",  loc!!.longitude.toString())
              }
          }
@@ -119,9 +127,14 @@ class MainFragment : Fragment() {
         binding.saless.setOnClickListener {
             findNavController().navigate(
                 MainFragmentDirections.actionGlobalSalesSettingFragment()
-
             )
-        }
+
+//                    val intent = Intent(activity, NetSpeedActivity::class.java)
+//                        .apply {}
+//                    startActivity(intent)
+
+                }
+
 
 
         binding.car.setOnClickListener {
@@ -169,6 +182,13 @@ class MainFragment : Fragment() {
 
               )
           }
+
+         binding.logoutId.setOnClickListener {
+          //   SharedPreferencesCom.getInstance().setSerial_ID("")
+             val intent = Intent(requireContext(), RegistrationActivity::class.java)
+             startActivity(intent)
+
+         }
 
          lifecycleScope.launch() {
              availableItemsViewModel.GetUserInfo().collect {
@@ -219,7 +239,10 @@ class MainFragment : Fragment() {
         // Implement your method logic here
         // This method will be executed every 5 minutes
         lifecycleScope.launch() {
-            availableItemsViewModel.AddLocationPointToUser( loc!!.longitude, loc!!.latitude).collect {
+           // availableItemsViewModel.AddLocationPointToUser( loc!!.longitude, loc!!.latitude).collect {
+
+          //  availableItemsViewModel.AddLocationPointToUser( loc!!.longitude, loc!!.latitude).collect {
+            availableItemsViewModel.AddLocationPointToUser( lon, lat).collect {
 
                 when (it) {
                     is State.Loading ->{
@@ -227,7 +250,7 @@ class MainFragment : Fragment() {
                     }
                     is State.Success -> {
                         Log.d("billNumToCreateQR","Success")
-                        
+
                     }
                     is State.Error -> {
                         Log.d("billNumToCreateQR","Error")
@@ -237,6 +260,8 @@ class MainFragment : Fragment() {
 
         }
     }
+
+
 }
 
 

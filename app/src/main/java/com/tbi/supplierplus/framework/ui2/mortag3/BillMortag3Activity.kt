@@ -53,7 +53,8 @@ class BillMortag3Activity : AppCompatActivity() {
     private lateinit var binding: ActivityBillMortag3Binding
     lateinit var viewModel: ReportsViewModel
     var list = ArrayList<Items>()
-    var adapte = SaleingBillAdpter()
+   // var adapte = SaleingBillAdpter()
+    lateinit var adapte: SaleingBillAdpter
     var listBill = ArrayList<SaleingBill>()
     private val barcode = StringBuffer()
     lateinit var message: String

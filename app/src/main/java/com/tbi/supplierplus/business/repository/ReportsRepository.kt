@@ -26,12 +26,12 @@ interface ReportsRepository {
     suspend   fun getItemsReport( User_ID:String):    Flow<Tasks<ItemReport>>
     suspend    fun getSelesReport( User_ID:String): Flow<Tasks<SelesReport>>
 
-    suspend    fun getCustomerStatement( CusID:String): Flow<Tasks<Invoices>>
+    suspend    fun getCustomerStatement( CusID:String ,ItemId :Int): Flow<Tasks<Invoices>>
 
 
 
     suspend   fun getSalesSummary(userID: String): Flow<SalesSummary>
-    suspend  fun getItemsSummary(userID: String): Flow<List<ItemsSummary>>
+    suspend  fun getItemsSummary(userID: String ): Flow<List<ItemsSummary>>
    // fun getCustomerStatement(customerID: String): Flow<List<CustomerStatement>>
  suspend   fun getBillDetails(customerID: String, billNo: String): Flow<Tasks<InvoiceDetails>>
 
@@ -96,11 +96,11 @@ class ReportsRepositoryImpl @Inject constructor(@TBIService private val api: Sup
         IO
     )
 
-    override  suspend  fun getCustomerStatement(CusID: String): Flow<Tasks<Invoices>> =
+    override  suspend  fun getCustomerStatement(CusID: String ,ItemId: Int): Flow<Tasks<Invoices>> =
         flow {
             try {
                 val response =
-                    api.getCustomerStatementAPI(CusID).await()
+                    api.getCustomerStatementAPI(CusID,ItemId).await()
                 emit(response)
             }catch (ex:Exception){
 

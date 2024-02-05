@@ -125,8 +125,8 @@ class AddBranchFragment : Fragment() {
                                 64,
                                 RegionId,
                                 Idd,
-                                loc!!.latitude,
-                                loc!!.longitude,
+                               lat,
+                                long,
                                 binding.BuildingNumber.text.toString(),
                                 SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt()
                             )
@@ -170,7 +170,6 @@ class AddBranchFragment : Fragment() {
                     is State.Loading -> binding.spinKit.isVisible = true
                     is State.Success -> {
                         binding.spinKit.isVisible = false
-
 
                         Toast.makeText(context, it.data.Message, Toast.LENGTH_SHORT).show()
                         binding.com.setText("")
@@ -331,8 +330,8 @@ class AddBranchFragment : Fragment() {
                                 64,
                                 RegionId,
                                 Idd,
-                                it.longitude,
-                                it.latitude,
+                                long,
+                                lat,
                                 binding.BuildingNumber.text.toString(),
                                 SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt()
                             )
@@ -360,8 +359,8 @@ class AddBranchFragment : Fragment() {
                             64,
                             RegionId,
                             78,
-                            it.latitude,
-                            it.longitude,
+                            lat,
+                            long,
                             binding.BuildingNumber.text.toString(),
                             SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt()
                             //  SharedPreferencesCom.getInstance().gerSharedDistributor_ID(),

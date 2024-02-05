@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.tbi.supplierplus.R
 import com.tbi.supplierplus.business.utils.showSnackbar
 import com.tbi.supplierplus.databinding.FragmentCollectDebitBinding
+import com.tbi.supplierplus.framework.ui.collect_debit.CollectDebitFragmentDirections.actionCollectDebitFragmentToDebitExecutionFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -63,7 +64,7 @@ class CollectDebitFragment : Fragment() {
 
         viewModel.navToExecution.observe(viewLifecycleOwner) {
             if (it) {
-                findNavController().navigate(CollectDebitFragmentDirections.actionCollectDebitFragmentToDebitExecutionFragment("Hello, this is the string to pass!"))
+                findNavController().navigate(actionCollectDebitFragmentToDebitExecutionFragment("Hello, this is the string to pass!"))
                 viewModel.onDoneNavigateToExecution()
             }
         }

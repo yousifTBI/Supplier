@@ -199,12 +199,27 @@ class AvailableItemsFragment : Fragment() {
             val filteredList =ArrayList<AvailableItems>()
           //  AvailableItemsItemslist = AvailableItemsItemslist!!.filter { query in it.ItemName } as ArrayList<AvailableItems>
 
-            for (i in AvailableItemsItemslist){
-                if (i.ItemName.toLowerCase(Locale.ROOT).contains(query)){
-                    filteredList.add(i)
-                    Log.d("AvailableItemsItemslist",AvailableItemsItemslist[0].ItemName)
+            if (query.contains("%")){
+                val WildcardSearch =  query.replace("%", "")
+                for (i in AvailableItemsItemslist){
+                    if (i.ItemName.toLowerCase(Locale.ROOT).contains(WildcardSearch)){
+                         filteredList.add(i)
+
+                        Log.d("AvailableItemsItemslist","AvailableItemsItemslist[0].ItemName")
+                    }
+                }
+            }else{
+                for (i in AvailableItemsItemslist){
+                //    if (i.ItemName.toLowerCase(Locale.ROOT).contains(query)){
+
+                        if (startsWithWord(i.ItemName.toLowerCase(Locale.ROOT), query.toLowerCase(Locale.ROOT))) {
+                            filteredList.add(i)
+                        }
+                        Log.d("AvailableItemsItemslist",AvailableItemsItemslist[0].ItemName)
+                 //   }
                 }
             }
+
             if (filteredList.isEmpty())
             {
                 Toast.makeText(requireContext(), "No Data found",Toast.LENGTH_SHORT).show()
@@ -216,5 +231,9 @@ class AvailableItemsFragment : Fragment() {
 
             }
         }
+    }
+    fun startsWithWord(fullString: String, prefix: String): Boolean {
+        val words = fullString.split("\\.+".toRegex()) // Split by spaces
+        return words.any { it.startsWith(prefix) }
     }
 }

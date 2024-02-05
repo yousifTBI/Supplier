@@ -100,7 +100,7 @@
                 tools:ignore="MissingConstraints" />
             <Button
                 android:id="@+id/closing_day_button"
-                android:layout_width="250dp"
+                android:layout_width="170dp"
                 android:layout_height="50dp"
                 android:layout_marginBottom="8dp"
                 android:background="@drawable/add_expense_button_background"
@@ -108,10 +108,22 @@
                 android:text="  تسويه البضاعه"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:ignore="MissingConstraints" />
 
+            <Button
+                android:id="@+id/reviewbtn"
+                android:layout_width="170dp"
+                android:layout_height="50dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/add_expense_button_background"
+
+                android:text="   مراجعه التاكيد"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/closing_day_button"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="MissingConstraints" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </FrameLayout>

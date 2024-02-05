@@ -19,7 +19,8 @@ data class NewBill(
      var   Bill_Details: ArrayList<SaleingBill>,
      var   Longitude : Double,
      var   Latitude  : Double,
-     var   Comment   : String
+     var   Comment   : String,
+     var   ClientDocumentNo   : String
 
 
 )

@@ -9,6 +9,8 @@ data class AddCollection(
 
 
     var RemainingAmount :String,
-    var Payment_Method_Id :Int
+    var Payment_Method_Id :Int,
+    var CheckNumber :String,
+    var Bank :String
 
 )

@@ -1,12 +1,14 @@
 package com.tbi.supplierplus.framework.ui.login
 
+import android.app.Application
 import android.content.Context
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.net.ConnectivityManager
+import androidx.lifecycle.*
 import com.tbi.supplierplus.business.pojo.RegistrationModel
+import dagger.hilt.android.internal.Contexts.getApplication
 
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlinx.coroutines.flow.collect
@@ -14,10 +16,10 @@ import kotlinx.coroutines.flow.collect
 
 @HiltViewModel
 class AccountViewModel @Inject constructor(
-    private val repository: LoginRepositoryImpl
-
+    private val repository: LoginRepositoryImpl,
+    application: Application
 ) :
-    ViewModel() {
+    AndroidViewModel(application)  {
 
 
 
@@ -30,10 +32,8 @@ class AccountViewModel @Inject constructor(
 
             repository.loginInfoComb(androidID,context).collect {
 
-
                 loginInfoCombVLiveData.value = it
             }
-
         }
     }
 
@@ -43,7 +43,6 @@ class AccountViewModel @Inject constructor(
         viewModelScope.launch {
 
             repository.RegistrationInfo(registrationModel,context).collect {
-
 
                 registrationLiveData.value = it
             }
@@ -92,7 +91,18 @@ class AccountViewModel @Inject constructor(
 
 
 
+    private val _isInternetAvailable = MutableLiveData<Boolean>()
+    val isInternetAvailable: LiveData<Boolean> = _isInternetAvailable
 
+    fun checkInternetConnection() {
+        viewModelScope.launch(Dispatchers.IO) {
+            val connectivityManager =
+                getApplication<Application>().applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val networkInfo = connectivityManager.activeNetworkInfo
+            val isConnected = networkInfo != null && networkInfo.isConnected
+            _isInternetAvailable.postValue(isConnected)
+        }
+    }
 
 
 }

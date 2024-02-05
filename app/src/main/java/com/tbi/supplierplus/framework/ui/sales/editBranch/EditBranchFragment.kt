@@ -66,6 +66,8 @@ class EditBranchFragment : Fragment() {
         val locationResult: MyLocation.LocationResult = object : MyLocation.LocationResult() {
             override fun gotLocation(location: Location) {
                 loc = location
+                lat = loc!!.latitude
+                long = loc!!.longitude
                 //   System.out.println("allah: " + loc!!.latitude)
                 //   System.out.println("allah: " + loc!!.longitude)
                  //    Log.d("allahAkbr",  loc!!.latitude.toString())
@@ -348,8 +350,8 @@ class EditBranchFragment : Fragment() {
                      SharedPreferencesCom.getInstance().gerSharedDistributor_ID().toInt(),
                      RegionId,
                      Idd,
-                     loc!!.latitude,
-                     loc!!.longitude,
+                     lat,
+                     long,
                      "",
                      SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt()
                  )

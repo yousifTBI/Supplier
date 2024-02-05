@@ -5,26 +5,9 @@ import java.util.ArrayList;
 public class Task3<t> {
     public int State;
     public String Message;
-    public String msg;
     ArrayList<t> Data;
     t Item;
     t UserInfo;
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
-
-    public t getUserInfo() {
-        return UserInfo;
-    }
-
-    public void setUserInfo(t userInfo) {
-        UserInfo = userInfo;
-    }
 
     public t getItem() {
         return Item;
