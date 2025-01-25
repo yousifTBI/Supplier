@@ -51,7 +51,7 @@ class LoginAccActivity : AppCompatActivity() {
             contentResolver,
             Settings.Secure.ANDROID_ID
         )
-      //  Log.d("aziza3s2", androidId)
+        Log.d("aziza3s2", androidId)
 
 
 
@@ -92,18 +92,16 @@ class LoginAccActivity : AppCompatActivity() {
         }
 
         Log.d("loginInfoCombVLiveData",SharedPreferencesCom.getInstance().getSerial_ID())
-        viewModel.loginInfoCombVM(androidId,this)
-        viewModel.loginInfoCombVM(SharedPreferencesCom.getInstance().getSerial_ID(),this)
-//        val intent = Intent(this, MainActivity::class.java)
-//        startActivity(intent)
-//        finish()
+     //   viewModel.loginInfoCombVM("158223899173",this)
+      viewModel.loginInfoCombVM(androidId,this)
+      viewModel.loginInfoCombVM(SharedPreferencesCom.getInstance().getSerial_ID(),this)
         viewModel.loginInfoCombVLiveData.observe(this) {
 
             when (it) {
 
                 is State.Loading ->{}// Log.d("aziza", "")
                 is State.Success -> {
-
+                    Log.d("aziza32", it.data.Message.toString())
                     if (it.data!!.State == 0) {
  //                       Log.d("cfgdgdfgdfg", it.data.message)
  //                       your Request is pending
@@ -174,7 +172,7 @@ class LoginAccActivity : AppCompatActivity() {
                         //  finish()
                     }
                 }
-                is State.Error ->{}// Log.d("aziza32", it.messag.toString())
+                is State.Error ->{Log.d("aziza32", it.messag.toString())}// Log.d("aziza32", it.messag.toString())
 
             }
         }

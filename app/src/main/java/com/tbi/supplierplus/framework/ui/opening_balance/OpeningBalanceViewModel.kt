@@ -47,11 +47,13 @@ class OpeningBalanceViewModel @Inject constructor(private val debitsRepository: 
 
     fun filterCustomers(query: String) {
         Log.i("FilterQuery", query)
-        if ( _balances.value !=null){
-//            _balances .value =   _balances2 .value!!.filter { query in it.cusName }
-
+        val originalList = _balances2.value
+        if (originalList != null) {
+            val filteredList = originalList.filter { it.cusName.contains(query, ignoreCase = true) }
+            _balances.value = filteredList
         }
     }
+
     private fun getBalances() {
         viewModelScope.launch {
             debitsRepository.getOpeningBalances(SharedPreferencesCom.getInstance().gerSharedUser_ID()).collect {

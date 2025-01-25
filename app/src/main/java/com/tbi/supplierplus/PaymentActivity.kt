@@ -135,7 +135,6 @@ class PaymentActivity : AppCompatActivity() {
         // Log.d("sgdgdffd",myList?.get(0)?.Items!!)
         //    val listName: List<SaleingBill> =
         //     Gson().fromJson<List<YourList>>("data", object : TypeToken<List<YourList?>?>() {}.type)
-
         // ArrayList<SaleingBill>=
 
 
@@ -165,8 +164,6 @@ class PaymentActivity : AppCompatActivity() {
             binding.progressBar2.isGone = true
             Toast.makeText(baseContext, it.Message, Toast.LENGTH_SHORT).show()
 
-
-
             if (it.State == 1) {
                 Log.d("billNumToCreateQR", it.Message + "msg")
 
@@ -192,7 +189,7 @@ class PaymentActivity : AppCompatActivity() {
                 GlobalScope.launch(Dispatchers.Main) {
                     withContext(Dispatchers.Main) {
 
-                        //  Log.d("billNumToCreateQR",billNumToCreateQR)
+                          Log.d("billNumToCreateQR",billNumToCreateQR)
 
                         //   Log.d("billNumToCreateQR",billNumToCreateQR)
 
@@ -861,7 +858,8 @@ class PaymentActivity : AppCompatActivity() {
                 SharedPreferencesCom.getInstance().gerSharedUser_ID()
 
 
-                //  Log.d("showDefaultDialog",loc!!.longitude.toString())
+                  Log.d("showDefaultDialog", SharedPreferencesCom.getInstance().gerSharedUser_ID().toString())
+                 // Log.d("showDefaultDialog",loc!!.longitude.toString())
                 viewModel.setNewPill(
                     NewBill(
                         CusID.trim(),
@@ -896,8 +894,8 @@ class PaymentActivity : AppCompatActivity() {
                         Unpaid_deferred,
                         binding.Totalss2.text.toString().trim(),
                         list,
-                        loc!!.longitude,
-                        loc!!.latitude,
+                        lon,
+                        lat,
                         binding.com.text.toString(),
                         binding.clientName.text.toString()
                     ).toJson().toString()
@@ -999,7 +997,7 @@ class PaymentActivity : AppCompatActivity() {
 
 
     fun textAsBitmap2(text: String?, textWidth: Int, textSize: Int): Bitmap? {
-// Get text dimensions
+        // Get text dimensions
         val textPaint = TextPaint(
             Paint.ANTI_ALIAS_FLAG
                     or Paint.LINEAR_TEXT_FLAG
@@ -1011,12 +1009,14 @@ class PaymentActivity : AppCompatActivity() {
             text, textPaint,
             textWidth, Layout.Alignment.ALIGN_NORMAL, 1.0f, 0.0f, false
         )
+        // Set the typeface to bold
+        textPaint.typeface = Typeface.DEFAULT_BOLD
 
-// Create bitmap and canvas to draw to
+        // Create bitmap and canvas to draw to
         val b = Bitmap.createBitmap(textWidth, mTextLayout.height, Bitmap.Config.RGB_565)
         val c = Canvas(b)
 
-// Draw background
+        // Draw background
         val paint = Paint(
             (Paint.ANTI_ALIAS_FLAG or Paint.LINEAR_TEXT_FLAG)
         )

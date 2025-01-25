@@ -229,7 +229,7 @@ class MainFragment : Fragment() {
             myMethod()
         }
 
-        // Schedule the task to run every 5 minutes
+        // Schedule the task to run every 1 minutes
         executorService.scheduleAtFixedRate(task, 0, 1, TimeUnit.MINUTES)
     }
 

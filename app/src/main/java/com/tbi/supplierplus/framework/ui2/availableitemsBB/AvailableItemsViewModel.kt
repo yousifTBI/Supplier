@@ -123,8 +123,8 @@ class AvailableItemsViewModel @Inject constructor(
     }.flowOn(Dispatchers.IO)
 
 
- fun getUserBillsByDay( ) = wrapWithFlowApi {
-        api.getUserBillsByDayAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt())
+ fun getUserBillsByDay( DateFrom : String,DateTo : String,) = wrapWithFlowApi {
+        api.getUserBillsByDayAPI(SharedPreferencesCom.getInstance().gerSharedUser_ID().toInt(),DateFrom,DateTo)
     }.flowOn(Dispatchers.IO)
 
  fun GetAllDayDataForDistributors(  DateFrom: String, DateTo: String ) = wrapWithFlowApi {

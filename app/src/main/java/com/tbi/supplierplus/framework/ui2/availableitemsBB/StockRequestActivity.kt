@@ -41,6 +41,11 @@ class StockRequestActivity : AppCompatActivity() {
         val Supplier_Id = intent.getStringExtra("Supplier_Id").toString()
         binding.textView8.setText(ItemName)
         binding.textView3.setText(Barcode)
+        Log.d("ItemName",ItemName)
+        Log.d("ItemName",ItemID)
+        Log.d("ItemName",Barcode)
+        Log.d("ItemName",availableCount)
+        Log.d("ItemName",Supplier_Id)
 
     //    binding.textView2.setText(Selling_Price)
 

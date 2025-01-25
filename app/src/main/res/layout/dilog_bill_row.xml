@@ -21,7 +21,7 @@
             android:id="@+id/textView100"
             android:layout_width="25dp"
             android:layout_height="33dp"
-            android:text="TextView"
+            android:text=" "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -29,7 +29,7 @@
             android:id="@+id/textView98"
             android:layout_width="23dp"
             android:layout_height="33dp"
-            android:text="TextView"
+            android:text="0 "
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

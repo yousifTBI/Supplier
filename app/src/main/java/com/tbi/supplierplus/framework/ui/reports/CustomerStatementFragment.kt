@@ -93,9 +93,6 @@ class CustomerStatementFragment : Fragment() {
             adapter1.submitList(it)
         }
 
-
-
-
         return binding.root
     }
 

@@ -73,8 +73,6 @@ class CustomersFragment : Fragment() {
 
                     }else{
                         listCom = it.data.Data as ArrayList<Data>
-
-
                     }
 
                 }
@@ -381,6 +379,8 @@ class CustomersFragment : Fragment() {
                 companyId =item.ID()
                 branchApi(item.ID())
                 ComName = item.getTitle()
+                Log.d("company",companyId.toString())
+                Log.d("company",ComName.toString())
                 binding.textView21.setText(ComName)
                 baseSearchDialogCompat.dismiss()
             }).show()
@@ -407,6 +407,7 @@ class CustomersFragment : Fragment() {
 
 
                     barnchId =item.ID()
+                    Log.d("company",barnchId.toString())
                     item.Unpaid_deferred().toString()
                     //  Log.d("Unpaid_defxserred",item.ID().toString())
                     viewModel.GetAllBranchDetailsVM(item.ID())

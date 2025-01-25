@@ -211,6 +211,19 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_margin="22dp"
             />
+
+        <TextView
+            android:id="@+id/textView108"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Version 11"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/logoutId"
+            app:layout_constraintEnd_toStartOf="@+id/logoutId"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/logoutId"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

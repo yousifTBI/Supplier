@@ -12,5 +12,6 @@ data class Invoices(
    var cash                 :Double,
    var Add_date  :String,
    var Typett    :String,
+   var BranchName    :String,
 
 )

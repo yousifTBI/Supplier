@@ -34,13 +34,15 @@ class AvailableItemsAdapter
 
 
     override fun onBindViewHolder(holder: GetItemsSettelmentViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
-
-        holder.itemView.setOnClickListener {
-            getItem(position)?.let { it1 -> onClickListener.onClick(it1) }
+        val item = getItem(position)
+        item?.let {
+            holder.bind(it)
+            holder.itemView.setOnClickListener {
+                onClickListener.onClick(item)
+            }
         }
-
     }
+
 
     companion object DiffCallback : DiffUtil.ItemCallback<AvailableItems>() {
         override fun areItemsTheSame(oldItem: AvailableItems, newItem: AvailableItems): Boolean {

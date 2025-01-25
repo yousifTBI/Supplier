@@ -286,6 +286,7 @@ var editProductpriceState = MutableLiveData<Int>()
       viewModelScope.launch {
           salesRepository. addNewPill(bill).collect{
               setNewBillTip.value=it
+              Log.d("yarbstrk",it.Message)
 
           }
       }
@@ -399,6 +400,7 @@ var editProductpriceState = MutableLiveData<Int>()
 
          }
      }
+
 
  //  fun filterItems(query: String) {
  //      _items.value = _allItems.value!!.filter { query in it.id }

@@ -43,12 +43,28 @@ class CollectDebitViewModel @Inject constructor(private val debitsRepository: De
         remaining = MutableLiveData(0.0f)
     }
 
+    // ViewModel
     fun filterCustomers(query: String) {
-        if (_debits.value != null) {
-            //    _debits .value =   _debits2 .value!!.filter { query in it.cusName }
-
+        val filteredList = if (query.isNotBlank()) {
+            _debits2.value?.filter { it.BranchName?.contains(query, ignoreCase = true) == true }
+        } else {
+            _debits2.value // Return the original list when the query is blank
         }
+
+        // Log the input query and filtered list
+        Log.d("ViewModel", "Search query: $query, Filtered list: $filteredList")
+
+        _debits.value = filteredList
     }
+
+    fun clearFilter() {
+        // Reset the filtered list to its original state
+        _debits.value = _debits2.value
+    }
+
+
+
+
 
     fun setDebit(newDebits: OpeningBalance) {
         this._debit.value = newDebits

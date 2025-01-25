@@ -15,15 +15,14 @@
         android:layout_height="match_parent"
         android:background="@drawable/mainback">
         <SearchView
-            android:visibility="gone"
             android:id="@+id/searchView"
-            android:layout_width="500dp"
+            android:layout_width="match_parent"
             android:layout_height="66dp"
             android:layout_marginTop="45dp"
             android:background="@drawable/gray_border"
             android:iconifiedByDefault="false"
             android:padding="10dp"
-            android:queryHint="العميل"
+            android:queryHint="اسم الفرع"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

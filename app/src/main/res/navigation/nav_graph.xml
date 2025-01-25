@@ -548,7 +548,11 @@
         android:id="@+id/allInvoicesFragment"
         android:name="com.tbi.supplierplus.framework.ui.reports.AllInvoicesFragment"
         android:label="fragment_all_invoices"
-        tools:layout="@layout/fragment_all_invoices" />
+        tools:layout="@layout/fragment_all_invoices" >
+        <action
+            android:id="@+id/action_allInvoicesFragment_to_customerStatementDetailsFragment"
+            app:destination="@id/customerStatementDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dateReportFragment"
         android:name="com.tbi.supplierplus.framework.ui.dateReport.DateReportFragment"

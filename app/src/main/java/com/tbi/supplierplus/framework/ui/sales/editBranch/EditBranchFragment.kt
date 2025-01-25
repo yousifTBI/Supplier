@@ -337,7 +337,7 @@ class EditBranchFragment : Fragment() {
              viewModel.EditBranchDetailsVM(
                  EditBranchDetailsModel(
                      branchId,
-                     binding.textView272.text.toString(),
+                     binding.com.text.toString(),
                      binding.numOfRecord.text.toString(),
                      binding.comCode.text.toString(),
                      binding.branchcode.text.toString(),

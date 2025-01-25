@@ -429,9 +429,7 @@ interface SupplierAPI {
     @POST("api/Customer/AddCompany")
     fun AddCustomerAPI(@Body customerModel: CustomerModel): Deferred<CustomerTask<CustomerModel>>
 
-
-   // @Headers("Content-Type: application/json")
-   @Headers("Content-Type: application/json")
+    @Headers("Content-Type: application/json")
     @GET("api/Company/GetCompaniesToFillSelect")
     fun GetAllCompaniesAPI(
         @Query("DisGroupID") DisGroupID: Int,
@@ -615,8 +613,10 @@ interface SupplierAPI {
     @Headers("Content-Type: application/json")
     @GET("api/Report/Get_User_Bills_ByDay")
     fun getUserBillsByDayAPI(
-        @Query("UserID") UserID: Int
-    ):  Deferred<Tasks<Invoices>>
+        @Query("UserID") UserID: Int,
+        @Query("DateFrom ") DateFrom : String,
+    @Query("DateTo") DateTo: String
+    ): Deferred<Tasks<Invoices>>
 
 
  @Headers("Content-Type: application/json")
@@ -631,6 +631,7 @@ interface SupplierAPI {
     @GET("api/DistributorV2/SalesCurrentDayRoadMap")
     fun GetSalesCurrentDayRoadMapAPI(
         @Query("SalesId") SalesId: Int
+
     ):  Deferred<Task3<RoadMapModel>>
 
 @Headers("Content-Type: application/json")
@@ -645,6 +646,15 @@ interface SupplierAPI {
 
     ):  Deferred<ItemTask<ItemDetailsModel>>
 
+
+
+
+
+@Headers("Content-Type: application/json")
+    @GET("api/dailycollectionsreporttosalesman")
+    fun Getdailycollectionsreporttosalesman(
+    @Query("UserId") UserId: Int
+    ):  Deferred<ItemTask<ItemDetailsModel>>
 
 
 //    @Headers("Content-Type: application/json")

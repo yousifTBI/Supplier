@@ -78,9 +78,9 @@ class BillActivity2 : AppCompatActivity() {
             //  Toast.makeText(context, it.toString(), Toast.LENGTH_SHORT).show()
 
             // set value in array list
-           var oldChangeItemRowBalance = 0.0
-           oldChangeItemRowBalance = listBill[it].NumberOfUnits.toDouble()
-            Log.d("oldChangeItemRowBalance",oldChangeItemRowBalance.toString())
+            var oldChangeItemRowBalance = 0.0
+            oldChangeItemRowBalance = listBill[it].NumberOfUnits.toDouble()
+            Log.d("oldChangeItemRowBalance", oldChangeItemRowBalance.toString())
             var arrayList = java.util.ArrayList<Int>()
 
             // set value in array list
@@ -140,7 +140,7 @@ class BillActivity2 : AppCompatActivity() {
                     listBill[it].TotalPrice = (adapterlist.getItem(position)!!
                         .toDouble() * listBill[it].UnitPrice.toDouble()).toString()!!
 
-                    changeItemRowBalance  += listBill[it].NumberOfUnits.toDouble() -oldChangeItemRowBalance.toDouble()
+                    changeItemRowBalance += listBill[it].NumberOfUnits.toDouble() - oldChangeItemRowBalance.toDouble()
                     calculateSum(listBill)
                     adapte.submitList(listBill)
                     adapte.notifyDataSetChanged()
@@ -524,8 +524,9 @@ class BillActivity2 : AppCompatActivity() {
                     .setAction(listBill[viewHolder.adapterPosition].Items,
                         View.OnClickListener { }).show()
 
-                itemBalance += listBill[viewHolder.adapterPosition].NumberOfUnits.toString().toDouble()
-                Log.d("oldChangeItemRowBalance",itemBalance.toString())
+                itemBalance += listBill[viewHolder.adapterPosition].NumberOfUnits.toString()
+                    .toDouble()
+                Log.d("oldChangeItemRowBalance", itemBalance.toString())
                 listBill.removeAt(viewHolder.adapterPosition)
 
                 d()
@@ -584,9 +585,13 @@ class BillActivity2 : AppCompatActivity() {
                     availabelItemCount = dialog?.findViewById(R.id.availabelItemCount)!!
                     tv_name.setText(split.name)
 
-                    Log.d("oldChangeItemRowBalance",bal.toString()+"bal  " + cunt.toString()+"cunt " +itemBalance.toString()+"itembal "+changeItemRowBalance.toString()+"  ch")
+                    Log.d(
+                        "oldChangeItemRowBalance",
+                        bal.toString() + "bal  " + cunt.toString() + "cunt " + itemBalance.toString() + "itembal " + changeItemRowBalance.toString() + "  ch"
+                    )
                     availabelItemCount.setText(
-                        (bal.toString().toDouble() - cunt.toString().toDouble() +itemBalance -changeItemRowBalance).toString()
+                        (bal.toString().toDouble() - cunt.toString()
+                            .toDouble() + itemBalance - changeItemRowBalance).toString()
                     )
 
                     lateinit var tv_group: TextView
@@ -716,8 +721,10 @@ class BillActivity2 : AppCompatActivity() {
                                             val arabicLocale = Locale("ar")
                                             collection = (discount.text.toString()
                                                 .toFloat() * item.CustomerSellingPrice / item.size).toFloat()
-                                            val number3digits = String.format(arabicLocale, "%.2f", collection)
-                                            val englishNumber = convertToEnglishDigits(number3digits.toString())
+                                            val number3digits =
+                                                String.format(arabicLocale, "%.2f", collection)
+                                            val englishNumber =
+                                                convertToEnglishDigits(number3digits.toString())
                                             //  val number3digits: Double = String.format("%.2f", collection).toDouble()
                                             billDiscountEditText9.setText(englishNumber.toString())
 
@@ -729,44 +736,44 @@ class BillActivity2 : AppCompatActivity() {
                             }
 
                         })
-           /*               //wieght listener
-                        confirmWieght.setOnClickListener {
-                            val arabicLocale = Locale("ar")
-                         //  var englishFormattedNumber =convertToEnglishDigits(discount.text.toString())
+                        /*               //wieght listener
+                                     confirmWieght.setOnClickListener {
+                                         val arabicLocale = Locale("ar")
+                                      //  var englishFormattedNumber =convertToEnglishDigits(discount.text.toString())
 
-                          //  Log.d("englishFormattedNumber",englishFormattedNumber.toString())
-                            if (discount.text.isNullOrEmpty()) {
-                                billDiscountEditText9.setText("0.0")
-                            } else {
-                                    if (discount.text.toString().toFloat() > item.size) {
-                                        Toast.makeText(
-                                            this@BillActivity2,
-                                            "الوزن كبير",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        Toast.makeText(
-                                            this@BillActivity2,
-                                            "الوزن كبير",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                    } else {
-                                        collection = (discount.text.toString()
-                                            .toFloat() * item.CustomerSellingPrice / item.size).toFloat()
-                                        val number3digits = String.format(arabicLocale, "%.2f", collection)
-                                        val englishNumber = convertToEnglishDigits(number3digits.toString())
-                                      //  val number3digits: Double = String.format("%.2f", collection).toDouble()
-                                        billDiscountEditText9.setText(englishNumber.toString())
+                                       //  Log.d("englishFormattedNumber",englishFormattedNumber.toString())
+                                         if (discount.text.isNullOrEmpty()) {
+                                             billDiscountEditText9.setText("0.0")
+                                         } else {
+                                                 if (discount.text.toString().toFloat() > item.size) {
+                                                     Toast.makeText(
+                                                         this@BillActivity2,
+                                                         "الوزن كبير",
+                                                         Toast.LENGTH_SHORT
+                                                     ).show()
+                                                     Toast.makeText(
+                                                         this@BillActivity2,
+                                                         "الوزن كبير",
+                                                         Toast.LENGTH_SHORT
+                                                     ).show()
+                                                 } else {
+                                                     collection = (discount.text.toString()
+                                                         .toFloat() * item.CustomerSellingPrice / item.size).toFloat()
+                                                     val number3digits = String.format(arabicLocale, "%.2f", collection)
+                                                     val englishNumber = convertToEnglishDigits(number3digits.toString())
+                                                   //  val number3digits: Double = String.format("%.2f", collection).toDouble()
+                                                     billDiscountEditText9.setText(englishNumber.toString())
 
-                                    }
+                                                 }
 
-                                }
-                        }*/
+                                             }
+                                     }*/
 
                         //price listener
                         confirmPricee.setOnClickListener {
                             val arabicLocale = Locale("ar")
-                         //   val formattedNumber = String.format(arabicLocale, "%.3f", collection)
-                         //   val englishFormattedNumber = convertToEnglishDigits(billDiscountEditText9.text.toString())
+                            //   val formattedNumber = String.format(arabicLocale, "%.3f", collection)
+                            //   val englishFormattedNumber = convertToEnglishDigits(billDiscountEditText9.text.toString())
 
                             if (billDiscountEditText9.text.isNullOrEmpty()) {
                                 billDiscountEditText9.setText("0.0")
@@ -787,12 +794,14 @@ class BillActivity2 : AppCompatActivity() {
                                 } else {
                                     collection = (billDiscountEditText9.text.toString()
                                         .toFloat() / item.CustomerSellingPrice * item.size).toFloat()
-                                    val number3digits = String.format(arabicLocale, "%.2f", collection)
-                                   val englishNumber = convertToEnglishDigits(number3digits.toString())
+                                    val number3digits =
+                                        String.format(arabicLocale, "%.2f", collection)
+                                    val englishNumber =
+                                        convertToEnglishDigits(number3digits.toString())
                                     //  val englishNumber = convertToEnglishDigits(number3digits.replace(',', '.'))
 
                                     //       val number3digits: Double =
-                             //           String.format("%.3f", collection).toDouble()
+                                    //           String.format("%.3f", collection).toDouble()
                                     discount.setText(englishNumber.replace(',', '.').toString())
 
                                 }
@@ -1216,11 +1225,9 @@ class BillActivity2 : AppCompatActivity() {
                             sizesEditText.text.toString().toDouble() * TotalPrice.toString()
                                 .toDouble()
 
-
                         var TotalPriceAfterEditSize: Double
                         TotalPriceAfterEditSize =
                             PriceAfterEditSize / item.size.toString().toDouble()
-
 
                         listBill.add(
                             SaleingBill(
@@ -1289,7 +1296,10 @@ class BillActivity2 : AppCompatActivity() {
 
 
         binding.printbtn.setOnClickListener {
-
+            if (  binding.Totalss4.text.toString() =="0.0")
+            {
+                Toast.makeText(baseContext, "اختر الصنف اولا ", Toast.LENGTH_SHORT).show()
+            }else{
             val intent = Intent(this, PaymentActivity::class.java).apply {
                 putExtra("TotalSalse", binding.Totalss.text.toString())
                 putExtra("Unpaid_deferred", binding.oldRemainningAmount.text.toString())
@@ -1297,14 +1307,11 @@ class BillActivity2 : AppCompatActivity() {
                 putExtra("TotalAfterDescound", binding.Totalss4.text.toString())
                 putExtra("name", CompanyName)
                 putExtra("CusID", message)
-
-
-
                 putExtra("list", Gson().toJson(listBill))
-
-
             }
-            startActivity(intent)
+                startActivity(intent)
+            }
+
             // Log.e("PrintError1", "e.message.toString()")
 
 
@@ -1667,10 +1674,9 @@ class BillActivity2 : AppCompatActivity() {
     }
 
 
-
     fun convertToEnglishDigits(arabicNumber: String): String {
-        val arabicDigits = charArrayOf(',','٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩')
-        val englishDigits = charArrayOf('.','0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
+        val arabicDigits = charArrayOf(',', '٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩')
+        val englishDigits = charArrayOf('.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9')
         var convertedNumber = arabicNumber
         for (i in arabicDigits.indices) {
             convertedNumber = convertedNumber.replace(arabicDigits[i], englishDigits[i])

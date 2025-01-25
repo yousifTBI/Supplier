@@ -10,7 +10,7 @@ import com.tbi.supplierplus.R
 import com.tbi.supplierplus.business.pojo.opening.OpeningBalance
 import com.tbi.supplierplus.databinding.RowCustomerDebitBinding
 
-class CustomerDebitsAdapter(val onClickListener: OnDebitClickListener) :
+class CustomerDebitsAdapter(private val onClickListener: OnDebitClickListener) :
     ListAdapter<OpeningBalance, CustomerDebitsViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CustomerDebitsViewHolder {
@@ -21,9 +21,18 @@ class CustomerDebitsAdapter(val onClickListener: OnDebitClickListener) :
     }
 
     override fun onBindViewHolder(holder: CustomerDebitsViewHolder, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+        val currentItem = getItemOrNull(position)
+        currentItem?.let { holder.bind(it) }
         holder.itemView.setOnClickListener {
-            getItem(position)?.let { it1 -> onClickListener.onClick(it1) }
+            currentItem?.let { onClickListener.onClick(it) }
+        }
+    }
+
+    private fun getItemOrNull(position: Int): OpeningBalance? {
+        return if (position in 0 until itemCount) {
+            getItem(position)
+        } else {
+            null
         }
     }
 
@@ -37,6 +46,7 @@ class CustomerDebitsAdapter(val onClickListener: OnDebitClickListener) :
         }
     }
 }
+
 
 class CustomerDebitsViewHolder(private var binding: RowCustomerDebitBinding) :
     RecyclerView.ViewHolder(binding.root) {

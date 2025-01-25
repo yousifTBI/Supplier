@@ -54,6 +54,7 @@ class OpeningBalancesFragment : Fragment() {
             if (it == null) {
             } else {
                 adapter.submitList(it)
+                adapter.notifyDataSetChanged()
             }
         }
         viewModel.msg.observe(viewLifecycleOwner) {

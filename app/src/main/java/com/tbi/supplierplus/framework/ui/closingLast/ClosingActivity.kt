@@ -92,7 +92,6 @@ class ClosingActivity : AppCompatActivity() {
                 }
             }
         }
-
         binding.sales.setText("مردودات")
 
         lifecycleScope.launch(){
